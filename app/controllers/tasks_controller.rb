@@ -1,10 +1,10 @@
 TASKS = [
-  {id: 1, task: "Set alarm"}, 
-  {id: 2, task: "Make Breakfast"}, 
-  {id: 3, task: "Make Lunch"}, 
-  {id: 4, task: "Make Dinner"}, 
-  {id: 5, task: "Exercise"}, 
-  {id: 6, task: "Do Homework"}
+  { task: "Set alarm" },
+  { task: "Make Breakfast" },
+  { task: "Make Lunch" },
+  { task: "Make Dinner" },
+  { task: "Exercise" },
+  { task: "Do Homework" },
 ]
 
 class TasksController < ApplicationController
@@ -13,10 +13,19 @@ class TasksController < ApplicationController
     @tasks = TASKS
   end
 
+  def featured_task
+    @featured = @tasks.sample
+  end
+
   def show
     task_id = params[:id]
+    puts "Task Id is #{task_id}"
 
-    @task = TASKS[task_id]
-   # @task = Task.find(task_id) -- when we learn about Models
+    @task = TASKS[task_id.to_i]
+    # @task = Task.find(task_id) -- when we learn about Models
+
+    unless @task
+      head :not_found # barely step above raising an exception. 
+    end
   end
 end
