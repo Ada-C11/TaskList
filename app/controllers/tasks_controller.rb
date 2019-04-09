@@ -1,10 +1,10 @@
 TASKS = [
-    "feed cat",
-    "make breakfast",
-    "take vitamins",
-    "play with cat",
-    "have a coffee",
-    "take a walk",
+    {title: 'feed cat'},
+    {title: 'make breakfast'},
+    {title: 'take vitamins'},
+    {title: 'play with cat'},
+    {title: 'have a coffee'},
+    {title: 'take a walk'}
 ]
 
 class TasksController < ApplicationController
