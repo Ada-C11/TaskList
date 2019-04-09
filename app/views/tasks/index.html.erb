@@ -2,7 +2,18 @@
 <p>Find me in app/views/tasks/index.html.erb</p>
 
 
+<h2>Tasks to do</h2>
 <% @tasks.each do |task| %>
-    <li><%= task %>
+    <% if task.completion == false %>
+    <li><%= task.title %>: <%= task.description %> created at: <%= task.created_at%>
     </li>
+    <% end %>
+   <% end %> 
+
+   <h2>Tasks Completed</h2>
+   <% @tasks.each do |task| %>
+    <% if task.completion == true %>
+    <li><%= task.title %>: <%= task.description %> finished at: <%= task.updated_at%>
+    </li>
+    <% end %>
    <% end %> 
