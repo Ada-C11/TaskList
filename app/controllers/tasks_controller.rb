@@ -1,11 +1,6 @@
-
-TASKS = [
-  "wash the dishes", "mow the lawn", "clean the car",
-]
-
 class TasksController < ApplicationController
   def index
-    @tasks = TASKS
+    @tasks = Task.all
   end
 
   def show
