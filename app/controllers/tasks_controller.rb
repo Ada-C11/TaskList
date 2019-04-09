@@ -8,5 +8,8 @@ class TasksController < ApplicationController
   def show
     task_id = params[:id]
     @task = TASKS[task_id.to_i]
+    if !@task
+      head :not_found
+    end
   end
 end
