@@ -10,10 +10,7 @@ class TasksController < ApplicationController
 
   def show
     task_id = params[:id]
-    puts "Task Id is #{task_id}"
-
     @task = Task.find_by(id: task_id)
-    # @task = Task.find(task_id) -- when we learn about Models
 
     unless @task
       head :not_found # barely step above raising an exception. 
