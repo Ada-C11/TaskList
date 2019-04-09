@@ -14,6 +14,7 @@ class TasksController < ApplicationController
 
   def index # Loads a list of all the books
     @tasks = Task.all
+    return @tasks
   end
 
 end
