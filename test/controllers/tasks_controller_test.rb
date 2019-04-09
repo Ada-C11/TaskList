@@ -13,7 +13,7 @@ describe TasksController do
     end
 
     it "renders even when there is zero task" do
-      TasksController::TASKS.clear
+      Task.create!(name: "test task")
 
       get "/tasks"
 

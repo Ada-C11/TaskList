@@ -1,9 +1,7 @@
 class TasksController < ApplicationController
-  TASKS = [ "Task One", "Task Two", "Task Three", "Task Four"
-  ]
   
   def index
-    @tasks = TASKS
+    @tasks = Task.all
   end
 
   def show
@@ -11,7 +9,7 @@ class TasksController < ApplicationController
 
     puts "Task ID was #{task_id}"
 
-    @task = TASKS[task_id.to_i]
+    @task = Task.find_by(id: task_id)
 
     unless @task
       head :not_found
