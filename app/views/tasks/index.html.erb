@@ -1,10 +1,13 @@
 <h1>Shamira's Tasks</h1>
-<h2> SHAMIRA!!!!!</h2>
-
+<p>
+<% @tasks %>
+</p>
 <ul>
 <% @tasks.each do |task| %>
   <li>
-    <%= task[:todo] %> by <%= task[:when] %>
+  <!-- fix anchor -->
+  <a href="/tasks/<%= task.id %>">
+    <%= task.name %>, Details:<%= task.description%>, due <%= task.completion_date%>
   </li>
 <% end %>
 </ul>
