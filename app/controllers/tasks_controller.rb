@@ -4,10 +4,6 @@ class TasksController < ApplicationController
     @tasks = Task.all
   end
 
-  def featured_task
-    @featured = @tasks.sample
-  end
-
   def show
     task_id = params[:id]
     @task = Task.find_by(id: task_id)
