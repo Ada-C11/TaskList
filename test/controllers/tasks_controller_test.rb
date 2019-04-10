@@ -3,7 +3,7 @@ require "test_helper"
 describe TasksController do
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
-                completion_date: Time.now + 5.days
+                completed_at: Time.now + 5.days
   }
 
   # Tests for Wave 1
@@ -68,7 +68,7 @@ describe TasksController do
         task: {
           name: "new task",
           description: "new task description",
-          completion_date: nil,
+          completed_at: nil,
         },
       }
 
