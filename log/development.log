@@ -196,3 +196,86 @@ Migrating to CreateTasks (20190409232440)
   ↳ /Users/bitaamani/.rvm/rubies/ruby-2.6.0/lib/ruby/gems/2.6.0/gems/rake-12.3.2/lib/rake/task.rb:273
   [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   ↳ /Users/bitaamani/.rvm/rubies/ruby-2.6.0/lib/ruby/gems/2.6.0/gems/rake-12.3.2/lib/rake/task.rb:273
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTask Create (1.1ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Study"], ["description", "Read the lectures"], ["created_at", "2019-04-09 23:53:09.001177"], ["updated_at", "2019-04-09 23:53:09.001177"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Homework"], ["description", "Finish the homeworks"], ["created_at", "2019-04-09 23:54:26.372518"], ["updated_at", "2019-04-09 23:54:26.372518"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "housework"], ["description", "Do your chores"], ["created_at", "2019-04-09 23:57:05.770772"], ["updated_at", "2019-04-09 23:57:05.770772"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+Started GET "/tasks" for ::1 at 2019-04-09 16:58:24 -0700
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/bitaamani/.rvm/gems/ruby-2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by TasksController#index as HTML
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - uninitialized constant TasksController::TASKS:
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/ffae6d7b68e98b97/variables" for ::1 at 2019-04-09 16:58:24 -0700
+Started GET "/tasks" for ::1 at 2019-04-09 16:58:55 -0700
+Processing by TasksController#index as HTML
+Completed 500 Internal Server Error in 223ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - undefined local variable or method `task' for #<TasksController:0x00007f92e13526b0>:
+  app/controllers/tasks_controller.rb:7:in `index'
+
+Started POST "/__better_errors/e43f6ada20c6f1e0/variables" for ::1 at 2019-04-09 16:58:55 -0700
+Started GET "/tasks" for ::1 at 2019-04-09 17:02:16 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (11.2ms)
+Completed 200 OK in 28ms (Views: 20.7ms | ActiveRecord: 4.8ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-09 17:03:26 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - uninitialized constant TasksController::Book:
+  app/controllers/tasks_controller.rb:15:in `show'
+
+Started POST "/__better_errors/0bb17089bfef75b1/variables" for ::1 at 2019-04-09 17:03:26 -0700
+Started GET "/tasks/1" for ::1 at 2019-04-09 17:03:50 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 27ms (Views: 12.8ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-09 17:04:45 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 20ms (Views: 16.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-09 17:05:20 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 33ms (Views: 29.3ms | ActiveRecord: 0.6ms)
+
+
