@@ -1,6 +1,14 @@
+# frozen_string_literal: true
+
 class TodosController < ApplicationController
-  TASKS = ["take a shower", "drink coffee"] 
+  # Todos = ["take a shower", "drink coffee"]
   def index
-    @tasks = TASKS
+    @todos = Todo.all
+  end
+
+  def show
+    task_id = params[:id].to_i
+    @task = Todo.find_by(id: task_id)
+    puts '@taksssss', @task.description
   end
 end
