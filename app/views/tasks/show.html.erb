@@ -1,9 +1,10 @@
+
 <h2><%= @task.name %> </h2>
 <ul>
   <p><%= @task.description %></p>
   <br>
   <% status = "completed" if @task.completed %>
   <% status = "in-progress" unless @task.completed %>
-  <p class="status">Created: <%= @task.created_at %></p>
+  <p class="status"><%= @task.created_at.strftime("Created: %a %D %r") %></p>
   <p class="status">Status: <%= status %></p>
 </ul>
