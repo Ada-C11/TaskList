@@ -1,0 +1,23 @@
+<h2>Create a new task</h2>
+
+<%= form_with model: @task, class: "new-task-form" do |task| %>
+  <p>Add a new task:</p>
+  
+  <div>
+    <% task.label :name, "Task name" %>
+    <%= task.text_field :name, placeholder: "ex. Call grandma" %>
+  </div>
+  
+  <div>
+    <%= task.label :completion_date, "Due date" %>
+    <%= task.text_field :completion_date, placeholder: "January 1, 2095" %>
+  </div>
+  
+  <div>
+    <%= task.label :description, "Description" %>
+    <%= task.text_field :description, placeholder: "ex. Birthday call, on her home phone" %>
+  </div>
+  
+  <%= task.submit "Create!" %>
+  
+<% end %>

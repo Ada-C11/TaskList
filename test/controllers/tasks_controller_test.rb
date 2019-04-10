@@ -17,7 +17,7 @@ describe TasksController do
     end
 
     it "can get the root path" do
-      # Act
+      # Act 
       get root_path
 
       # Assert
@@ -28,7 +28,7 @@ describe TasksController do
   # Unskip these tests for Wave 2
   describe "show" do
     it "can get a valid task" do
-      skip
+
       # Act
       get task_path(task.id)
 
