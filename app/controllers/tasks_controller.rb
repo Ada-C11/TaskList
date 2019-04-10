@@ -9,4 +9,8 @@ class TasksController < ApplicationController
 
     head :not_found if @task.nil?
   end
+
+  def new
+    @task = Task.new
+  end
 end
