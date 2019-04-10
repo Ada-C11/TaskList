@@ -1245,3 +1245,96 @@ Processing by TasksController#new as HTML
 Completed 200 OK in 25ms (Views: 22.1ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/tasks/new" for ::1 at 2019-04-10 16:19:19 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 26ms (Views: 23.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/tasks" for ::1 at 2019-04-10 16:19:54 -0700
+
+AbstractController::ActionNotFound - The action 'create' could not be found for TasksController:
+
+Started POST "/__better_errors/4c4f5c73105f496f/variables" for ::1 at 2019-04-10 16:19:54 -0700
+Started GET "/tasks" for ::1 at 2019-04-10 16:20:08 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 24ms (Views: 21.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-04-10 16:20:09 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 36ms (Views: 33.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-04-10 16:31:07 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 49ms (Views: 29.5ms | ActiveRecord: 9.1ms)
+
+
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+Started POST "/tasks" for ::1 at 2019-04-10 16:31:41 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uHE0UyFRKfJ7EmWKqcK3WHjLQ4HHbHHZQkSrRGXezRZuNSbvUzfVxrAT/k1IbqiYisS/4hL0d7sMfO+eMFWIkg==", "task"=>{"name"=>"Sleep", "description"=>"For like 30 hours straight yo!"}, "commit"=>"Add Task"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:23
+  [1m[36mTask Create (1.6ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Sleep"], ["description", "For like 30 hours straight yo!"], ["created_at", "2019-04-10 23:31:41.160009"], ["updated_at", "2019-04-10 23:31:41.160009"]]
+  ↳ app/controllers/tasks_controller.rb:23
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:23
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 2.3ms)
+
+
+
+ActionController::UrlGenerationError - No route matches {:action=>"show", :controller=>"tasks"}, missing required keys: [:id]:
+  app/controllers/tasks_controller.rb:24:in `create'
+
+Started POST "/__better_errors/250ed404889a7fd8/variables" for ::1 at 2019-04-10 16:31:41 -0700
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+Started GET "/tasks" for ::1 at 2019-04-10 16:32:42 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 29ms (Views: 22.6ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-04-10 16:32:43 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 36ms (Views: 33.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/tasks" for ::1 at 2019-04-10 16:33:03 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"C1WFTxZU4aGWDv4S/dLkWAY19h1tcNUycm0X+DqRorHhKCM7Osiwx5QOn67W9feDtTYTsbclnephvQ2fKH3N/A==", "task"=>{"name"=>"Drink A Beer", "description"=>"You deserve one, you little champion!"}, "commit"=>"Add Task"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:23
+  [1m[36mTask Create (0.7ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Drink A Beer"], ["description", "You deserve one, you little champion!"], ["created_at", "2019-04-10 23:33:03.714385"], ["updated_at", "2019-04-10 23:33:03.714385"]]
+  ↳ app/controllers/tasks_controller.rb:23
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:23
+Redirected to http://localhost:3000/tasks
+Completed 302 Found in 5ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-10 16:33:03 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 24ms (Views: 20.9ms | ActiveRecord: 0.3ms)
+
+
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
