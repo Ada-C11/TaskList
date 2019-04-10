@@ -8,4 +8,8 @@ class TasksController < ApplicationController
 
   #   @task = Task.find(task_id)
   # end
+
+  def new
+    @task = Task.new
+  end
 end
