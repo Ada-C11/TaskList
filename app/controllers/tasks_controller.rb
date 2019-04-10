@@ -1,7 +1,11 @@
-TASKS = ["walk the dog", "brush teeth", "do homework", "go for a jog"]
-
 class TasksController < ApplicationController
   def index
-    @tasks = TASKS
+    @tasks = Task.all
   end
+
+  # def show
+  #   task_id = params[:id]
+
+  #   @task = Task.find(task_id)
+  # end
 end
