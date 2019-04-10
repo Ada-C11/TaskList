@@ -17,7 +17,7 @@ describe TasksController do
     end
 
     it "can get the root path" do
-      # Act 
+      # Act
       get root_path
 
       # Assert
@@ -37,25 +37,22 @@ describe TasksController do
     end
 
     it "will redirect for an invalid task" do
-      skip
       # Act
       get task_path(-1)
 
       # Assert
-      must_respond_with :redirect
-      expect(flash[:error]).must_equal "Could not find task with id: -1"
+      must_respond_with :not_found
     end
   end
 
   describe "new" do
     it "can get the new task page" do
-      skip
 
       # Act
       get new_task_path
 
       # Assert
-      must_respond_with :success
+      must_respond_with :ok
     end
   end
 

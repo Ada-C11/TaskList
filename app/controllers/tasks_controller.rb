@@ -13,20 +13,23 @@ class TasksController < ApplicationController
 
     def new
       @task = Task.new
-      @task.name = "New Task"
-      @task.save
     end
 
     def create
       puts "New task created!"
 
-      task = Task.new(
-        name: params["name"],
-        description: params["description"],
-        completion_date: params["completion date"],
-      )
+      @task = Task.new
 
-      task.save
+      unless params["task"]
+        render :new, status: :bad_request
+        return
+      end
+
+      @task.name = params["task"]["name"],
+                   @task.completion_date = params["task"]["completion_date"],
+      @task.description = params["task"]["description"]
+
+      @task.save
 
       redirect_to tasks_path
     end
