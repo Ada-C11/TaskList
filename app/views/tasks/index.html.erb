@@ -1,6 +1,10 @@
 <h1>This is my task list </h1>
 <ul class="task-list">
   <% @tasks.each do |task| %>
-    <li><%= task.name %>, <%= task.description %>, complete by<%= task.completion_date %></li>
+    <li>
+      <%= link_to task.name, task_path(task) %>, 
+      <%= task.description %>, 
+      complete by<%= task.completion_date %>
+    </li>
   <% end %>
 </ul>
