@@ -16,7 +16,12 @@ class TasksController < ApplicationController
     @message = 'Hello world!'
   end
 
+  def show
+    @task = Task.find(params['id'])
+  end
+
   def index
-    @tasks = TASKS
+    @tasks = Task.all
+    #@tasks = TASKS
   end
 end
