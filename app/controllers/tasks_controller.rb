@@ -31,7 +31,7 @@ class TasksController < ApplicationController
   def show
     task_id = params[:id]
 
-    @task = Task.find(task_id)
+    @task = Task.find_by(id: task_id)
     unless @task
       redirect_to tasks_path
       return
