@@ -16,16 +16,26 @@ class TasksController < ApplicationController
 
   def create
     # task = Task.new
+    @task = Task.new
+    unless params["task"]
+      render :new, status: :bad_request
+      return
+    end
 
-    task = Task.new(
-      name: params[:task][:name],
-      description: params[:task][:description],
-      # date: Date.parse(params[:task][:date]),
-    )
+    @task.name = params[:task][:name]
+    @task.description = params[:task][:description]
+    if params[:task][:date]
+      @task.date = Date.parse(params[:task][:date])
+    end
+    # task = Task.new(
+    #   name: params[:task][:name],
+    #   description: params[:task][:description],
+    #   date: Date.parse(params[:task][:date]),
+    # )
 
-    task.save
+    @task.save
 
-    redirect_to task_path(task.id)
+    redirect_to task_path(@task.id)
   end
 
   def show

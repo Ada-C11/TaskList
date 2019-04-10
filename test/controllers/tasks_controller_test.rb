@@ -65,7 +65,7 @@ describe TasksController do
         task: {
           name: "new task",
           description: "new task description",
-          date: nil,
+          date: Date.new(2019, 4, 20),
         },
       }
 
@@ -75,8 +75,8 @@ describe TasksController do
       }.must_change "Task.count", 1
 
       new_task = Task.find_by(name: task_hash[:task][:name])
-      # expect(new_task.description).must_equal task_hash[:task][:description]
-      # expect(new_task.due_date.to_time.to_i).must_equal task_hash[:task][:due_date].to_i
+      expect(new_task.description).must_equal task_hash[:task][:description]
+      expect(new_task.date).must_equal task_hash[:task][:date]
       # expect(new_task.completed).must_equal task_hash[:task][:completed]
 
       must_respond_with :redirect
