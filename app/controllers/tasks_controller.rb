@@ -9,6 +9,24 @@ class TasksController < ApplicationController
 
     if @task.nil?
       head :not_found
-    end 
+    end
+  end
+
+  def new
+    @task = Task.new
+  end
+
+  def create
+    @task = Task.new(
+      name: params[:task][:name],
+      description: params[:task][:description],
+      completion_date: params[:task][:completion_date],
+    )
+
+    if @task.save
+      redirect_to task_path(@task.id)
+    else
+      render :new
+    end
   end
 end
