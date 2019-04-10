@@ -1,6 +1,6 @@
 require "test_helper"
 
-describe TasksController do
+describe "TasksController" do
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
                 completion_date: Time.now + 5.days
@@ -28,7 +28,7 @@ describe TasksController do
   # Unskip these tests for Wave 2
   describe "show" do
     it "can get a valid task" do
-      skip
+
       # Act
       get task_path(task.id)
 
@@ -49,7 +49,6 @@ describe TasksController do
 
   describe "new" do
     it "can get the new task page" do
-      skip
 
       # Act
       get new_task_path
