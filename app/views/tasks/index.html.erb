@@ -1,11 +1,11 @@
 <h1>Task List</h1>
 
 <ul>
-<% @tasks.each do |task_item| %>
+<% @tasks.each do |task| %>
     <li>
-        Task: <%= task_item.name %> 
-        Description: <%= task_item.description %>
-        Completed on: <%= task_item.completion_date %>
+        Task: <%= link_to task.name, task_path(task.id) %>
+        Description: <%= task.description %>
+        Completed on: <%= task.completion_date %>
     </li>
 <% end %>
 </ul>
