@@ -1,0 +1,18 @@
+<h1>Welcome to your Task List</h1>
+
+<%# refactor this to return number of uncompleted, overdue tasksetc %>
+<p>There are <%= @tasks.length %> tasks in this list.</p>
+
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <strong>
+        <%= link_to task.name, task_path(task) %>
+      </strong>
+      Description: <%= task.description %>
+      Deadline: <%= task.deadline %>
+      Completion Date: <%= task.date_completed%>
+      Priority Level: <%= task.priority_level %>
+    </li>
+  <% end %>
+</ul>
