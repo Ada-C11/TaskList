@@ -42,3 +42,348 @@ Processing by TasksController#index as HTML
 Completed 200 OK in 42ms (Views: 39.4ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/" for ::1 at 2019-04-08 14:25:34 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  Rendered tasks/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 526ms (Views: 504.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-04-09 15:40:52 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  Rendered tasks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 270ms (Views: 262.9ms | ActiveRecord: 0.0ms)
+
+
+  [1m[35m (188.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (47.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (27.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateTasks (20190409224344)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (361.6ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "name" character varying, "description" character varying, "completion" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190409224344_create_tasks.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (2.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190409224344"]]
+  ↳ bin/rails:9
+  [1m[35m (31.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (42.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-04-09 22:43:59.931299"], ["updated_at", "2019-04-09 22:43:59.931299"]]
+  ↳ bin/rails:9
+  [1m[35m (28.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTask Create (41.8ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Feed Cat"], ["description", "Missy gets hangry if she isn't fed"], ["created_at", "2019-04-09 22:45:59.876180"], ["updated_at", "2019-04-09 22:45:59.876180"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTask Create (41.1ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Water plants"], ["description", "Succulents are thirsty"], ["created_at", "2019-04-09 22:48:48.014263"], ["updated_at", "2019-04-09 22:48:48.014263"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2019-04-09 15:52:34 -0700
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/shubharajan/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  Rendered tasks/index.html.erb within layouts/application (4.6ms)
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 0.0ms)
+
+
+
+SyntaxError - unterminated string meets end of file
+          end
+             ^
+/Users/shubharajan/Ada/09_Ada/TaskList/app/views/tasks/index.html.erb:14: syntax error, unexpected end-of-input, expecting ')'
+          end
+             ^:
+  app/views/tasks/index.html.erb:14:in `'
+
+Started POST "/__better_errors/e2721a68bf12b32a/variables" for ::1 at 2019-04-09 15:52:36 -0700
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ /Users/shubharajan/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Started GET "/" for ::1 at 2019-04-09 15:53:10 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (68.9ms)
+Completed 500 Internal Server Error in 80ms (ActiveRecord: 0.6ms)
+
+
+
+NoMethodError - undefined method `defined?' for nil:NilClass:
+  app/views/tasks/index.html.erb:7:in `block in _app_views_tasks_index_html_erb__912674290651300340_70349097311520'
+  app/views/tasks/index.html.erb:3:in `_app_views_tasks_index_html_erb__912674290651300340_70349097311520'
+
+Started POST "/__better_errors/a09039537dbad8be/variables" for ::1 at 2019-04-09 15:53:10 -0700
+Started GET "/" for ::1 at 2019-04-09 15:54:40 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 69ms (Views: 66.0ms | ActiveRecord: 0.4ms)
+
+
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateTasks (20190409224344)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (77.2ms)[0m  [1m[35mDROP TABLE "tasks"[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.7ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20190409224344"]]
+  ↳ bin/rails:9
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateTasks (20190409224344)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (126.2ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "name" character varying, "description" character varying, "completion_date" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190409224344_create_tasks.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190409224344"]]
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mTask Load (46.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTask Create (43.4ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Feed Cat"], ["description", "Missy gets hangry if she isn't fed"], ["created_at", "2019-04-09 23:03:08.314988"], ["updated_at", "2019-04-09 23:03:08.314988"]]
+  [1m[35m (40.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTask Destroy (82.7ms)[0m  [1m[31mDELETE FROM "tasks" WHERE "tasks"."id" = $1[0m  [["id", 1]]
+  [1m[35m (82.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateTasks (20190409224344)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (3.3ms)[0m  [1m[35mDROP TABLE "tasks"[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.4ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20190409224344"]]
+  ↳ bin/rails:9
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateTasks (20190409224344)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (29.3ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "name" character varying, "description" character varying, "completion_date" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190409224344_create_tasks.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190409224344"]]
+  ↳ bin/rails:9
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateTasks (20190409224344)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (2.3ms)[0m  [1m[35mDROP TABLE "tasks"[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20190409224344"]]
+  ↳ bin/rails:9
+  [1m[35m (43.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (1.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTask Create (103.5ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Feed Cat"], ["description", "Missy gets hangry if she isn't fed"], ["created_at", "2019-04-09 23:07:49.874204"], ["updated_at", "2019-04-09 23:07:49.874204"]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateTasks (20190409230738)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (88.0ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "name" character varying, "description" character varying, "completion_date" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190409230738_create_tasks.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190409230738"]]
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (40.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTask Create (41.8ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Feed Cat"], ["description", "Missy gets hangry if she isn't fed"], ["created_at", "2019-04-09 23:08:21.626723"], ["updated_at", "2019-04-09 23:08:21.626723"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTask Create (2.0ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Water plants"], ["description", "Succulents are thirsty"], ["created_at", "2019-04-09 23:08:27.969915"], ["updated_at", "2019-04-09 23:08:27.969915"]]
+  [1m[35m (40.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+Started GET "/" for ::1 at 2019-04-09 16:08:41 -0700
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/shubharajan/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (26.7ms)
+Completed 200 OK in 124ms (Views: 96.4ms | ActiveRecord: 6.4ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-09 16:11:39 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (43.0ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE (1) LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+Completed 500 Internal Server Error in 57ms (ActiveRecord: 44.8ms)
+
+
+
+PG::DatatypeMismatch - ERROR:  argument of WHERE must be type boolean, not type integer
+LINE 1: SELECT  "tasks".* FROM "tasks" WHERE (1) LIMIT $1
+                                              ^
+:
+  app/controllers/tasks_controller.rb:8:in `show'
+
+Started POST "/__better_errors/dc1f1fd57a558aa7/variables" for ::1 at 2019-04-09 16:11:40 -0700
+Started GET "/tasks/" for ::1 at 2019-04-09 16:12:39 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (3.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (47.4ms)
+Completed 200 OK in 166ms (Views: 151.3ms | ActiveRecord: 5.5ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-09 16:13:02 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (45.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE (1) LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+Completed 500 Internal Server Error in 51ms (ActiveRecord: 45.4ms)
+
+
+
+PG::DatatypeMismatch - ERROR:  argument of WHERE must be type boolean, not type integer
+LINE 1: SELECT  "tasks".* FROM "tasks" WHERE (1) LIMIT $1
+                                              ^
+:
+  app/controllers/tasks_controller.rb:8:in `show'
+
+Started POST "/__better_errors/48ffdeb0d0e501e8/variables" for ::1 at 2019-04-09 16:13:02 -0700
+Started GET "/tasks/1" for ::1 at 2019-04-09 16:14:32 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+Completed 406 Not Acceptable in 269ms (ActiveRecord: 130.1ms)
+
+
+
+ActionController::UnknownFormat - TasksController#show is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.:
+
+Started POST "/__better_errors/c915faa02aa13a53/variables" for ::1 at 2019-04-09 16:14:33 -0700
+Started GET "/tasks/1" for ::1 at 2019-04-09 16:15:25 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (432.4ms)
+Completed 500 Internal Server Error in 447ms (ActiveRecord: 0.5ms)
+
+
+
+NameError - undefined local variable or method `task' for #<#<Class:0x00007ff6d9d0e5d0>:0x00007ff6d9d0cc58>
+Did you mean?  @task:
+  app/views/tasks/show.html.erb:1:in `_app_views_tasks_show_html_erb___188308580730155649_70349096515300'
+
+Started POST "/__better_errors/3b4068d51013d459/variables" for ::1 at 2019-04-09 16:15:26 -0700
+Started GET "/tasks/1" for ::1 at 2019-04-09 16:15:37 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (1.9ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 31ms (Views: 24.9ms | ActiveRecord: 1.9ms)
+
+

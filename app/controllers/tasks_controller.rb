@@ -1,7 +1,13 @@
-TASKS = ["Feed Cat", "Fold Laundry", "Wash Dishes"]
 
 class TasksController < ApplicationController
   def index
-    @tasks = TASKS
+    @tasks = Task.all
+  end
+
+  def show
+    @task = Task.find_by(id: params[:id])
+    if !@task
+      head :not_found
+    end
   end
 end
