@@ -25,7 +25,6 @@ describe TasksController do
     end
   end
 
-  # Unskip these tests for Wave 2
   describe "show" do
     it "can get a valid task" do
       skip
