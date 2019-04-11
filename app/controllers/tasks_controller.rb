@@ -27,7 +27,6 @@ class TasksController < ApplicationController
       description: params["task"]["description"]
       )
 
-
     # If the book saves correctly, then we want to redirect to the show page of that book
     # Otherwise, we should give back something about the error (for now, 404)
 
