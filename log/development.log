@@ -610,3 +610,32 @@ Processing by TasksController#edit as HTML
 Completed 200 OK in 50ms (Views: 41.9ms | ActiveRecord: 0.3ms)
 
 
+Started GET "/tasks" for ::1 at 2019-04-11 09:31:18 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (1.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (30.4ms)
+Completed 200 OK in 94ms (Views: 67.6ms | ActiveRecord: 16.8ms)
+
+
+Started GET "/tasks/3" for ::1 at 2019-04-11 09:31:28 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:9
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 41ms (Views: 32.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/tasks/3/edit" for ::1 at 2019-04-11 09:31:34 -0700
+Processing by TasksController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mTask Load (2.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:23
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/edit.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 46ms (Views: 35.6ms | ActiveRecord: 2.5ms)
+
+
