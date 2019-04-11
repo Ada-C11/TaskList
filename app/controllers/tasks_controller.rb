@@ -13,7 +13,7 @@ class TasksController < ApplicationController
 
     @task = Task.find_by(id: task_id)
     unless @task
-      head :not_found
+      redirect_to tasks_path
     end
   end
 
@@ -29,23 +29,10 @@ class TasksController < ApplicationController
       )
 
     if @task.save # save returns true if the database insert succeeds
-      redirect_to root_path # go to the index so we can see the task in the list
+      redirect_to task_path(@task.id) # go to the index so we can see the task in the list
     else # save failed :(
       render :new # show the new task form view again
     end
-
-    unless params["task"]
-      render :new, status: :bad_request
-      return
-    end
-
-    @task.name = params["task"]["name"],
-    @task.description = params["task"]["description"]
-    @task.completion_date = params["task"]["completion_date"]
-
-    @task.save
-
-    redirect_to tasks_path
   end
 
 end
