@@ -1,12 +1,17 @@
-<h1>Task List</h1>
+<h1 class="logo">Task List</h1>
 
-<ul>
-<% @tasks.each do |task| %>
-  <li>
-    Where: <%= link_to task.name, task_path(task.id) %>
+<div class="list">
+  <ol>
+  <% @tasks.each do |task| %>
+    <li class= "list-item">
+    <h3>Task:</h3> 
 
-    Date: <%= task.completion_date %>
-  </li>
-<% end %>
-<%= link_to "Create a new Task", new_task_path %>
-</ul>
+    <p> Completion Date: <%= task.completion_date %> </p>
+
+    <p> Location: <%= link_to task.name, task_path(task.id) %> </p>
+
+    </li>
+  <% end %>
+  <h4 class="new-task"> <%= link_to "Create a new Task", new_task_path %> </h4>
+  </ol>
+</div>
