@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   root 'tasks#index'
 
   get '/tasks', to: 'tasks#index', as: 'tasks'
-  get '/tasks/new', to: 'tasks#new', as: 'add_task' # form
-  post '/tasks', to: 'tasks#create', as: 'save_task' # form action
+  get '/tasks/new', to: 'tasks#new', as: 'new_task' # form
+  post '/tasks', to: 'tasks#create'
 
   # routes that operate on individual task routes
   get '/tasks/:id', to: 'tasks#show', as: 'task'
   get '/tasks/:id/edit', to: 'tasks#edit', as: 'edit_task' # form
-  patch '/tasks/:id', to: 'tasks#update' # form action
-  delete '/tasks/:id', to: 'tasks#destroy' # remove from database
+  patch '/tasks/:id', to: 'tasks#update'
+  delete '/tasks/:id', to: 'tasks#destroy'
 end

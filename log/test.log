@@ -520,3 +520,2230 @@ TasksController::edit: test_0002_will respond with redirect when attempting to e
 TasksController::create: test_0001_can create a new task
 --------------------------------------------------------
   [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (214.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "TaskList_test"[0m
+  [1m[35m (690.5ms)[0m  [1m[35mCREATE DATABASE "TaskList_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (3.6ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (5.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks" CASCADE[0m
+  [1m[35m (38.3ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "name" character varying, "description" character varying, "completion_date" date)[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20190409233419)[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20190409223759),
+(20190409223344),
+(20190409221740),
+(20190409233234),
+(20190409223642);
+
+[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2019-04-10 21:04:00.872486"], ["updated_at", "2019-04-10 21:04:00.872486"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (1.4ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 21:04:01.385696', '2019-04-10 21:04:01.385696', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 21:04:01.385696', '2019-04-10 21:04:01.385696', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 14:04:01 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (32.2ms)
+Completed 200 OK in 325ms (Views: 316.8ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 14:04:01 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 5ms (Views: 3.7ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------
+Task: test_0001_must be valid
+-----------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (0.7ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 21:15:58.279904', '2019-04-10 21:15:58.279904', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 21:15:58.279904', '2019-04-10 21:15:58.279904', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 14:15:58 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (1.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-04-10 21:15:58.329767"], ["updated_at", "2019-04-10 21:15:58.329767"], ["name", "new task"], ["description", "new task description"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 20ms (ActiveRecord: 2.1ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."name" = $1 LIMIT $2[0m  [["name", "new task"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 14:15:58 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (57.2ms)
+Completed 500 Internal Server Error in 65ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 14:15:58 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (50.8ms)
+Completed 500 Internal Server Error in 52ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------
+Task: test_0001_must be valid
+-----------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 14:15:58 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (18.7ms)
+Completed 200 OK in 211ms (Views: 208.9ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 14:15:58 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 21:15:58.718370"], ["updated_at", "2019-04-10 21:15:58.718370"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190964" for 127.0.0.1 at 2019-04-10 14:15:58 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190964"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190964], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 6ms (Views: 2.6ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (0.7ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 21:18:12.403899', '2019-04-10 21:18:12.403899', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 21:18:12.403899', '2019-04-10 21:18:12.403899', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 14:18:12 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (7.8ms)
+Completed 200 OK in 208ms (Views: 185.5ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 14:18:12 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-04-10 21:18:12.655834"], ["updated_at", "2019-04-10 21:18:12.655834"], ["name", "new task"], ["description", "new task description"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+No template found for TasksController#create, rendering head :no_content
+Completed 204 No Content in 126ms (ActiveRecord: 1.0ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."name" = $1 LIMIT $2[0m  [["name", "new task"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------
+Task: test_0001_must be valid
+-----------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 14:18:12 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (53.7ms)
+Completed 500 Internal Server Error in 56ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 14:18:12 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (59.4ms)
+Completed 500 Internal Server Error in 60ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 21:18:12.931356"], ["updated_at", "2019-04-10 21:18:12.931356"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190964" for 127.0.0.1 at 2019-04-10 14:18:12 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190964"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190964], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 6ms (Views: 2.4ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 14:18:12 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Completed 307 Temporary Redirect in 1ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (0.7ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 21:18:46.541840', '2019-04-10 21:18:46.541840', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 21:18:46.541840', '2019-04-10 21:18:46.541840', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 21:18:46.572145"], ["updated_at", "2019-04-10 21:18:46.572145"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190963" for 127.0.0.1 at 2019-04-10 14:18:46 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190963"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190963], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 285ms (Views: 272.5ms | ActiveRecord: 0.7ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 14:18:46 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to 
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 14:18:46 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 10ms (Views: 8.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 14:18:46 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-04-10 21:18:46.902522"], ["updated_at", "2019-04-10 21:18:46.902522"], ["name", "new task"], ["description", "new task description"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+No template found for TasksController#create, rendering head :no_content
+Completed 204 No Content in 119ms (ActiveRecord: 0.9ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."name" = $1 LIMIT $2[0m  [["name", "new task"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------
+Task: test_0001_must be valid
+-----------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 14:18:47 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (59.1ms)
+Completed 500 Internal Server Error in 62ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 14:18:47 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (58.1ms)
+Completed 500 Internal Server Error in 59ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (0.7ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 21:20:18.158922', '2019-04-10 21:20:18.158922', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 21:20:18.158922', '2019-04-10 21:20:18.158922', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 14:20:18 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 298ms (Views: 278.9ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 14:20:18 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 8ms (Views: 4.4ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 14:20:18 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 21:20:18.515117"], ["updated_at", "2019-04-10 21:20:18.515117"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190963" for 127.0.0.1 at 2019-04-10 14:20:18 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190963"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190963], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 10ms (Views: 4.1ms | ActiveRecord: 1.0ms)
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 14:20:18 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to 
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------
+Task: test_0001_must be valid
+-----------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 14:20:18 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-04-10 21:20:18.565033"], ["updated_at", "2019-04-10 21:20:18.565033"], ["name", "new task"], ["description", "new task description"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+No template found for TasksController#create, rendering head :no_content
+Completed 204 No Content in 129ms (ActiveRecord: 1.0ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."name" = $1 LIMIT $2[0m  [["name", "new task"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (0.8ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 21:25:05.488876', '2019-04-10 21:25:05.488876', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 21:25:05.488876', '2019-04-10 21:25:05.488876', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 14:25:05 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (11.5ms)
+Completed 200 OK in 283ms (Views: 274.2ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 14:25:05 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------
+Task: test_0001_must be valid
+-----------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 21:25:05.828164"], ["updated_at", "2019-04-10 21:25:05.828164"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190963" for 127.0.0.1 at 2019-04-10 14:25:05 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190963"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190963], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 11ms (Views: 3.6ms | ActiveRecord: 0.9ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 14:25:05 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 2ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 14:25:05 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (13.1ms)
+Completed 200 OK in 20ms (Views: 16.7ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (1.0ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 21:40:26.055615', '2019-04-10 21:40:26.055615', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 21:40:26.055615', '2019-04-10 21:40:26.055615', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 14:40:26 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 262ms (Views: 243.3ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------
+Task: test_0001_must be valid
+-----------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 14:40:26 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (4.6ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.6ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 21:40:26.381178"], ["updated_at", "2019-04-10 21:40:26.381178"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190963" for 127.0.0.1 at 2019-04-10 14:40:26 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190963"}
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190963], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 6ms (Views: 2.7ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 14:40:26 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 9ms (Views: 4.7ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 14:40:26 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (0.7ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 21:41:19.697468', '2019-04-10 21:41:19.697468', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 21:41:19.697468', '2019-04-10 21:41:19.697468', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 14:41:19 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (21.4ms)
+Completed 200 OK in 239ms (Views: 227.3ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 14:41:19 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 4ms (Views: 2.6ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 21:41:19.982729"], ["updated_at", "2019-04-10 21:41:19.982729"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190963" for 127.0.0.1 at 2019-04-10 14:41:19 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190963"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190963], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 7ms (Views: 2.2ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 14:41:19 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 2ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 14:41:20 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (9.2ms)
+Completed 200 OK in 15ms (Views: 11.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------
+Task: test_0001_must be valid
+-----------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (0.9ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 21:53:33.310727', '2019-04-10 21:53:33.310727', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 21:53:33.310727', '2019-04-10 21:53:33.310727', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 14:53:33 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (14.1ms)
+Completed 200 OK in 222ms (Views: 213.6ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 14:53:33 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------
+Task: test_0001_must be valid
+-----------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 14:53:33 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-04-10 21:53:33.611687"], ["updated_at", "2019-04-10 21:53:33.611687"], ["name", "new task"], ["description", "new task description"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks/980190963
+Completed 302 Found in 5ms (ActiveRecord: 0.9ms)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."name" = $1 LIMIT $2[0m  [["name", "new task"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------
+TasksController::create: test_0002_does something if no task is sent
+--------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 14:53:33 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (19.2ms)
+Completed 200 OK in 25ms (Views: 22.7ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 21:53:33.663485"], ["updated_at", "2019-04-10 21:53:33.663485"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190964" for 127.0.0.1 at 2019-04-10 14:53:33 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190964"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190964], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 9ms (Views: 3.4ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 14:53:33 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 2ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (1.4ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 23:35:27.049946', '2019-04-10 23:35:27.049946', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 23:35:27.049946', '2019-04-10 23:35:27.049946', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 16:35:27 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (31.2ms)
+Completed 200 OK in 269ms (Views: 242.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:35:27 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-04-10 23:35:27.825711"], ["updated_at", "2019-04-10 23:35:27.825711"], ["name", "new task"], ["description", "new task description"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 6ms (ActiveRecord: 1.3ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."name" = $1 LIMIT $2[0m  [["name", "new task"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------
+TasksController::create: test_0002_does something if no task is sent
+--------------------------------------------------------------------
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:35:27 -0700
+Processing by TasksController#create as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (1.4ms)
+Completed 400 Bad Request in 5ms (Views: 4.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 16:35:27 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 6ms (Views: 3.3ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 16:35:27 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (2.4ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 23:35:27.894325"], ["updated_at", "2019-04-10 23:35:27.894325"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190964" for 127.0.0.1 at 2019-04-10 16:35:27 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190964"}
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190964], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 11ms (Views: 3.7ms | ActiveRecord: 0.7ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 16:35:27 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 2ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (1.1ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 23:37:30.705183', '2019-04-10 23:37:30.705183', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 23:37:30.705183', '2019-04-10 23:37:30.705183', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 16:37:30 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (11.2ms)
+Completed 200 OK in 261ms (Views: 252.5ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 16:37:31 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 16:37:31 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (9.8ms)
+Completed 200 OK in 15ms (Views: 12.9ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:37:31 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-04-10 23:37:31.111855"], ["updated_at", "2019-04-10 23:37:31.111855"], ["name", "new task"], ["description", "new task description"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 1.1ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------
+TasksController::create: test_0002_does something if no task is sent
+--------------------------------------------------------------------
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:37:31 -0700
+Processing by TasksController#create as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (2.3ms)
+Completed 400 Bad Request in 6ms (Views: 5.1ms | ActiveRecord: 0.0ms)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 16:37:31 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 3ms (ActiveRecord: 0.6ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 23:37:31.160777"], ["updated_at", "2019-04-10 23:37:31.160777"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190964" for 127.0.0.1 at 2019-04-10 16:37:31 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190964"}
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190964], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 7ms (Views: 2.4ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (8.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (1.1ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 23:37:46.804409', '2019-04-10 23:37:46.804409', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 23:37:46.804409', '2019-04-10 23:37:46.804409', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 23:37:46.913312"], ["updated_at", "2019-04-10 23:37:46.913312"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190963" for 127.0.0.1 at 2019-04-10 16:37:46 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190963"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190963], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 227ms (Views: 211.1ms | ActiveRecord: 0.8ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 16:37:47 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 2ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 16:37:47 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 6ms (Views: 3.1ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 16:37:47 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 16:37:47 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 12ms (Views: 9.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:37:47 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.7ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-04-10 23:37:47.215484"], ["updated_at", "2019-04-10 23:37:47.215484"], ["name", "new task"], ["description", "new task description"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 1.3ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------
+TasksController::create: test_0002_does something if no task is sent
+--------------------------------------------------------------------
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:37:47 -0700
+Processing by TasksController#create as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (2.4ms)
+Completed 400 Bad Request in 6ms (Views: 5.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (2.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (0.8ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 23:37:58.012786', '2019-04-10 23:37:58.012786', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 23:37:58.012786', '2019-04-10 23:37:58.012786', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 16:37:58 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 189ms (Views: 173.7ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 16:37:58 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 11ms (Views: 5.7ms | ActiveRecord: 0.7ms)
+  [1m[35m (6.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 16:37:58 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 23:37:58.366760"], ["updated_at", "2019-04-10 23:37:58.366760"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190963" for 127.0.0.1 at 2019-04-10 16:37:58 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190963"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190963], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 9ms (Views: 3.0ms | ActiveRecord: 0.8ms)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 16:37:58 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 2ms (ActiveRecord: 0.5ms)
+  [1m[35m (6.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:37:58 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-04-10 23:37:58.425373"], ["updated_at", "2019-04-10 23:37:58.425373"], ["name", "new task"], ["description", "new task description"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks.980190964
+Completed 302 Found in 4ms (ActiveRecord: 1.1ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Load (0.9ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."name" = $1 LIMIT $2[0m  [["name", "new task"], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------
+TasksController::create: test_0002_does something if no task is sent
+--------------------------------------------------------------------
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:37:58 -0700
+Processing by TasksController#create as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (1.2ms)
+Completed 400 Bad Request in 3ms (Views: 2.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (4.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (1.1ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 23:38:35.873875', '2019-04-10 23:38:35.873875', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 23:38:35.873875', '2019-04-10 23:38:35.873875', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (9.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------
+TasksController::create: test_0002_does something if no task is sent
+--------------------------------------------------------------------
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:38:35 -0700
+Processing by TasksController#create as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (15.2ms)
+Completed 400 Bad Request in 234ms (Views: 214.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:38:36 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-04-10 23:38:36.223953"], ["updated_at", "2019-04-10 23:38:36.223953"], ["name", "new task"], ["description", "new task description"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks.980190963
+Completed 302 Found in 5ms (ActiveRecord: 1.2ms)
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."name" = $1 LIMIT $2[0m  [["name", "new task"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 16:38:36 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (4.8ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 12ms (Views: 4.6ms | ActiveRecord: 4.8ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 16:38:36 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (1.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 6ms (Views: 4.0ms | ActiveRecord: 1.1ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 23:38:36.288277"], ["updated_at", "2019-04-10 23:38:36.288277"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (9.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190964" for 127.0.0.1 at 2019-04-10 16:38:36 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190964"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190964], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 11ms (Views: 4.4ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 16:38:36 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 2ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 16:38:36 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 7ms (Views: 5.9ms | ActiveRecord: 0.0ms)
+  [1m[35m (7.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (1.1ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 23:39:00.209973', '2019-04-10 23:39:00.209973', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 23:39:00.209973', '2019-04-10 23:39:00.209973', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.7ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 23:39:00.336087"], ["updated_at", "2019-04-10 23:39:00.336087"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190963" for 127.0.0.1 at 2019-04-10 16:39:00 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190963"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190963], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 189ms (Views: 176.8ms | ActiveRecord: 0.8ms)
+  [1m[35m (9.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 16:39:00 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 3ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:39:00 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-04-10 23:39:00.573496"], ["updated_at", "2019-04-10 23:39:00.573496"], ["name", "new task"], ["description", "new task description"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks/980190964
+Completed 302 Found in 4ms (ActiveRecord: 1.1ms)
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."name" = $1 LIMIT $2[0m  [["name", "new task"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------
+TasksController::create: test_0002_does something if no task is sent
+--------------------------------------------------------------------
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:39:00 -0700
+Processing by TasksController#create as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (6.6ms)
+Completed 400 Bad Request in 12ms (Views: 11.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 16:39:00 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 5ms (Views: 3.0ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 16:39:00 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 16:39:00 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 8ms (Views: 7.5ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (1.2ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 23:40:37.559764', '2019-04-10 23:40:37.559764', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 23:40:37.559764', '2019-04-10 23:40:37.559764', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 16:40:37 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (20.4ms)
+Completed 200 OK in 273ms (Views: 263.3ms | ActiveRecord: 0.6ms)
+  [1m[35m (13.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 16:40:37 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 16:40:37 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (11.4ms)
+Completed 200 OK in 18ms (Views: 13.9ms | ActiveRecord: 0.0ms)
+  [1m[35m (12.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.7ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 23:40:38.014634"], ["updated_at", "2019-04-10 23:40:38.014634"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190963" for 127.0.0.1 at 2019-04-10 16:40:38 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190963"}
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190963], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 15ms (Views: 4.4ms | ActiveRecord: 1.0ms)
+  [1m[35m (16.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 16:40:38 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 2ms (ActiveRecord: 0.6ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:40:38 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.7ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-04-10 23:40:38.083834"], ["updated_at", "2019-04-10 23:40:38.083834"], ["name", "new task"], ["description", "new task description"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks/980190964
+Completed 302 Found in 6ms (ActiveRecord: 1.4ms)
+  [1m[35m (16.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."name" = $1 LIMIT $2[0m  [["name", "new task"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------------
+TasksController::create: test_0002_does something if no task is sent
+--------------------------------------------------------------------
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:40:38 -0700
+Processing by TasksController#create as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (2.3ms)
+Completed 400 Bad Request in 6ms (Views: 4.9ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:40:38 -0700
+Processing by TasksController#create as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (1.4ms)
+Completed 400 Bad Request in 5ms (Views: 4.4ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (16.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (0.9ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-10 23:41:37.207880', '2019-04-10 23:41:37.207880', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-10 23:41:37.207880', '2019-04-10 23:41:37.207880', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 16:41:37 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 186ms (Views: 171.4ms | ActiveRecord: 0.0ms)
+  [1m[35m (10.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------------------------------
+TasksController::create: test_0002_will respond with bad request if no task is sent
+-----------------------------------------------------------------------------------
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:41:37 -0700
+Processing by TasksController#create as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (1.3ms)
+Completed 400 Bad Request in 4ms (Views: 3.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:41:37 -0700
+Processing by TasksController#create as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (1.1ms)
+Completed 400 Bad Request in 4ms (Views: 3.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 16:41:37 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+  [1m[35m (18.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (1.9ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-04-10 23:41:37.608165"], ["updated_at", "2019-04-10 23:41:37.608165"], ["name", "new task"], ["description", "new task description"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks/980190963
+Completed 302 Found in 26ms (ActiveRecord: 20.4ms)
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."name" = $1 LIMIT $2[0m  [["name", "new task"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 16:41:37 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-10 23:41:37.662143"], ["updated_at", "2019-04-10 23:41:37.662143"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190964" for 127.0.0.1 at 2019-04-10 16:41:37 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190964"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190964], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 6ms (Views: 2.5ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 16:41:37 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (20.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (22.5ms)
+Completed 200 OK in 30ms (Views: 5.2ms | ActiveRecord: 20.7ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 16:41:37 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (1.9ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-11 00:15:33.967639', '2019-04-11 00:15:33.967639', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-11 00:15:33.967639', '2019-04-11 00:15:33.967639', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 17:15:34 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (19.2ms)
+Completed 200 OK in 240ms (Views: 218.7ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 17:15:34 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 17:15:34 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-11 00:15:34.353580"], ["updated_at", "2019-04-11 00:15:34.353580"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190963" for 127.0.0.1 at 2019-04-10 17:15:34 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190963"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190963], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 8ms (Views: 2.7ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 17:15:34 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.9ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 3ms (ActiveRecord: 0.9ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 17:15:34 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------------------------------
+TasksController::create: test_0002_will respond with bad request if no task is sent
+-----------------------------------------------------------------------------------
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 17:15:34 -0700
+Processing by TasksController#create as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (1.5ms)
+Completed 400 Bad Request in 4ms (Views: 3.5ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 17:15:34 -0700
+Processing by TasksController#create as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (0.8ms)
+Completed 400 Bad Request in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (1.2ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-11 00:18:09.319845', '2019-04-11 00:18:09.319845', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-11 00:18:09.319845', '2019-04-11 00:18:09.319845', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 17:18:09 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------------------------------
+TasksController::create: test_0002_will respond with bad request if no task is sent
+-----------------------------------------------------------------------------------
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 17:18:09 -0700
+Processing by TasksController#create as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (6.2ms)
+Completed 400 Bad Request in 188ms (Views: 187.3ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 17:18:09 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 9ms (Views: 7.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (2.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (33.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.3ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 17:18:09 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (2.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 13ms (Views: 7.2ms | ActiveRecord: 2.1ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (33.5ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 17:18:09 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 5ms (Views: 4.1ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-11 00:18:09.791942"], ["updated_at", "2019-04-11 00:18:09.791942"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190963" for 127.0.0.1 at 2019-04-10 17:18:09 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190963"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190963], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 12ms (Views: 4.4ms | ActiveRecord: 0.7ms)
+  [1m[35m (2.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 17:18:09 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 2ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "tasks" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixtures Load (0.8ms)[0m  [1m[31mDELETE FROM "tasks";
+INSERT INTO "tasks" ("id", "created_at", "updated_at", "name", "description", "completion_date") VALUES (980190962, '2019-04-11 00:18:58.483091', '2019-04-11 00:18:58.483091', DEFAULT, DEFAULT, DEFAULT), (298486374, '2019-04-11 00:18:58.483091', '2019-04-11 00:18:58.483091', DEFAULT, DEFAULT, DEFAULT)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "tasks" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------------
+TasksController::edit: test_0001_can get the edit page for an existing task
+---------------------------------------------------------------------------
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------------------------------------------
+TasksController::edit: test_0002_will respond with redirect when attempting to edit a nonexistant task
+------------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::create: test_0001_can create a new task
+--------------------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 17:18:58 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"new task", "description"=>"new task description", "completion_date"=>nil}}
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-04-11 00:18:58.627485"], ["updated_at", "2019-04-11 00:18:58.627485"], ["name", "new task"], ["description", "new task description"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks/980190963
+Completed 302 Found in 33ms (ActiveRecord: 1.2ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."name" = $1 LIMIT $2[0m  [["name", "new task"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------------------------------
+TasksController::create: test_0002_will respond with bad request if no task is sent
+-----------------------------------------------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2019-04-10 17:18:58 -0700
+Processing by TasksController#create as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (14.0ms)
+Completed 400 Bad Request in 212ms (Views: 211.7ms | ActiveRecord: 0.0ms)
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+TasksController::index: test_0001_can get the index path
+--------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2019-04-10 17:18:58 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 10ms (Views: 5.3ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+TasksController::index: test_0002_can get the root path
+-------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2019-04-10 17:18:58 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  Rendered tasks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 6ms (Views: 4.4ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+TasksController::new: test_0001_can get the new task page
+---------------------------------------------------------
+Started GET "/tasks/new" for 127.0.0.1 at 2019-04-10 17:18:58 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 7ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+TasksController::show: test_0001_can get a valid task
+-----------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("created_at", "updated_at", "name", "description", "completion_date") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2019-04-11 00:18:58.922240"], ["updated_at", "2019-04-11 00:18:58.922240"], ["name", "sample task"], ["description", "this is an example for a test"], ["completion_date", "2019-04-15"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/980190964" for 127.0.0.1 at 2019-04-10 17:18:58 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"980190964"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 980190964], ["LIMIT", 1]]
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 6ms (Views: 2.6ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------------------
+TasksController::show: test_0002_will redirect for an invalid task
+------------------------------------------------------------------
+Started GET "/tasks/-1" for 127.0.0.1 at 2019-04-10 17:18:58 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"-1"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", -1], ["LIMIT", 1]]
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 1ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+TasksController::update: test_0001_can update an existing task
+--------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------------------------
+TasksController::update: test_0002_will redirect to the root page if given an invalid id
+----------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
