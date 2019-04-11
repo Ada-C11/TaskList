@@ -98,13 +98,7 @@ describe TasksController do
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      #Arrange
-      # task_data = {
-      #   name: "Edit test",
-      #   description: "build a test for the edit method",
-      #   completion_date: nil,
-      # }
-
+      #Act
       get edit_task_path(-1)
 
       # Assert
@@ -118,13 +112,39 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
-      # Your code here
+      id = Task.first.id
+
+      task_data = {
+        name: "Edit test",
+        description: "build a test for the edit method",
+        completion_date: nil,
+      }
+
+      expect {
+        patch task_path(id), params: task_data
+      }.wont_change "Task.count"
+
+      must_respond_with :redirect
+      must_redirect_to task_path
+
+      task = Task.find_by(id: id)
+      expect(task.name).must_equal task_data[:name]
+      expect(task.description).must_equal task_data[:description]
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      id = -1
+
+      task_data = {
+        name: "Edit test",
+        description: "build a test for the edit method",
+        completion_date: nil,
+      }
+
+      patch task_path(id), params: task_data
+
+      must_respond_with :redirect
+      expect(flash[:error]).must_equal "Could not find task with id: -1"
     end
   end
 
