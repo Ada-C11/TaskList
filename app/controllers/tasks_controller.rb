@@ -22,13 +22,46 @@ class TasksController < ApplicationController
       description: params[:task][:description],
       completed: params[:task][:completed],
     )
-
     is_sucessful = task.save
 
     if is_sucessful
       redirect_to task_path(task.id)
     else
       head :not_found
+    end
+  end
+
+  def edit
+    @task = Task.find_by(id: params[:id])
+
+    if @task.nil?
+      redirect_to root_path
+    end
+  end
+
+  def update
+    task = Task.find_by(id: params[:id])
+
+    if task.nil?
+      redirect_to root_path
+    else
+      task.update(
+        name: params[:task][:name],
+        description: params[:task][:description],
+        completed: params[:task][:completed],
+      )
+      redirect_to root_path
+    end
+  end
+
+  def destroy
+    task = Task.find_by(id: params[:id])
+
+    if task.nil?
+      head :not_found
+    else
+      task.destroy
+      redirect_to root_path
     end
   end
 end
