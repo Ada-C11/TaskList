@@ -50,8 +50,8 @@ class TasksController < ApplicationController
     task = Task.find_by(id: task_id)
 
     unless task
-      flash[:error] = "Could not find task with id: #{task_id}"
       redirect_to tasks_path
+      return
     end
 
     task.name = params['task']['name']
