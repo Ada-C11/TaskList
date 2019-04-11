@@ -33,18 +33,17 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find_by(id: params[:id])
-    unless @task
-      redirect_to task_path(@task.id), { :flash => { :error => "Could not find task with id: #{params[:id]}" } }
-    end
-
-    # binding.pry
-
-    @task.name = params["task"]["name"]
-    @task.description = params["task"]["description"]
-    if @task.save
-      redirect_to task_path(@task.id), { :flash => { :success => "Successfully updated task!" } }
+    if @task
+      @task.name = params["task"]["name"]
+      @task.description = params["task"]["description"]
+      if @task.save
+        redirect_to task_path(@task.id), { :flash => { :success => "Successfully updated task!" } }
+      else
+        redirect_to :edit, :flash => { :error => "Failed to update task" }
+      end
     else
-      redirect_to :edit, :flash => { :error => "Failed to update task" }
+      redirect_to root_path, status: 303, :flash => { :error => "Could not find task with id: #{params[:id]}" }
     end
+    # binding.pry
   end
 end
