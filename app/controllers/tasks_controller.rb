@@ -21,17 +21,45 @@ class TasksController < ApplicationController
     form_data = params["task"]
     name = form_data["name"]
     description = form_data["description"]
-    if form_data["completed"] == nil
-      completed = false
+    completion_date = form_data["completion_date"]
+   
+
+    @task = Task.new(name: name, description: description, completion_date: completion_date, completed: false)
+    if @task.save 
+      redirect_to task_path(@task.id)
     else
-      completed = form_data["completed"]
+      head :not_found
+    end
+  end
+
+  def edit
+    @edited_task = Task.find_by(id: params[:id])
+    if @edited_task.nil?
+      redirect_to tasks_path
+    end
+  end
+
+  def update
+    form_data = params["task"]
+    edit_name = form_data["name"]
+    edit_description = form_data["description"]
+    edit_completion_date = form_data["completion_date"]
+    
+    @edited_task = Task.find_by(id: params[:id])
+    if !edit_name.nil?
+      @edited_task.name = edit_name
+    end
+    if !edit_description.nil?
+      @edited_task.description = edit_description
+    end
+    if !edit_completion_date.nil?
+      @edited_task.completion_date = edit_completion_date
     end
 
-    @task = Task.new(name: name, description: description, completed: completed )
-    if @task.save 
-      redirect_to tasks_path
+    if @edited_task.save 
+      redirect_to task_path(@edited_task.id)
     else
-      head :redirect
+      head :not_found
     end
   end
 

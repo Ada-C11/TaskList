@@ -1,19 +1,23 @@
-<section id="task_list">
+<section id="all_tasks">
 <h4>All the tasks needed to be done!</h4>
 <ul>
   <% @tasks.each do |task| %>
-      <li>
-        Task <%= task.id %>
-      </li>
-      <li>
-        Task Description:
-        <%= task.description %>
-      </li>
-      <% if !task.completed.nil?%>
+      <section id="list-tasks">
+        <strong><%= link_to "Task #{task.id}", task_path(task.id) %></strong>
         <li>
-          Task Completion Date:
-          <%= task.completed %>
-        </li> 
+         <%= link_to "Edit", edit_task_path(task.id) %>
+        </li>
+        <li>
+          <%= task.name %>: 
+          <%= task.description %>
+        </li>
+        <% if !task.completion_date.nil?%>
+          <li>
+            Task Completion Date:
+            <%= task.completion_date %>
+          </li>
+
+      </section>
     <% end%>
   <% end %>
 </ul>

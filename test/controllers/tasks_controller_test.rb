@@ -4,7 +4,7 @@ describe TasksController do
   # Note to students:  Your Task model **may** be different and
   #   you may need to modify this.
   let (:task) {
-    Task.create name: "sample task", description: "this is an example for a test",
+    Task.create name: "sample task", description: "this is an example for a test", 
     completed: false
   }
 
@@ -60,8 +60,6 @@ describe TasksController do
 
   describe "create" do
     it "can create a new task" do
-    
-
       # Arrange
       # Note to students:  Your Task model **may** be different and
       #   you may need to modify this.
@@ -86,17 +84,21 @@ describe TasksController do
       must_redirect_to task_path(new_task.id)
     end
   end
-
+###################################################
   # Unskip and complete these tests for Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
-      skip
-      # Your code here
+      get edit_task_path(task.id)
+
+      must_respond_with :success
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      skip
-      # Your code here
+
+      invalid_id = "INVALID ID"
+      get edit_task_path(invalid_id)
+
+      must_respond_with :redirect
     end
   end
 
@@ -106,6 +108,15 @@ describe TasksController do
     #        thing to test.
     it "can update an existing task" do
       skip
+      task_change = {
+        task: {
+          name: "new task",
+          description: "new task description",
+          completed: false,
+        },
+      }
+
+      patch task_path, params: task_change
       # Your code here
     end
 
