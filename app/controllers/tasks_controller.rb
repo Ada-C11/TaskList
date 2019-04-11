@@ -32,4 +32,36 @@ class TasksController < ApplicationController
     end
   end 
 
+  def edit
+    # this could be book = Book.new its just telling the form what to have  in
+    task_id = params[:id].to_i
+    @task_to_edit = Task.find_by(id: task_id)
+    # raise
+    if @task_to_edit.nil? #SOMETHING WRONG HERE, CHECK LATER
+      redirect_to tasks_path
+    end
+  end
+
+  def update
+    task_id = params[:id].to_i
+    task_to_update = Task.find(task_id)
+  
+    new_completed = params["task"]["completed"]
+    new_description = params["task"]["description"]
+    new_name = params["task"]["task_name"]  
+
+    task_to_update.task_name = new_name
+    task_to_update.description = new_description
+    task_to_update.completed = new_completed
+
+    updated_successfully = task_to_update.save 
+
+    if updated_successfully
+      redirect_to task_path(task_id)
+    else 
+      redirect_to tasks_path
+    end
+  end 
+
+
 end

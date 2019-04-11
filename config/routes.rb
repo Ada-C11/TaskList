@@ -7,11 +7,11 @@ Rails.application.routes.draw do
   get '/tasks/:id', to: 'tasks#show', as: "task"
 
   get '/tasks/:id/edit', to: 'tasks#edit', as: "edit_task"
-  patch "/tasks/:id", to: "tasks#update" #path already has a name 
-  delete "/tasks/:id", to: "tasks#destroy" #path already has a name 
+  patch "/tasks/:id", to: "tasks#update" #path already has a name (task)
+  delete "/tasks/:id", to: "tasks#destroy" #path already has a name (task)
 
-  # mark a task as read / task as complete (not a RESTful route)
-  patch "tasks/:id/read", to: "tasks#mark_read", as: "mark_read"
+  # mark a task as complete (not a RESTful route)
+  patch "tasks/:id/completed", to: "tasks#mark_completed", as: "mark_completed"
   
   root to: "tasks#index" #makes the homepage for the site go to tasks#index 
 
