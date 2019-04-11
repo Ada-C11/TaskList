@@ -2,11 +2,33 @@
 
 <h3>Here is a list of your Tasks</h3>
 
+<p><strong>You have <%= @tasks.length %> outstanding tasks</strong></p>
 
-<ul>
-  <% @tasks.each do | task |  %>
-    <li>
-      <%=  task.name %> : <%= task.description %> : <%= task.completion_date %>
-    </li>
+<section class ='urgent_task'>
+  <% if @urgent_task %>
+    <p>
+      Most Urgent Task: <%= @urgent_task.name %> 
+    </p>
+    <p>
+      Due date: <%= @urgent_task.completion_date %>
+    </p>
+  <% else %>
+    <p>No tasks today :(</p>
   <% end %>
-</ul>
+</section>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th> 
+    <th>Completion_date</th>
+  </tr>
+  <tr> 
+    <% @tasks.each do | task | %>
+    <td><%= link_to task.name, task_path(task) %></td> 
+    <td><%= task.description %></td>
+    <td><%= task.completion_date %></td>
+  </tr>
+  <% end %>
+</table>
+
