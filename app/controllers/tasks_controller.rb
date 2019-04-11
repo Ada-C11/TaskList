@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   def index # Loads a list of all the tasks
     @tasks = Task.all
 
-    @urgent_task = @tasks.last
+    @urgent_task = @tasks.min_by {|task| Date.parse(task.completion_date).to_time.to_i}
 
   end
 
