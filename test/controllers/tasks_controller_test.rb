@@ -122,7 +122,7 @@ describe TasksController do
 
       # Act-Assert
       expect {
-        patch edit_task_path(new_task.id), params: task_hash
+        patch task_path(new_task.id), params: task_hash
       }.must_change "Task.count", 0
 
       updated_task = Task.find_by(id: new_task.id)
@@ -136,7 +136,7 @@ describe TasksController do
 
     it "will redirect to the root page if given an invalid id" do
       expect {
-        edit_task_path(-1)
+        patch task_path(-1)
       }.must_redirect_to root_path
     end
   end

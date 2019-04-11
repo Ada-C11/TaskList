@@ -34,4 +34,17 @@ class TasksController < ApplicationController
 
     head :not_found if @task.nil?
   end
+
+  def update
+    task_id = params[:id]
+    task = Task.find_by(id: task_id)
+    task.name = params[:task][:name]
+    task.description = params[:task][:description]
+
+    if task.save
+      redirect_to task_path(task.id)
+    else
+      head :bad_request
+    end
+  end
 end
