@@ -4,11 +4,9 @@
   <ol>
   <% @tasks.each do |task| %>
     <li class= "list-item">
-    <h3>Task:</h3> 
+    <h3>Task Type:  <%= link_to task.name, task_path(task.id) %>  </h3> 
 
     <p> Completion Date: <%= task.completion_date %> </p>
-
-    <p> Location: <%= link_to task.name, task_path(task.id) %> </p>
 
     <p> <%= link_to "Edit", edit_task_path(task.id)%>
     </li>
