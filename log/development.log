@@ -972,3 +972,72 @@ Processing by TasksController#index as HTML
 Completed 200 OK in 75ms (Views: 72.1ms | ActiveRecord: 0.6ms)
 
 
+Started GET "/tasks" for ::1 at 2019-04-10 19:19:12 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (1.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (88.4ms)
+Completed 200 OK in 212ms (Views: 138.2ms | ActiveRecord: 54.7ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-10 19:19:14 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (4.6ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 62ms (Views: 50.3ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/tasks/1/edit" for ::1 at 2019-04-10 19:19:17 -0700
+
+AbstractController::ActionNotFound - The action 'edit' could not be found for TasksController:
+
+Started POST "/__better_errors/5b1de0566ad2be4b/variables" for ::1 at 2019-04-10 19:19:17 -0700
+Started GET "/tasks/1" for ::1 at 2019-04-10 19:19:30 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 43ms (Views: 38.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-10 19:41:21 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 158ms (Views: 103.6ms | ActiveRecord: 14.1ms)
+
+
+Started GET "/tasks/1/edit" for ::1 at 2019-04-10 19:41:24 -0700
+Processing by TasksController#edit as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 29ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `id' for nil:NilClass:
+  app/controllers/tasks_controller.rb:34:in `edit'
+
+Started POST "/__better_errors/8cd51ea7bd2050f1/variables" for ::1 at 2019-04-10 19:41:24 -0700
+Started POST "/__better_errors/8cd51ea7bd2050f1/eval" for ::1 at 2019-04-10 19:41:35 -0700
+Started POST "/__better_errors/8cd51ea7bd2050f1/eval" for ::1 at 2019-04-10 19:41:39 -0700
+Started POST "/__better_errors/8cd51ea7bd2050f1/eval" for ::1 at 2019-04-10 19:41:47 -0700
+Started GET "/tasks/1/edit" for ::1 at 2019-04-10 19:54:25 -0700
+Processing by TasksController#edit as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `id' for nil:NilClass:
+  app/controllers/tasks_controller.rb:34:in `edit'
+
+Started POST "/__better_errors/471f500b745f41aa/variables" for ::1 at 2019-04-10 19:54:25 -0700
