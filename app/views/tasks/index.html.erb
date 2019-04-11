@@ -1,13 +1,15 @@
-<h1>TaskList</h1>
-<p>get it done!</p>
+<h1><%= link_to "TaskList", tasks_path %></h1>
+<h2>just get it done!</h2>
 
-<ul>
-    <li>
-        TO DO:
-    </li>
-<% @tasks.each do |task| %>
-    <li>
-        <%= task.name %>: <%= task.description %> (completion date: <%= task.completion_date %>)
-    </li>
-<%end%>
-</ul>
+<div>
+    <p>ToDo:</p>
+    <ul>
+    <% @tasks.each do |task| %>
+        <li>
+            <%= task.name %>: <%= task.description %> (completed: <%= task.completion_date %>)
+        </li>
+    <%end%>
+    </ul>
+</div>
+
+<p class="button"><%= link_to "Add Task", new_task_path %></p>
