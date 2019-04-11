@@ -5,7 +5,7 @@ describe TasksController do
   #   you may need to modify this.
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
-                completed: false
+                completion_date: 2010-03-02
   }
 
   # Tests for Wave 1
@@ -30,7 +30,7 @@ describe TasksController do
   # Unskip these tests for Wave 2
   describe "show" do
     it "can get a valid task" do
-      skip
+      
       # Act
       get task_path(task.id)
 
@@ -50,7 +50,7 @@ describe TasksController do
 
   describe "new" do
     it "can get the new task page" do
-      skip
+    
 
       # Act
       get new_task_path
@@ -62,7 +62,7 @@ describe TasksController do
 
   describe "create" do
     it "can create a new task" do
-      skip
+      
 
       # Arrange
       # Note to students:  Your Task model **may** be different and
@@ -82,7 +82,7 @@ describe TasksController do
 
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
-      expect(new_task.completed).must_equal task_hash[:task][:completed]
+      expect(new_task.completion_date).must_equal task_hash[:task][:completion_date]
 
       must_respond_with :redirect
       must_redirect_to task_path(new_task.id)
@@ -93,7 +93,10 @@ describe TasksController do
   describe "edit" do
     it "can get the edit page for an existing task" do
       skip
-      # Your code here
+      get edit_task_path
+
+      # Assert
+      must_respond_with :success
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
