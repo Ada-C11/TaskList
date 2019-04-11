@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   patch "/tasks/:id", to: "tasks#update"
   delete "/tasks/:id", to: "tasks#destroy"
 
-  patch "/tasks", to: "tasks#mark_complete", as: "mark_complete"
+  patch "/tasks/:id/toggle_complete", to: "tasks#mark_complete", as: "mark_complete"
 
   root to: "tasks#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -20,6 +20,7 @@ class TasksController < ApplicationController
     task = Task.new(
       name: params[:task][:name],
       description: params[:task][:description],
+      due_date: params[:task][:due_date],
       completed: params[:task][:completed],
     )
     is_sucessful = task.save
@@ -42,16 +43,15 @@ class TasksController < ApplicationController
   def update
     task = Task.find_by(id: params[:id])
 
-    if task.nil?
-      redirect_to root_path
-    else
+    if !task.nil?
       task.update(
         name: params[:task][:name],
         description: params[:task][:description],
-        completed: params[:task][:completed],
+        due_date: params[:task][:due_date],
       )
-      redirect_to root_path
     end
+
+    redirect_to root_path
   end
 
   def mark_complete

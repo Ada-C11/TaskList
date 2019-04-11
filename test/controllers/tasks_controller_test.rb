@@ -62,6 +62,7 @@ describe TasksController do
         task: {
           name: "new task",
           description: "new task description",
+          due_date: DateTime.parse("2019-05-01"),
           completed: false,
         },
       }
@@ -73,6 +74,7 @@ describe TasksController do
 
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
+      expect(new_task.due_date).must_equal task_hash[:task][:due_date]
       expect(new_task.completed).must_equal task_hash[:task][:completed]
 
       must_respond_with :redirect
@@ -101,12 +103,16 @@ describe TasksController do
   # Uncomment and complete these tests for Wave 3
   describe "update" do
     it "can update an existing task" do
-      existing_task = Task.create(name: "Cook dinner", description: "Cooking dinner for four", completed: false)
+      existing_task = Task.create(
+        name: "Cook dinner",
+        description: "Cooking dinner for four",
+        due_date: DateTime.parse("2019-05-27"),
+        completed: false,
+      )
+
       task_hash = {
         task: {
           name: "Cook lunch",
-          description: "Cook lunch for two",
-          completed: true,
         },
       }
 
@@ -114,7 +120,7 @@ describe TasksController do
         patch task_path(existing_task.id), params: task_hash
       }.must_change "Task.count", 0
 
-      must_respond_with :success
+      must_respond_with :found
     end
 
     it "will redirect to the root page if given an invalid id" do
@@ -153,6 +159,19 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "can update existing status" do
+      existing_task = Task.create(
+        name: "Cook dinner",
+        description: "Cooking dinner for four",
+        due_date: DateTime.parse("2019-05-15"),
+        completed: false,
+      )
+
+      expect {
+        patch mark_complete_path(existing_task.id)
+      }.must_change "Task.count", 0
+
+      must_respond_with :found
+    end
   end
 end
