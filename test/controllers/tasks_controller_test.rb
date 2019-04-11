@@ -99,10 +99,9 @@ describe TasksController do
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      get edit_task_path(-1)
+      get edit_task_path(30)
 
       must_respond_with :not_found
-      # redirect to where? task list? show task?
     end
   end
 

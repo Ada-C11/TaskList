@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    task_id = params[:id].to_i
+    task_id = params[:id]
     @task = Task.find_by(id: task_id)
 
     head :not_found if @task.nil?
@@ -25,5 +25,13 @@ class TasksController < ApplicationController
     else
       head :bad_request
     end
+  end
+
+  def edit
+    task_id = params[:id]
+    # @book = Book.new(title: "Default Title")
+    @task = Task.find_by(id: task_id)
+
+    head :not_found if @task.nil?
   end
 end
