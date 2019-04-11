@@ -10,4 +10,46 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
   end
+
+  def new
+    @task = Task.new
+  end
+
+  def create
+    puts "You are so busy and important! Task added."
+
+    @task = Task.new
+
+    unless params["task"]
+      render :new, status: :bad_request
+      return
+    end
+
+    @task.name = params["task"]["name"]
+    @task.description = params["task"]["description"]
+    @task.deadline = params["task"]["deadline"]
+    @task.date_completed = params["task"]["date_completed"]
+    @task.priority_level = params["task"]["priority_level"]
+
+    # binding.pry
+
+    @task.save
+
+    redirect_to task_path(@task.id)
+  end
+
+  def show
+    task_id = params[:id]
+    puts "Task ID was #{task_id}"
+    puts "Result of .to_i: #{task_id.to_i}"
+    # binding.pry
+
+    @task = Task.find_by(id: task_id)
+
+    # binding.pry
+
+    unless @task
+      redirect_to tasks_path, flash: { error: "Could not find task with id #{task_id}." }
+    end
+  end
 end

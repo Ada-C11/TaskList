@@ -1,9 +1,10 @@
 require "test_helper"
 
 describe TasksController do
+  # Note to students:  Your Task model **may** be different and
+  #   you may need to modify this.
   let (:task) {
-    Task.create name: "sample task", description: "this is an example for a test",
-                completion_date: Time.now + 5.days
+    Task.create name: "sample task", description: "this is an example for a test", deadline: 20190410, priority_level: "low"
   }
 
   # Tests for Wave 1
@@ -28,28 +29,27 @@ describe TasksController do
   # Unskip these tests for Wave 2
   describe "show" do
     it "can get a valid task" do
-      skip
       # Act
       get task_path(task.id)
+
+      # binding.pry
 
       # Assert
       must_respond_with :success
     end
 
     it "will redirect for an invalid task" do
-      skip
+
       # Act
       get task_path(-1)
 
       # Assert
       must_respond_with :redirect
-      expect(flash[:error]).must_equal "Could not find task with id: -1"
     end
   end
 
   describe "new" do
     it "can get the new task page" do
-      skip
 
       # Act
       get new_task_path
@@ -61,14 +61,16 @@ describe TasksController do
 
   describe "create" do
     it "can create a new task" do
-      skip
 
       # Arrange
+      # Note to students:  Your Task model **may** be different and
+      #   you may need to modify this.
       task_hash = {
         task: {
-          name: "new task",
-          description: "new task description",
-          completion_date: nil,
+          name: "A Task",
+          description: "A Description of the Task",
+          deadline: Date.parse("20190410"),
+          priority_level: "Priority Level",
         },
       }
 
@@ -78,9 +80,12 @@ describe TasksController do
       }.must_change "Task.count", 1
 
       new_task = Task.find_by(name: task_hash[:task][:name])
+
+      # binding.pry
+
       expect(new_task.description).must_equal task_hash[:task][:description]
-      expect(new_task.due_date.to_time.to_i).must_equal task_hash[:task][:due_date].to_i
-      expect(new_task.completed).must_equal task_hash[:task][:completed]
+      expect(new_task.deadline).must_equal task_hash[:task][:deadline]
+      expect(new_task.priority_level).must_equal task_hash[:task][:priority_level]
 
       must_respond_with :redirect
       must_redirect_to task_path(new_task.id)
