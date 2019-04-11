@@ -5,7 +5,7 @@ describe TasksController do
   #   you may need to modify this.
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
-                completed: false
+                completed_date: "April 10, 2019"
   }
 
   # Tests for Wave 1
@@ -30,7 +30,6 @@ describe TasksController do
   # Unskip these tests for Wave 2
   describe "show" do
     it "can get a valid task" do
-      skip
       # Act
       get task_path(task.id)
 
