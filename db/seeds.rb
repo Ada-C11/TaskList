@@ -9,8 +9,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 tasks = Task.create([
                       { title: "Fake Task", description: "Don't work too hard on this. It's not a real task." },
-
                       { title: "Another Fake Task", description: "Get help. Fake tasks are really hard." },
-
                       { title: "Very Fake Task", description: "Remember to use soap." }
                     ])
