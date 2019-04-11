@@ -93,7 +93,6 @@ describe TasksController do
   describe "edit" do
     it "can get the edit page for an existing task" do
 
-
       # Arrange
       new_task = Task.create(task_name: "The Martian")
 
@@ -108,7 +107,7 @@ describe TasksController do
       # Arrange
       id = -1
       # Act
-      get edit_task_path(id) # double check this is the path I want to use 
+      get edit_task_path(id) # double check this is the path I want to use
 
       # Assert
       must_respond_with :redirect
@@ -120,7 +119,7 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      #Arrange #Create a task 
+      #Arrange #Create a task
       task_hash = {
         task: {
           task_name: "new task",
@@ -133,29 +132,39 @@ describe TasksController do
       # Act-Assert
       task_to_edit = Task.find_by(task_name: task_hash[:task][:task_name])
       task_to_edit.task_name = "Read a book"
-      task_to_edit.save 
+      task_to_edit.save
 
-      #DOES THIS NEED TO HAVE A PATCH PATH? 
-      
+      #DOES THIS NEED TO HAVE A PATCH PATH?
+
       expect(task_to_edit.task_name).must_equal "Read a book"
-      
     end
 
     it "will redirect to the root page if given an invalid id" do
-       # Arrange
-       id = -1
-       # Act
-       get task_path(id) # double check this is the path I want to use 
- 
-       # Assert
-       must_respond_with :redirect
+      # Arrange
+      id = -1
+      # Act
+      get task_path(id) # double check this is the path I want to use
+
+      # Assert
+      must_respond_with :redirect
     end
   end
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "can delete a task" do
+      #Arrange
+      new_task = Task.create(task_name: "Do the laundry")
 
+      expect {
+        #Act
+        delete task_path(new_task.id)
+        #Assert
+      }.must_change "Task.count", -1
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end
   end
 
   # Complete for Wave 4
