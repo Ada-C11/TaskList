@@ -1,9 +1,11 @@
 require "test_helper"
 
 describe TasksController do
+  # Note to students:  Your Task model **may** be different and
+  #   you may need to modify this.
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
-                completion_date: Time.now + 5.days
+                completed: false
   }
 
   # Tests for Wave 1
@@ -25,6 +27,7 @@ describe TasksController do
     end
   end
 
+  # Unskip these tests for Wave 2
   describe "show" do
     it "can get a valid task" do
       skip
@@ -42,7 +45,6 @@ describe TasksController do
 
       # Assert
       must_respond_with :redirect
-      expect(flash[:error]).must_equal "Could not find task with id: -1"
     end
   end
 
@@ -63,11 +65,13 @@ describe TasksController do
       skip
 
       # Arrange
+      # Note to students:  Your Task model **may** be different and
+      #   you may need to modify this.
       task_hash = {
         task: {
           name: "new task",
           description: "new task description",
-          completion_date: nil,
+          completed: false,
         },
       }
 
@@ -78,11 +82,10 @@ describe TasksController do
 
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
-      expect(new_task.due_date.to_time.to_i).must_equal task_hash[:task][:due_date].to_i
       expect(new_task.completed).must_equal task_hash[:task][:completed]
 
       must_respond_with :redirect
-      must_redirect_to task_path(new_task.id)
+      must_redirect_to tasks_path
     end
   end
 
@@ -99,7 +102,7 @@ describe TasksController do
     end
   end
 
-  # Uncomment and complete these tests for Wave 3
+    # Uncomment and complete these tests for Wave 3
   describe "update" do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
@@ -115,10 +118,38 @@ describe TasksController do
   end
 
   # Complete these tests for Wave 4
+  # destroy test done in class 
   describe "destroy" do
-    # Your tests go here
+    it "removes a task from the database" do
+      #arrange
+      task = Task.create!(title: "test_task")
+      #act
+      expect {
+        delete task_path(task)
+      }.must_change "Task.count", -1
+      #assert
+      must_respond_with :redirect
+      must_redirect_to tasks_path
 
+      after_task = Task.find_by(task.id)
+      expect(after_task).must_be_nil
+    end
+
+    it "returns as 404 if the task doesn't exist" do
+      task_id = 1234
+      expect(Task.find_by(id: task_id)).must_be_nil
+      expect {
+        delete tasks_path(task_id)
+      }.wont_change "Task.count"
+
+    end
   end
+
+    it "does something if the book doesn't exist" do
+    end
+
+
+
 
   # Complete for Wave 4
   describe "toggle_complete" do
