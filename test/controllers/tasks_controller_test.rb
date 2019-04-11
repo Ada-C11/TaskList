@@ -126,8 +126,13 @@ describe TasksController do
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      # Act
+      patch task_path(-1)
+
+      # Assert
+      must_respond_with :redirect
+      expect(flash[:error]).must_equal "Could not find task with id: -1"
+      must_redirect_to root_path
     end
   end
 
