@@ -10,4 +10,16 @@ class TasksController < ApplicationController
   def new
     @task = Task.new
   end
+
+  def create
+    new_task = Task.new(name: params[:task][:name],
+                        description: params[:task][:description],
+                        priority: params[:task][:priority])
+    #error handle when saving incase unsuccessful
+    if new_task.save
+      redirect_to task_path(new_task)
+    else
+      head :not_found
+    end
+  end
 end
