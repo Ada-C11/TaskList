@@ -1,9 +1,31 @@
-<h1>This is TasksList</h1>
+<header>
+  <h1>This is TasksList</h1>
+  <nav>
+    <ul>
+      <li>
+        Add Tasks
+      </li>
+      <li>
+        All Tasks
+      </li>
+    </ul>
+  </nav>
+</header>
 
-<ul>
-  <% @tasks.each do |task| %>
-    <li><%= task.name %></li>
-    <li><%= task.description %></li>
-    <li><%= task.completion_date %></li>
-  <% end %>
-</ul>
+<section>
+  <h2>Your Tasks</h2>
+  <ul>
+    <% @tasks.each do |task| %>
+      <li>
+        <strong>
+          <%= task.name %> - 
+        </strong>
+        <%= link_to "view details", task_path(task) %></li>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+<footer>
+  <p>copyright 2019 - Hana L Clements</p>
+</footer>
