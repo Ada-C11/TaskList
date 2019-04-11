@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new(title: "Default Title")
+    @task = Task.new(name: "Location")
   end
 
 end
