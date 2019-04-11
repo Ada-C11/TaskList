@@ -8,7 +8,7 @@ class TasksController < ApplicationController
     @task = Task.find_by(id: task_id)
 
     if @task.nil?
-      head :not_found
+      redirect_to tasks_path
     end
   end
 
