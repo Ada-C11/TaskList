@@ -56,10 +56,16 @@ class TasksController < ApplicationController
 
   def mark_complete
     task = Task.find_by(id: params[:id])
-
-    task.update(
-      completed: true,
-    )
+    if !task.completed
+      task.update(
+        completed: true,
+      )
+    else
+      task.update(
+        completed: false,
+      )
+    end
+    redirect_to root_path
   end
 
   def destroy

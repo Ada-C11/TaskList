@@ -2,7 +2,11 @@
 <% @tasks.each do |task| %>
   <li>
     <%= link_to task.name, task_path(task.id) %>
-    <%= button_to "Mark complete", { action: "mark_complete", id: task.id }, method: :patch %>
+    <% if !task.completed %>
+      <%= button_to "Mark complete", { action: "mark_complete", id: task.id }, method: :patch %>
+    <% else %>
+      <%= button_to "Unmark complete", { action: "mark_complete", id: task.id }, method: :patch %>
+    <% end %>
   </li>
 <% end %>
 </ul>
