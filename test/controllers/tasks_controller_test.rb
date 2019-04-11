@@ -99,7 +99,7 @@ describe TasksController do
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      get edit_task_path(30)
+      get edit_task_path(-1)
 
       must_respond_with :not_found
     end
@@ -110,13 +110,34 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
-      # Your code here
+      task_hash = {
+        task: {
+          name: "new task",
+          description: "new task description",
+          completed: false,
+        },
+      }
+
+      new_task = Task.create(name: "Stuff", description: "Lots of it!")
+
+      # Act-Assert
+      expect {
+        patch edit_task_path(new_task.id), params: task_hash
+      }.must_change "Task.count", 0
+
+      updated_task = Task.find_by(id: new_task.id)
+      expect(updated_task.name).must_equal task_hash[:task][:name]
+      expect(updated_task.description).must_equal task_hash[:task][:description]
+      expect(updated_task.completed).must_equal task_hash[:task][:completed]
+
+      must_respond_with :redirect
+      must_redirect_to task_path(new_task.id)
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      expect {
+        edit_task_path(-1)
+      }.must_redirect_to root_path
     end
   end
 
