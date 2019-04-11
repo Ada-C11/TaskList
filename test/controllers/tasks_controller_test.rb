@@ -175,6 +175,42 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
+    it "can mark a task complete without changing anything else" do
+      # Arrange
+      test_task = Task.last
+      initial_attributes = test_task.attributes.clone
+      task_hash = {
+        task: {
+          completion_date: Time.now.to_date,
+        },
+      }
+
+      #Act-Assert
+      expect {
+        patch task_path(test_task.id), params: task_hash
+      }.wont_change "Task.count"
+
+      updated_task = Task.find_by(id: initial_attributes["id"])
+
+      # Completion date should change, but nothing else should.
+      expect(updated_task.name).must_equal initial_attributes["name"]
+      expect(updated_task.description).must_equal initial_attributes["description"]
+      expect(updated_task.completion_date).must_equal task_hash[:task][:completion_date]
+
+      must_respond_with :redirect
+      must_redirect_to task_path(test_task.id)
+    end
+
+    it "will redirect to the root page if given an invalid id" do
+      # Act
+      patch task_path(-1)
+
+      # Assert
+      must_respond_with :redirect
+      expect(flash[:error]).must_equal "Could not find task with id: -1"
+
+      must_redirect_to root_path
+    end
     # Your tests go here
   end
 end

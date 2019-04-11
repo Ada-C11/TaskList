@@ -35,8 +35,10 @@ class TasksController < ApplicationController
     @task = Task.find_by(id: params[:id])
 
     if @task
-      @task.name = params["task"]["name"]
-      @task.description = params["task"]["description"]
+      @task.name = params["task"]["name"] if params["task"]["name"]
+      @task.description = params["task"]["description"] if params["task"]["description"]
+      @task.completion_date = params["task"]["completion_date"] if params["task"]["completion_date"]
+
       if @task.save
         redirect_to task_path(@task.id), { :flash => { :success => "Successfully updated task!" } }
       else
