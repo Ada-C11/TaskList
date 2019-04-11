@@ -39,7 +39,7 @@ describe TasksController do
     end
 
     it "will redirect for an invalid task" do
-      skip
+      
       # Act
       get task_path(-1)
 
