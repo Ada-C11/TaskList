@@ -74,8 +74,8 @@ describe TasksController do
       }.must_change "Task.count", 1
 
       new_task = Task.find_by(name: task_hash[:task][:name])
-      expect(new_task.description).must_equal task_hash[:task][:description]
 
+      expect(new_task.description).must_equal task_hash[:task][:description]
       expect(new_task.completion_date).must_equal task_hash[:task][:completion_date]
 
       must_respond_with :redirect
@@ -108,7 +108,7 @@ describe TasksController do
     #        thing to test.
     it "can update an existing task" do
       # Arrange
-
+      test_id = Task.last.id
       task_hash = {
         task: {
           name: "updated task",
@@ -117,12 +117,15 @@ describe TasksController do
       }
 
       expect {
-        patch task_path(Task.last.id), params: task_hash
+        patch task_path(test_id), params: task_hash
       }.wont_change "Task.count"
 
       updated_task = Task.find_by(name: task_hash[:task][:name])
 
       expect(updated_task.description).must_equal task_hash[:task][:description]
+
+      must_respond_with :redirect
+      must_redirect_to task_path(test_id)
     end
 
     it "will redirect to the root page if given an invalid id" do
@@ -139,8 +142,35 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "removes the test from the database" do
+      # Arrange
+      test_id = Task.last.id
 
+      # Act
+      expect {
+        delete task_path(test_id)
+      }.must_change "Task.count", -1
+
+      # Assert
+      expect(Task.find_by(id: test_id)).must_equal nil
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
+
+    it "redirects to root if the book does not exist" do
+      # Arrange
+      test_id = -1
+
+      # Act
+      delete task_path(test_id)
+
+      # Assert
+      must_respond_with :redirect
+      expect(flash[:error]).must_equal "Could not find task with id: -1"
+
+      must_redirect_to root_path
+    end
   end
 
   # Complete for Wave 4

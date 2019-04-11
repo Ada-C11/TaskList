@@ -33,6 +33,7 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find_by(id: params[:id])
+
     if @task
       @task.name = params["task"]["name"]
       @task.description = params["task"]["description"]
@@ -42,8 +43,20 @@ class TasksController < ApplicationController
         redirect_to :edit, :flash => { :error => "Failed to update task" }
       end
     else
-      redirect_to root_path, status: 303, :flash => { :error => "Could not find task with id: #{params[:id]}" }
+      redirect_to root_path, status: 302, :flash => { :error => "Could not find task with id: #{params[:id]}" }
     end
-    # binding.pry
+  end
+
+  def destroy
+    @task = Task.find_by(id: params[:id])
+    if @task
+      if @task.destroy
+        redirect_to root_path, { :flash => { :success => "Successfully added task!" } }
+      else
+        redirect_to root_path, :flash => { :error => "Failed to delete task" }
+      end
+    else
+      redirect_to root_path, status: 302, :flash => { :error => "Could not find task with id: #{params[:id]}" }
+    end
   end
 end
