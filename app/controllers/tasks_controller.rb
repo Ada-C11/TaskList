@@ -44,4 +44,17 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
+  def update
+    @task = Task.find(params[:id])
+    if @task.update(
+      name: params["task"]["name"],
+      completion_date: params["task"]["completion_date"],
+      description: params["task"]["description"]
+    )
+      redirect_to tasks_path
+    else
+      head :not_acceptable
+    end
+  end
+
 end
