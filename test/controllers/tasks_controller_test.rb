@@ -137,7 +137,7 @@ describe TasksController do
     it "will redirect to the root page if given an invalid id" do
       expect {
         patch task_path(-1)
-      }.must_redirect_to root_path
+      }.must_respond_with :bad_request
     end
   end
 
