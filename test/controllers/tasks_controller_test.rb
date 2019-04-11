@@ -86,15 +86,24 @@ describe TasksController do
   end
 
   # Unskip and complete these tests for Wave 3
-  describe "edit" do
+  describe "edit" do 
     it "can get the edit page for an existing task" do
-      skip
-      # Your code here
+      # Act
+      task = Task.new
+      task.title = "Get water"
+      task.save
+
+      get edit_task_path(task.id)
+
+      # Assert
+      must_respond_with :success
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      skip
-      # Your code here
+      get edit_task_path(999)
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
     end
   end
 
@@ -103,13 +112,38 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
-      # Your code here
+      task = Task.new
+      task.title = "Get water"
+      task.save
+      
+      task_hash = {
+        task: {
+          title: "new task",
+          content: "new task description",
+          completiondate: "false",
+        },
+      }
+
+      # Act-Assert
+      expect {
+        patch update_task_path(task.id), params: task_hash
+      }.must_change "Task.count", 0
+
+      expect(task.title).must_equal "Get water"
+      #Repulling from database - updating the title variable
+      task.reload
+      expect(task.title).must_equal task_hash[:task][:title]
+      expect(task.content).must_equal task_hash[:task][:content]
+      expect(task.completiondate).must_equal task_hash[:task][:completiondate]
+
+      must_respond_with :redirect
+      must_redirect_to task_path(task.id)
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+        patch update_task_path(999)
+        must_respond_with :redirect
+        must_redirect_to tasks_path
     end
   end
 

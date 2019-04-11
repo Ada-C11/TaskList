@@ -30,8 +30,31 @@ class TasksController < ApplicationController
         task_id = params[:id]
         @task = Task.find_by(id: task_id)
 
-        unless @task
+        if @task.nil?
             redirect_to tasks_path
         end
+    end
+
+    def edit
+        task_id = params[:id]
+        @task = Task.find_by(id: task_id)
+
+        if @task.nil?
+            redirect_to tasks_path
+        end
+    end
+
+    def update
+        task_id = params[:id]
+        task = Task.find_by(id: task_id)
+
+        if task.nil?
+            redirect_to tasks_path
+            return
+        end
+
+        task.update_attributes(params[:task].permit(:title, :content, :completiondate))
+
+        redirect_to task_path(task.id)
     end
 end
