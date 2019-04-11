@@ -17,6 +17,10 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
+  def edit
+    @task = Task.find(params[:id])
+  end
+
   def create
     task = Task.new(
       name: params["task"]["name"],
