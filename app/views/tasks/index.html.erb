@@ -7,11 +7,14 @@
   </tr>
   <tr>
     <% @tasks.each do |task| %>
-    <td> <%= task.name %> </td>
+    <td> <%= link_to task.name, task_path(task) %> </td>
     <td> <%= task.description %> </td>
     <td> <%= task.completion_date %> </td>
   </tr>
   <% end %>
+  <tr>
+    <td>  <%= link_to "Add a NEW Task", new_task_path %> </td>
+  </tr>
 </table>
 
 

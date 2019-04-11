@@ -1,0 +1,23 @@
+<%= form_with model: @task, class: 'task-form' do |f| %>
+  <div>
+    <%= f.label :title, "New Task:" %>
+    <%= f.text_field :name, placeholder: "Homework" %>
+  </div>
+
+  <div>
+    <%= f.label :description, "Description:" %>
+    <%= f.text_field :description, placeholder: "make 20 flashcards" %>
+  </div>
+
+  <div>
+    <%= f.label :completion_date, "Due Date:" %>
+    <%= f.text_field :comepletion_date, placeholder: "Thursday August 1st" %>
+  </div>
+
+  <%= f.submit "Add to task list!" %>
+
+<% end %>
+
+
+  flash[:error] = 'Successfully checked in'
+      redirect_to "tasks_path"
