@@ -6,8 +6,8 @@ class TasksController < ApplicationController
   def show
     task_id = params[:id].to_i
     @task = Task.find_by(id: task_id)
-    if @task.nil?
-      head :not_found
+    if @task.nil? 
+      head 300 #what is best status code to use?
     end
   end
 
@@ -20,7 +20,7 @@ class TasksController < ApplicationController
     new_task = Task.new(
       task_name: params["task"]["task_name"],
       description: params["task"]["description"],
-      completion_date: params["task"]["completion_date"]   
+      completed: params["task"]["completed"]   
     )
 
     created_successfully = new_task.save 
