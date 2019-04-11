@@ -54,6 +54,14 @@ class TasksController < ApplicationController
     end
   end
 
+  def mark_complete
+    task = Task.find_by(id: params[:id])
+
+    task.update(
+      completed: true,
+    )
+  end
+
   def destroy
     task = Task.find_by(id: params[:id])
 
