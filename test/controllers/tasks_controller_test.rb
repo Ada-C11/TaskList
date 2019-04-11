@@ -98,8 +98,18 @@ describe TasksController do
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      skip
-      # Your code here
+      #Arrange
+      # task_data = {
+      #   name: "Edit test",
+      #   description: "build a test for the edit method",
+      #   completion_date: nil,
+      # }
+
+      get edit_task_path(-1)
+
+      # Assert
+      must_respond_with :redirect
+      expect(flash[:error]).must_equal "Could not find task with id: -1"
     end
   end
 
