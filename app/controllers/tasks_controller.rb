@@ -2,7 +2,6 @@
 
 class TasksController < ApplicationController
   def index
-    # add an instance variable here
     @tasks = Task.all
   end
 
@@ -32,7 +31,7 @@ class TasksController < ApplicationController
     @task.description = params['task']['description']
     @task.save
 
-    redirect_to task_path(@task.id)
+    redirect_to tasks_path
   end
 
   def edit
@@ -46,5 +45,20 @@ class TasksController < ApplicationController
       flash[:error] = "Could not find task with id: #{task_id}"
       redirect_to tasks_path
     end
+  end
+
+  def destroy
+    task_id = params[:id]
+
+    task = Task.find_by(id: task_id)
+
+    unless task
+      head :not_found
+      return
+    end
+
+    task.destroy
+
+    redirect_to tasks_path
   end
 end

@@ -62,8 +62,8 @@ describe TasksController do
       # Arrange
       task_hash = {
         task: {
-          name: "new task",
-          description: "new task description",
+          name: 'new task',
+          description: 'new task description',
           completion_date: nil,
         },
       }
@@ -71,17 +71,17 @@ describe TasksController do
       # Act-Assert
       expect {
         post tasks_path, params: task_hash
-      }.must_change "Task.count", 1
+      }.must_change 'Task.count', +1
 
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
       expect(new_task.completion_date).must_equal task_hash[:task][:completion_date]
 
       must_respond_with :redirect
-      must_redirect_to task_path(new_task.id)
+      must_redirect_to tasks_path
     end
 
-    it "will respond with bad request if no task is sent" do 
+    it 'will respond with bad request if no task is sent' do 
       # Arrange
       task_data = {}
 
@@ -131,8 +131,37 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "deletes a task from database" do 
+      # Arrange
+      task = Task.create!(name: "Darren", description: "Gardening")
 
+      # Act
+      expect {
+        delete task_path(task)
+      }.must_change "Task.count", -1
+
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+
+      after_task = Task.find_by(id: task.id)
+      expect(after_task).must_be_nil
+    end
+
+    it " returns a 404 if the task doesn't exist" do 
+      # Arrange
+      task_id = 1337
+      # Assumption
+      expect(Task.find_by(id: task_id)).must_be_nil
+
+      # Act
+      expect {
+        delete task_path(task_id)
+      }.wont_change 'Task.count'
+
+      # Assert
+      must_respond_with :not_found
+    end
   end
 
   # Complete for Wave 4
