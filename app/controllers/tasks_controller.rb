@@ -12,14 +12,14 @@ class TasksController < ApplicationController
   def create
     @task = Task.create task_params
     redirect_to task_path(@task)
-   end
+  end
 
   def show
     @task = Task.find(params[:id])
   end
 
   def edit
-    @task = Task.find(params[:id])
+    @task = Task.find_by(id: params[:id])
   end
 
   def update
