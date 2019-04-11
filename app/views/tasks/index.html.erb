@@ -1,10 +1,22 @@
+<section id="task_list">
 <h4>All the tasks needed to be done!</h4>
 <ul>
-  <% @tasks.each_with_index do |task, index| %>
-    <li>
-      <%=task %>
-    </li>
+  <% @tasks.each do |task| %>
+      <li>
+        Task <%= task.id %>
+      </li>
+      <li>
+        Task Description:
+        <%= task.description %>
+      </li>
+      <% if !task.completed.nil?%>
+        <li>
+          Task Completion Date:
+          <%= task.completed %>
+        </li> 
+    <% end%>
   <% end %>
 </ul>
+</section>
 
 
