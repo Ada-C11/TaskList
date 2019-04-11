@@ -3,8 +3,9 @@
 <ul>
   <p><%= @task.description %></p>
   <br>
-  <% status = "completed" if @task.completed %>
-  <% status = "in-progress" unless @task.completed %>
-  <p class="status"><%= @task.created_at.strftime("Created: %a %D %r") %></p>
-  <p class="status">Status: <%= status %></p>
+  <p class="status">Created: <%= @task.created_at.strftime("%a %D %r") %></p>
+  <% if @task.due_date %>
+    <p class="status">Due: <%= @task.due_date.strftime("%a %D %r") %></p>
+  <% end %>
+  <p class="status">Status: <%= @status %></p>
 </ul>
