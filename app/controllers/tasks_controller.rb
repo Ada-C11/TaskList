@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'pry'
 class TasksController < ApplicationController
   def index
     @tasks = Task.all
@@ -41,13 +42,18 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id])
-    @task.update(
-      name: params['task']['name'],
-      description: params['task']['description'],
-      completion_date: params['task']['completion_date']
-    )
-    redirect_to task_path(@task)
+    @task = Task.find_by(id: params[:id])
+    if @task
+      @task.update(
+        name: params['task']['name'],
+        description: params['task']['description'],
+        completion_date: params['task']['completion_date']
+      )
+      redirect_to task_path(@task)
+    else
+      puts 'Redirecting to root'
+      redirect_to root_path
+    end
   end
 
   def destroy
