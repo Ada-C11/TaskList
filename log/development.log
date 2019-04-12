@@ -1,0 +1,424 @@
+  [1m[35m (393.7ms)[0m  [1m[35mCREATE DATABASE "TaskList_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (354.3ms)[0m  [1m[35mCREATE DATABASE "TaskList_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateTasks (20190409221740)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateTasks (20190409221740)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "name" character varying, "description" character varying, "completion_date" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190409221740_create_tasks.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190409221740"]]
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-04-09 22:25:39.171959"], ["updated_at", "2019-04-09 22:25:39.171959"]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(4169262226251541860)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTask Create (0.9ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Go Grocery Shopping"], ["description", "go to the grocery store"], ["created_at", "2019-04-09 22:39:05.188520"], ["updated_at", "2019-04-09 22:39:05.188520"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Walk Daisy"], ["description", "walk Daisy for at least 30 minutes"], ["created_at", "2019-04-09 22:40:01.552603"], ["updated_at", "2019-04-09 22:40:01.552603"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+Started GET "/tasks" for ::1 at 2019-04-09 15:54:08 -0700
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/minashin/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (19.4ms)
+Completed 200 OK in 230ms (Views: 219.6ms | ActiveRecord: 3.7ms)
+
+
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+Started GET "/" for ::1 at 2019-04-12 14:30:23 -0700
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/minashin/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/minashin/.rvm/gems/ruby-2.5.1/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/minashin/.rvm/gems/ruby-2.5.1/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb (3.8ms)
+Completed 200 OK in 19ms (Views: 12.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-12 14:30:29 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (5.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (18.7ms)
+Completed 200 OK in 175ms (Views: 160.5ms | ActiveRecord: 10.0ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-12 14:31:37 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 18ms (Views: 15.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-12 14:33:44 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (9.3ms)
+Completed 200 OK in 26ms (Views: 19.1ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-12 14:35:00 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (210.5ms)
+Completed 500 Internal Server Error in 217ms (ActiveRecord: 0.3ms)
+
+
+
+NameError - undefined local variable or method `todo' for #<#<Class:0x00007fbfc8b1b1d0>:0x00007fbfca520288>:
+  app/views/tasks/index.html.erb:6:in `block in _app_views_tasks_index_html_erb__2927626949109003612_70230854927820'
+  app/views/tasks/index.html.erb:4:in `_app_views_tasks_index_html_erb__2927626949109003612_70230854927820'
+
+Started POST "/__better_errors/2535f22a2fe98b29/variables" for ::1 at 2019-04-12 14:35:01 -0700
+Started GET "/tasks" for ::1 at 2019-04-12 14:35:13 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (344.2ms)
+Completed 500 Internal Server Error in 351ms (ActiveRecord: 0.4ms)
+
+
+
+NameError - undefined local variable or method `todo' for #<#<Class:0x00007fbfc8b1b1d0>:0x00007fbfc3c9b9d8>:
+  app/views/tasks/index.html.erb:6:in `block in _app_views_tasks_index_html_erb__2927626949109003612_70230799989720'
+  app/views/tasks/index.html.erb:4:in `_app_views_tasks_index_html_erb__2927626949109003612_70230799989720'
+
+Started POST "/__better_errors/43fc4b87459251b2/variables" for ::1 at 2019-04-12 14:35:14 -0700
+Started GET "/tasks" for ::1 at 2019-04-12 14:35:17 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (400.1ms)
+Completed 500 Internal Server Error in 407ms (ActiveRecord: 0.3ms)
+
+
+
+NameError - undefined local variable or method `todo' for #<#<Class:0x00007fbfc8b1b1d0>:0x00007fbfc8b935b8>:
+  app/views/tasks/index.html.erb:6:in `block in _app_views_tasks_index_html_erb__2927626949109003612_70230841532260'
+  app/views/tasks/index.html.erb:4:in `_app_views_tasks_index_html_erb__2927626949109003612_70230841532260'
+
+Started POST "/__better_errors/b92b28d9eb6ea512/variables" for ::1 at 2019-04-12 14:35:17 -0700
+Started GET "/tasks" for ::1 at 2019-04-12 14:35:27 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 20ms (Views: 17.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-12 14:35:29 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (3.2ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+Completed 406 Not Acceptable in 97ms (ActiveRecord: 3.4ms)
+
+
+
+ActionController::UnknownFormat - TasksController#show is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.:
+
+Started POST "/__better_errors/62d833e5f6c1bdf2/variables" for ::1 at 2019-04-12 14:35:29 -0700
+Started GET "/tasks/1" for ::1 at 2019-04-12 14:37:46 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+Completed 406 Not Acceptable in 99ms (ActiveRecord: 3.0ms)
+
+
+
+ActionController::UnknownFormat - TasksController#show is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.:
+
+Started POST "/__better_errors/9a7cfe171ad8c376/variables" for ::1 at 2019-04-12 14:37:46 -0700
+Started GET "/tasks/" for ::1 at 2019-04-12 14:37:48 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 33ms (Views: 29.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-12 14:37:50 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+Completed 406 Not Acceptable in 88ms (ActiveRecord: 0.3ms)
+
+
+
+ActionController::UnknownFormat - TasksController#show is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.:
+
+Started POST "/__better_errors/5647347e0ed4c676/variables" for ::1 at 2019-04-12 14:37:50 -0700
+Started GET "/tasks/1" for ::1 at 2019-04-12 14:39:47 -0700
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/minashin/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (189.6ms)
+Completed 500 Internal Server Error in 216ms (ActiveRecord: 4.5ms)
+
+
+
+NameError - undefined local variable or method `todo_path' for #<#<Class:0x00007ffb6aa97b68>:0x00007ffb6aa85be8>
+Did you mean?  root_path:
+  app/views/tasks/show.html.erb:5:in `_app_views_tasks_show_html_erb__2261667046004579877_70358901549280'
+
+Started POST "/__better_errors/703d5ddd53d41c56/variables" for ::1 at 2019-04-12 14:39:48 -0700
+Started GET "/tasks/1" for ::1 at 2019-04-12 14:39:59 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 168ms (Views: 164.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-12 14:40:03 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 22ms (Views: 18.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-12 14:40:06 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 23ms (Views: 19.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-12 14:40:07 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 25ms (Views: 21.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-12 14:43:29 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 18ms (Views: 15.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-12 14:43:30 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 23ms (Views: 19.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-12 14:46:30 -0700
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/minashin/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (9.5ms)
+Completed 200 OK in 176ms (Views: 160.4ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/tasks/2" for ::1 at 2019-04-12 14:46:33 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 23ms (Views: 17.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-12 14:46:35 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 23ms (Views: 20.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-12 14:46:36 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 26ms (Views: 22.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-12 14:46:37 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 22ms (Views: 19.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-12 14:58:26 -0700
+
+ArgumentError - Invalid route name, already in use: 'task' 
+You may have defined two routes with the same name using the `:as` option, or you may be overriding a route already defined by a resource with the same naming. For the latter, you can restrict the routes created with `resources` as explained here: 
+http://guides.rubyonrails.org/routing.html#restricting-the-routes-created:
+  config/routes.rb:8:in `block in <main>'
+  config/routes.rb:1:in `<main>'
+
+Started POST "/__better_errors/c759e84cb7f85144/variables" for ::1 at 2019-04-12 14:58:26 -0700
+Started GET "/tasks" for ::1 at 2019-04-12 15:00:49 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (294.6ms)
+Completed 500 Internal Server Error in 302ms (ActiveRecord: 5.7ms)
+
+
+
+NameError - undefined local variable or method `task' for #<#<Class:0x00007f92cdb5d350>:0x00007f92c7f5e158>
+Did you mean?  @tasks:
+  app/views/tasks/index.html.erb:10:in `_app_views_tasks_index_html_erb___626244006399085298_70134246600100'
+
+Started POST "/__better_errors/f1e2ab8140c2e99c/variables" for ::1 at 2019-04-12 15:00:50 -0700
+Started GET "/tasks" for ::1 at 2019-04-12 15:01:44 -0700
+
+ArgumentError - Invalid route name, already in use: 'task' 
+You may have defined two routes with the same name using the `:as` option, or you may be overriding a route already defined by a resource with the same naming. For the latter, you can restrict the routes created with `resources` as explained here: 
+http://guides.rubyonrails.org/routing.html#restricting-the-routes-created:
+  config/routes.rb:8:in `block in <main>'
+  config/routes.rb:1:in `<main>'
+
+Started POST "/__better_errors/2653d1673d3451ec/variables" for ::1 at 2019-04-12 15:01:44 -0700
+Started GET "/tasks" for ::1 at 2019-04-12 15:02:18 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (301.5ms)
+Completed 500 Internal Server Error in 309ms (ActiveRecord: 2.8ms)
+
+
+
+NameError - undefined local variable or method `new_task_path' for #<#<Class:0x00007f92cdb07040>:0x00007f92cdb056c8>
+Did you mean?  new_tasks_path:
+  app/views/tasks/index.html.erb:10:in `_app_views_tasks_index_html_erb___626244006399085298_70134246423580'
+
+Started POST "/__better_errors/8adf587a25a0a2af/variables" for ::1 at 2019-04-12 15:02:18 -0700
+Started GET "/tasks" for ::1 at 2019-04-12 15:04:00 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 23ms (Views: 17.4ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-04-12 15:04:03 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (22.1ms)
+Completed 200 OK in 41ms (Views: 37.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-12 15:04:06 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 25ms (Views: 21.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-04-12 15:08:39 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 25ms (Views: 21.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-12 15:08:40 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 35ms (Views: 31.4ms | ActiveRecord: 0.3ms)
+
+
