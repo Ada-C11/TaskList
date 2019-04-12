@@ -164,10 +164,18 @@ describe TasksController do
     it "returns a 404 if the task doesn't exist" do
 
       #Arrange
+      task_id = 9001
+
+      #Assumptions
+      expect(Task.find_by(id: task_id)).must_be_nil
 
       #Act
+      expect {
+        delete task_path(task_id)
+      }.wont_change "Task.count"
 
       #Assert
+      must_respond_with :not_found
     end
   end
 
