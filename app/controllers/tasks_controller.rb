@@ -64,14 +64,14 @@ class TasksController < ApplicationController
 
     if task.nil?
       head :not_found
-    elsif task.completed == false
+    elsif !task.completed
       task.completed = true
+      task.completion_date = Date.today.strftime("%b %d %Y")
       task.save
-      redirect_to tasks_path
     else
-      task.complete = false
+      task.completed = false
       task.save
-      redirect_to tasks_path
     end
+    redirect_to tasks_path
   end
 end
