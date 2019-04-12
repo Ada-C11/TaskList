@@ -1,18 +1,26 @@
-<h1>Tasks</h1>
-<ul>
+<h1>TASKLIST</h1>
+<%= link_to "Create new task", new_task_path %>
 
-  <table>
-    <tr>  
-      <th>Name</th>
-      <th>Description</th>
-      <th>Completion</th>
-    </tr>
-  <% @tasks.each do |task|  %>  
-    <tr>  
-      <td><%= task.name%></td>
-      <td><%= task.description%></td>
-      <td><%= task.completion%></td>
-    </tr>
-  <% end %>  
-  </table>
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <strong>
+        <%= link_to task.name, task_path(task) %>
+      </strong>
+      <ul>
+        <li>
+          <strong>
+            <%= link_to "Edit", edit_task_path(task) %>
+          </strong>
+        </li>
+
+        <li>
+          <strong>
+            <%= link_to "Delete", task_path(task.id), method: :delete %>
+          </strong>
+         </li>
+      </ul>
+    </li>
+  <% end %>
 </ul>
+
