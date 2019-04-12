@@ -116,22 +116,22 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # it "can delete a task" do
-    #   new_task = Tast.create(name: "Amy", description: "practice self care")
-    #   expect {
-    #     delete task_path(new_task.id)
-    #   }.must_change "Task.count", -1
-    #   must_respond_with :redirect
-    #   must_redirect_to tasks_path
-    # end
+    it "can delete a task" do
+      new_task = Task.create(name: "Amy", description: "practice self care")
+      expect {
+        delete task_path(new_task.id)
+      }.must_change "Task.count", -1
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end
 
-    # it "returns a 404 if the task is not found" do
-    #   invalid_id = "NOT A VALID ID"
-    #   expect {
-    #     delete task_path(invalid_id)
-    #   }.wont_change "Task.count"
-    #   must_respond_with :not_found
-    # end
+    it "returns a 404 if the task is not found" do
+      invalid_id = "NOT A VALID ID"
+      expect {
+        delete task_path(invalid_id)
+      }.wont_change "Task.count"
+      must_respond_with :not_found
+    end
   end
 
   # Complete for Wave 4
