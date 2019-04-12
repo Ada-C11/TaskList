@@ -56,11 +56,11 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
-  def mark_complete
+  def toggle
     task_id = params[:id]
     task = Task.find(task_id)
     task.update(
-      completion_date: params[:task][:completion_date]
+      is_complete: !task.is_complete
     )
     redirect_to tasks_path
   end
