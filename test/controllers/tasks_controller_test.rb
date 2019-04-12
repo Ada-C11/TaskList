@@ -211,6 +211,5 @@ describe TasksController do
 
       must_redirect_to root_path
     end
-    # Your tests go here
   end
 end

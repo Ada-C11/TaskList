@@ -4,7 +4,7 @@
     <li>
         <h2><%= link_to task.name, task_path(task.id) %></h2> 
         <h3><%= task.description %></h3> 
-        <h3><%= "Completed? #{!task.completion_date.nil?}"%></h3> 
+        <h3><strong>Completed? </strong><%= "#{task.completion_date.nil? ? "Not yet..." : "Yup!" }"%></h3> 
         <%= link_to "Edit Task", edit_task_path(task.id) %>
         <%= link_to "Mark as Completed", task_path(task.id, task: {completion_date: DateTime.now }), method: :patch %>
         <%= link_to "Delete Task", task_path(task.id), method: :delete, data: { confirm: "Are you sure?" } %>
