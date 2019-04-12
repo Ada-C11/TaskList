@@ -55,7 +55,16 @@ class TasksController < ApplicationController
     end
   end
 
-  def toggle_complete
+  def toggle
+    task_id = params[:id].to_i
+    task_to_toggle = Task.find_by(id: params[:id])
+
+    if task_to_toggle.nil?
+      redirect_to tasks_path
+    else
+
+    end 
+
   end 
 
   def destroy
