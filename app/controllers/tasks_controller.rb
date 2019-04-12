@@ -19,10 +19,6 @@ class TasksController < ApplicationController
 
   def create
     new_task = Task.new(task_params)
-    #   task_name: params["task"]["task_name"],
-    #   description: params["task"]["description"],
-    #   completed: params["task"]["completed"],
-    # )
 
     created_successfully = new_task.save
 
@@ -33,33 +29,35 @@ class TasksController < ApplicationController
     end
   end
 
-  def edit
-    task_id = params[:id].to_i
-    @task_to_edit = Task.find_by(id: task_id)
-    if @task_to_edit.nil?
+  def edit #how can i use task_params in this?
+    # task_id = params[:id].to_i
+    @task = Task.find_by(id: params[:id])
+    if @task.nil?
       redirect_to tasks_path
     end
   end
 
   def update
-    task_id = params[:id].to_i
-    task_to_update = Task.find(task_id)
+    # task_id = params[:id].to_i
+    task = Task.find_by(id: params[:id])
 
-    new_completed = params["task"]["completed"]
-    new_description = params["task"]["description"]
-    new_name = params["task"]["task_name"]
-
-    task_to_update.task_name = new_name
-    task_to_update.description = new_description
-    task_to_update.completed = new_completed
-
-    updated_successfully = task_to_update.save
+    updated_successfully = task.update(task_params)
 
     if updated_successfully
-      redirect_to task_path(task_id)
+      redirect_to task_path(task.id)
     else
       redirect_to tasks_path
     end
+  end
+
+  def toggle_complete
+    task = Task.find_by(id: params[:id])
+
+    task.completed?
+    task.toggle(:completed)
+    task.save
+
+    redirect_to tasks_path
   end
 
   def destroy
@@ -75,17 +73,7 @@ class TasksController < ApplicationController
 
   private
 
-  # this method is our way of saying that params looks like this nested hash, we are permitting the following keys:
-  # {
-  #   task: {
-  #     task_name: "some name",
-  #     description: "some description "
-  #     completed: "true or false"
-  #   }
-  # }
-
   def task_params
-    #Responsible for returning strong params as rails wants it
     return params.require(:task).permit(:task_name, :description, :completed)
   end
 end

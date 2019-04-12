@@ -7,7 +7,9 @@
     <a href="/tasks/<%=task.id%>">
       Task: <%= task.task_name %> 
       Description: <%= task.description %>
-      Completed?: <%= task.completed %>
+      Completed?: <%= task.completed %></a>
+     
+      <%= button_to "Change completion status", {action: "toggle_complete", id: task.id}, method: :patch %>
     </li>
   <% end %>
   </ul>

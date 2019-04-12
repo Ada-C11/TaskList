@@ -1,15 +1,7 @@
-<h2>Form for creating a new task</h2>
+<h2>Create a new task</h2>
 
-
-<%= form_with model: @task, class: "create-task" do |f| %>
-
-<p>Please fill out the form below to make a new book</p>
-<%= f.label :task_name %>
-<%= f.text_field :task_name %>
-<%= f.label :description %>
-<%= f.text_field :description%>
-<%= f.label :completed %>
-<%= f.text_field :completed %>
-
-<%= f.submit "Add task", class: "add-task-form_save-button" %>
-<% end %>
+<%= render partial: "form", locals: {
+    form_class: "new-task", 
+    intro_text: "Use this form to create task",
+    action_name: "Save Task"
+    } %>

@@ -169,6 +169,17 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "changes completed from true to false" do
+      # Arrange
+      new_task = Task.create(completed: false)
+      patch toggle_complete_path(new_task.id)
+
+      # Act
+      new_task.reload
+
+      # Assert
+      expect(new_task.completed).must_equal true
+      must_redirect_to tasks_path
+    end
   end
 end

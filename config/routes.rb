@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   resources :tasks
 
   # mark a task as complete (not a RESTful route)
-  patch "tasks/:id/completed", to: "tasks#mark_completed", as: "mark_completed"
+  patch "tasks/:id/toggle_complete", to: "tasks#toggle_complete", as: "toggle_complete"
 end
