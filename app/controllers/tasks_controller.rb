@@ -33,8 +33,25 @@ class TasksController < ApplicationController
 
     unless @task
       redirect_to tasks_path
+      return
     end
   end
 
-  
+  def update
+    task = Task.find_by(id: params[:id])
+
+    unless task
+      redirect_to tasks_path
+      return
+    end
+
+    task_params = {
+      name: params[:task][:name],
+      description: params[:task][:description],
+    }
+
+    task.update(task_params)
+
+    redirect_to tasks_path
+  end
 end

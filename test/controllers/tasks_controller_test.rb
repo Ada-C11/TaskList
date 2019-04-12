@@ -103,13 +103,19 @@ describe TasksController do
     end
   end
 
-  # Uncomment and complete these tests for Wave 3
   describe "update" do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
-      # Your code here
+      task = Task.new(name: "new task", description: "Important")
+      task.save
+      new_task_params = {task: {name: "new new",
+                                description: "More Important"}}
+
+      patch task_path(task), params: new_task_params
+
+      task.reload
+      expect(task.name).must_equal "new new"
     end
 
     it "will redirect to the root page if given an invalid id" do
