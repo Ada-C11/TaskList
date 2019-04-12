@@ -13,6 +13,19 @@ class TodosController < ApplicationController
   end
 
   def new
-    @todos = Todo.new
+    @todo = Todo.new
+  end
+
+  def create
+    @todo = Todo.new(
+      name: params['todo']['name'],
+      completion_date: params['todo']['completion_date'],
+      description: params['todo']['description']
+    )
+    if @todo.save
+      redirect_to todos_path
+    else
+      render :new
+    end
   end
 end

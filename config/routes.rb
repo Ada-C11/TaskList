@@ -6,12 +6,10 @@ Rails.application.routes.draw do
   get '/todos', to: 'todos#index', as: 'todos'
 
   get '/todos/new', to: 'todos#new', as: 'new_task'
-
   post '/todos', to: 'todos#create'
 
-  patch '/todo/:id/read', to: 'todo#mark_complete', as: 'mark_complete'
+  get '/todos/:id', to: 'todos#show', as: 'todo'
+  # patch '/todo/:id/read', to: 'todo#mark_complete', as: 'mark_complete'
 
   root to: 'todos#index'
-
-  resources :todos
 end
