@@ -1,10 +1,19 @@
 <h2>Edit this task!</h2>
 
-<%= form_with model: @task, class: 'edit-task' do |f| %>
+<%= form_with model: @task_to_edit, class: 'edit-task' do |f| %>
 
   <p>Please fill out this form to edit this task</p>
-
+    <%= f.label "Edit name of task:"  %>
+    <%= f.text_field :name %>
+  <%= f.label "Edit description of task:" %>
+  <%= f.text_field :description %>
+  <%= f.label "Change completion status:" %>
+  <%= f.text_field :completed %>
 
   <%= f.submit "Edit Task", class: "edit-button" %>
 
 <% end %>
+
+<%# link_to "Delete '#{@task.name}'", task_path(@task.id), method: :delete %>
+
+<%= link_to "Back to All Tasks", tasks_path %>

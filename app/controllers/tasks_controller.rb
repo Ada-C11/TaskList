@@ -17,13 +17,13 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(
+    new_task = Task.new(
       name: params[:task][:name],
       description: params[:task][:description],
       completed: params[:task][:completed],
     )
 
-    if @task.save
+    if new_task.save
       redirect_to task_path(@task.id)
     else
       render :new
@@ -31,9 +31,35 @@ class TasksController < ApplicationController
   end
 
   def edit
-    
+    task_id = params[:id].to_i
+    @task_to_edit = Task.find_by(id: task_id)
+
+    if @task_to_edit.nil?
+      redirect_to tasks_path
+    end
   end
 
   def update
+    task_id = params[:id].to_i
+    task_to_update = Task.find_by(id: task_id)
+
+    edited_name = params[:task][:name]
+    edited_description = params[:task][:description]
+    edited_completed = params[:task][:completed]
+
+    task_to_update.name = edited_name
+    task_to_update.description = edited_description
+    task_to_update.completed = edited_completed
+
+    if task_to_update.save
+      redirect_to task_path(task_id)
+    end
   end
+
+  # def destroy
+  #   task = Task.find(params[:id])
+  #   task.destroy
+
+  #   redirect_to tasks_path
+  # end
 end
