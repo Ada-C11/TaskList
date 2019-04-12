@@ -18,11 +18,11 @@ class TasksController < ApplicationController
   end
 
   def create
-    new_task = Task.new(
-      task_name: params["task"]["task_name"],
-      description: params["task"]["description"],
-      completed: params["task"]["completed"],
-    )
+    new_task = Task.new(task_params)
+    #   task_name: params["task"]["task_name"],
+    #   description: params["task"]["description"],
+    #   completed: params["task"]["completed"],
+    # )
 
     created_successfully = new_task.save
 
@@ -71,5 +71,21 @@ class TasksController < ApplicationController
       task_to_destroy.destroy
       redirect_to tasks_path
     end
+  end
+
+  private
+
+  # this method is our way of saying that params looks like this nested hash, we are permitting the following keys:
+  # {
+  #   task: {
+  #     task_name: "some name",
+  #     description: "some description "
+  #     completed: "true or false"
+  #   }
+  # }
+
+  def task_params
+    #Responsible for returning strong params as rails wants it
+    return params.require(:task).permit(:task_name, :description, :completed)
   end
 end
