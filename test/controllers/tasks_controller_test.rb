@@ -109,7 +109,8 @@ describe TasksController do
     it "will redirect to the root page if given an invalid id" do
       invalid_id = "NOT A VALID ID"
       patch task_path(invalid_id)
-      assert_redirected_to tasks_path
+      must_respond_with :redirect
+      must_redirect_to tasks_path
     end
   end
 

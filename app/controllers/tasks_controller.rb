@@ -38,7 +38,8 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id])
+    task_id = params[:id].to_i
+    @task = Task.find_by(id: task_id)
 
     if @task.nil?
       redirect_to tasks_path
@@ -47,10 +48,6 @@ class TasksController < ApplicationController
       redirect_to task_path(@task.id)
     end
   end
-
-  #   @article = Article.find(params[:id])
-  #   @article.update(title: params[:title], description: params[:description])
-  #   redirect_to article_path(@article)
 
   # def destroy
   #   task = Task.find_by(id: params[:id])
