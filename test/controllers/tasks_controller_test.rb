@@ -175,8 +175,9 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    it "can mark a task complete without changing anything else" do
+    it "can mark an incomplete task complete without changing anything else" do
       # Arrange
+      Task.update_all(completion_date: nil)
       test_task = Task.last
       initial_attributes = test_task.attributes.clone
       task_hash = {
@@ -187,7 +188,7 @@ describe TasksController do
 
       #Act-Assert
       expect {
-        patch task_path(test_task.id), params: task_hash
+        patch toggle_complete_task_path(test_task.id), params: task_hash
       }.wont_change "Task.count"
 
       updated_task = Task.find_by(id: initial_attributes["id"])
@@ -198,7 +199,7 @@ describe TasksController do
       expect(updated_task.completion_date).must_equal task_hash[:task][:completion_date]
 
       must_respond_with :redirect
-      must_redirect_to task_path(test_task.id)
+      must_redirect_to root_path
     end
 
     it "will redirect to the root page if given an invalid id" do

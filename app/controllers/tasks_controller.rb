@@ -16,7 +16,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(name: params[:task][:name], description: params[:task][:description])
+    @task = Task.new task_params
     if @task.save
       redirect_to task_path(@task.id), { :flash => { :success => "Successfully added a task! Look at you, Busy Bee!" } }
     else
@@ -35,11 +35,7 @@ class TasksController < ApplicationController
     @task = Task.find_by(id: params[:id])
 
     if @task
-      @task.name = params["task"]["name"] if params["task"]["name"]
-      @task.description = params["task"]["description"] if params["task"]["description"]
-      @task.completion_date = params["task"]["completion_date"] if params["task"]["completion_date"]
-
-      if @task.save
+      if @task.update task_params
         redirect_to task_path(@task.id), { :flash => { :success => "Successfully updated task!" } }
       else
         redirect_to :edit, :flash => { :error => "Failed to update task" }
@@ -60,5 +56,25 @@ class TasksController < ApplicationController
     else
       redirect_to root_path, status: 302, :flash => { :error => "Could not find task with id: #{params[:id]}" }
     end
+  end
+
+  def toggle_complete
+    @task = Task.find_by(id: params[:id])
+
+    if @task
+      if @task.update task_params
+        redirect_to root_path, { :flash => { :success => "Successfully updated task!" } }
+      else
+        redirect_to root_path, :flash => { :error => "Failed to update task" }
+      end
+    else
+      redirect_to root_path, status: 302, :flash => { :error => "Could not find task with id: #{params[:id]}" }
+    end
+  end
+
+  private
+
+  def task_params
+    return params.require(:task).permit(:name, :description, :completion_date)
   end
 end

@@ -13,7 +13,7 @@
         <h3><strong>Completed? </strong><%= "#{task.completion_date.nil? ? "Not yet..." : "Yup!" }"%></h3> 
         <p>
         <%= link_to "Edit Task", edit_task_path(task.id) %>
-         | <%= link_to task.completion_date ? "Mark as Incomplete" : "Mark as Complete", task_path(task.id, task: {completion_date: task.completion_date ? nil : DateTime.now }), method: :patch %> | 
+         | <%= link_to task.completion_date ? "Mark as Incomplete" : "Mark as Complete", toggle_complete_task_path(task.id, task: {completion_date: task.completion_date ? nil : DateTime.now }), method: :patch %> | 
         <%= link_to "Delete Task", task_path(task.id), method: :delete, data: { confirm: "Are you sure?" } %>
         </p>
     </li>   
