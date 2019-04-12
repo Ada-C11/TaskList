@@ -17,12 +17,10 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(
-      task_params
-    )
+    task_to_create = Task.new(task_params)
 
-    if @task.save
-      redirect_to task_path(@task.id)
+    if task_to_create.save
+      redirect_to task_path(task_to_create.id)
     else
       render :new
     end
@@ -38,16 +36,14 @@ class TasksController < ApplicationController
   end
 
   def update
-    task_id = params[:id].to_i
     task_to_update = Task.find_by(id: params[:id])
 
     if task_to_update.nil?
       redirect_to tasks_path
     else
-      task_to_update.update(
-        task_params
-      )
-      redirect_to task_path(task_id)
+      task_to_update.update(task_params)
+
+      redirect_to task_path(task_to_update.id)
     end
   end
 
