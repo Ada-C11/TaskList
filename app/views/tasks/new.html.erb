@@ -1,22 +1,5 @@
 <h2>New Task Form</h2>
-
-<%= form_with model: @task, class: 'task-form' do |f| %>
-  <p>Please fill out this task's information</p>
-
-  <div>
-    <%= f.label :name, "Please enter a title" %>
-    <%= f.text_field :name, placeholder: "A Task" %>
-  </div>
-
-  <div>
-    <%= f.label :description, "Please enter a description" %>
-    <%= f.text_field :description, placeholder: "Task Description" %>
-  </div>
-
-    <div>
-    <%= f.label :completion_date, "When is it due?" %>
-    <%= f.text_field :completion_date, placeholder: "dd/mm/yyyy" %>
-  </div>
-
-  <%= f.submit "Shelve it!" %>
-<% end %>
+<%= render partial: "form", locals: { action_name: "New",
+                                      title: "What would you like to name this task?",
+                                      description: "Description of task",
+                                      completion: "mm/dd/yyyy" } %>
