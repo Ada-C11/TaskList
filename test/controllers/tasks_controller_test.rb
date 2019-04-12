@@ -5,7 +5,7 @@ describe TasksController do
   #   you may need to modify this.
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
-                completion_date: 2010-03-02
+                completion_date: 2010 - 03 - 02
   }
 
   # Tests for Wave 1
@@ -30,7 +30,7 @@ describe TasksController do
   # Unskip these tests for Wave 2
   describe "show" do
     it "can get a valid task" do
-      
+
       # Act
       get task_path(task.id)
 
@@ -39,7 +39,7 @@ describe TasksController do
     end
 
     it "will redirect for an invalid task" do
-      
+
       # Act
       get task_path(-1)
 
@@ -50,7 +50,6 @@ describe TasksController do
 
   describe "new" do
     it "can get the new task page" do
-    
 
       # Act
       get new_task_path
@@ -62,7 +61,6 @@ describe TasksController do
 
   describe "create" do
     it "can create a new task" do
-      
 
       # Arrange
       # Note to students:  Your Task model **may** be different and
@@ -85,7 +83,7 @@ describe TasksController do
       expect(new_task.completion_date).must_equal task_hash[:task][:completion_date]
 
       must_respond_with :redirect
-      must_redirect_to task_path(new_task.id)
+      must_redirect_to tasks_path
     end
   end
 
@@ -108,7 +106,6 @@ describe TasksController do
       #Assert
       must_respond_with :redirect
       must_redirect_to tasks_path
-    
     end
   end
 
@@ -117,13 +114,34 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
+
       # Your code here
+      task = Task.create!(name: "new task", description: "making a new one")
+      task_data = {
+        task: {
+          name: "not new",
+        },
+      }
+      #Act
+      patch task_path(task), params: task_data
+      #Assert
+      must_respond_with :redirect
+      must_redirect_to task_path(task)
+
+      task.reload
+      expect(task.name).must_equal(task_data[:task][:name])
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
+
       # Your code here
+      #Arrange
+      task_id = 55
+      #Act
+      patch task_path(task_id)
+      #Assert
+      must_respond_with :redirect
+      must_redirect_to tasks_path
     end
   end
 
@@ -131,16 +149,15 @@ describe TasksController do
   describe "destroy" do
     # Your tests go here
     it "can destroy a model" do
-    #Arrange
-    task = Task.new name: "read", description: "Read one book per week"
-    task.create!
-    expect {
-      delete task_path(task.id)
-    }.must_change 'Task.count', -1
-    read =Task.find_by( description: "Read one book per week")
-    expect(read).must_be_nil
-    must_respond_with :redirect
-    must_redirect_to tasks_path
+      #Arrange
+      task = Task.create!(name: "read", description: "Read one book per week")
+      expect {
+        delete task_path(task.id)
+      }.must_change "Task.count", -1
+      read = Task.find_by(description: "Read one book per week")
+      expect(read).must_be_nil
+      must_respond_with :redirect
+      must_redirect_to tasks_path
     end
   end
 
@@ -148,5 +165,4 @@ describe TasksController do
   describe "toggle_complete" do
     # Your tests go here
   end
-
 end
