@@ -63,7 +63,7 @@ describe TasksController do
         task: {
           name: "new task",
           description: "new task description",
-          completion_date: nil
+          completed_at: nil
         }
       }
       # Act-Assert
@@ -93,8 +93,7 @@ describe TasksController do
 
   # Uncomment and complete these tests for Wave 3
   describe "update" do
-    # Note:  If there was a way to fail to save the changes to a task, that would be a great
-    #        thing to test.
+    # Note:  If there was a way to fail to save the changes to a task, that would be a great thing to test.
     it "can update an existing task" do
       skip
       # Your code here
