@@ -3306,3 +3306,22 @@ Processing by TasksController#show as HTML
 Completed 404 Not Found in 2ms (ActiveRecord: 0.7ms)
 
 
+Started GET "/tasks/" for ::1 at 2019-04-11 19:56:33 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."name" ASC[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (16.2ms)
+Completed 200 OK in 63ms (Views: 36.0ms | ActiveRecord: 19.6ms)
+
+
+Started GET "/tasks/7" for ::1 at 2019-04-11 19:56:35 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 33ms (Views: 25.7ms | ActiveRecord: 0.8ms)
+
+
