@@ -1,4 +1,5 @@
 require "test_helper"
+require 'pry'
 
 describe TasksController do
   # Note to students:  Your Task model **may** be different and
@@ -67,7 +68,7 @@ describe TasksController do
         task: {
           name: "new task",
           description: "new task description",
-          completion_date: Date.parse("April 20 2019"),
+          completion_date: "April 20, 2019",
         },
       }
 
@@ -78,7 +79,7 @@ describe TasksController do
 
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
-      expect(new_task.completion_date).must_equal task_hash[:task][:completion_date]
+      expect(new_task.completion_date).must_equal Date.parse(task_hash[:task][:completion_date])
 
       must_respond_with :redirect
       must_redirect_to tasks_path
@@ -88,13 +89,26 @@ describe TasksController do
   # Unskip and complete these tests for Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
-      skip
-      # Your code here
+      # Arrange
+      task_id = task.id
+
+      # Act
+      get edit_task_path(task_id)
+
+      # Assert
+      must_respond_with :success
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      skip
-      # Your code here
+      # Arrange 
+      task_id = 123456
+
+      # Act
+      get edit_task_path(task_id)
+
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to tasks_path
     end
   end
 
