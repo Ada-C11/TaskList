@@ -127,8 +127,8 @@ describe TasksController do
       must_respond_with :redirect
       must_redirect_to task_path(test_task)
 
-      # task.reload
-      # expect(test_task.name).must_equal(task_data[:task][:name])
+      task.reload
+      expect(test_task.name).must_equal(task_data[:task][:name])
     end
 
     it "will redirect to the root page if given an invalid id" do
@@ -143,8 +143,38 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "removes the task from the database" do
+      # Arrange
+      task = Task.create!(name: "test task")
 
+      # Act
+      expect {
+        delete task_path(task)
+      }.must_change "Task.count", -1
+
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+
+      after_task = Task.find_by(id: task.id)
+      expect(after_task).must_be_nil
+    end
+
+    it "returns a 404 if the task does not exist" do
+      # Arrange
+      task_id = 1234567
+
+      # Assumptions
+      expect(Task.find_by(id: task_id)).must_be_nil
+
+      # Act
+      expect {
+        delete task_path(task_id)
+      }.wont_change "Task.count"
+
+      # Assert
+      must_respond_with :not_found
+    end
   end
 
   # Complete for Wave 4
