@@ -168,6 +168,10 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "can mark a task complete" do
+    end
+
+    it "can update a task with a complete date/time" do
+    end
   end
 end

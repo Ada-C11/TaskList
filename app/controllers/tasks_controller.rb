@@ -58,4 +58,20 @@ class TasksController < ApplicationController
       redirect_to tasks_path
     end
   end
+
+  def mark_complete
+    task = Task.find_by(id: params[:id])
+
+    if task.nil?
+      head :not_found
+    elsif task.completed == false
+      task.completed = true
+      task.save
+      redirect_to tasks_path
+    else
+      task.complete = false
+      task.save
+      redirect_to tasks_path
+    end
+  end
 end
