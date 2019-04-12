@@ -59,10 +59,7 @@ describe TasksController do
 
   describe "create" do
     it "can create a new task" do
-
       # Arrange
-      # Note to students:  Your Task model **may** be different and
-      #   you may need to modify this.
       task_hash = {
         task: {
           name: "new task",
@@ -70,7 +67,6 @@ describe TasksController do
           completed: false,
         },
       }
-
       # Act-Assert
       expect {
         post tasks_path, params: task_hash
@@ -106,13 +102,35 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
-      # Your code here
+      task_hash = {
+        task: {
+          name: "new task",
+          description: "new task description",
+          completed: false,
+        },
+      }
+
+      post tasks_path, params: task_hash
+
+      task_to_update = Task.find_by(name: task_hash[:task][:name])
+      task_to_update.name = "Updated task name!"
+      # task_to_update.save
+
+      expect {
+        patch task_path(task_to_update.id), params: task_hash
+      }.must_change "Task.count", 0
+
+      expect(task_to_update.name).must_equal "Updated task name!"
+      expect(task_to_update.completed).must_equal task_hash[:task][:completed]
+
+      must_respond_with :redirect
+      must_redirect_to task_path(task_to_update.id)
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      # expect {
+      #   patch task_path(-1)
+      # }.must_respond_with :redirect
     end
   end
 

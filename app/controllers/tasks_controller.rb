@@ -17,13 +17,13 @@ class TasksController < ApplicationController
   end
 
   def create
-    new_task = Task.new(
+    @task = Task.new(
       name: params[:task][:name],
       description: params[:task][:description],
       completed: params[:task][:completed],
     )
 
-    if new_task.save
+    if @task.save
       redirect_to task_path(@task.id)
     else
       render :new

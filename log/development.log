@@ -2337,3 +2337,178 @@ Processing by TasksController#index as HTML
 Completed 200 OK in 50ms (Views: 41.6ms | ActiveRecord: 1.3ms)
 
 
+Started GET "/tasks" for ::1 at 2019-04-11 18:07:17 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (1.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (59.6ms)
+Completed 200 OK in 175ms (Views: 148.3ms | ActiveRecord: 15.5ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-11 18:07:20 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 49ms (Views: 43.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-11 18:07:23 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 37ms (Views: 33.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-04-11 18:07:24 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (28.2ms)
+Completed 200 OK in 199ms (Views: 192.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/tasks" for ::1 at 2019-04-11 18:07:48 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"3BOxhbFyzuxdW0LGu+rGBdQ/tiBp8MltRvFq6k1087wURFf0rFRQL/TMHRj82rcr4pj95I/BQ+dx6SJY44LBzg==", "task"=>{"name"=>"change sheets", "description"=>"add waterproof cover", "completed"=>"false"}, "commit"=>"Add Task"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:26
+  [1m[36mTask Create (1.0ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at", "completed") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "change sheets"], ["description", "add waterproof cover"], ["created_at", "2019-04-12 01:07:48.959821"], ["updated_at", "2019-04-12 01:07:48.959821"], ["completed", false]]
+  ↳ app/controllers/tasks_controller.rb:26
+  [1m[35m (41.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:26
+Redirected to http://localhost:3000/tasks/5
+Completed 302 Found in 51ms (ActiveRecord: 42.4ms)
+
+
+Started GET "/tasks/5" for ::1 at 2019-04-11 18:07:49 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 37ms (Views: 30.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-11 18:07:52 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (5.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 57ms (Views: 46.5ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/tasks/5" for ::1 at 2019-04-11 18:07:55 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mTask Load (5.6ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 49ms (Views: 37.2ms | ActiveRecord: 5.6ms)
+
+
+Started GET "/tasks/5/edit" for ::1 at 2019-04-11 18:07:56 -0700
+Processing by TasksController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:35
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/edit.html.erb within layouts/application (101.5ms)
+Completed 200 OK in 1236ms (Views: 1232.5ms | ActiveRecord: 0.3ms)
+
+
+Started PATCH "/tasks/5" for ::1 at 2019-04-11 18:08:09 -0700
+Processing by TasksController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ELErgV/v0zSBGkn0LaC2OMR1VI1FSrXAqAs+auS+2NcNGzu4FRCzm3Ha3fgirRqz3WonGjeFjuqDDSrOcPMXlw==", "task"=>{"name"=>"change sheets", "description"=>"add waterproof cover too", "completed"=>"false"}, "commit"=>"Edit Task", "id"=>"5"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:44
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:54
+  [1m[36mTask Update (0.6ms)[0m  [1m[33mUPDATE "tasks" SET "description" = $1, "updated_at" = $2 WHERE "tasks"."id" = $3[0m  [["description", "add waterproof cover too"], ["updated_at", "2019-04-12 01:08:09.194579"], ["id", 5]]
+  ↳ app/controllers/tasks_controller.rb:54
+  [1m[35m (41.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:54
+Redirected to http://localhost:3000/tasks/5
+Completed 302 Found in 62ms (ActiveRecord: 42.6ms)
+
+
+Started GET "/tasks/5" for ::1 at 2019-04-11 18:08:09 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 227ms (Views: 221.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-11 18:08:11 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (21.6ms)
+Completed 200 OK in 307ms (Views: 290.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tasks/5" for ::1 at 2019-04-11 18:08:19 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 145ms (Views: 140.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tasks/5/edit" for ::1 at 2019-04-11 18:08:20 -0700
+Processing by TasksController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mTask Load (1.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:35
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/edit.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 61ms (Views: 52.3ms | ActiveRecord: 1.5ms)
+
+
+Started PATCH "/tasks/5" for ::1 at 2019-04-11 18:08:24 -0700
+Processing by TasksController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"DCV++BODE86dN0Q6ZaCZwLDUU3DMBemVmAYYK2KchdURj27BWXxzYW330DZqrTVLqcsg577K0r+zAAyP9tFKlQ==", "task"=>{"name"=>"change sheets", "description"=>"add waterproof cover too", "completed"=>"true"}, "commit"=>"Edit Task", "id"=>"5"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:44
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:54
+  [1m[36mTask Update (0.8ms)[0m  [1m[33mUPDATE "tasks" SET "completed" = $1, "updated_at" = $2 WHERE "tasks"."id" = $3[0m  [["completed", true], ["updated_at", "2019-04-12 01:08:24.405737"], ["id", 5]]
+  ↳ app/controllers/tasks_controller.rb:54
+  [1m[35m (41.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:54
+Redirected to http://localhost:3000/tasks/5
+Completed 302 Found in 49ms (ActiveRecord: 42.4ms)
+
+
+Started GET "/tasks/5" for ::1 at 2019-04-11 18:08:24 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 39ms (Views: 35.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-11 18:08:26 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.9ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 71ms (Views: 65.3ms | ActiveRecord: 0.9ms)
+
+
