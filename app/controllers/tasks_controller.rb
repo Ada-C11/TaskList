@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new(name: "Default")
+    @task = Task.new(name: "Task")
   end
 
   def create
@@ -37,6 +37,39 @@ class TasksController < ApplicationController
       redirect_to task_path(task.id)
     else
       head :temporary_redirect
+    end
+  end
+
+  def edit
+    task_id = params[:id].to_i
+    @task = Task.find_by(id: task_id)
+
+    if @task.nil?
+      redirect_to tasks_path
+    end
+  end
+
+  def update
+    task_id = params[:id].to_i
+    task = Task.find_by(id: task_id)
+
+    # save??
+
+    if task.nil?
+      redirect_to task_path(@task.id)
+    else
+      task.update
+    end
+  end
+
+  def destroy
+    task = Task.find_by(id: params[:id])
+
+    if task.nil?
+      head :not_found
+    else
+      task.destroy
+      redirect_to tasks_path
     end
   end
 end

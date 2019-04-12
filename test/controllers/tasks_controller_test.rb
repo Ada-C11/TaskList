@@ -92,13 +92,20 @@ describe TasksController do
   # Unskip and complete these tests for Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
-      skip
-      # Your code here
+      #Arrange
+      new_task = Task.create(name: "Study")
+      # Act
+      get edit_task_path(new_task)
+      # Assert
+      must_respond_with :success
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      skip
-      # Your code here
+      bad_task_id = "THIS IS INVALID"
+      # Act
+      get edit_task_path(bad_task_id)
+      # Assert
+      must_redirect_to tasks_path
     end
   end
 
@@ -119,8 +126,31 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "returns a 404 if the book is not found" do
+      # Arrange
+      invalid_task_id = "NOT A VALID ID"
 
+      # Try to do the Books# destroy action
+      expect {
+        # Act
+        delete task_path(invalid_task_id)
+      }.must_change "Task.count", 0
+      must_respond_with :not_found
+    end
+
+    it "can delete a book" do
+      # Arrange - Create a book
+      new_task = Task.create(name: "Study")
+
+      expect {
+        # Act
+        delete task_path(new_task.id)
+        # Assert
+      }.must_change "Task.count", -1
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end
   end
 
   # Complete for Wave 4
