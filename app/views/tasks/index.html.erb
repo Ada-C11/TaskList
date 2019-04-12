@@ -1,14 +1,25 @@
+<link rel="stylesheet" href="../assets/stylesheets/normalize.css">
+
+<section id="left-column">
+  <%= link_to "Add a new task", new_task_path %>
+</section>
+
 <ul>
-<% @tasks.each do |task| %>
-  <li>
-    <%= link_to task.name, task_path(task.id) %>
-    <% if !task.completed %>
-      <%= button_to "Mark complete", { action: "mark_complete", id: task.id }, method: :patch %>
-    <% else %>
-      <%= button_to "Unmark complete", { action: "mark_complete", id: task.id }, method: :patch %>
-    <% end %>
-  </li>
-<% end %>
+  <% @tasks.each do |task| %>
+    <li>
+      <div><%= link_to task.name, task_path(task.id) %></div>
+      <% if !task.completed %>
+        <%= button_to "Mark complete", { action: "mark_complete", id: task.id }, method: :patch %>
+      <% else %>
+        <%= button_to "Unmark complete", { action: "mark_complete", id: task.id }, method: :patch %>
+      <% end %>
+      <%= button_to "Edit", { action: "edit", id: task.id }, form_class: "edit-task", method: :get %>
+      <%= button_to "Delete", { action: "destroy", id: task.id }, method: :delete %>
+    </li>
+  <% end %>
 </ul>
 
-<%= link_to "Add a new task", new_task_path %>
+
+
+
+

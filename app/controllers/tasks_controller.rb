@@ -21,6 +21,7 @@ class TasksController < ApplicationController
       name: params[:task][:name],
       description: params[:task][:description],
       due_date: params[:task][:due_date],
+      completed_date: params[:task][:completed_date],
       completed: params[:task][:completed],
     )
     is_sucessful = task.save
@@ -58,10 +59,12 @@ class TasksController < ApplicationController
     task = Task.find_by(id: params[:id])
     if !task.completed
       task.update(
+        completed_date: DateTime.now.in_time_zone("Central Time (US & Canada)"),
         completed: true,
       )
     else
       task.update(
+        completed_date: nil,
         completed: false,
       )
     end
