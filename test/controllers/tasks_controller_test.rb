@@ -129,7 +129,7 @@ describe TasksController do
   #   you may need to modify this.
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
-                completion_date: false
+                completion_date: "today"
   }
 
   # Tests for Wave 1
@@ -172,7 +172,6 @@ describe TasksController do
 
   describe "new" do
     it "can get the new task page" do
-
       # Act
       get new_task_path
 
@@ -183,10 +182,7 @@ describe TasksController do
 
   describe "create" do
     it "can create a new task" do
-
       # Arrange
-      # Note to students:  Your Task model **may** be different and
-      #   you may need to modify this.
       task_hash = {
         task: {
           name: "new task",
@@ -213,13 +209,19 @@ describe TasksController do
   # Unskip and complete these tests for Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
-      skip
-      # Your code here
+      # Act
+      get edit_task_path(id: task.id)
+
+      # Assert
+      must_respond_with :success
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      skip
-      # Your code here
+      #Act
+      get edit_task_path(-1)
+
+      # Assert
+      must_respond_with :redirect
     end
   end
 
@@ -228,13 +230,28 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
+      #Arrange
+      task_hash = {
+        task: {
+          name: "edited task",
+          description: "edited task description",
+          completion_date: "Tuesday",
+        },
+      }
+      # binding.pry
+      patch update_task_path(id: task.id), params: task_hash
+      # binding.pry
+      edited_task = Task.find_by(name: task_hash[:task][:name])
+      expect(edited_task.name).must_equal task_hash[:task][:name]
       # Your code here
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      #Act
+      get edit_task_path(-1)
+
+      # Assert
+      must_respond_with :redirect
     end
   end
 
