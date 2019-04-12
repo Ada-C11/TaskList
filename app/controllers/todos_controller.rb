@@ -7,8 +7,12 @@ class TodosController < ApplicationController
   end
 
   def show
-    task_id = params[:id].to_i
-    @task = Todo.find_by(id: task_id)
-    puts '@taksssss', @task.description
+    todo_id = params[:id].to_i
+    @todos = Todo.find_by(id: todo_id)
+    # puts '@tasssssk', @todo
+  end
+
+  def new
+    @todos = Task.new
   end
 end
