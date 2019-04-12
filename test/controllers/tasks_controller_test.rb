@@ -177,18 +177,27 @@ describe TasksController do
   # Complete for Wave 4
   describe "toggle_complete" do
     it "can mark a task complete" do
-      task = Task.new(title: "Thing")
+      task = Task.create(name: "Thing", description: "Thing Thing")
 
       expect(task.completed).must_equal false
 
       expect {
-        patch task_path(task.id)
+        patch mark_complete_path(task.id)
       }.wont_change "Task.count"
 
-      expect(task.completed).must_equal true
+      expect(task.reload.completed).must_equal true
+      patch mark_complete_path(task.id)
+      expect(task.reload.completed).must_equal false
     end
 
     it "can update a task with a complete date/time" do
+      task = Task.create(name: "Thing", description: "Thing Thing")
+
+      expect(task.completion_date).must_equal nil
+
+      patch mark_complete_path(task.id)
+
+      expect(task.reload.completion_date).must_equal Date.today
     end
   end
 end

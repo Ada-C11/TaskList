@@ -59,7 +59,6 @@ class TasksController < ApplicationController
 
   def mark_complete
     task = Task.find_by(id: params[:id])
-    config.time_zone = "Pacific Time (US & Canada)"
 
     if task.nil?
       head :not_found
@@ -77,6 +76,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    return params.require(:task).permit(:name, :description)
+    return params.require(:task).permit(:name, :description, :completed)
   end
 end
