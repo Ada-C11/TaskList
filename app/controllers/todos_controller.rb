@@ -13,6 +13,6 @@ class TodosController < ApplicationController
   end
 
   def new
-    @todos = Task.new
+    @todos = Todo.new
   end
 end
