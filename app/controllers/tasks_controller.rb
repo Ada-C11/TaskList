@@ -18,7 +18,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(name: params[:task][:name], description: params[:task][:description])
     if @task.save
-      redirect_to task_path(@task.id), { :flash => { :success => "Successfully added task!" } }
+      redirect_to task_path(@task.id), { :flash => { :success => "Successfully added a task! Look at you, Busy Bee!" } }
     else
       redirect_to :new, :flash => { :error => "Failed to add task" }
     end
@@ -53,7 +53,7 @@ class TasksController < ApplicationController
     @task = Task.find_by(id: params[:id])
     if @task
       if @task.destroy
-        redirect_to root_path, { :flash => { :success => "Successfully added task!" } }
+        redirect_to root_path, { :flash => { :success => "Successfully removed task! Doesn't that feel nice?" } }
       else
         redirect_to root_path, :flash => { :error => "Failed to delete task" }
       end
