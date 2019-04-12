@@ -117,8 +117,12 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
-      # Your code here
+      # Arrange
+      
+      
+      # Act
+
+      # Assert
     end
 
     it "will redirect to the root page if given an invalid id" do
