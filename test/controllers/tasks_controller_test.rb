@@ -134,8 +134,23 @@ describe TasksController do
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
       # Your code here
+
+      #Arrange
+      task_hash = {
+        task: {
+          name: "test name change",
+          description: "test description change",
+          completion_date: "test date change",
+        },
+      }
+
+      #Act
+      patch task_path 12345, params: task_hash
+
+      #Assert
+      must_respond_with :redirect
+      must_redirect_to tasks_path
     end
   end
 
