@@ -168,7 +168,7 @@ describe TasksController do
   end
 
   # Complete for Wave 4
-  describe "toggle_complete" do
+  describe "mark_done" do
     it "changes the completed and saves a completion date" do 
       new_task = Task.create(name: "Do Homework", completed: false)
       
@@ -178,5 +178,10 @@ describe TasksController do
       expect(new_task.completion_date).must_equal Date.today
     end
 
+    it "returns a 404 if the task is not found" do 
+      invalid_id = "INVALID ID"
+      patch marked_task_path(invalid_id)
+      must_respond_with :not_found
+    end
   end
 end

@@ -22,12 +22,12 @@ class TasksController < ApplicationController
     form_data = params["task"]
     name = form_data["name"]
     description = form_data["description"]
-    completion_date = form_data["completion_date"]
+    # completion_date = form_data["completion_date"]
    
     @task = Task.new(
             name: name, 
             description: description, 
-            completion_date: completion_date, 
+            # completion_date: completion_date, 
             completed: false)
     
     if @task.save 
@@ -48,18 +48,13 @@ class TasksController < ApplicationController
     form_data = params["task"]
     edit_name = form_data["name"]
     edit_description = form_data["description"]
-
     
     edited_task = Task.find_by(id: params[:id])
     if edited_task.nil?
       redirect_to tasks_path
     else
-      edited_task.update(
-        name: edit_name,
-        description: edit_description,
-      )
-      # edited_task.name = edit_name
-      # edited_task.description = edit_description
+      edited_task.name = edit_name
+      edited_task.description = edit_description
       if edited_task.save 
         redirect_to task_path(edited_task.id)
       else
@@ -69,21 +64,24 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @delete_task = Task.find_by(id: params[:id])
-    if @delete_task.nil?
+    delete_task = Task.find_by(id: params[:id])
+    if delete_task.nil?
       head :not_found
     else
-      @delete_task.destroy
+      delete_task.destroy
       redirect_to tasks_path
     end
   end
 
   def mark_done
-    @mark_task = Task.find_by(id: params[:id])
-    @mark_task.toggle :completed 
-    @mark_task.update(completion_date: Date.today)
-    redirect_to tasks_path
-
+    mark_task = Task.find_by(id: params[:id])
+    if mark_task.nil?
+      head :not_found
+    else
+      mark_task.toggle :completed 
+      mark_task.update(completion_date: Date.today)
+      redirect_to tasks_path
+    end
   end
   
 end
