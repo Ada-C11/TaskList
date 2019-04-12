@@ -175,7 +175,7 @@ describe TasksController do
       expect(after_task).must_be_nil
     end
 
-    it "it returns a 404 if the task does not exist" do
+    it "returns responds with redirect if the task does not exist" do
       #Arrange
       task_id = -1
 
@@ -195,6 +195,12 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "updates the task with the completion time when marked complete" do
+      #code
+    end
+
+    it "updates the task with nil completion time when unmarked complete" do
+      #code
+    end
   end
 end
