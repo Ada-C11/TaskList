@@ -58,7 +58,6 @@ class TasksController < ApplicationController
   end
 
   def mark_complete
-
   end
 
   private

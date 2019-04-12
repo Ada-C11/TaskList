@@ -4,9 +4,10 @@
 <% @tasks.each do|task|%>
     <li>
     <%= link_to task.name, task_path(task.id)%>
-    <%= link_to "Delete Task", task_path(task.id), method: :delete, data: {confirm: "Are you sure?"} %>
+    <%= button_to "Delete Task", task_path(task.id), method: :delete, data: {confirm: "Are you sure?"} %>
+    <%= button_to "Mark Complete", task_path(task.id), method: :patch %>
     </li>
 <% end %>
 </ul>
 
-<%= link_to "Create New Task ", new_task_path %>
+<%= button_to "Create New Task ", new_task_path %>
