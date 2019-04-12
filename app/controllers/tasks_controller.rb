@@ -33,14 +33,30 @@ class TasksController < ApplicationController
 
   def edit
     task_id = params[:id].to_i
-    task = Task.find_by(id: task_id)
+    @task = Task.find_by(id: task_id)
 
-    if task.nil?
+    if @task.nil?
       redirect_to tasks_path
-    else
-      redirect_to task_path(task.id)
     end
   end
+
+  def update
+    @task = Task.find(params[:id])
+
+    if @task.nil?
+      redirect_to tasks_path
+    else
+      @task.update(
+        :name => params[:task][:name],
+        :description => params[:task][:description],
+      )
+      redirect_to task_path(@task.id)
+    end
+  end
+
+  #   @article = Article.find(params[:id])
+  #   @article.update(title: params[:title], description: params[:description])
+  #   redirect_to article_path(@article)
 
   # def destroy
   #   task = Task.find_by(id: params[:id])
