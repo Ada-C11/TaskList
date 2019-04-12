@@ -1,9 +1,10 @@
-<p id="notice"><%= flash[:success] if flash[:success] %></p>
 <p id="notice">
 <%= flash[:success] if flash[:success] %>
 <%= flash[:error] if flash[:error] %>
 </p>
+<div class="task">
  <h2><%= @task.name %></h2> 
  <h3><%= @task.description %></h3> 
 <h3><%= "Completed? #{@task.completion_date.nil? ? "Not yet..." : "Yup!"}"%></h3> 
-<%= link_to 'Back to task list', tasks_path %>
+</div>
+<%= link_to 'Back to task list', tasks_path, class:"back-link" %>
