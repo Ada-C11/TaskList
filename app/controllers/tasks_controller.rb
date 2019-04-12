@@ -40,21 +40,6 @@ class TasksController < ApplicationController
   end
 
   def update
-    # task_id = params[:id].to_i
-    # task_to_update = Task.find_by(id: task_id)
-
-    # edited_name = params[:task][:name]
-    # edited_description = params[:task][:description]
-    # edited_completed = params[:task][:completed]
-
-    # task_to_update.name = edited_name
-    # task_to_update.description = edited_description
-    # task_to_update.completed = edited_completed
-
-    # if task_to_update.save
-    #   redirect_to task_path(task_id)
-    # end
-
     task_id = params[:id].to_i
     task_to_update = Task.find_by(id: params[:id])
 
