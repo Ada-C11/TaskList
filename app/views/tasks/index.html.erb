@@ -11,7 +11,12 @@
             <ul>
             <% @tasks.each do |task| %>
                 <li>
-                    <%= task.name %>: <%= task.description %> (completed: <%= task.completion_date %>)
+                    <%= task.name %>: <%= task.description %> Due: <%= task.completion_date %>
+                </li>
+                <li>
+                    <%= link_to "Mark Complete", task_path(task.id), method: :mark_complete %> | 
+                    <%= link_to "Edit", edit_task_path(task.id) %> | 
+                    <%= link_to "Delete", task_path(task.id), method: :delete %>
                 </li>
             <%end%>
             </ul>
