@@ -50,9 +50,12 @@ class TasksController < ApplicationController
         description: params[:task][:description],
         due_date: params[:task][:due_date],
       )
+      redirect_to task_path(task.id)
+    else
+      redirect_to root_path
     end
 
-    redirect_to root_path
+    
   end
 
   def mark_complete
