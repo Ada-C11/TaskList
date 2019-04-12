@@ -117,10 +117,25 @@ describe TasksController do
   describe "destroy" do
     # Your tests go here
 
+    #Arrange
+    
+    #Act
+
+    #Assert
+
+
+
   end
 
   # Complete for Wave 4
   describe "toggle_complete" do
     # Your tests go here
+
+    #Arrange
+    
+    #Act
+
+    #Assert
+
   end
 end
