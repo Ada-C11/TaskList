@@ -131,14 +131,22 @@ describe TasksController do
       must_redirect_to task_path(task.id)
     end
 
-    it "will redirect to the root page if given an invalid id" do
-      # invalid_id = -1
+    it "will render a 404 if given an invalid id" do
+      task_hash = {
+        task: {
+          name: "new task",
+          description: "new task description",
+          completed: false,
+        },
+      }
 
-      # expect {
-      #   patch task_path(invalid_id)
-      # }.wont_change "Task.count"
+      invalid_id = -1
 
-      # must_respond_with :bad_request
+      expect {
+        patch task_path(invalid_id), params: task_hash
+      }.wont_change "Task.count"
+
+      must_respond_with :not_found
     end
   end
 
@@ -155,7 +163,7 @@ describe TasksController do
       must_redirect_to tasks_path
     end
 
-    it "returns a 404 error if task can't be found" do
+    it "will render a 404 if task can't be found" do
       invalid_id = -1
 
       expect {
@@ -169,6 +177,15 @@ describe TasksController do
   # Complete for Wave 4
   describe "toggle_complete" do
     it "can mark a task complete" do
+      task = Task.new(title: "Thing")
+
+      expect(task.completed).must_equal false
+
+      expect {
+        patch task_path(task.id)
+      }.wont_change "Task.count"
+
+      expect(task.completed).must_equal true
     end
 
     it "can update a task with a complete date/time" do

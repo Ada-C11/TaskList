@@ -36,15 +36,13 @@ class TasksController < ApplicationController
   end
 
   def update
-    task_id = params[:id]
-    task = Task.find_by(id: task_id)
-    task.name = params[:task][:name]
-    task.description = params[:task][:description]
+    task = Task.find_by(id: params[:id])
 
-    if task.save
-      redirect_to task_path(task.id)
+    if task.nil?
+      head :not_found
     else
-      head :bad_request
+      task.update(task_params)
+      redirect_to task_path
     end
   end
 
@@ -74,5 +72,11 @@ class TasksController < ApplicationController
       task.save
     end
     redirect_to tasks_path
+  end
+
+  private
+
+  def task_params
+    return params.require(:task).permit(:name, :description)
   end
 end
