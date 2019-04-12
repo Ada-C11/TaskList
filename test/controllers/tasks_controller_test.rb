@@ -143,7 +143,10 @@ describe "TasksController" do
       must_redirect_to tasks_path
     end
 
-    it "gives a 404 for a task that doesn't exist" do
+    it "redirects for a task that doesn't exist" do
+      delete task_path(12345)
+
+      must_redirect_to tasks_path
     end
   end
 

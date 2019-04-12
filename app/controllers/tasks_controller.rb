@@ -54,7 +54,7 @@ class TasksController < ApplicationController
       task.destroy
       redirect_to tasks_path, flash: { alert: "Task successfully deleted" }
     else
-      render :not_found
+      redirect_to tasks_path, flash: { alert: "No such task" }
     end
   end
 end
