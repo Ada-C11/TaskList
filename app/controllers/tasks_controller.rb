@@ -14,6 +14,7 @@ class TasksController < ApplicationController
   def new
     @task = Task.new
     @task.task_name = "Default task name"
+    @task.completed = "true/false"
   end
 
   def create
@@ -33,7 +34,6 @@ class TasksController < ApplicationController
   end
 
   def edit
-    # this could be book = Book.new its just telling the form what to have  in
     task_id = params[:id].to_i
     @task_to_edit = Task.find_by(id: task_id)
     if @task_to_edit.nil?

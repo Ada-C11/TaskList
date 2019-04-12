@@ -94,10 +94,10 @@ describe TasksController do
     it "can get the edit page for an existing task" do
 
       # Arrange
-      new_task = Task.create(task_name: "The Martian")
+      # above
 
       # Act
-      get edit_task_path(new_task.id)
+      get edit_task_path(task.id)
 
       # Assert
       must_respond_with :success

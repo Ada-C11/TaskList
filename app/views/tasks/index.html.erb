@@ -1,13 +1,21 @@
-<h1>Tasks</h1>
+<section class=index>
+  <h1>Your Tasks</h1>
 
-<ul>
-<% @tasks.each do |task| %>
-  <li>
-  <a href="/tasks/<%=task.id%>">
-    Task: <%= task.task_name %> 
-    Description: <%= task.description %>
-    Completed?: <%= task.completed %>
-  </li>
-<% end %>
-</ul>
+  <ul>
+  <% @tasks.each do |task| %>
+    <li>
+    <a href="/tasks/<%=task.id%>">
+      Task: <%= task.task_name %> 
+      Description: <%= task.description %>
+      Completed?: <%= task.completed %>
+    </li>
+  <% end %>
+  </ul>
+  <footer>
+    <ul>
+      <li><%= link_to "Create Task", new_task_path %></li>
+      <li><%= link_to "All Tasks", tasks_path %></li>
+    </ul>
+  </footer>
+  </section>
 
