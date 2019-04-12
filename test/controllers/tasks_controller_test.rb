@@ -145,13 +145,12 @@ describe TasksController do
   # Complete these tests for Wave 4
   describe "destroy" do
     it "can delete a task" do
-      task = Task.new(name: "thing", description: "yup")
+      task = Task.create(name: "thing", description: "yup")
 
       expect {
         delete task_path(task.id)
-      }.must_change "Book.count", -1
+      }.must_change "Task.count", -1
 
-      expect(Task.find_by(task.id)).must_equal nil
       must_respond_with :redirect
       must_redirect_to tasks_path
     end
@@ -161,7 +160,7 @@ describe TasksController do
 
       expect {
         delete task_path(invalid_id)
-      }.wont_change "Book.count"
+      }.wont_change "Task.count"
 
       must_respond_with :not_found
     end
