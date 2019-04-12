@@ -107,28 +107,63 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
       task_change = {
         task: {
-          name: "new task",
-          description: "new task description",
-          completed: false,
+          name: "name has changed",
+          description: "description has changed",
         },
       }
 
-      patch task_path, params: task_change
-      # Your code here
+      task_id = task.id
+      # patch task_path(task.id), params: task_change
+      expect {
+        patch task_path(task.id), params: task_change
+      }.must_change "Task.count", 0
+
+      edited_task = Task.find_by(id: task_id)
+      expect(edited_task.name).must_equal task_change[:task][:name]
+      expect(edited_task.description).must_equal task_change[:task][:description]
+
+      must_respond_with :redirect
+      must_redirect_to task_path(task.id)
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      task_change = {
+        task: {
+          name: "name has changed",
+          description: "description has changed",
+        },
+      }
+
+      invalid_id = "INVALID ID"
+      patch task_path(invalid_id), params: task_change
+
+      must_respond_with :redirect
+
     end
   end
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "returns a 404 if the task is not found" do 
+      invalid_id = "INVALID ID"
+      expect {
+        delete task_path(invalid_id)
+      }.wont_change "Task.count"
+ 
+      must_respond_with :not_found
+    end
+
+    it "can delete a task" do 
+      new_task = Task.create(name: "Do Homework")
+      expect {
+        delete task_path(new_task.id)
+      }.must_change "Task.count", -1
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end 
 
   end
 
