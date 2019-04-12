@@ -9,7 +9,7 @@ $header-font-stack: 'Indie Flower', cursive;
 $paragraph-font-stack: 'Open Sans Condensed', sans-serif;
 $text-color:#023366;
 $background-color:#ffffff;
-$post-it-colors: #fff740 #feff9c #7afcff #ff7eb9;
+$post-it-colors: #fff740 #ff7eb9  #7afcff #feff9c #ff65a3;
 
 
 main{
@@ -38,16 +38,13 @@ ul {
     padding:0;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: center;
 
 
     li {
         box-shadow: 2px 2px 2px 2px #888888;
         margin:20px;
-        padding:20px;
-
-
-        
+        padding:20px;      
     }
 
 
@@ -58,13 +55,29 @@ ul {
         box-shadow: 4px 4px 4px 4px #888888;
     }
 
-    /* Randomizes post-it color on compilation, not page load, but will assign a random color to a new post-it */
-    
+
     @for $i from 1 through length($post-it-colors) {
         li:nth-child(#{length($post-it-colors)}n+#{$i}) {
-            background: nth($post-it-colors, random(length($post-it-colors)));
+            background: nth($post-it-colors, $i % (length($post-it-colors)+1));
         }
     }
+}
+
+.add_task{
+    
+}
+
+#task-board {
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+}
+
+#to-do {
+    grid-column: 1/2;
+}
+
+#done {
+    grid-column: 2/3;
 }
 
 form {
