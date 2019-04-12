@@ -169,6 +169,14 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "changes the completed and saves a completion date" do 
+      new_task = Task.create(name: "Do Homework", completed: false)
+      
+      patch marked_task_path(new_task.id)
+      new_task = Task.find_by(id: new_task.id)
+      expect(new_task.completed).must_equal true
+      expect(new_task.completion_date).must_equal Date.today
+    end
+
   end
 end
