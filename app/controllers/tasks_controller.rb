@@ -27,16 +27,34 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
+    @task = Task.find_by(id: params[:id])
+
+    if !@task
+      redirect_to tasks_path, flash: { alert: "No such task" }
+    end
   end
 
   def update
-    task = Task.find(params[:id])
+    task = Task.find_by(id: params[:id])
 
-    # "task"=>{"name"=>"Feed bird again", "description"=>"Pellets and beans"}, "commit"=>"Save", "controller"=>"tasks", "action"=>"update", "id"=>"1"}
+    if task
+      task.update(name: params["task"]["name"], description: params["task"]["description"], completion_date: params["task"]["completion_date"], completed: params["task"]["completed"])
 
-    task.update(name: params["task"]["name"], description: params["task"]["description"], completion_date: params["task"]["completion_date"], completed: params["task"]["completed"])
+      redirect_to task_path(params[:id])
+    else
+      redirect_to tasks_path, flash: { alert: "No such task" }
+    end
+  end
 
-    redirect_to task_path(params[:id])
+  def destroy
+    task_id = params[:id]
+    task = Task.find_by(id: task_id)
+
+    if task
+      task.destroy
+      redirect_to tasks_path, flash: { alert: "Task successfully deleted" }
+    else
+      render :not_found
+    end
   end
 end
