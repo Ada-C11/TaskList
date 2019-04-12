@@ -17,10 +17,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new(
-      name: params["task"]["name"],
-      description: params["task"]["description"],
-    )
+    task = Task.new(task_params)
 
     is_successful = task.save
 
@@ -46,10 +43,7 @@ class TasksController < ApplicationController
     if @task.nil?
       redirect_to tasks_path
     else
-      @task.update(
-        :name => params[:task][:name],
-        :description => params[:task][:description],
-      )
+      @task.update(task_params)
       redirect_to task_path(@task.id)
     end
   end
