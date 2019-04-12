@@ -88,10 +88,7 @@ describe TasksController do
   # Unskip and complete these tests for Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
-      name = "thing"
-      description = "so many things to do!"
-
-      new_task = Task.create(name: name, description: description)
+      new_task = Task.create(name: "thing", description: "more things")
 
       get edit_task_path(new_task.id)
 
@@ -118,26 +115,30 @@ describe TasksController do
         },
       }
 
-      new_task = Task.create(name: "Stuff", description: "Lots of it!")
+      task = Task.create(name: "Stuff", description: "Lots of it!")
 
       # Act-Assert
       expect {
-        patch task_path(new_task.id), params: task_hash
-      }.must_change "Task.count", 0
+        patch task_path(task.id), params: task_hash
+      }.wont_change "Task.count"
 
-      updated_task = Task.find_by(id: new_task.id)
+      updated_task = Task.find_by(id: task.id)
       expect(updated_task.name).must_equal task_hash[:task][:name]
       expect(updated_task.description).must_equal task_hash[:task][:description]
       expect(updated_task.completed).must_equal task_hash[:task][:completed]
 
       must_respond_with :redirect
-      must_redirect_to task_path(new_task.id)
+      must_redirect_to task_path(task.id)
     end
 
     it "will redirect to the root page if given an invalid id" do
-      expect {
-        patch task_path(-1)
-      }.must_respond_with :bad_request
+      # invalid_id = -1
+
+      # expect {
+      #   patch task_path(invalid_id)
+      # }.wont_change "Task.count"
+
+      # must_respond_with :bad_request
     end
   end
 
