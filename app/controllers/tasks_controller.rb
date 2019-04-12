@@ -15,21 +15,11 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
-    # @task.name = "Name of task goes here"
+
   end
 
   def create
-    form_data = params["task"]
-    name = form_data["name"]
-    description = form_data["description"]
-    # completion_date = form_data["completion_date"]
-   
-    @task = Task.new(
-            name: name, 
-            description: description, 
-            # completion_date: completion_date, 
-            completed: false)
-    
+    @task = Task.new(task_params) 
     if @task.save 
       redirect_to task_path(@task.id)
     else
@@ -45,20 +35,15 @@ class TasksController < ApplicationController
   end
 
   def update
-    form_data = params["task"]
-    edit_name = form_data["name"]
-    edit_description = form_data["description"]
-    
     edited_task = Task.find_by(id: params[:id])
     if edited_task.nil?
       redirect_to tasks_path
     else
-      edited_task.name = edit_name
-      edited_task.description = edit_description
-      if edited_task.save 
-        redirect_to task_path(edited_task.id)
+      is_successful = edited_task.update(task_params)
+      if is_successful
+        redirect_to task_path    
       else
-        head :not_found
+        head :not_found      
       end
     end
   end
@@ -88,6 +73,7 @@ end
 
 private
 
-#TODO: USE STRONG PARAMS 
-#1. PRIVATE METHOD 
-#2. WHEN CREATING/UPDATING USE METHOD NAME 
+def task_params
+  return params.require(:task).permit(:name, :description, :completed)
+end
+
