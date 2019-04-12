@@ -41,6 +41,7 @@ class TasksController < ApplicationController
   def update
     task_id = params[:id]
     @task = Task.find_by(id: task_id)
+    puts "***** #{params}"
     @task.update(
       name: params["task"]["name"],
       description: params["task"]["description"],

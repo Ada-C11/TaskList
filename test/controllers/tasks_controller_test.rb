@@ -110,8 +110,27 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
-      # Your code here
+      #Arrange
+      task = Task.create!(
+        name: "test task",
+        description: "test description",
+        completion_date: "test date",
+      )
+
+      task_hash = {
+        task: {
+          name: "test name change",
+          description: "test description change",
+          completion_date: "test date change",
+        },
+      }
+
+      #Act
+      patch task_path task.id, params: task_hash
+
+      #Assert
+      must_respond_with :redirect
+      must_redirect_to task_path(task.id)
     end
 
     it "will redirect to the root page if given an invalid id" do
