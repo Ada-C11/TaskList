@@ -55,6 +55,9 @@ class TasksController < ApplicationController
     end
   end
 
+  def toggle_complete
+  end 
+
   def destroy
     task_to_destroy = Task.find_by(id: params[:id])
 
