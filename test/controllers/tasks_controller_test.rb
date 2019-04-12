@@ -102,49 +102,44 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      task_hash = {
+      task_change = {
         task: {
-          name: "new task",
-          description: "new task description",
-          completed: false,
+          name: "this is an updated name!",
+          description: "this is a new description!",
         },
       }
 
-      post tasks_path, params: task_hash
+      task_id = task.id
+      patch task_path(task.id), params: task_change
 
-      task_to_update = Task.find_by(name: task_hash[:task][:name])
-      task_to_update.name = "Updated task name!"
-      # task_to_update.save
-
-      expect {
-        patch task_path(task_to_update.id), params: task_hash
-      }.must_change "Task.count", 0
-
-      expect(task_to_update.name).must_equal "Updated task name!"
-      expect(task_to_update.completed).must_equal task_hash[:task][:completed]
+      edited_task = Task.find_by(id: task_id)
+      expect(edited_task.name).must_equal task_change[:task][:name]
+      expect(edited_task.description).must_equal task_change[:task][:description]
 
       must_respond_with :redirect
-      must_redirect_to task_path(task_to_update.id)
+      must_redirect_to task_path(task.id)
     end
 
     it "will redirect to the root page if given an invalid id" do
-      # expect {
-      #   patch task_path(-1)
-      # }.must_respond_with :redirect
+      invalid_task_id = -1
+      patch task_path(invalid_task_id)
+      must_respond_with :redirect
+      must_redirect_to tasks_path
     end
   end
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # it "returns a 404 error if a task is not found" do
-    #   invalid_id = "Invalid id!"
+    it "returns a 404 error if a task is not found" do
+      # invalid_id = "Invalid id!"
 
-    #   expect {
-    #     delete task_path(invalid_id)
-    #   }.must_change "Task.count", 0
+      # expect {
+      #   delete task_path(invalid_id)
+      # }.must_change "Task.count", 0
 
-    #   must_respond_with :not_found
-    # end
+      # must_respond_with :not_found
+
+    end
 
     it "can delete a book" do
       new_task = Task.create(name: "Delete this task")
