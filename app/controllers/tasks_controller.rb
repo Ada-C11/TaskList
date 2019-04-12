@@ -8,11 +8,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new(
-      name: params['task']['name'],
-      description: params['task']['description'],
-      completion_date: params['task']['completion_date']
-    )
+    task = Task.new(task_params)
 
     task.save
     redirect_to task_path(task.id)
@@ -35,12 +31,26 @@ class TasksController < ApplicationController
 
   def update
     task_id = params[:id]
+    task = Task.find_by(id: task_id)
+    task.update(task_params)
+    redirect_to task_path(task)
+  end
+
+  def destroy
+    task_id = params[:id]
     @task = Task.find_by(id: task_id)
-    @task.update(
-      name: params['task']['name'],
-      description: params['task']['description'],
-      completion_date: params['task']['completion_date']
-    )
-    redirect_to task_path(@task)
+
+    if @task
+      @task.destroy
+      redirect_to tasks_path
+    else
+      render :notfound, status: :not_found
+    end
+  end
+
+  private
+
+  def task_params
+    params.require(:task).permit(:name, :description, :completion_date)
   end
 end
