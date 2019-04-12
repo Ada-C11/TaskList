@@ -18,9 +18,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(
-      name: params[:task][:name],
-      description: params[:task][:description],
-      completed: params[:task][:completed],
+      task_params
     )
 
     if @task.save
@@ -47,25 +45,23 @@ class TasksController < ApplicationController
       redirect_to tasks_path
     else
       task_to_update.update(
-        name: params[:task][:name],
-        description: params[:task][:description],
-        completed: params[:task][:completed],
+        task_params
       )
       redirect_to task_path(task_id)
     end
   end
 
   def toggle
-    task_id = params[:id].to_i
-    task_to_toggle = Task.find_by(id: params[:id])
+    # task_id = params[:id].to_i
+    # task_to_toggle = Task.find_by(id: params[:id])
 
-    if task_to_toggle.nil?
-      redirect_to tasks_path
-    else
+    # if task_to_toggle.nil?
+    #   redirect_to tasks_path
+    # else
+    #   task_to_toggle.toggle(:completed).save
+    # end
 
-    end 
-
-  end 
+  end
 
   def destroy
     task_to_destroy = Task.find_by(id: params[:id])
@@ -76,5 +72,11 @@ class TasksController < ApplicationController
       task_to_destroy.destroy
       redirect_to tasks_path
     end
+  end
+
+  private
+
+  def task_params
+    return params.require(:task).permit(:name, :description, :completed)
   end
 end
