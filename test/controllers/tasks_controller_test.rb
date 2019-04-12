@@ -114,17 +114,32 @@ describe TasksController do
     #        thing to test.
 
     it "can update an existing task" do
+      task_hash = {
+        task: {
+          name: "I am not cleaning",
+          description: "new task description",
+        },
+      }
+
       new_task = Task.create(name: "cleaning", description: "not fun")
 
-      new_task.update(name: "not cleaning")
+      patch task_path(new_task.id, params: task_hash)
+
+      new_task.reload
 
       expect(new_task["created_at"]).wont_equal new_task["updated_at"]
     end
 
     it "will redirect to the root page if given an invalid id" do
-      invalid_task_id = 999
+      task_hash = {
+        task: {
+          name: "I am not cleaning",
+        },
+      }
 
-      patch update_path(invalid_task_id)
+      invalid_id = 999
+
+      patch task_path(invalid_id, params: task_hash)
 
       must_redirect_to tasks_path
     end
@@ -132,8 +147,29 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "can delete a task" do
+      # Arrange - Create a task
+      new_task = Task.create(name: "Task to destroy")
 
+      expect {
+
+        # Act
+        delete task_path(new_task.id)
+
+        # Assert
+      }.must_change "Task.count", -1
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end
+
+    it "returns a 404 if the task is not found" do
+      invalid_id = "NOT A VALID ID"
+
+      delete task_path(invalid_id)
+
+      must_respond_with :missing
+    end
   end
 
   # Complete for Wave 4

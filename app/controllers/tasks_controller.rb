@@ -51,24 +51,37 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find_by(id: params["id"])
-    @task.update(name: params["task"]["name"], description: params["task"]["description"])
+    task = Task.find_by(id: params["id"])
+    # task.update(name: params["task"]["name"], description: params["task"]["description"])
 
-    if @task.nil?
+    if task.nil?
       redirect_to tasks_path
+    elsif task.update(task_params)
+      redirect_to task_path(task.id)
     else
-      redirect_to task_path(@task)
+      redirect_to tasks_path
     end
   end
 
-  #   def destroy
-  #     task = Task.find_by(id: params[:id])
+  def destroy
+    task = Task.find_by(id: params[:id])
 
-  #     if task.nil?
-  #   head: not_found
-  # else
-  #     task.destroy
-  #     redirect_to tasks_path
-  #   end
-  # end
+    if task.nil?
+      head :not_found
+    else
+      task.destroy
+      redirect_to tasks_path
+    end
+  end
+
+  def toggle
+  end
+
+  private
+
+  def task_params
+    return params.require(:task).permit(:name, :description, :completed_at)
+    #need to update def create if you want to use this.
+    #only permitted params can be allowed, so make sure to include what you want
+  end
 end
