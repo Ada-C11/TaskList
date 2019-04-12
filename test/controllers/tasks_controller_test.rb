@@ -99,8 +99,6 @@ describe TasksController do
 
   # Uncomment and complete these tests for Wave 3
   describe "update" do
-    # Note:  If there was a way to fail to save the changes to a task, that would be a great
-    #        thing to test.
     it "can update an existing task" do
       task_change = {
         task: {
@@ -140,7 +138,7 @@ describe TasksController do
       must_respond_with :not_found
     end
 
-    it "can delete a book" do
+    it "can delete a task" do
       new_task = Task.create(name: "Delete this task")
 
       expect {
@@ -154,6 +152,22 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "changes the completion status of a task" do
+      patch toggle_complete_path(task.id)
+
+      task_with_changed_status = Task.find_by(id: task.id)
+
+      expect(task_with_changed_status.completed).must_equal true
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end
+
+    it "redirects to root page if task is not found" do
+      invalid_task_id = -1
+      patch toggle_complete_path(invalid_task_id)
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end
   end
 end

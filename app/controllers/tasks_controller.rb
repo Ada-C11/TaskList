@@ -51,12 +51,17 @@ class TasksController < ApplicationController
 
   def toggle_complete
     toggle_task = Task.find_by(id: params[:id])
-    if !toggle_task.completed
-      toggle_task.update(completed: true)
+
+    if toggle_task.nil?
+      redirect_to tasks_path
     else
-      toggle_task.update(completed: false)
+      if !toggle_task.completed
+        toggle_task.update(completed: true)
+      else
+        toggle_task.update(completed: false)
+      end
+      redirect_to tasks_path
     end
-    redirect_to tasks_path
   end
 
   def destroy
