@@ -146,7 +146,23 @@ describe TasksController do
   # Complete these tests for Wave 4
   describe "destroy" do
     # Your tests go here
+    it "removes a task from the database" do
 
+      #Arrange
+
+      #Act
+
+      #Assert
+    end
+
+    it "returns a 404 if the task doesn't exist" do
+
+      #Arrange
+
+      #Act
+
+      #Assert
+    end
   end
 
   # Complete for Wave 4
