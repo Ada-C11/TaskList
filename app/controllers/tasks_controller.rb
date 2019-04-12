@@ -57,4 +57,21 @@ class TasksController < ApplicationController
       redirect_to tasks_path, flash: { alert: "No such task" }
     end
   end
+
+  def complete
+    task_id = params[:id]
+    task = Task.find_by(id: task_id)
+
+    if task
+      if task.completed == false
+        task.update(completed: true)
+        redirect_to tasks_path
+      else
+        task.update(completed: false)
+        redirect_to tasks_path
+      end
+    else
+      redirect_to tasks_path, flash: { alert: "No such task" }
+    end
+  end
 end

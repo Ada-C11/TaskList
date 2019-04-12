@@ -1,15 +1,22 @@
-
-
-
 <h2>
-    Remember to:
+  Remember to:
 </h2>
 <ul  class="index-tasks">
-    <% @tasks.each do |task| %>
+  <% @tasks.each do |task| %>
     <li>
+      <% if task.completed == false %>
         <%= link_to task.name, task_path(task), class: "task-name" %>
-        <%= link_to "Edit", edit_task_path(task) %>
-        <%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>
+      <% else %>
+        <%= link_to task.name, task_path(task), class: "task-complete" %>
+      <% end %>
+      <%= link_to "Edit", edit_task_path(task) %>
+      <%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>
+
+      <% if task.completed == false %>
+        <%= link_to "Mark as Complete", task_path(task), method: :post %>
+      <% else %>
+        <%= link_to "Mark as Not Complete", task_path(task), method: :post %>
+      <% end %>
     </li>
-    <% end %>
+  <% end %>
 </ul>
