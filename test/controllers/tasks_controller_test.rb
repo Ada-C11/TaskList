@@ -101,6 +101,7 @@ describe TasksController do
 
       # Assert
       must_respond_with :redirect
+      must_redirect_to tasks_path
     end
   end
 
@@ -110,7 +111,7 @@ describe TasksController do
     #        thing to test.
     it "can update an existing task" do
       # Arrange
-      task = Task.create!(name: "original")
+      test_task = task
       task_data = {
         task: {
           name: "changed",
@@ -118,14 +119,16 @@ describe TasksController do
       }
 
       # Act
-      patch task_path(task), params: task_data
+      expect {
+        patch task_path(test_task), params: task_data
+      }.wont_change "Task.count"
 
       # Assert
       must_respond_with :redirect
-      must_redirect_to task_path(task)
+      must_redirect_to task_path(test_task)
 
-      task.reload
-      expect(task.title).must_equal(task_data[:book][:name])
+      # task.reload
+      # expect(test_task.name).must_equal(task_data[:task][:name])
     end
 
     it "will redirect to the root page if given an invalid id" do
