@@ -36,13 +36,27 @@ class TasksController < ApplicationController
         redirect_to task_path(@task.id)
     end
     def edit
-        @task = Task.find(params[:id])
+        @task = Task.find_by(id: params[:id])
+        unless @task 
+            
+            redirect_to tasks_path
+        end
 
     end
     def update
         @task = Task.find(params[:id])
         @task.update(name: params["task"]["name"], description: params["task"]["description"], completion_date: params["task"]["completion_date"])
         redirect_to task_path 
+    end
+    def destroy
+        @task = Task.find_by(id: params[:id])
+        unless @task
+            head :not_found
+            return
+        end
+            @task.destroy
+            redirect_to tasks_path
+       
     end
 
     

@@ -92,16 +92,23 @@ describe TasksController do
   # Unskip and complete these tests for Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
-      skip
-      get edit_task_path
+      task = Task.create!(name: "read", description: "read somethong")
+      task_id = task.id
+      get edit_task_path(task_id)
 
       # Assert
       must_respond_with :success
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      skip
-      # Your code here
+      #Arrange
+      task_id = 300
+      #Act
+      get edit_task_path(task_id)
+      #Assert
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    
     end
   end
 
@@ -123,11 +130,23 @@ describe TasksController do
   # Complete these tests for Wave 4
   describe "destroy" do
     # Your tests go here
-
+    it "can destroy a model" do
+    #Arrange
+    task = Task.new name: "read", description: "Read one book per week"
+    task.create!
+    expect {
+      delete task_path(task.id)
+    }.must_change 'Task.count', -1
+    read =Task.find_by( description: "Read one book per week")
+    expect(read).must_be_nil
+    must_respond_with :redirect
+    must_redirect_to tasks_path
+    end
   end
 
   # Complete for Wave 4
   describe "toggle_complete" do
     # Your tests go here
   end
+
 end
