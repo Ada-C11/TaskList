@@ -4,12 +4,16 @@
     <th>Task</th> 
     <th>Description</th>
     <th>Due Date</th>
+    <th>Action</th>
   </tr>
   <tr>
     <% @tasks.each do |task| %>
     <td> <%= link_to task.name, task_path(task) %> </td>
     <td> <%= task.description %> </td>
     <td> <%= task.completion_date %> </td>
+    <td> <%= link_to "EDIT", edit_task_path(id: task.id) %> 
+         <%= link_to " | DELETE", task_path(task), method: :delete, data: { confirm: "You sure?" } %>
+    </td>
   </tr>
   <% end %>
   <tr>

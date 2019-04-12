@@ -238,12 +238,13 @@ describe TasksController do
           completion_date: "Tuesday",
         },
       }
-      # binding.pry
+   
       patch update_task_path(id: task.id), params: task_hash
-      # binding.pry
+
       edited_task = Task.find_by(name: task_hash[:task][:name])
       expect(edited_task.name).must_equal task_hash[:task][:name]
-      # Your code here
+      expect(edited_task.description).must_equal task_hash[:task][:description]
+      expect(edited_task.completion_date).must_equal task_hash[:task][:completion_date]
     end
 
     it "will redirect to the root page if given an invalid id" do
@@ -257,12 +258,43 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "removes the task from the database" do
+      # Arrange
+      task = Task.create!(name: "test_task")
 
-  end
+      # Act
+      expect {
+        delete task_path(task)
+      }.must_change "Task.count", -1
 
-  # Complete for Wave 4
-  describe "toggle_complete" do
-    # Your tests go here
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+
+      after_task = Task.find_by(id: task.id)
+      expect(after_task).must_be_nil
+    end
+
+    it "returns a 404 if the task does not exist" do
+      # Arrange
+      task_id = 123456
+
+      # Assumptions
+      expect(Task.find_by(id: task_id)).must_be_nil
+
+      # Act
+      expect {
+        delete task_path(task_id)
+      }.wont_change "Task.count"
+
+      # Assert
+      must_respond_with :not_found
+    end
+
+    # Complete for Wave 4
+    describe "toggle_complete" do
+      # Your tests go here
+    end
   end
 end
+
