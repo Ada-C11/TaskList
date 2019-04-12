@@ -100,15 +100,16 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      patch task_path(task.id)
-      must_respond_with :redirect
-      must_redirect_to task_path(task.id)
+      patch task_path(task.id), params: {task: {name: "amy"}}
+      assert_redirected_to task_path(task.id)
+      task.reload
+      assert_equal "amy", task.name
     end
 
     it "will redirect to the root page if given an invalid id" do
-      patch task_path(-1)
-      must_respond_with :redirect
-      must_redirect_to tasks_path
+      invalid_id = "NOT A VALID ID"
+      patch task_path(invalid_id)
+      assert_redirected_to tasks_path
     end
   end
 
