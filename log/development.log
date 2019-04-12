@@ -2512,3 +2512,22 @@ Processing by TasksController#index as HTML
 Completed 200 OK in 71ms (Views: 65.3ms | ActiveRecord: 0.9ms)
 
 
+Started GET "/tasks" for ::1 at 2019-04-11 18:38:19 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 119ms (Views: 113.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/tasks/3" for ::1 at 2019-04-11 18:38:22 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mTask Load (1.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:8
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 62ms (Views: 53.4ms | ActiveRecord: 1.7ms)
+
+
