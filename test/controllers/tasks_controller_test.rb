@@ -4,8 +4,7 @@ describe TasksController do
   # Note to students:  Your Task model **may** be different and
   #   you may need to modify this.
   let (:task) {
-    Task.create name: "sample task", description: "this is an example for a test",
-                completed: false
+    Task.create name: "sample task", description: "this is an example for a test"
   }
 
   # Tests for Wave 1
@@ -30,7 +29,6 @@ describe TasksController do
   # Unskip these tests for Wave 2
   describe "show" do
     it "can get a valid task" do
-      task = Task.create(name: "cleaning")
       valid_task_id = task.id
       # Act
       get task_path(valid_task_id)
@@ -90,7 +88,7 @@ describe TasksController do
     #   task_hash = {}
     #   expect {
     #     post tasks_path, params: task_hash
-    #   }.wont_change "Book.count"
+    #   }.wont_change "task.count"
 
     #   must_respond_with :bad_request
     # end
@@ -99,7 +97,6 @@ describe TasksController do
   # Unskip and complete these tests for Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
-      task = Task.create(name: "study")
       valid_task_id = task.id
       # Act
       get edit_task_path(valid_task_id)
@@ -119,7 +116,7 @@ describe TasksController do
   describe "update" do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great thing to test.
     it "can update an existing task" do
-      task = Task.create(name: "some random to dos")
+      existing_task = Task.create(name: "some random to dos")
 
       task_hash = {
         task: {
@@ -131,7 +128,7 @@ describe TasksController do
 
       # Act-Assert
       expect {
-        patch task_path(task.id), params: task_hash
+        patch task_path(existing_task.id), params: task_hash
       }.must_change "Task.count", 0
 
       edited_task = Task.find_by(name: task_hash[:task][:name])
@@ -152,8 +149,31 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "returns a 404 if the task is not found " do
+      invalid_id = "NOT A VALID ID"
+      #Act
+      expect {
+        delete task_path(invalid_id)
+      }.wont_change "Task.count"
+      #Assert
+      #should respond with not found
+      #the count will change by 0 OR wont_change task.count
+      must_respond_with :not_found
+    end
 
+    it "can delete a task" do
+      #Arrange - Create a task
+      existing_task = Task.create(name: "some random to dos")
+      expect {
+        #Act
+        delete task_path(existing_task.id)
+        #Assert - task count will get reduce by 1
+      }.must_change "Task.count", -1
+
+      #task will get redirect and redirect to tasks_path
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end
   end
 
   # Complete for Wave 4
