@@ -41,6 +41,15 @@ class TasksController < ApplicationController
   end
 
   def update
+    task = Task.find_by(id: params[:id])
 
+    task.update(task_params)
+
+    redirect_to task_path(task)
+  end
+
+  private
+  def task_params
+    return params.require(:task).permit(:name, :description, :completion_date)
   end
 end
