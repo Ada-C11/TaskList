@@ -103,9 +103,24 @@ describe TasksController do
   end
 
     # Uncomment and complete these tests for Wave 3
+    #done in class on Friday 
   describe "update" do
-    # Note:  If there was a way to fail to save the changes to a task, that would be a great
-    #        thing to test.
+    it "changes the data on the model" do
+      task = Task.create!(title: "original")
+      task_data = {
+        task: {
+          title: "changed"
+        }
+      }
+      patch task_path(task), params: task_data
+
+      must_respond_with :redirect
+      must_redirect_to task_path(task)
+
+      expect(task.title).must_equal(task_data[:task][:title])
+    end
+  end
+
     it "can update an existing task" do
       skip
       # Your code here

@@ -31,6 +31,15 @@ class TasksController < ApplicationController
         redirect_to tasks_path
     end
 
+    #done in class on Friday
+    def.update(
+        title: params["task"]["title"]
+        description: params["task"]["title"]
+    )
+
+    redirect_to task_path(task)
+    end
+
         #from wave 4 test #1- done in class 
     def destroy
         task_id = params[:id]
