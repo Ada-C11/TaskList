@@ -25,11 +25,22 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     @task.update task_params
-    redirect_to task_path(@task)
+    if !@task
+      redirect_to task_path(@task.id), flash:
+      { error: "Could not find task with id: #{params[:id]}" }
+    else
+      redirect_to task_path(@task)
+    end
   end
 
   def destroy
     Task.find(params[:id]).destroy
+    redirect_to root_path
+  end
+
+  def complete
+    @task = Task.find(params[:id])
+    @task.update_attribute(:completed_at, Time.now)
     redirect_to root_path
   end
 
