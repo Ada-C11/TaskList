@@ -3,10 +3,19 @@
 <ul>
 <% @tasks.each do |task| %>
     <li>
-        Task: <%= link_to task.name, task_path(task.id) %>
-        Description: <%= task.description %>
-        Completed: <%= task.completed %>
-        <%= link_to "Delete this task", task_path(task.id), method: :delete, data: {confirm: "Are you sure you want to delete this task?"} %>
+        
+        <% if !task.completed %>
+            <section class="false-status"><%= link_to task.name, task_path(task.id) %></section>
+            <section class="false-status">Description: <%= task.description %></section>
+            <%= button_to "Mark complete", { action: "toggle_complete", id: task.id }, method: :patch %>
+        <% else %>
+            <section class="true-status"><%= link_to task.name, task_path(task.id) %></section>
+            <section class="true-status">Description: <%= task.description %></section>
+            <%= button_to "Unmark complete", { action: "toggle_complete", id: task.id }, method: :patch %>
+        <% end %>
+        
+        <%= link_to "Edit", edit_task_path(task.id) %>
+        <%= link_to "Delete", task_path(task.id), method: :delete, data: {confirm: "Are you sure you want to delete this task?"} %>
     </li>
 <% end %>
 </ul>

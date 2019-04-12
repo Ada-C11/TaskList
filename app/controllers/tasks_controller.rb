@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order(:id)
   end
 
   def show
@@ -18,6 +18,8 @@ class TasksController < ApplicationController
 
   def create
     task_to_create = Task.new(task_params)
+
+    task_to_create.completed = false
 
     if task_to_create.save
       redirect_to task_path(task_to_create.id)
@@ -47,16 +49,14 @@ class TasksController < ApplicationController
     end
   end
 
-  def toggle
-    # task_id = params[:id].to_i
-    # task_to_toggle = Task.find_by(id: params[:id])
-
-    # if task_to_toggle.nil?
-    #   redirect_to tasks_path
-    # else
-    #   task_to_toggle.toggle(:completed).save
-    # end
-
+  def toggle_complete
+    toggle_task = Task.find_by(id: params[:id])
+    if !toggle_task.completed
+      toggle_task.update(completed: true)
+    else
+      toggle_task.update(completed: false)
+    end
+    redirect_to tasks_path
   end
 
   def destroy
