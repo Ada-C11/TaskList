@@ -52,5 +52,11 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find_by(id: params[:id])
+    unless @task
+      redirect_to tasks_path
+      return
+    end
+
+    # head :not_found unless @task
   end
 end
