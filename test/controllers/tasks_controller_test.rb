@@ -202,6 +202,33 @@ describe TasksController do
       must_redirect_to root_path
     end
 
+    it "can mark a completed task as incomplete without changing anything else" do
+      # Arrange
+      test_task = Task.last
+      initial_attributes = test_task.attributes.clone
+      task_hash = {
+        task: {
+          completion_date: nil,
+        },
+      }
+
+      #Act-Assert
+      expect {
+        patch toggle_complete_task_path(test_task.id), params: task_hash
+      }.wont_change "Task.count"
+
+      updated_task = Task.find_by(id: initial_attributes["id"])
+
+      # Completion date should change, but nothing else should.
+      expect(updated_task.name).must_equal initial_attributes["name"]
+      expect(updated_task.description).must_equal initial_attributes["description"]
+      expect(updated_task.completion_date).must_equal task_hash[:task][:completion_date]
+      expect(updated_task.completion_date).must_be_nil
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
+
     it "will redirect to the root page if given an invalid id" do
       # Act
       patch task_path(-1)
