@@ -8,10 +8,10 @@
 
 <div id="task-board">
 <div id="to-do">
-<h1>To Do:</h1>
+<h1>To Do</h1>
 <ul>
 <% incomplete_tasks = @tasks.select{|task| !task.completion_date}%>
-<p><%= "( No more tasks! Enjoy your lazy day (= )" if (incomplete_tasks.length == 0)%></p>
+<p><%= "No more tasks! Enjoy your lazy day (=" if (incomplete_tasks.length == 0)%></p>
 <% incomplete_tasks.each do |task| %>
     <li>
         <h2><%= link_to task.name, task_path(task.id) %></h2> 
@@ -31,7 +31,7 @@
 <h1>Done! :) </h1> 
 <ul>
 <% completed_tasks = @tasks.select{|task| task.completion_date}%>
-<p><%= "( No completed tasks. Let's get to work! )" if (completed_tasks.length == 0)%></p>
+<p><%= "No completed tasks. Let's get to work!" if (completed_tasks.length == 0)%></p>
 <% completed_tasks.each do |task| %>
     <li>
         <h2><%= link_to task.name, task_path(task.id) %></h2> 

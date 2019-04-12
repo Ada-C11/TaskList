@@ -63,7 +63,7 @@ class TasksController < ApplicationController
 
     if @task
       if @task.update task_params
-        redirect_to root_path, { :flash => { :success => "Successfully updated task!" } }
+        redirect_to root_path
       else
         redirect_to root_path, :flash => { :error => "Failed to update task" }
       end
