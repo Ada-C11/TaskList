@@ -11,12 +11,12 @@
             <ul>
             <% @tasks.each do |task| %>
                 <li>
-                    <%= task.name %>: <%= task.description %> Due: <%= task.completion_date %>
+                    <%= task.name %>: <%= task.description %> <%= task.completion_date %>
                 </li>
                 <li>
                     <%= link_to "Mark Complete", task_path(task.id), method: :mark_complete %> | 
                     <%= link_to "Edit", edit_task_path(task.id) %> | 
-                    <%= link_to "Delete", task_path(task.id), method: :delete %>
+                    <%= link_to "Delete", task_path(task.id), data: { confirm: 'Your confirm message'}, method: :delete %>
                 </li>
             <%end%>
             </ul>
