@@ -67,7 +67,7 @@ class TasksController < ApplicationController
       head :not_found
     elsif !task.completed
       task.completed = true
-      task.completion_date = Date.today.strftime("%b %d %Y")
+      task.completion_date = Date.today
       task.save
     else
       task.completed = false
