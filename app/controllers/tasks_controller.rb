@@ -34,4 +34,8 @@ class TasksController < ApplicationController
       flash[:error] = "Cannot create task: #{params[:name]}"
     end
   end
+
+  def edit
+    @task = Task.find_by(id: params[:id])
+  end
 end
