@@ -149,10 +149,16 @@ describe TasksController do
     it "removes a task from the database" do
 
       #Arrange
+      task = Task.create!(name: "test task!")
 
       #Act
+      expect {
+        delete task_path(task)
+      }.must_change "Task.count", -1
 
       #Assert
+      must_respond_with :redirect
+      must_redirect_to tasks_path
     end
 
     it "returns a 404 if the task doesn't exist" do
