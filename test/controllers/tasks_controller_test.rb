@@ -27,37 +27,28 @@ describe TasksController do
   # Unskip these tests for Wave 2
   describe "show" do
     it "can get a valid task" do
-      # Act
       get task_path(task.id)
 
-      # Assert
       must_respond_with :success
     end
 
     it "will redirect for an invalid task" do
-      # Act
       get task_path(-1)
 
-      # Assert
       must_respond_with :redirect
     end
   end
 
   describe "new" do
     it "can get the new task page" do
-
-      # Act
       get new_task_path
 
-      # Assert
       must_respond_with :success
     end
   end
 
   describe "create" do
     it "can create a new task" do
-
-      # Arrange
       task_hash = {
         task: {
           name: "new task",
@@ -67,7 +58,6 @@ describe TasksController do
         },
       }
 
-      # Act-Assert
       expect {
         post tasks_path, params: task_hash
       }.must_change "Task.count", 1
@@ -100,7 +90,6 @@ describe TasksController do
     end
   end
 
-  # Uncomment and complete these tests for Wave 3
   describe "update" do
     it "can update an existing task" do
       existing_task = Task.create(
@@ -121,6 +110,8 @@ describe TasksController do
       }.must_change "Task.count", 0
 
       must_respond_with :found
+      must_respond_with :redirect
+      must_redirect_to task_path(existing_task.id)
     end
 
     it "will redirect to the root page if given an invalid id" do

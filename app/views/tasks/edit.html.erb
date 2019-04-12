@@ -2,19 +2,10 @@
 
 <h2>Edit existing task</h2>
 
-<%= form_with model: @task, class: "edit-task" do |f| %>
-
-  <p>Please update the fields below:</p>
-
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :description %>
-  <%= f.text_field :description %>
-  <%= f.label :due_date %>
-  <%= f.text_field :due_date %>
-
-  <%= f.submit "Save Task", class: "task-form_submit-btn" %>
-
-<% end %>
+<%= render partial: "form", locals: {
+    intro_text: "Fill in the boxes below to edit your existing task",
+    action_name: "Update",
+    form_class: "edit-task"
+} %>
 
 <%= link_to "Back to task list", tasks_path %>

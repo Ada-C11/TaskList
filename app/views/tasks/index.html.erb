@@ -4,7 +4,7 @@
   <%= link_to "Add a new task", new_task_path %>
 </section>
 
-<ul>
+<ul class="front-page-list">
   <% @tasks.each do |task| %>
     <li>
       <div><%= link_to task.name, task_path(task.id) %></div>
@@ -13,8 +13,8 @@
       <% else %>
         <%= button_to "Unmark complete", { action: "mark_complete", id: task.id }, method: :patch %>
       <% end %>
-      <%= button_to "Edit", { action: "edit", id: task.id }, form_class: "edit-task", method: :get %>
-      <%= button_to "Delete", { action: "destroy", id: task.id }, method: :delete %>
+      <%= button_to "Edit", { action: "edit", id: task.id }, method: :get %>
+      <%= button_to "Delete", { action: "destroy", id: task.id }, method: :delete, data: { confirm: "Are you sure?" } %>
     </li>
   <% end %>
 </ul>
