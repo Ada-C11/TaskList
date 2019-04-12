@@ -157,7 +157,6 @@ describe TasksController do
     end
   end
 
-  # Complete for Wave 4
   describe "toggle_complete" do
     it "can update existing status" do
       existing_task = Task.create(
@@ -172,6 +171,8 @@ describe TasksController do
       }.must_change "Task.count", 0
 
       must_respond_with :found
+      must_respond_with :redirect
+      must_redirect_to root_path
     end
   end
 end
