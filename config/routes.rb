@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   patch "/tasks/:id", to: "tasks#update"
   delete "/tasks/:id", to: "tasks#destroy"
 
+  patch "/tasks/:id/complete", to: "tasks#toggle_complete", as: "toggle_complete_task"
   get "/tasks/:id/edit", to: "tasks#edit", as: "edit_task"
 end

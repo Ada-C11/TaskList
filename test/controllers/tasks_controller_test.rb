@@ -196,11 +196,34 @@ describe TasksController do
   # Complete for Wave 4
   describe "toggle_complete" do
     it "updates the task with the completion time when marked complete" do
-      #code
+      id = Task.first.id
+
+      expect {
+        patch toggle_complete_task_path(id)
+      }.wont_change "Task.count"
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+
+      task = Task.find_by(id: id)
+      expect(task.completion_date).wont_be_nil
     end
 
     it "updates the task with nil completion time when unmarked complete" do
-      #code
+      id = Task.first.id
+      task = Task.find_by(id: id)
+
+      patch toggle_complete_task_path(id) if task.completion_date == nil
+
+      expect {
+        patch toggle_complete_task_path(id)
+      }.wont_change "Task.count"
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+
+      task = Task.find_by(id: id)
+      expect(task.completion_date).must_be_nil
     end
   end
 end

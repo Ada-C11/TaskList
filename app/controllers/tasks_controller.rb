@@ -44,6 +44,25 @@ class TasksController < ApplicationController
     end
   end
 
+  def toggle_complete
+    task_id = (params[:id])
+
+    @task = Task.find_by(id: task_id)
+
+    if @task.completion_date
+      @task.completion_date = nil
+      @task.save
+
+      redirect_to tasks_path
+    else
+      @task.completion_date = Time.now
+
+      @task.save
+
+      redirect_to tasks_path
+    end
+  end
+
   def create
     task = Task.new(
       name: params["task"]["name"],

@@ -3,6 +3,10 @@
   <% @tasks.each do |task|%>
     <li>
       <%= "#{task.name}: #{task.description}" %>
+      <%= form_with url: toggle_complete_task_path(task.id), method: :patch do |f| %>
+        <%= f.submit (task.completion_date ? "Unmark Complete" : "Mark Complete") %>
+      <% end %>
     </li>
   <%end%>
 </ul>
+
