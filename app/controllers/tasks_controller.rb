@@ -21,6 +21,7 @@ class TasksController < ApplicationController
   end
 
   def create
+    # Change to strong params
     task = Task.new(
       name: params["task"]["name"],
       completion_date: params["task"]["completion_date"],
@@ -46,6 +47,7 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
+    # Change to strong params
     if @task.update(
       name: params["task"]["name"],
       completion_date: params["task"]["completion_date"],
@@ -66,8 +68,13 @@ class TasksController < ApplicationController
       task.destroy 
       redirect_to tasks_path
     end
-   
   end
 
+  def complete
+    task = Task.find_by(id: params[:id])
+    task.completion_date = "Completed"
+    task.save
+    redirect_to tasks_path
+  end
 
 end

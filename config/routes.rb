@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   # verb 'path', to: 'controller#action'
+
   get '/tasks', to: 'tasks#index', as: 'tasks'
 
   get '/tasks/new', to: 'tasks#new', as: 'new_task'
@@ -12,6 +13,10 @@ Rails.application.routes.draw do
 
   delete "/tasks/:id", to: "tasks#destroy"
 
+  patch '/tasks/:id/complete', to: 'tasks#complete', as: 'complete_task'
+  
+  # resources :tasks, only: [:index, :show]
+
  
-  root to: "tasks#index"
+  root to: "tasks#index"  
 end

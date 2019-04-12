@@ -1,6 +1,7 @@
 <h1 class="logo">Task List</h1>
 
 <div class="list">
+
   <ol>
   <% @tasks.each do |task| %>
     <li class= "list-item">
@@ -11,10 +12,17 @@
     <p> <%= link_to "Edit", edit_task_path(task.id)%> </p>
 
     <p> <%= link_to "Delete", task_path(task.id), method: :delete %> </p>
+    <p> <%= link_to "Complete Task", complete_task_path(task.id), method: :patch %> </p>
 
+    <% if task.completed? %>
+         <p> 
+           <strong>Completed.</strong>
+         </p>
+    <% end %>
     </li>
   <% end %>
+
   <h4 class="new-task"> <%= link_to "Create a new Task", new_task_path %> </h4>
- 
   </ol>
+ 
 </div>
