@@ -42,18 +42,21 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find_by(id: params[:id])
-    if @task
-      @task.update(
-        name: params['task']['name'],
-        description: params['task']['description'],
-        completion_date: params['task']['completion_date']
-      )
-      redirect_to task_path(@task)
-    else
-      puts 'Redirecting to root'
+    task = Task.find_by(id: params[:id])
+
+    unless task
       redirect_to root_path
+      return
     end
+
+    task.update(
+      name: params['task']['name'],
+      description: params['task']['description'],
+      completion_date: params['task']['completion_date']
+    )
+    
+    redirect_to task_path(task)
+
   end
 
   def destroy

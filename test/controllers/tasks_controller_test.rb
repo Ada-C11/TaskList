@@ -113,8 +113,6 @@ describe TasksController do
     end
 
     it 'will respond with redirect when attempting to edit a nonexistant task' do
-      task_id = 1337
-
       get edit_task_path(-1)
 
       must_respond_with :redirect
@@ -137,9 +135,9 @@ describe TasksController do
       }
 
       # Act-Assert
-      expect do
+      expect {
         patch task_path(test_task), params: task_hash
-      end.wont_change 'Task.count'
+      }.wont_change 'Task.count'
 
       # task.update(
       #   name: "updated name",
@@ -156,10 +154,12 @@ describe TasksController do
 
     it 'will redirect to the root page if given an invalid id' do
       # Act
-      get edit_task_path(-1)
+      patch task_path(-1)
 
       # Assert
       must_respond_with :redirect
+      must_redirect_to root_path
+      
     end
   end
 
