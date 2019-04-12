@@ -104,7 +104,7 @@ describe TasksController do
   describe "update" do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
-    it "changes the data on the model" do
+    it "can update an existing task" do
       task = Task.create!(name: "original test task")
       task_data = {
         task: {
@@ -125,26 +125,12 @@ describe TasksController do
       expect(task.name).must_equal(task_data[:task][:name])
     end
 
-    # it "can update an existing task" do
-    #   # Arrange
-    #   task = Task.create!(name: "original task")
-    #   task_data = {
-    #     task: {
-    #       name: "updated task",
-    #     },
-    #   }
-    #   patch task_path(task), params: task_data
-    #   # Your code here
-    #   must_respond_with :redirect
-    #   must_redirect_to task_path(task)
-
-    #   task.reload
-    #   expect(task.name).must_equal(task_data[:task][:name])
-    # end
-
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      # Act
+      get task_path(id: -1)
+
+      # Assert
+      must_redirect_to tasks_path
     end
   end
 
