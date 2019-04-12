@@ -3,7 +3,7 @@
 class TasksController < ApplicationController
   def index
     @tasks = Task.all
-    @urgent_task = @tasks.min_by { |task| Date.parse(task.completion_date).to_time.to_i }
+    @urgent_task = @tasks.min_by(&:completion_date)
   end
 
   def show
@@ -28,6 +28,8 @@ class TasksController < ApplicationController
   def edit
     task_id = params[:id]
     @task = Task.find_by(id: task_id)
+
+    redirect_to tasks_path if @task.nil?
   end
 
   def update
@@ -42,10 +44,13 @@ class TasksController < ApplicationController
     task_id = params[:id]
     task = Task.find_by(id: task_id)
 
-    # if task
-    #   task.destroy
-    # end
-    task&.destroy
+    unless task
+      head :not_found
+      return
+    end
+
+    task.destroy
+
     redirect_to tasks_path
   end
 
