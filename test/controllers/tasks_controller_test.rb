@@ -41,7 +41,6 @@ describe TasksController do
 
       # Assert
       must_respond_with :redirect
-      expect(flash[:error]).must_equal 'Could not find task with id: -1'
     end
   end
 
@@ -121,18 +120,17 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it 'can update an existing task' do
-      existing_task = Task.create!(name: 'Homework', description: 'Work on TaskList', completion_date: Time.now)
+      new_task = Task.create!(name: 'Homework', description: 'Work on TaskList', completion_date: Time.now)
       update_task_name = { 
         task: { 
-          name: 'Mario', 
-          description: 'Work on TaskList',
-          completion_date: Time.now,
+          name: 'Changed name', 
           } 
         }
+        
+      patch task_path(new_task.id), params: update_task_name
+      new_task.reload
 
-      patch task_path(existing_task.id), params: update_task_name
-
-      expect(existing_task.name).must_equal 'Homework'
+      expect(new_task.name).must_equal 'Changed name'
     end
 
     it 'will redirect to the root page if given an invalid id' do
@@ -182,6 +180,11 @@ describe TasksController do
 
   # Complete for Wave 4
   describe 'toggle_complete' do
-    # Your tests go here
+    task_item = Task.create!(name: "Fold clothes", description: "Konmari way")
+    task_id = task_item.id
+
+    it "will update completion_date when clicked" do 
+      toggle_complete mark_task_path(task_id)
+    end
   end
 end

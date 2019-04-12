@@ -1,21 +1,21 @@
 
 
 <h2>See the List</h2>
-
-<ul>
-  <% @tasks.each do |task|%>
-  <li>
-    <strong>
-    <%= link_to task.description, task_path(task) %>
-    </strong>
-    by <%= task.name %>
-    <%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Press Ok to continue."} %>
-    <p>--------------------------------</p>
-  </li>
-  <%end%>
-</ul>
-
-<button type="button"> <%= link_to "Add Task", new_task_path %> </button>
+<div class="index-display">
+  <ul>
+    <% @tasks.each do |task|%>
+    <li>
+      <strong>
+      <%= link_to task.description, task_path(task) %>
+      </strong>
+      by <%= task.name %>
+      <%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Press Ok to continue."} %>
+      <%= link_to "Mark Complete", task_path(task)%>
+      <p>--------------------------------</p>
+    </li>
+    <% end %>
+  </ul>
+</div>
 
 
 
