@@ -93,7 +93,7 @@ describe TasksController do
       must_respond_with :found
     end
 
-    it "will respond with redirect when attempting to edit a nonexistant task" do
+    it "will respond with redirect when attempting to edit a nonexistent task" do
       get edit_task_path(5555555)
 
       must_respond_with :redirect
@@ -105,8 +105,10 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
+      patch task_path(1)
       # Your code here
+      must_respond_with :success
+      must_redirect_to :tasks_path
     end
 
     it "will redirect to the root page if given an invalid id" do
