@@ -91,7 +91,6 @@ describe TasksController do
   describe "edit" do
     it "can get the edit page for an existing task" do
       new_task = Task.create(name: "cleaning")
-      # new_task.save
 
       get edit_task_path(new_task.id)
 
@@ -99,8 +98,13 @@ describe TasksController do
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      skip
-      # Your code here
+      invalid_task_id = 999
+
+      # Act
+      get edit_task_path(invalid_task_id)
+
+      # Assert
+      must_redirect_to tasks_path
     end
   end
 
@@ -108,14 +112,21 @@ describe TasksController do
   describe "update" do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
+
     it "can update an existing task" do
-      skip
-      # Your code here
+      new_task = Task.create(name: "cleaning", description: "not fun")
+
+      new_task.update(name: "not cleaning")
+
+      expect(new_task["created_at"]).wont_equal new_task["updated_at"]
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      invalid_task_id = 999
+
+      patch update_path(invalid_task_id)
+
+      must_redirect_to tasks_path
     end
   end
 

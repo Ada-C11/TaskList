@@ -43,8 +43,22 @@ class TasksController < ApplicationController
   def edit
     puts params
     task_id = params[:id]
-
     @task = Task.find_by(id: task_id)
+
+    if @task.nil?
+      redirect_to tasks_path
+    end
+  end
+
+  def update
+    @task = Task.find_by(id: params["id"])
+    @task.update(name: params["task"]["name"], description: params["task"]["description"])
+
+    if @task.nil?
+      redirect_to tasks_path
+    else
+      redirect_to task_path(@task)
+    end
   end
 
   #   def destroy
