@@ -132,8 +132,40 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "removes the task from the database" do
+      # Arrange
+      task = Task.create!(name: "test_task")
 
+      # Act
+      expect {
+        delete task_path(task)
+      }.must_change "Task.count", -1
+
+
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+
+      after_task = Task.find_by(id: task.id)
+      expect(after_task).must_be_nil
+    end
+
+    it "returns 404 for a task that does not exist" do
+      # Arrange
+      task_id = 123456
+
+      # Assumptions
+      expect(Task.find_by(id: task_id)).must_be_nil
+
+      # Act
+      expect {
+        delete task_path(task_id)
+      }.wont_change "Task.count"
+
+      # Assert
+      must_respond_with :not_found
+
+    end
   end
 
   # Complete for Wave 4
