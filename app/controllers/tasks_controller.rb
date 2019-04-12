@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 class TasksController < ApplicationController
-  
   def index
     @tasks = Task.all
   end
@@ -10,9 +11,9 @@ class TasksController < ApplicationController
 
   def create
     task = Task.new(
-      name: params["task"]["name"],
-      description: params["task"]["description"],
-      completion_date: params["task"]["completion_date"]
+      name: params['task']['name'],
+      description: params['task']['description'],
+      completion_date: params['task']['completion_date']
     )
 
     task.save
@@ -34,15 +35,17 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
+    @task = Task.find_by(id: params[:id])
+
+    redirect_to tasks_path unless @task
   end
 
   def update
     @task = Task.find(params[:id])
     @task.update(
-      name: params["task"]["name"],
-      description: params["task"]["description"],
-      completion_date: params["task"]["completion_date"]
+      name: params['task']['name'],
+      description: params['task']['description'],
+      completion_date: params['task']['completion_date']
     )
     redirect_to task_path(@task)
   end
