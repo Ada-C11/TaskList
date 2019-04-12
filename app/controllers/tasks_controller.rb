@@ -71,7 +71,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    task_to_destroy = Task.find(params[:id])
+    task_to_destroy = Task.find_by(id: params[:id])
 
     if task_to_destroy.nil?
       head :not_found

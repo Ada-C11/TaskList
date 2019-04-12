@@ -131,14 +131,13 @@ describe TasksController do
   # Complete these tests for Wave 4
   describe "destroy" do
     it "returns a 404 error if a task is not found" do
-      # invalid_id = "Invalid id!"
+      invalid_task_id = -1
 
-      # expect {
-      #   delete task_path(invalid_id)
-      # }.must_change "Task.count", 0
+      expect {
+        delete task_path(invalid_task_id)
+      }.must_change "Task.count", 0
 
-      # must_respond_with :not_found
-
+      must_respond_with :not_found
     end
 
     it "can delete a book" do
