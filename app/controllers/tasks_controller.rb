@@ -9,26 +9,16 @@ class TasksController < ApplicationController
     task_id = params[:id]
     @task = Task.find_by(id: task_id)
 
-    unless @task
-      redirect_to tasks_path
-    end
+    redirect_to tasks_path unless @task
   end
 
   def new
-    @new_task = Task.new
+    @task = Task.new
   end
 
   def create
-    @task = Task.new
-
-    unless params['task']
-      render :new, status: :bad_request
-      return
-    end
-
-    @task.name = params['task']['name']
-    @task.description = params['task']['description']
-    @task.save
+    @task = Task.new(task_params)
+    @task.update(completed: false)
 
     redirect_to tasks_path
   end
@@ -52,9 +42,7 @@ class TasksController < ApplicationController
       return
     end
 
-    task.name = params['task']['name']
-    task.description = params['task']['description']
-    task.save
+    task.update(task_params)
 
     redirect_to task_path(task_id)
   end
@@ -75,7 +63,24 @@ class TasksController < ApplicationController
   end
 
   def toggle_complete
-    task_id = params[:id]
-    task = Task.find_by(id: task_id)
+    task = Task.find_by(id: params[:id])
+
+    unless task
+      redirect_to tasks_path
+      return
+    end
+
+    task.completion_date =  Time.now
+    task.completed = true
+    task.save
+    # flash[:notice] = 'Task marked complete!'
+
+    redirect_to tasks_path
+  end
+
+  private
+
+  def task_params
+    return params.require(:task).permit(:name, :description, :completion_date)
   end
 end

@@ -9,8 +9,10 @@
       <%= link_to task.description, task_path(task) %>
       </strong>
       by <%= task.name %>
+      </li>
+      <li>
       <%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Press Ok to continue."} %>
-      <%= link_to "Mark Complete", task_path(task)%>
+      <div><%= link_to "Mark Complete", toggle_complete_path(task), method: :put %>
       <p>--------------------------------</p>
     </li>
     <% end %>

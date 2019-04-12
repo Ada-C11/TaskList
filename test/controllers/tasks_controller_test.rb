@@ -81,6 +81,7 @@ describe TasksController do
     end
 
     it 'will respond with bad request if no task is sent' do 
+      skip
       # Arrange
       task_data = {}
 
