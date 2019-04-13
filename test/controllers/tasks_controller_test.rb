@@ -5,7 +5,8 @@ require 'pry'
 describe TasksController do
   let (:task) do
     Task.create name: 'sample task', description: 'this is an example for a test',
-                completion_date: Time.now + 5.days
+                completion_date: Time.now + 5.days,
+                completed: false
   end
 
   # Tests for Wave 1
@@ -130,7 +131,8 @@ describe TasksController do
         task: {
           name: 'new task',
           description: 'new task description',
-          completion_date: nil
+          completion_date: nil,
+          completed: true
         }
       }
 
@@ -190,9 +192,9 @@ describe TasksController do
       expect(Task.find_by(id: task_id)).must_be_nil
 
       # Act
-      expect do
+      expect {
         delete task_path(task_id)
-      end.wont_change 'Task.count'
+      }.wont_change 'Task.count'
 
       # Assert
       must_respond_with :not_found
@@ -201,6 +203,43 @@ describe TasksController do
 
   # Complete for Wave 4
   describe 'toggle_complete' do
-    # Your tests go here
+    it "can mark an incomplete task as complete" do
+      test_task = task
+
+      expect {
+        post complete_task_path(test_task.id)
+      }.wont_change 'Task.count'
+
+      test_task.reload
+
+      test_task.completed.must_equal true
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
+
+    it "can mark a completed task as incomplete" do
+      task_hash = {
+        task: {
+          name: 'new task',
+          description: 'new task description',
+          completion_date: nil,
+          completed: true
+        }
+      }
+
+      test_task = Task.create task_hash[:task]
+
+      expect {
+        post complete_task_path(test_task.id)
+      }.wont_change 'Task.count'
+
+      test_task.reload
+
+      test_task.completed.must_equal false
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
   end
 end
