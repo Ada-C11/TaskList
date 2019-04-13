@@ -169,7 +169,25 @@ describe TasksController do
 
     # Complete for Wave 4
     describe "complete" do
-      # Your tests go here
+      it "changes completed status of a task" do
+        post complete_task_path(id: task.id)
+
+        completed_task = Task.find_by(completed: true)
+        expect(completed_task.completed).must_equal true
+      end
+
+      it "sets todays date as completion date if completion status is true" do
+        post complete_task_path(id: task.id)
+
+        completed_task = Task.find_by(completed: true)
+        expect(completed_task.date_completed).must_equal Date.today
+      end
+
+      it "will redirect to the root page" do
+        post complete_task_path(id: task.id)
+
+        must_respond_with :redirect
+      end
     end
   end
 end
