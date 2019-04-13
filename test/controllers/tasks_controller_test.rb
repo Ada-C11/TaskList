@@ -84,9 +84,6 @@ describe TasksController do
   describe "edit" do
     it "can get the edit page for an existing task" do
 
-      # Arrange
-      # above
-
       # Act
       get edit_task_path(task.id)
 
@@ -95,10 +92,11 @@ describe TasksController do
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
+
       # Arrange
       id = -1
       # Act
-      get edit_task_path(id) # double check this is the path I want to use
+      get edit_task_path(id)
 
       # Assert
       must_respond_with :redirect
@@ -112,7 +110,7 @@ describe TasksController do
       # Arrange
       task_hash = {
         task: {
-          task_name: "Water the garden",
+          task_name: "Water the plants",
         },
       }
 
@@ -121,7 +119,24 @@ describe TasksController do
       task.reload
 
       # Assert
-      expect(task.task_name).must_equal "Water the garden"
+      expect(task.task_name).must_equal "Water the plants"
+    end
+
+    it "will redirect to the root page if not updated successfully" do
+
+      # Arrange
+      task_hash = {
+        task: {
+          task_name: "Get dog food",
+        },
+      }
+
+      # Act
+      patch task_path(task.id), params: task_hash
+      # do not get new data from database using task.reload to simulate failing to save the changes
+
+      # Assert
+      must_respond_with :redirect
     end
 
     it "will redirect to the root page if given an invalid id" do
@@ -137,17 +152,28 @@ describe TasksController do
 
   describe "destroy" do
     it "can delete a task" do
-      #Arrange
+      # Arrange
       new_task = Task.create(task_name: "Do the laundry")
 
       expect {
-        #Act
+        # Act
         delete task_path(new_task.id)
-        #Assert
+        # Assert
       }.must_change "Task.count", -1
 
       must_respond_with :redirect
       must_redirect_to tasks_path
+    end
+
+    it "responds with a not found error if task id is invalid" do
+      # Arrange
+      id = -1
+
+      # Act
+      delete task_path(id)
+
+      # Assert
+      must_respond_with :not_found
     end
   end
 
