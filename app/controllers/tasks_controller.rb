@@ -68,4 +68,18 @@ class TasksController < ApplicationController
 
     redirect_to tasks_path
   end
+
+  def toggle_complete
+    task = Task.find_by(id: params[:id])
+
+    unless task
+      head :not_found
+      return
+    end
+
+    task.completion_date = DateTime.current
+    task.save
+
+    redirect_to tasks_path
+  end
 end

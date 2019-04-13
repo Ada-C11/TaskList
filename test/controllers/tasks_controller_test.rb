@@ -144,6 +144,11 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    # Create task
+
+    # Mark task complete
+
+    # Expect it will have a completion date
+    # Must respond with redirect
   end
 end
