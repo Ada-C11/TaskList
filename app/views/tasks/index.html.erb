@@ -8,26 +8,30 @@
         </div>
         <div class="task_list">
             <p>ToDo:</p>
-            <ul>
-            <% x = 0 %>
-            <% @tasks.each do |task| %>
-                <li>
-                    <%= x + 1%>. 
-                    <a href="/tasks/<%=task.id%>">
-                    <%= task.name %>: <%= task.description %> <%= task.completion_date %></a>
-                </li>
-                <li>
-                    <%if task.complete == false%>
-                        <%= link_to "Mark Complete", { action: "toggle_complete", id: task.id }, method: :patch %> | 
-                    <%else%>
-                        <%= link_to "Unmark Complete", { action: "toggle_complete", id: task.id }, method: :patch %> | 
-                    <%end%>
-                    <%= link_to "Edit", edit_task_path(task.id) %> | 
-                    <%= link_to "Delete", task_path(task.id), data: { confirm: 'Your confirm message'}, method: :delete %>
-                </li>
-                <%x += 1%>
-            <%end%>
-            </ul>
+            <ol>
+                <% @tasks.each do |task| %>
+                    <li>
+                        <%if task.complete == false%>
+                            <div>
+                                <a href="/tasks/<%=task.id%>"> <%= task.name %>: <%= task.description %> Due:<%= task.completion_date %> </a>
+                            </div>
+                            <div>
+                                <%= link_to "Mark Complete", { action: "toggle_complete", id: task.id }, method: :patch %> | 
+                                <%= link_to "Edit", edit_task_path(task.id) %> | 
+                                <%= link_to "Delete", task_path(task.id), data: { confirm: 'Your confirm message'}, method: :delete %>
+                            </div>
+                        <%else%>
+                            <div class="strike">
+                                <a href="/tasks/<%=task.id%>"> <%= task.name %>: <%= task.description %> Due:<%= task.completion_date %> </a>                            </div>
+                            <div>
+                                <%= link_to "Unmark Complete", { action: "toggle_complete", id: task.id }, method: :patch%> | 
+                                <%= link_to "Edit", edit_task_path(task.id) %> | 
+                                <%= link_to "Delete", task_path(task.id), data: { confirm: 'Your confirm message'}, method: :delete %>
+                            </div>
+                        <%end%>
+                    </li>
+                <%end%>
+            </ol>
         </div>
     </section>
 </body>
