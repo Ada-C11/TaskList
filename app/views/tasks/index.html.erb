@@ -11,10 +11,15 @@
             <ul>
             <% @tasks.each do |task| %>
                 <li>
-                    <%= task.name %>: <%= task.description %> <%= task.completion_date %>
+                    <a href="/tasks/<%=task.id%>">
+                    <%= task.name %>: <%= task.description %> <%= task.completion_date %></a>
                 </li>
                 <li>
-                    <%= link_to "Mark Complete", task_path(task.id), method: :mark_complete %> | 
+                    <%if task.complete == false%>
+                        <%= link_to "Mark Complete", { action: "toggle_complete", id: task.id }, method: :patch %> | 
+                    <%else%>
+                        <%= link_to "Unmark Complete", { action: "toggle_complete", id: task.id }, method: :patch %> | 
+                    <%end%>
                     <%= link_to "Edit", edit_task_path(task.id) %> | 
                     <%= link_to "Delete", task_path(task.id), data: { confirm: 'Your confirm message'}, method: :delete %>
                 </li>

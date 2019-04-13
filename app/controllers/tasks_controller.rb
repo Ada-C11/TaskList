@@ -29,8 +29,7 @@ class TasksController < ApplicationController
   end
 
   def edit
-    task_id = params[:id].to_i
-    @task = Task.find_by(id: task_id)
+    @task = Task.find_by(id: params[:id])
 
     if @task.nil?
       redirect_to tasks_path
@@ -38,8 +37,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    task_id = params[:id].to_i
-    @task = Task.find_by(id: task_id)
+    @task = Task.find_by(id: params[:id])
 
     if @task.nil?
       redirect_to tasks_path
@@ -50,14 +48,20 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    task_id = params[:id].to_i
-    @task = Task.find_by(id: task_id)
+    @task = Task.find_by(id: params[:id])
     if @task.nil?
       head :not_found
     else
       @task.destroy
       redirect_to tasks_path
     end
+  end
+
+  def toggle_complete
+    @task = Task.find_by(id: params[:id])
+    @task.toggle(:complete)
+    @task.save
+    redirect_to tasks_path
   end
 
   private
