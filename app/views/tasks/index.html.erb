@@ -6,10 +6,15 @@
     <li>
     <a href="/tasks/<%=task.id%>">
       Task: <%= task.task_name %> 
-      Description: <%= task.description %>
-      Completed?: <%= task.completed %></a>
+      Description: <%= task.description %></a>
      
-      <%= button_to "Change completion status", {action: "toggle_complete", id: task.id}, method: :patch %>
+      <% if task.completed == false %>
+          Not complete 
+          <%= button_to "Mark complete", { action: "toggle_complete", id: task.id }, method: :patch %>
+        <% else %>
+        Complete
+          <%= button_to "Unmark complete", { action: "toggle_complete", id: task.id }, method: :patch %>
+        <% end %>
     </li>
   <% end %>
   </ul>
