@@ -1,26 +1,36 @@
 <h1>TASKLIST</h1>
-<%= link_to "Create new task", new_task_path %>
+<h3 id="create-new"><%= link_to "Create new task", new_task_path %></h3>
 
-<ul>
+<ol>
   <% @tasks.each do |task| %>
     <li>
       <strong>
-        <%= link_to task.name, task_path(task) %>
+        <% if (task.completed_at) == nil %>
+          <h4 id="name-before"><%= link_to task.name, task_path(task) %></h4>
+        <% else %>
+          <h4 id="name-after"><strike><%= link_to task.name, task_path(task) %></strike></h4>
+        <% end %>
       </strong>
       <ul>
         <li>
-          <strong>
+          
             <%= link_to "Edit", edit_task_path(task) %>
-          </strong>
+          
         </li>
 
         <li>
-          <strong>
-            <%= link_to "Delete", task_path(task.id), method: :delete %>
-          </strong>
-         </li>
+          
+            <%= link_to "Delete", task_path(task.id), method: :delete, data: {confirm: "Confirm deletion?"} %>
+          
+        </li>
+
+        <li>
+          <% if (task.completed_at) == nil %>
+            <%= link_to "Mark Complete", toggle_path(task.id), method: :patch %>
+          <% end %>
+        </li>
       </ul>
     </li>
   <% end %>
-</ul>
+</ol>
 

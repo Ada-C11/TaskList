@@ -66,4 +66,12 @@ class TasksController < ApplicationController
 
     redirect_to tasks_path
   end
+
+  def toggle
+    @task = Task.find(params[:id])
+
+    @task.update_attribute(:completed_at, Time.now)
+    redirect_to tasks_path
+  end
+
 end
