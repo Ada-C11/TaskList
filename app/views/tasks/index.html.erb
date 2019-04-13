@@ -9,8 +9,10 @@
         <div class="task_list">
             <p>ToDo:</p>
             <ul>
+            <% x = 0 %>
             <% @tasks.each do |task| %>
                 <li>
+                    <%= x + 1%>. 
                     <a href="/tasks/<%=task.id%>">
                     <%= task.name %>: <%= task.description %> <%= task.completion_date %></a>
                 </li>
@@ -23,6 +25,7 @@
                     <%= link_to "Edit", edit_task_path(task.id) %> | 
                     <%= link_to "Delete", task_path(task.id), data: { confirm: 'Your confirm message'}, method: :delete %>
                 </li>
+                <%x += 1%>
             <%end%>
             </ul>
         </div>

@@ -63,6 +63,7 @@ describe TasksController do
           name: "new task",
           description: "new task description",
           completion_date: nil,
+          complete: false,
         },
       }
 
@@ -136,5 +137,11 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
+    it "changes default status to true" do
+      patch toggle_complete_path(task.id)
+      assert_redirected_to tasks_path
+      task.reload
+      assert_equal true, task.complete
+    end
   end
 end
