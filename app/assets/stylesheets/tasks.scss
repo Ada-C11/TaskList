@@ -8,8 +8,11 @@
 $header-font-stack: 'Indie Flower', cursive;
 $paragraph-font-stack: 'Open Sans Condensed', sans-serif;
 $text-color:#023366;
-$background-color:#ffffff;
+$link-color:#390040;
+$highlight-color: #FF1053;
+$background-color: #ffffff;
 $post-it-colors: #fff740 #ff7eb9  #7afcff #feff9c #ff65a3;
+
 
 
 main{
@@ -17,6 +20,10 @@ main{
     color:$text-color;
     background: $background-color;
     
+}
+
+::selection {
+    background-color: lighten($highlight-color, 40%);
 }
 
 h1, h2, h3 {
@@ -27,10 +34,20 @@ h1, h2, h3 {
     }
 }
 
+
 p, a, label {
     font-family: $paragraph-font-stack;
     text-decoration: none;
+    
 
+}
+
+a {
+    color: $link-color;
+}
+
+a:hover {
+    color: $highlight-color;
 }
 
 ul {
@@ -63,8 +80,19 @@ ul {
     }
 }
 
-.add_task{
-    
+.button {
+    font-size:30px;
+    padding:10px;
+    border: 1px solid $link-color;
+    background-color: lighten($highlight-color, 40%);
+    box-shadow: 2px 2px 2px 2px #888888;
+    font-family: $paragraph-font-stack;
+}
+
+.button:hover {
+    border-color: $highlight-color;
+    box-shadow: inset 2px 2px 2px 2px #888888;
+    color:$highlight-color;;
 }
 
 .task {
@@ -105,6 +133,14 @@ form {
     input[type="submit"] {
         margin-top:20px;
         margin-bottom:20px;
+    }
+
+    input[type="text"], {
+        padding:10px;
+    }
+
+    textarea {
+        padding:20px;
     }
 
     label {
