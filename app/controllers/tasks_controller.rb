@@ -66,6 +66,23 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
+  def complete
+    task_id = params[:id]
+
+    task = Task.find_by(id: task_id)
+
+    unless task
+      head :not_found
+      return
+    end
+
+    task.completed = !task.completed
+
+    task.save
+
+    redirect_to root_path
+  end
+
   private
 
   def task_params

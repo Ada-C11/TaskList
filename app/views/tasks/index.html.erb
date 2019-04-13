@@ -3,10 +3,17 @@
   <% @tasks.each do |task|  %>
     <li>
       <strong><%= link_to task.name, task_path(task) %></strong>
-      Description: <%= task.description %>
-      Due date: <%= task.completion_date %>
+      <p>Description: <%= task.description %></p>
+      <% if task.completion_date %>
+        <p>Due date: <%= task.completion_date %></p>
+      <% end %>
       <%= link_to "Edit", edit_task_path(task) %>
       <%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure you'd like to delete this task?" }%>
+      <% if task.completed %>
+        <p><%= link_to "Unmark Complete", complete_task_path(task), method: :post %></p>
+      <% else %>
+        <p><%= link_to "Mark Complete", complete_task_path(task), method: :post %></p>
+      <% end %>
     </li>
   <% end %>
 </ul>

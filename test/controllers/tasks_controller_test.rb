@@ -105,7 +105,7 @@ describe TasksController do
   # Unskip and complete these tests for Wave 3
   describe 'edit' do
     it 'can get the edit page for an existing task' do
-      task = Task.create!(name: 'Test task')
+      test_task = task
 
       get edit_task_path(task.id)
 
@@ -167,11 +167,11 @@ describe TasksController do
   describe 'destroy' do
     it 'removes the task from the database' do
       # Arrange
-      task = Task.create!(name: 'test_task')
+      test_task = task
 
       # Act
       expect do
-        delete task_path(task)
+        delete task_path(test_task)
       end.must_change 'Task.count', -1
 
       # Assert
