@@ -1,0 +1,35 @@
+<section>
+<h2>Task List</h2>
+<h3>Here is a list of your Tasks</h3>
+
+<p><strong>You have <%= @tasks.length %> outstanding tasks</strong></p>
+
+  <% if @urgent_task %>
+    <p class="urgent_task">
+      <strong>Most Urgent Task: <%= @urgent_task.name %></strong>
+    </p>
+    <p class="urgent_task">
+      <strong>Due date: <%= @urgent_task.completion_date %></strong>
+    </p>
+  <% else %>
+    <p>No tasks today</p>
+  <% end %>
+  
+  <ul>
+    <% @tasks.each do | task | %>
+    <li><%= link_to task.name, task_path(task.id) %></li> 
+    <li><%= link_to task.completion_date, task_path(task) %></li> 
+    <li><%= link_to "Edit", edit_task_path(task.id) %></li>
+    <li><%= link_to "Delete", task_path(task.id), method: :delete, data: { confirm: "Do you really want to delete?" } %></li>
+    <li>
+      <% if task.is_complete %>
+        <%= link_to "Mark as incomplete", toggle_path(task.id), method: :patch %>
+      <% else %>
+        <%= link_to "Mark as Complete", toggle_path(task.id), method: :patch %>
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
+
+</section>
+
