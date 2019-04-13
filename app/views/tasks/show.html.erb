@@ -1,19 +1,28 @@
-<h2>
-  <%= @task.name %>
-</h2>
+<body>
+  <main>
+  <h1>Task List</h1>
 
-<h3>
-  Description: <%= @task.description %>
-</h3>
+  <div class="info-section">
+    <h2>
+      <%= @task.name %>
+    </h2>
 
-<% if !@task.completed %>
-    <%= button_to "Mark complete", { action: "toggle_complete", id: @task.id }, method: :patch %>
-<% else %>
-    <%= button_to "Unmark complete", { action: "toggle_complete", id: @task.id }, method: :patch %>
-<% end %>
+    <p>
+      Description: <%= @task.description %>
+    </p>
 
-<%= link_to "Edit this task", edit_task_path, class: "link" %>
+    <% if !@task.completed %>
+        <%= button_to "Mark complete", { action: "toggle_complete", id: @task.id }, method: :patch %>
+    <% else %>
+        <%= button_to "Unmark complete", { action: "toggle_complete", id: @task.id }, method: :patch %>
+    <% end %>
+  </div>
 
-<%= link_to 'Delete this task', task_path(@task.id), method: :delete, data: {confirm: "Are you sure you want to delete this task?"}, class: "link" %>
+  <%= link_to "Edit this task", edit_task_path, class: "link bottom-link" %>
 
-<%= link_to "Back to All Tasks", tasks_path, class: "link" %>
+  <%= link_to 'Delete this task', task_path(@task.id), method: :delete, data: {confirm: "Are you sure you want to delete this task?"}, class: "link bottom-link" %>
+
+  <%= link_to "Back to All Tasks", tasks_path, class: "link bottom-link" %>
+  </main>
+  <footer>&copy; Alex McCarthy</footer>
+</body>
