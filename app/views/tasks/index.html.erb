@@ -3,9 +3,20 @@
   <ul class="tasks-list">
     <% @tasks.each do |task| %>
       <li>
-        <strong><%= task.name %></strong> due by: <%= task.completion_date %>
-        <%= link_to "View details", task_path(task.id) %>
-        <%= link_to "Edit", edit_task_path(task.id) %>
+        <ul class="task-elements">
+          <li class="task-name">
+            <strong><%= task.name %></strong> 
+          </li>
+          <li class="due-date">
+            Due by: <%= task.completion_date %>
+          </li>
+          <li class="task-actions">
+            <%= link_to "Mark Complete", edit_task_path(task.id) %>
+            <%= link_to "View details", task_path(task.id) %> |
+            <%= link_to "Edit", edit_task_path(task.id) %> |
+            <%= link_to "Delete", task_path(task.id), method: :delete, data: { confirm: "Are you very sure you want to delete?" } %>
+          </li>
+        </ul>
       </li>
     <% end %>
   </ul>
