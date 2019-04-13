@@ -198,6 +198,15 @@ describe TasksController do
     end
 
     it "returns a 404 if the task doesn't exist" do
+
+      #Arrange
+      task_id = 9001
+
+      #Act
+      patch toggle_complete_task_path(task_id)
+
+      #Assert
+      must_respond_with :not_found
     end
     # Your tests go here
   end
