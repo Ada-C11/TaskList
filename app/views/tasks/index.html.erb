@@ -3,7 +3,7 @@
 <ol>
   <% @tasks.each do |task| %>
     <section id="list-tasks">
-    <% if task.completed == false %>
+    <% if task.completed == false || task.completed == nil %>
       <li><strong><%= link_to "Task: #{task.name}", task_path(task.id) %></strong></li>
     <% elsif task.completed == true %>
       <li id="crossed-off"><%= link_to "Task: #{task.name}", task_path(task.id) %></li>
