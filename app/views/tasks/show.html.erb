@@ -1,3 +1,5 @@
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+
 <section class="show">
   <h2>
     Task: <%= @task.task_name%>
@@ -8,7 +10,12 @@
   </h3>
 
   <h3>
-    Completed: <%= @task.completed%>
+    Completed: 
+    <% if @task.completed? %> Yep!
+      
+    <% else %> Not yet...
+    <% end %>
+
   </h3>
 
   <%= link_to "Back to all tasks", tasks_path %> 
