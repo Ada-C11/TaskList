@@ -143,6 +143,21 @@ describe TasksController do
       must_respond_with :redirect
       must_redirect_to tasks_path
     end
+    it "will not update if the params are invelid" do
+      id = Task.first.id
+      original_task = Task.find_by(id: id)
+
+      expect {
+        patch task_path(id), params: {}
+      }.wont_change "Task.count"
+
+      must_respond_with :error
+
+      task = Task.find_by(id: id)
+      expect(task.name).must_equal original_task.name
+      expect(task.description).must_equal original_task.description
+      expect(task.completion_date).must_equal original_task.completion_date
+    end
   end
 
   # Complete these tests for Wave 4

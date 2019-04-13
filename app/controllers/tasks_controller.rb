@@ -18,18 +18,15 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new(task_params)
+    @task = Task.new
   end
 
   def create
-    @task = Task.new
+    @task = Task.new(task_params)
     unless params["task"]
       render :new, status: :bad_request
       return
     end
-
-    @task.name = params["task"]["name"]
-    @task.description = params["task"]["description"]
     @task.save
     redirect_to tasks_path
   end
@@ -42,14 +39,14 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find_by(id: params[:id])
-    unless @task
+    task = Task.find_by(id: params[:id])
+    unless task
       redirect_to tasks_path
       return
     end
 
-    @task.update(name: params["task"]["name"], description: params["task"]["description"], completion_date: params["task"]["completion_date"])
-    redirect_to task_path
+    task.update!(task_params)
+    redirect_to task_path(task)
   end
 
   def destroy
