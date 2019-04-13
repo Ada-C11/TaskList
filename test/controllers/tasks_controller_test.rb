@@ -177,7 +177,20 @@ describe TasksController do
   end
 
   # Complete for Wave 4
-  describe "toggle_complete" do
+  describe "complete" do
+    it "will redirect to the main page" do
+      post complete_task_path(id: task.id)
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end
+    it "can mark a task, Mark complete or unmark complete" do
+      post complete_task_path(id: task.id)
+      completed_task = Task.find_by(completed: true)
+      expect(completed_task.completed).must_equal true
+
+    end
+
     # Your tests go here
   end
 end

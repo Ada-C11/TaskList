@@ -5,12 +5,19 @@
 
 
 <ul>
-<% @tasks.each do |task|%>
-<li>
-<%= link_to task.name, task_path(task) %> : <%= task.description %> , <%= task.completion_date%>
-          <%= link_to "Edit", edit_task_path(task.id) %>
-          <%= link_to "Delete", task_path(task.id), method: :delete, data: {confirm: "are you sure you want to delete this task?"} %>
-          <%= link_to "Mark complete", tasks_path, class: 'button' %>
-</li>
-<% end %>
+  <% @tasks.each do |task|%>
+    <li>
+      <strong><%= link_to task.name, task_path(task) %></strong>: <%= task.description %>
+      <% if task.completion_date %>
+      <p>Due date: <%= task.completion_date%></p>
+      <% end %>
+      <%= link_to "Edit", edit_task_path(task.id) %>
+      <%= link_to "Delete", task_path(task.id), method: :delete, data: {confirm: "are you sure you want to delete this task?"} %>
+      <% if task.completed %>
+        <p><%= link_to "Unmark Complete", complete_task_path(task.id), method: :post %></p>
+      <% else %>
+        <p><%= link_to "Mark Complete", complete_task_path(task.id), method: :post %></p>
+      <% end %>
+    </li>
+  <% end %>
 </ul>

@@ -2,12 +2,16 @@
 
 <h2>Task details page</h2>
 
-<p>
-Task: <%= @task.name %>
-</p>
+
+<strong>Task: <%= @task.name %></strong>
 <p>
 Description: <%= @task.description %>
 </p>
 <p>
 Completion_date: <%= @task.completion_date %>
 </p>
+<% if @task.completed %>
+<p><%= link_to "Unmark Complete", complete_task_path(@task), method: :post %></p>
+<% else %>
+<p><%= link_to "Mark Complete", complete_task_path(@task), method: :post %></p>
+<% end %>
