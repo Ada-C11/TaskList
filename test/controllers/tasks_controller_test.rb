@@ -181,6 +181,24 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
+    it "updates the 'completed' attribute of a task" do
+      #Arrange
+      task = Task.create!(name: "test task!", completed: true)
+
+      #Assumption
+      expect(task.completed).must_equal true
+
+      #Act
+      patch toggle_complete_task_path(task.id)
+
+      updated_task = Task.find_by(id: task.id)
+
+      #Assert
+      expect(updated_task.completed).must_equal false
+    end
+
+    it "returns a 404 if the task doesn't exist" do
+    end
     # Your tests go here
   end
 end

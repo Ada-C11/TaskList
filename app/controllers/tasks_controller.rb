@@ -69,4 +69,19 @@ class TasksController < ApplicationController
 
     redirect_to tasks_path
   end
+
+  def toggle_complete
+    task_id = params[:id].to_i
+    @task = Task.find_by(id: task_id)
+
+    if !@task.completed
+      @task.completed = true
+    else
+      @task.completed = false
+    end
+
+    @task.save
+
+    redirect_to tasks_path
+  end
 end

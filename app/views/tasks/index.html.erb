@@ -2,8 +2,9 @@
 <ul>
     <% @tasks.each do |task| %>
       <li>
-          <%= task.name %>: <%= task.description%> ||  Due <%= task.completion_date %>
+          <%= task.name %>: <%= task.description%> ||  Due <%= task.completion_date %> || <%= link_to task.completed ? "Unmark Complete" : "Mark Complete", toggle_complete_task_path(task), method: :patch %>
           || <%= link_to "Edit", edit_task_path(task)%>
       </li>
     <% end %>
 </ul>
+
