@@ -2,7 +2,7 @@
 
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    @tasks = Task.all.sort_by(&:id)
     @urgent_task = @tasks.min_by(&:completion_date)
   end
 
@@ -17,7 +17,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(book_params)
+    @task = Task.new(task_params)
+    @task.is_complete = false
     if @task.save
       redirect_to task_path(@task.id)
     else
@@ -36,7 +37,7 @@ class TasksController < ApplicationController
     task_id = params[:id]
     task = Task.find(task_id)
 
-    task.update(book_params)
+    task.update(task_params)
     redirect_to task_path(task.id)
   end
 
@@ -57,20 +58,26 @@ class TasksController < ApplicationController
   def toggle
     task_id = params[:id]
     task = Task.find(task_id)
-    task.update(
-      is_complete: !task.is_complete
-    )
+    if task.is_complete
+      task.update(
+        is_complete: !task.is_complete
+      )
+    else # only updated when incomplete => complete
+      task.update(
+        is_complete: !task.is_complete,
+        completion_date: DateTime.now
+      )
+    end
     redirect_to tasks_path
   end
 
   private
 
-  def book_params
+  def task_params
     params.require(:task).permit(
       :name,
       :description,
       :completion_date
-      # :is_complete
     )
   end
 end
