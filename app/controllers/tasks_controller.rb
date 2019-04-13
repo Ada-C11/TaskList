@@ -11,11 +11,6 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    # task = Task.new(
-    #   name: params["task"]["name"],
-    #   description: params["task"]["description"],
-    #   completion_date: params["task"]["completion_date"],
-    # )
 
     @task.save
 
@@ -50,11 +45,6 @@ class TasksController < ApplicationController
 
     @task.update(task_params)
 
-    # @task.update(
-    #   name: params["task"]["name"],
-    #   description: params["task"]["description"],
-    #   completion_date: params["task"]["completion_date"],
-    # )
     redirect_to task_path(@task)
   end
 
