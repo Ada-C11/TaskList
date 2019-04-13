@@ -1,8 +1,6 @@
 require "test_helper"
 
 describe TasksController do
-  # Note to students:  Your Task model **may** be different and
-  #   you may need to modify this.
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
                 completion_date: false
@@ -61,13 +59,11 @@ describe TasksController do
     it "can create a new task" do
 
       # Arrange
-      # Note to students:  Your Task model **may** be different and
-      #   you may need to modify this.
       task_hash = {
         task: {
           name: "new task",
           description: "new task description",
-          completion_date: "false",
+          completion_date: "new task due date",
         },
       }
 
@@ -107,8 +103,6 @@ describe TasksController do
 
   # Uncomment and complete these tests for Wave 3
   describe "update" do
-    # Note:  If there was a way to fail to save the changes to a task, that would be a great
-    #        thing to test.
     it "can update an existing task" do
       #Arrange
       task = Task.create!(
