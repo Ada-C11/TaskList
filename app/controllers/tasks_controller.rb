@@ -9,6 +9,7 @@ class TasksController < ApplicationController
 
     unless @task
       redirect_to tasks_path
+      return
     end
   end
 
@@ -51,6 +52,19 @@ class TasksController < ApplicationController
     }
 
     task.update(task_params)
+
+    redirect_to tasks_path
+  end
+
+  def destroy
+    task = Task.find_by(id: params[:id])
+
+    unless task
+      head :not_found
+      return
+    end
+
+    task.destroy
 
     redirect_to tasks_path
   end

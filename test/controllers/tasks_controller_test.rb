@@ -119,15 +119,27 @@ describe TasksController do
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      task_id = 1111111111
+      new_task_params = {task: {name: "new new",
+                                description: "More Important"}}
+
+      patch task_path(task_id), params: new_task_params
+
+      must_respond_with :redirect
     end
   end
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "removes the record of the task from the database" do
+      task = Task.create!(name: "new", description: "task")
 
+      expect {
+        delete task_path(task.id)
+      }.must_change "Task.count", -1
+
+      must_respond_with :redirect
+    end
   end
 
   # Complete for Wave 4
