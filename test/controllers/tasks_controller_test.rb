@@ -177,8 +177,8 @@ describe TasksController do
   describe "toggle_complete" do
     it "can mark an incomplete task complete without changing anything else" do
       # Arrange
-      Task.update_all(completion_date: nil)
       test_task = Task.last
+      test_task.update completion_date: nil
       initial_attributes = test_task.attributes.clone
       task_hash = {
         task: {
@@ -191,12 +191,12 @@ describe TasksController do
         patch toggle_complete_task_path(test_task.id), params: task_hash
       }.wont_change "Task.count"
 
-      updated_task = Task.find_by(id: initial_attributes["id"])
+      test_task.reload
 
       # Completion date should change, but nothing else should.
-      expect(updated_task.name).must_equal initial_attributes["name"]
-      expect(updated_task.description).must_equal initial_attributes["description"]
-      expect(updated_task.completion_date).must_equal task_hash[:task][:completion_date]
+      expect(test_task.name).must_equal initial_attributes["name"]
+      expect(test_task.description).must_equal initial_attributes["description"]
+      expect(test_task.completion_date).must_equal task_hash[:task][:completion_date]
 
       must_respond_with :redirect
       must_redirect_to root_path
@@ -217,13 +217,13 @@ describe TasksController do
         patch toggle_complete_task_path(test_task.id), params: task_hash
       }.wont_change "Task.count"
 
-      updated_task = Task.find_by(id: initial_attributes["id"])
+      test_task.reload
 
       # Completion date should change, but nothing else should.
-      expect(updated_task.name).must_equal initial_attributes["name"]
-      expect(updated_task.description).must_equal initial_attributes["description"]
-      expect(updated_task.completion_date).must_equal task_hash[:task][:completion_date]
-      expect(updated_task.completion_date).must_be_nil
+      expect(test_task.name).must_equal initial_attributes["name"]
+      expect(test_task.description).must_equal initial_attributes["description"]
+      expect(test_task.completion_date).must_equal task_hash[:task][:completion_date]
+      expect(test_task.completion_date).must_be_nil
 
       must_respond_with :redirect
       must_redirect_to root_path
