@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  before_action :set_task, except: :create
+
   def index
     @tasks = Task.all
   end
@@ -55,19 +57,23 @@ class TasksController < ApplicationController
 
     redirect_to tasks_path
   end
-  
-  def mark_complete
-     @task = Task.find_by(id: params[:id])
+
+  def complete
+    @task = Task.find_by(id: params[:id])
+
+    @task.update_attribute(:completed_at, Time.now)
     # redirect_to task_path
 
-    @task.update(task_params)
-
-    redirect_to tasks_path(@task)
+    redirect_to task_path(@task.id), notice: "Task marked completed"
   end
 
   private
 
   def task_params
-    return params.require(:task).permit(:name, :completion_date, :description, :completed)
+    return params.permit(:name, :completion_date, :description, :completed_at)
+  end
+
+  def set_task
+    @task = Task.find_by(id: params[:id])
   end
 end

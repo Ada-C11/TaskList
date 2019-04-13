@@ -1,17 +1,19 @@
-<h1>Tasks</h1>
-
   <ul class="tasks-list">
     <% @tasks.each do |task| %>
       <li>
         <ul class="task-elements">
           <li class="task-name">
-            <strong><%= task.name %></strong> 
+            <% if task.completed_at %>
+              <strong><strike><%= task.name %></strike></strong> 
+            <% else %>  
+              <strong><%= task.name %></strong> 
+            <% end %>
           </li>
           <li class="due-date">
             Due by: <%= task.completion_date %>
           </li>
           <li class="task-actions">
-            <%= link_to "Mark Complete", edit_task_path(task.id) %> |
+            <%= link_to "Mark Complete", complete_path(task.id), method: :patch %> |
             <%= link_to "View details", task_path(task.id) %> |
             <%= link_to "Edit", edit_task_path(task.id) %> |
             <%= link_to "Delete", task_path(task.id), method: :delete, data: { confirm: "Are you very sure you want to delete?" } %>
@@ -21,8 +23,3 @@
     <% end %>
   </ul>
 
-  <ul class="user-actions">
-    <li>
-      <%= link_to "Add a task", new_task_path %>
-    </li>
-  </ul>
