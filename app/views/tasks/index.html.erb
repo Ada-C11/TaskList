@@ -1,27 +1,28 @@
 <section class=index>
-  <h1>Your Tasks</h1>
-
-  <ul>
+  <h1>Task List</h1>
+  <div class="all_tasks">
+  <h2>My Tasks</h2>
+  <ol>
   <% @tasks.each do |task| %>
-    <li>
-    <a href="/tasks/<%=task.id%>">
-      Task: <%= task.task_name %></a>
-     
-      <% if task.completed == false %>
-          Not complete 
-          <%= button_to "Mark complete", { action: "toggle_complete", id: task.id }, method: :patch %>
-        <% else %>
-        Complete
-          <%= button_to "Unmark complete", { action: "toggle_complete", id: task.id }, method: :patch %>
-        <% end %>
+    <% if task.completed == false%>
+      <li>
+        <a href="/tasks/<%=task.id%>">
+        <%= task.task_name%></a>
+        <%= button_to "Mark complete", { action: "toggle_complete", id: task.id }, method: :patch %>
+      </li>
+      <% else %>
+      <li class="strike-through">
+        <a href="/tasks/<%=task.id%>">
+        <%= task.task_name%></a>
+        <%= button_to "Unmark complete", { action: "toggle_complete", id: task.id }, method: :patch %>
+      <% end %>
     </li>
   <% end %>
-  </ul>
-  <footer>
-    <ul>
-      <li><%= link_to "Create Task", new_task_path %></li>
+  </ol>
+  </div>
+    <ul class="side_buttons">
+      <li><%= link_to "Add Task", new_task_path %></li>
       <li><%= link_to "All Tasks", tasks_path %></li>
     </ul>
-  </footer>
   </section>
 
