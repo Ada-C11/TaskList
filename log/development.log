@@ -5589,3 +5589,116 @@ Processing by TasksController#new as HTML
 Completed 200 OK in 20ms (Views: 17.2ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/tasks/new" for ::1 at 2019-04-12 19:16:37 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (1.1ms)
+  Rendered tasks/new.html.erb within layouts/application (3.0ms)
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::UrlGenerationError - No route matches {:action=>"show", :controller=>"tasks"}, missing required keys: [:id]:
+  app/views/layouts/application.html.erb:21:in `_app_views_layouts_application_html_erb__915052644024017786_70140529183080'
+
+Started POST "/__better_errors/0eb56ece0257940a/variables" for ::1 at 2019-04-12 19:16:37 -0700
+Started GET "/" for ::1 at 2019-04-12 19:16:42 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (3.1ms)
+Completed 500 Internal Server Error in 36ms (ActiveRecord: 0.3ms)
+
+
+
+ActionController::UrlGenerationError - No route matches {:action=>"show", :controller=>"tasks"}, missing required keys: [:id]:
+  app/views/layouts/application.html.erb:21:in `_app_views_layouts_application_html_erb__915052644024017786_70140483707020'
+
+Started POST "/__better_errors/5631726cc5a3bdd3/variables" for ::1 at 2019-04-12 19:16:43 -0700
+Started GET "/" for ::1 at 2019-04-12 19:17:24 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 22ms (Views: 18.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for ::1 at 2019-04-12 19:17:25 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 29ms (Views: 25.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tasks/3/edit" for ::1 at 2019-04-12 19:17:27 -0700
+Processing by TasksController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mTask Load (2.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:37
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (2.1ms)
+  Rendered tasks/edit.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 31ms (Views: 25.3ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/" for ::1 at 2019-04-12 19:17:28 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 26ms (Views: 22.2ms | ActiveRecord: 0.3ms)
+
+
+Started PATCH "/tasks/5/toggle_complete" for ::1 at 2019-04-12 19:17:37 -0700
+Processing by TasksController#toggle_complete as HTML
+  Parameters: {"authenticity_token"=>"RvwzVHTnBW5L/WisMZQwFfEB53nf797evT7kZpDbSeN1NTVIutPMKMwfqjg9i5ILXyJMggVZLlrggt/4dHvkDA==", "id"=>"5"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:78
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:91
+  [1m[36mTask Update (0.6ms)[0m  [1m[33mUPDATE "tasks" SET "completed" = $1, "updated_at" = $2 WHERE "tasks"."id" = $3[0m  [["completed", true], ["updated_at", "2019-04-13 02:17:37.594053"], ["id", 5]]
+  ↳ app/controllers/tasks_controller.rb:91
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:91
+Redirected to http://localhost:3000/tasks
+Completed 302 Found in 7ms (ActiveRecord: 2.2ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-12 19:17:37 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 17ms (Views: 15.6ms | ActiveRecord: 0.3ms)
+
+
+Started PATCH "/tasks/4/toggle_complete" for ::1 at 2019-04-12 19:17:39 -0700
+Processing by TasksController#toggle_complete as HTML
+  Parameters: {"authenticity_token"=>"nlsPqqsVn39k/mVziCxszWj+4V5W0ab+F2+O8iISmDOtkgm2ZSFWOeMcp+eEM87Txt1KpYxnVnpK07VsxrI13A==", "id"=>"4"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:78
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:91
+  [1m[36mTask Update (0.4ms)[0m  [1m[33mUPDATE "tasks" SET "completed" = $1, "updated_at" = $2 WHERE "tasks"."id" = $3[0m  [["completed", true], ["updated_at", "2019-04-13 02:17:39.133365"], ["id", 4]]
+  ↳ app/controllers/tasks_controller.rb:91
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:91
+Redirected to http://localhost:3000/tasks
+Completed 302 Found in 7ms (ActiveRecord: 2.7ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-12 19:17:39 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:3
+  Rendered tasks/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 17ms (Views: 15.2ms | ActiveRecord: 0.3ms)
+
+
