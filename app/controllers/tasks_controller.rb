@@ -18,7 +18,7 @@ class TasksController < ApplicationController
 
     task.save
 
-    redirect_to task_path(task.id)
+    redirect_to tasks_path
   end
 
   def show

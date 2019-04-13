@@ -208,6 +208,5 @@ describe TasksController do
       #Assert
       must_respond_with :not_found
     end
-    # Your tests go here
   end
 end
