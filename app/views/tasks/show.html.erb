@@ -6,18 +6,15 @@
     <h2>
       <%= @task.name %>
     </h2>
-
     <p>
       Description: <%= @task.description %>
     </p>
-
     <% if !@task.completed %>
         <%= button_to "Mark complete", { action: "toggle_complete", id: @task.id }, method: :patch %>
     <% else %>
         <%= button_to "Unmark complete", { action: "toggle_complete", id: @task.id }, method: :patch %>
     <% end %>
   </div>
-
   <%= link_to "Edit this task", edit_task_path, class: "link bottom-link" %>
 
   <%= link_to 'Delete this task', task_path(@task.id), method: :delete, data: {confirm: "Are you sure you want to delete this task?"}, class: "link bottom-link" %>

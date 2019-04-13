@@ -1,8 +1,6 @@
 require "test_helper"
 
 describe TasksController do
-  # Note to students:  Your Task model **may** be different and
-  #   you may need to modify this.
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
                 completed: false
@@ -27,7 +25,7 @@ describe TasksController do
     end
   end
 
-  # Unskip these tests for Wave 2
+  # Wave 2
   describe "show" do
     it "can get a valid task" do
       # Act
@@ -48,7 +46,6 @@ describe TasksController do
 
   describe "new" do
     it "can get the new task page" do
-
       # Act
       get new_task_path
 
@@ -81,11 +78,10 @@ describe TasksController do
     end
   end
 
-  # Unskip and complete these tests for Wave 3
+  # Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
       get edit_task_path(task.id)
-
       # Assert
       must_respond_with :success
     end
@@ -97,7 +93,6 @@ describe TasksController do
     end
   end
 
-  # Uncomment and complete these tests for Wave 3
   describe "update" do
     it "can update an existing task" do
       task_change = {
@@ -126,7 +121,7 @@ describe TasksController do
     end
   end
 
-  # Complete these tests for Wave 4
+  # Wave 4
   describe "destroy" do
     it "returns a 404 error if a task is not found" do
       invalid_task_id = -1
@@ -150,7 +145,6 @@ describe TasksController do
     end
   end
 
-  # Complete for Wave 4
   describe "toggle_complete" do
     it "changes the completion status of a task" do
       patch toggle_complete_path(task.id)
