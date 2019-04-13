@@ -4,15 +4,27 @@
     <th>Task</th> 
     <th>Description</th>
     <th>Due Date</th>
+    <th>Completed?</th>
     <th>Action</th>
   </tr>
   <tr>
     <% @tasks.each do |task| %>
     <td> <%= link_to task.name, task_path(task) %> </td>
     <td> <%= task.description %> </td>
-    <td> <%= task.completion_date %> </td>
-    <td> <%= link_to "EDIT", edit_task_path(id: task.id) %> 
-         <%= link_to " | DELETE", task_path(task), method: :delete, data: { confirm: "You sure?" } %>
+    <td> <%= task.due_date %> </td>
+    <td> <% if task.date_completed != nil%>
+         <%= task.date_completed %>
+         <% else %>
+         <%= "Not yet" %>
+         <% end %>
+    </td>
+    <td> <%= link_to "EDIT", edit_task_path(id: task.id) %> |  
+         <%= link_to "DELETE", task_path(task), method: :delete, data: { confirm: "You sure?" } %> |
+         <% if task.completed %>
+         <%= link_to "UNMARK AS COMPLETE", complete_task_path(task), method: :post %>
+         <% else %>
+         <%= link_to "MARK AS COMPLETE", complete_task_path(task), method: :post %>
+         <% end %>
     </td>
   </tr>
   <% end %>
@@ -20,13 +32,3 @@
     <td>  <%= link_to "Add a NEW Task", new_task_path %> </td>
   </tr>
 </table>
-
-
-
-<%#
-<ul class="task-list">
-    <li> Task || Description || Due Date</li>
-  <% @tasks.each do |task| %>
- <%#   <li><%= task.name %> <%#<%= task.description %> <%#<%= task.completion_date %><%#</li>
- <%# <% end %>
-<%#</ul> %>
