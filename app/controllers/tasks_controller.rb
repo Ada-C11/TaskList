@@ -4,7 +4,8 @@ class TasksController < ApplicationController
   end
 
   def show
-    task_id = params[:id].to_i
+    task_id = params[:id]
+
     @task = Task.find_by(id: task_id)
 
     unless @task
@@ -18,10 +19,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new
-
-    @task.name = params["task"]["name"]
-    @task.description = params["task"]["description"]
+    @task = Task.new(task_params)
 
     @task.save
 
@@ -29,7 +27,8 @@ class TasksController < ApplicationController
   end
 
   def edit
-    task_id = params[:id].to_i
+    task_id = params[:id]
+
     @task = Task.find_by(id: task_id)
 
     unless @task
@@ -45,11 +44,6 @@ class TasksController < ApplicationController
       redirect_to tasks_path
       return
     end
-
-    task_params = {
-      name: params[:task][:name],
-      description: params[:task][:description],
-    }
 
     task.update(task_params)
 
@@ -81,5 +75,11 @@ class TasksController < ApplicationController
     task.save
 
     redirect_to tasks_path
+  end
+
+  private
+
+  def task_params
+    return params.require(:task).permit(:name, :description)
   end
 end
