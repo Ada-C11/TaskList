@@ -2,18 +2,21 @@
 <ul>
 <% @tasks.each do |task| %>  
   <li>
-    <a href="/tasks/<%= task.id %>" >
+    <a class="link" id="task_link" href="/tasks/<%= task.id %>" >
     <%= task.name %>
     </a>
     <br>
-    <%= link_to "Delete Task", task_path(task.id), method: :delete %>
-    <%= link_to "Edit Task", edit_task_path(task.id) %>
+    <%= link_to "Delete Task", task_path(task.id), method: :delete, class: "link" %>
+    |  
+    <%= link_to "Edit Task", edit_task_path(task.id), class: "link" %>
+    |
     <% if task.completed == false %>
-      <%= link_to "Mark Complete", mark_complete_path(task.id), method: :patch %>
+      <%= link_to "Mark Complete", mark_complete_path(task.id), method: :patch, class: "link" %>
     <% else %>
-      <%= link_to "Unmark Complete", mark_complete_path(task.id), method: :patch %>
+      <%= link_to "Unmark Complete", mark_complete_path(task.id), method: :patch, class: "link" %>
     <% end %>
   </li>
+  <br>
 <% end %>
 </ul>
 
