@@ -1,41 +1,43 @@
 <link rel="stylesheet" href="../assets/stylesheets/normalize.css">
 
 <h2>
-  <%= @task.name %>
+  <span><%= link_to "⟵", tasks_path %></span>
+  <span><%= @task.name %></span>
 </h2>
 
-<p>
-  <%= @task.description %>
-</p>
+<div>
+  <p class="description">
+    <%= @task.description %>
+  </p>
 
-<p>
-  <% if !@task.due_date.nil? %>
-    <%= @task.due_date %>
-  <% end %>
-</p>
+  <p class="due-date">
+    <% if !@task.due_date.nil? %>
+      <%= "Due on: #{@task.due_date}" %>
+    <% end %>
+  </p>
 
-<p>
-  <% if !@task.completed_date.nil? %>
-    <%= @task.completed_date %>
-  <% end %>
-</p>
+  <p class="completed-date">
+    <% if !@task.completed_date.nil? %>
+      <%= "Completed on: #{@task.completed_date}" %>
+    <% else %>
+      <%= "Completed on: N/A" %>
+    <% end %>
+  </p>
 
-<p>
-  <% if @task.completed %>
-    <%= "Complete" %>
-  <% else %>
-    <%= "Incomplete" %>
-  <% end %>
-</p>
+  <p class="status">
+    <% if @task.completed %>
+      <%= "Status: Complete" %>
+    <% else %>
+      <%= "Status: Incomplete" %>
+    <% end %>
+  </p>
+</div>
 
 <ul class="bottom-menu">
   <li class="bottom-menu-item">
-    <%= link_to "Edit", edit_task_path(@task.id) %>
+    <%= button_to "Edit", edit_task_path(@task.id) %>
   </li>
   <li class="bottom-menu-item">
-    <%= link_to "Delete", task_path(@task.id), method: :delete, data: { confirm: "Are you sure?" } %>
-  </li>
-  <li class="bottom-menu-item">
-    <%= link_to "Back to task list", tasks_path %>
+    <%= button_to "Delete", task_path(@task.id), method: :delete, data: { confirm: "Are you sure?" } %>
   </li>
 </ul>

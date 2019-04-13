@@ -51,7 +51,7 @@ class TasksController < ApplicationController
     task = Task.find_by(id: params[:id])
     if !task.completed
       task.update(
-        completed_date: DateTime.now.in_time_zone("Central Time (US & Canada)"),
+        completed_date: DateTime.now,
         completed: true,
       )
     else
