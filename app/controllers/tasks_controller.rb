@@ -18,7 +18,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+    @task = Task.new(task_params)
   end
 
   def create
@@ -62,6 +62,20 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
-  def toggle_complete
+  # def complete
+  #   @task = Task.find_by(id: params[:id])
+  #   unless @task
+  #     redirect_to tasks_path
+  #     return
+  #   end
+  #   @task.completed = !@task.completed
+  #   @task.save
+  #   redirect_to root_path
+  # end
+
+  private
+
+  def task_params
+    return params.require(:task).permit(:name, :description, :completion_date)
   end
 end
