@@ -7,19 +7,24 @@
     <li class= "list-item">
     <h3>Task Type:  <%= link_to task.name, task_path(task.id) %>  </h3> 
 
-    <p> Completion Date: <%= task.completion_date %> </p>
+     <% if task.completed? %>
+        <p> 
+          <strike> Completion Date:   <%= task.completion_date %> </strike>
+         </p>
+
+         <p class="complete"> <%= link_to "Mark Incomplete", complete_task_path(task.id), method: :patch %> </p>
+
+     <% else %> 
+         Completion Date: <%= task.completion_date %> 
+
+         <p class="complete"> <%= link_to "Mark Completed", complete_task_path(task.id), method: :patch %> </p>
+         
+     <% end %>
 
     <p> <%= link_to "Edit", edit_task_path(task.id)%> </p>
 
     <p> <%= link_to "Delete", task_path(task.id), method: :delete %> </p>
-    <p class="complete"> <%= link_to "Mark Completed", complete_task_path(task.id), method: :patch %> </p>
 
-    <% if task.completed? %>
-         <p> 
-           <strong>Task Completed!</strong>
-         </p>
-
-    <% end %>
     </li>
   <% end %>
   

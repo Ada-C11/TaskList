@@ -74,10 +74,8 @@ class TasksController < ApplicationController
     task = Task.find_by(id: params[:id])
     if task[:completed] == false
       task[:completed] = true
-      task.completion_date = "Task Completed!"
     else
       task[:completed] = false
-      task[:completion_date] = nil
     end
     task.save
     redirect_to tasks_path
