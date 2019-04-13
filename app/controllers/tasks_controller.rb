@@ -29,8 +29,7 @@ class TasksController < ApplicationController
     end
   end
 
-  def edit #how can i use task_params in this?
-    # task_id = params[:id].to_i
+  def edit
     @task = Task.find_by(id: params[:id])
     if @task.nil?
       redirect_to tasks_path
@@ -38,7 +37,6 @@ class TasksController < ApplicationController
   end
 
   def update
-    # task_id = params[:id].to_i
     task = Task.find_by(id: params[:id])
 
     updated_successfully = task.update(task_params)
