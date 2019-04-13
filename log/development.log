@@ -6779,3 +6779,55 @@ Processing by TasksController#show as HTML
 Completed 200 OK in 131ms (Views: 126.3ms | ActiveRecord: 0.3ms)
 
 
+Started GET "/tasks" for ::1 at 2019-04-12 17:00:17 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (6.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:13
+  Rendered tasks/index.html.erb within layouts/application (178.1ms)
+Completed 200 OK in 991ms (Views: 885.2ms | ActiveRecord: 6.5ms)
+
+
+Started PATCH "/task/5/toggle_complete?task%5Bcompletion_date%5D=" for ::1 at 2019-04-12 17:00:23 -0700
+Processing by TasksController#toggle_complete as HTML
+  Parameters: {"authenticity_token"=>"Zf9z21RV87nGDNdnWB1LPJ84jz8fg7UJOTPRBQvC2Upab/koPXstBEn4auVI+m8U190tueRJ89Eeu+0etawwKA==", "task"=>{"completion_date"=>""}, "id"=>"5"}
+  [1m[36mTask Load (3.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:62
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:65
+  [1m[36mTask Update (44.9ms)[0m  [1m[33mUPDATE "tasks" SET "completion_date" = $1, "updated_at" = $2 WHERE "tasks"."id" = $3[0m  [["completion_date", nil], ["updated_at", "2019-04-13 00:00:23.546307"], ["id", 5]]
+  ↳ app/controllers/tasks_controller.rb:65
+  [1m[35m (35.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:65
+Redirected to http://localhost:3000/
+Completed 302 Found in 312ms (ActiveRecord: 88.9ms)
+
+
+Started GET "/" for ::1 at 2019-04-12 17:00:23 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.9ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:13
+  Rendered tasks/index.html.erb within layouts/application (42.5ms)
+Completed 200 OK in 318ms (Views: 296.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/tasks/5/edit" for ::1 at 2019-04-12 17:56:09 -0700
+Processing by TasksController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mTask Load (26.6ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:28
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (125.1ms)
+  Rendered tasks/edit.html.erb within layouts/application (169.0ms)
+Completed 200 OK in 1692ms (Views: 1526.3ms | ActiveRecord: 29.9ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-04-12 17:56:17 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (24.9ms)
+  Rendered tasks/new.html.erb within layouts/application (45.5ms)
+Completed 200 OK in 593ms (Views: 506.0ms | ActiveRecord: 0.0ms)
+
+
