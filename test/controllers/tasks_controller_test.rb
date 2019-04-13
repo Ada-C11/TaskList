@@ -140,15 +140,37 @@ describe TasksController do
 
       must_respond_with :redirect
     end
+
+    it "will respond with 404 if no matching task is found" do
+      task_id = 1444444
+
+      patch complete_task_path(task_id)
+
+      must_respond_with :not_found
+    end
   end
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Create task
+    it "will mark a task complete" do
+      # Create task
+      task = Task.new(name: "Today's task", description: "I will be complete")
+      task.save
+      # Mark task complete
+      patch complete_task_path(task.id)
 
-    # Mark task complete
+      must_respond_with :redirect
 
-    # Expect it will have a completion date
-    # Must respond with redirect
+      task.reload
+      expect(task.completion_date).wont_be_nil
+    end
+
+    it "returns 404 error if no task is found" do
+      task_id = 1444444
+
+      patch complete_task_path(task_id)
+
+      must_respond_with :not_found
+    end
   end
 end
