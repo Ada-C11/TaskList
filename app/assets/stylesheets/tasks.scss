@@ -1,0 +1,149 @@
+// Place all the styles related to the Tasks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Get Google fonts
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Open+Sans+Condensed:300');
+
+$header-font-stack: 'Indie Flower', cursive;
+$paragraph-font-stack: 'Open Sans Condensed', sans-serif;
+$text-color:#023366;
+$link-color:#390040;
+$highlight-color: #FF1053;
+$background-color: #ffffff;
+$post-it-colors: #fff740 #ff7eb9  #7afcff #feff9c #ff65a3;
+
+
+
+main{
+    text-align: center;
+    color:$text-color;
+    background: $background-color;
+    
+}
+
+::selection {
+    background-color: lighten($highlight-color, 40%);
+}
+
+h1, h2, h3 {
+    font-family: $header-font-stack;
+
+    a {
+        font-family: $header-font-stack;  
+    }
+}
+
+
+p, a, label {
+    font-family: $paragraph-font-stack;
+    text-decoration: none;
+    
+
+}
+
+a {
+    color: $link-color;
+}
+
+a:hover {
+    color: $highlight-color;
+}
+
+ul {
+    list-style-type: none;
+    padding:0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+
+
+    li {
+        box-shadow: 2px 2px 2px 2px #888888;
+        margin:20px;
+        padding:20px;      
+    }
+
+
+    li::before {
+        content:"📍"
+    }
+    li:hover {
+        box-shadow: 4px 4px 4px 4px #888888;
+    }
+
+
+    @for $i from 1 through length($post-it-colors) {
+        li:nth-child(#{length($post-it-colors)}n+#{$i}) {
+            background: nth($post-it-colors, $i % (length($post-it-colors)+1));
+        }
+    }
+}
+
+.button {
+    font-size:30px;
+    padding:10px;
+    border: 1px solid $link-color;
+    background-color: lighten($highlight-color, 40%);
+    box-shadow: 2px 2px 2px 2px #888888;
+    font-family: $paragraph-font-stack;
+}
+
+.button:hover {
+    border-color: $highlight-color;
+    box-shadow: inset 2px 2px 2px 2px #888888;
+    color:$highlight-color;;
+}
+
+.task {
+    display: inline-block;
+    background: nth($post-it-colors, random(length($post-it-colors)));
+    box-shadow: 2px 2px 2px 2px #888888;
+    margin:20px;
+    padding:20px;      
+}
+
+.back-link {
+    display: block;
+}
+
+#task-board {
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+}
+
+#to-do {
+    grid-column: 1/2;
+}
+
+#done {
+    grid-column: 2/3;
+}
+
+form {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    input, textarea, label,  {
+        margin:20px;
+        width:200px;
+    }
+
+    input[type="submit"] {
+        margin-top:20px;
+        margin-bottom:20px;
+    }
+
+    input[type="text"], {
+        padding:10px;
+    }
+
+    textarea {
+        padding:20px;
+    }
+
+    label {
+        font-size:24px;
+    }
+}

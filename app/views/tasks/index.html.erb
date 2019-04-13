@@ -1,0 +1,53 @@
+<p id="notice">
+<%= flash[:success] if flash[:success] %>
+<%= flash[:error] if flash[:error] %>
+</p>
+
+<h1>Tasks for Today:</h1>
+<%= link_to 'Add another task!', new_task_path, class:"button"%>
+
+<div id="task-board">
+    <div id="to-do">
+        <h1>To Do</h1>
+        <ul>
+            <% incomplete_tasks = @tasks.select{|task| !task.completion_date}%>
+            <p>
+                <%= "No more tasks! Enjoy your lazy day (=" if (incomplete_tasks.length == 0)%>
+            </p>
+            <% incomplete_tasks.each do |task| %>
+            <li>
+                <h2><%= link_to task.name, task_path(task.id) %></h2> 
+                <h3><%= task.description %></h3> 
+                <h3><strong>Completed? </strong><%= "#{task.completion_date.nil? ? "Not yet..." : "Yup!" }"%></h3> 
+                <p>
+                    <%= link_to "Edit Task", edit_task_path(task.id) %>
+                     | <%= link_to "Mark as Complete", toggle_complete_task_path(task.id, task: {completion_date: DateTime.now.to_date }), method: :patch %> | 
+                    <%= link_to "Delete Task", task_path(task.id), method: :delete, data: { confirm: "Are you sure?" } %>
+                </p>
+            </li>  
+            <% end %> 
+        </ul>
+    </div>
+
+    <div id="done"">
+        <h1>Done! :) </h1> 
+        <ul>
+            <% completed_tasks = @tasks.select{|task| task.completion_date}%>
+            <p>
+                <%= "No completed tasks. Let's get to work!" if (completed_tasks.length == 0)%>
+            </p>
+            <% completed_tasks.each do |task| %>
+            <li>
+                <h2><%= link_to task.name, task_path(task.id) %></h2> 
+                <h3><%= task.description %></h3> 
+                <h3><strong>Completed? </strong><%= "#{task.completion_date.nil? ? "Not yet..." : "Yup!" }"%></h3> 
+                <p>
+                    <%= link_to "Edit Task", edit_task_path(task.id) %>
+                     | <%= link_to "Mark as Incomplete", toggle_complete_task_path(task.id, task: {completion_date: nil }), method: :patch %> | 
+                    <%= link_to "Delete Task", task_path(task.id), method: :delete, data: { confirm: "Are you sure?" } %>
+                </p>
+            </li>  
+            <% end %>
+        </ul>
+    </div>
+</div>
