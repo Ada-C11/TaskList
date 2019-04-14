@@ -1,0 +1,34 @@
+<div class="task-display">
+    <% @tasks.each do |task|%>
+      <ul>
+        <li>
+          <div class="sticky">
+            <div class="note">
+              <% if task.completed %>
+                <strike> 
+                <h2>To do: <%= task.name %></h2>
+                </strike>
+              <% else %>
+                <h2> To do: <%= task.name %> </h2>
+              <% end %>
+              <br>
+              <%= link_to "See more", task_path(task) %>
+            </div>
+            <div class="edit-links">
+              <%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Press Ok to continue."} %>
+              <% if !task.completed %>
+                <%= link_to "Mark Complete", toggle_complete_path(task), method: :patch %>
+              <% else %>
+                <%= link_to "Unmark Complete", toggle_complete_path(task), method: :patch %>
+              <% end %>
+            </div>
+        </div>
+        </li>
+      </ul>
+    <% end %>
+  </ul>
+</div>
+
+
+
+
