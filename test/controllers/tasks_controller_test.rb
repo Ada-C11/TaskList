@@ -99,11 +99,16 @@ describe TasksController do
 
   describe "update" do
     it "can update an existing task" do
-      task_hash = {
-        task: { description: "Go to the store"}
-      }
+      new_task = Task.create!(name: 'Household', description: 'Mop the floor', completion_date: "April 15th")
       
-      patch task_path(task.id), params: task_hash
+      new_name = { 
+        task: { 
+          name: 'Changed name', 
+          } 
+        }
+
+      patch task_path(new_task.id), params: new_name
+      new_task.reload
     end
 
 
