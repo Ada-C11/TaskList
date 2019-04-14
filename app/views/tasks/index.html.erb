@@ -5,17 +5,11 @@
   <ol>
   <% @tasks.each do |task| %>
     <li class= "list-item">
-    <h3>Task Type:  <%= link_to task.name, task_path(task.id) %>  </h3> 
-
-     <% if task.completed? %>
-        <p> 
-          Completion Date:   <%= task.completion_date %>
-        </p>
-        
+     <% if task.completed %>
+        <strike><h3> Task Type:  <%= link_to task.name, task_path(task.id) %> </h3></strike>
         <p class="incomplete"> <%= link_to "Mark Incomplete ", complete_task_path(task.id), method: :patch %> </p>
      <% else %> 
-         Completion Date: <%= task.completion_date %> 
-
+         <h3> Task Type:  <%= link_to task.name, task_path(task.id) %>  </h3> 
          <p class="complete"> <%= link_to "Mark Completed ", complete_task_path(task.id), method: :patch %> </p>
      <% end %>
 

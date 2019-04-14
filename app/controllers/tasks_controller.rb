@@ -62,14 +62,16 @@ class TasksController < ApplicationController
 
   def complete
     task = Task.find_by(id: params[:id])
-    if task[:completed] == false
-      task[:completed] = true
-      task.completion_date = DateTime.now
+    if task.completed
+      task.update(
+        completed: !task.completed
+      )
     else
-      task[:completed] = false
-      task[:completion_date] =  (DateTime.now).to_s
+      task.update(
+        completed: !task.completed,
+        completion_date: DateTime.now
+      )
     end
-
     task.save
     redirect_to tasks_path
   end
