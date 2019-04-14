@@ -1,8 +1,6 @@
 require "test_helper"
 
 describe TasksController do
-  # Note to students:  Your Task model **may** be different and
-  #   you may need to modify this.
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test"
   }
@@ -26,7 +24,7 @@ describe TasksController do
     end
   end
 
-  # Unskip these tests for Wave 2
+  # Tests for Wave 2
   describe "show" do
     it "can get a valid task" do
       valid_task_id = task.id
@@ -83,18 +81,9 @@ describe TasksController do
       must_respond_with :redirect
       must_redirect_to task_path(new_task.id)
     end
-
-    # it "will not create a task with invalid params" do
-    #   task_hash = {}
-    #   expect {
-    #     post tasks_path, params: task_hash
-    #   }.wont_change "task.count"
-
-    #   must_respond_with :bad_request
-    # end
   end
 
-  # Unskip and complete these tests for Wave 3
+  # Tests for Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
       valid_task_id = task.id
@@ -179,8 +168,12 @@ describe TasksController do
   describe "toggle_complete" do
     it "changes task's completion status from true to false" do
       #Arrange
+      patch mark_complete_path(task.id)
       #Act
+      task.reload
       #Assert
+      expect(task.completed).must_equal true
+      must_redirect_to tasks_path
+    end
   end
-end
 end
