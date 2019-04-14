@@ -4,23 +4,24 @@
     <title>TaskList</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Reenie+Beanie');
+    </style>
   </head>
 
   <body>
     <header>  
-    <h1> Task List App! </h1>
-      <nav>
-        <ul>
-          <li><%= link_to(image_tag("tasks.jpg", alt: "task list", class: "task-icon"), root_path)%></li>
-          <li><button type="button" class="add-button"> <%= link_to "Add Task", new_task_path %> </button></li>
-        </ul>
-      </nav>
+    <h1> Task List App</h1>
     </header>
     <main>
     <%= yield %>
+    <footer>
+        <%= link_to("Home", root_path)%>
+        <br>
+        <%= link_to "Add Task", new_task_path %> </button>
+    </footer>
     </main>
   </body>
 </html>

@@ -79,20 +79,6 @@ describe TasksController do
       must_respond_with :redirect
       must_redirect_to tasks_path
     end
-
-    it 'will respond with bad request if no task is sent' do 
-      skip
-      # Arrange
-      task_data = {}
-
-      # Act
-      expect {
-        post tasks_path, params: task_data
-      }.wont_change 'Task.count'
-
-      # Assert
-        must_respond_with :bad_request
-    end
   end
 
   # Unskip and complete these tests for Wave 3
@@ -181,11 +167,22 @@ describe TasksController do
 
   # Complete for Wave 4
   describe 'toggle_complete' do
-    task_item = Task.create!(name: "Fold clothes", description: "Konmari way")
-    task_id = task_item.id
+    it "will update completion_date when clicked" do
+      date = Time.now + 2.days 
+      task = Task.create! name: "Fold clothes", description: "Konmari way", 
+                               completion_date: date
+      task_id = task.id
+      patch toggle_complete_path(task_id)
+      task.reload
 
-    it "will update completion_date when clicked" do 
-      toggle_complete mark_task_path(task_id)
+      expect(task.completed).must_equal true
+      expect(task.completion_date).must_equal Date.today
+
+      patch toggle_complete_path(task_id)
+      task.reload
+
+      expect(task.completed).must_equal false
+      assert_nil(task.completion_date)
     end
   end
 end

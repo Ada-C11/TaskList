@@ -70,10 +70,14 @@ class TasksController < ApplicationController
       return
     end
 
-    task.completion_date =  Time.now
-    task.completed = true
-    task.save
-    # flash[:notice] = 'Task marked complete!'
+    if task.completed
+      task.completion_date = nil
+      task.completed = false
+      task.save
+    else
+      task.completion_date = Date.today
+      task.update(completed: true)
+    end
 
     redirect_to tasks_path
   end

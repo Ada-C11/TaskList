@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   # routes that operate on the task collection
   root 'tasks#index'
   resources :tasks
-  put 'tasks/:id/toggle_complete', to: 'tasks#toggle_complete', as: 'toggle_complete'
-  
+  patch 'tasks/:id/toggle_complete', to: 'tasks#toggle_complete', as: 'toggle_complete'
+  # patch 'tasks/:id/toggle_uncomplete', to: 'tasks#toggle_uncomplete', as: 'toggle_uncomplete'
 end
