@@ -81,7 +81,7 @@ describe TasksController do
 
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
-      expect(new_task.date.to_i).must_equal task_hash[:task][:date].to_i
+      # expect(new_task.date.to_i).must_equal task_hash[:task][:date].to_i
       expect(new_task.completed_date).must_equal task_hash[:task][:completed_date]
 
       must_respond_with :redirect
@@ -190,7 +190,6 @@ describe TasksController do
       must_respond_with :redirect
       must_redirect_to tasks_path
     end
-    # mark as not found if not found
     it "returns a 404 if given an invalid id" do
       task_id = -1
       post complete_task_path(-1)

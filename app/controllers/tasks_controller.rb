@@ -51,9 +51,7 @@ class TasksController < ApplicationController
     @task.update(
       name: params["task"]["name"],
       description: params["task"]["description"],
-      date: params["task"]["date"],
       completed_date: params["task"]["completed_date"],
-      due_date: params["task"]["due_date"],
     )
     redirect_to task_path(@task)
   end
