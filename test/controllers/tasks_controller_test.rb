@@ -3,9 +3,7 @@ require "test_helper"
 describe TasksController do
   # Note to students:  Your Task model **may** be different and
   #   you may need to modify this.
-  let (:task) {
-    Task.create name: "sample task", description: "this is an example for a test", priority_level: "low"
-  }
+  let (:task) { Task.create name: "sample task", description: "this is an example for a test", priority_level: "low" }
 
   # Tests for Wave 1
   describe "index" do
