@@ -1,18 +1,50 @@
-<h1>Welcome to your Task List</h1>
+<p id="notice">
+<%= flash[:success] if flash[:success] %>
+<%= flash[:error] if flash[:error] %>
+</p>
 
-<%# refactor this to return number of uncompleted, overdue tasksetc %>
-<p>There are <%= @tasks.length %> tasks in this list.</p>
+<h1>Task Tracker</h1>
+<h1>Current Tasks:</h1>
+<%= link_to 'Add another task!', new_task_path, class:"add-task"%>
 
+<div id="task-board">
+<div id="to-do">
+<h1>To Do</h1>
 <ul>
-  <% @tasks.each do |task| %>
+<% incomplete_tasks = @tasks.select{|task| !task.date_completed}%>
+<p><%= "All of your tasks have been completed!" if (incomplete_tasks.length == 0)%></p>
+<% incomplete_tasks.each do |task| %>
     <li>
-      <strong>
-        <%= link_to task.name, task_path(task) %>
-      </strong>
-      Description: <%= task.description %>
-      Deadline: <%= task.deadline %>
-      Completion Date: <%= task.date_completed%>
-      Priority Level: <%= task.priority_level %>
-    </li>
-  <% end %>
+        <h2><%= link_to task.name, task_path(task.id) %></h2> 
+        <h3><%= task.description %></h3> 
+        <h3><strong>Completed? </strong><%= "#{task.date_completed.nil? ? "No" : "Yes!" }"%></h3> 
+        <p>
+        <%= link_to "Edit Task", edit_task_path(task.id) %>
+         | <%= link_to "Mark as Complete", toggle_complete_task_path(task.id, task: {date_completed: DateTime.now }), method: :patch %> | 
+        <%= link_to "Delete Task", task_path(task.id), method: :delete, data: { confirm: "Are you sure?" } %>
+        </p>
+    </li>  
+<% end %> 
 </ul>
+</div>
+
+<div id="done"">
+<h1>Done! :) </h1> 
+<ul>
+<% completed_tasks = @tasks.select{|task| task.date_completed}%>
+<p><%= "You haven't completed any tasks yet. Are you ready to get to work?" if (completed_tasks.length == 0)%></p>
+<% completed_tasks.each do |task| %>
+    <li>
+        <h2><%= link_to task.name, task_path(task.id) %></h2> 
+        <h3><%= task.description %></h3> 
+        <h3><strong>Completed? </strong><%= "#{task.date_completed.nil? ? "No" : "Yes!" }"%></h3> 
+        <p>
+        <%= link_to "Edit Task", edit_task_path(task.id) %>
+         | <%= link_to "Mark as Incomplete", toggle_complete_task_path(task.id, task: {date_completed: nil }), method: :patch %> | 
+        <%= link_to "Delete Task", task_path(task.id), method: :delete, data: { confirm: "" } %>
+        </p>
+    </li>  
+<% end %>
+</ul>
+</div>
+</div>

@@ -95,12 +95,12 @@ describe TasksController do
   # Unskip and complete these tests for Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
-      skip
-      # Your code here
+      task = Task.first
+      get edit_task_path(task)
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      skip
+
       # Your code here
     end
   end
@@ -110,24 +110,90 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
-      # Your code here
+      # Arrange
+      test_id = Task.last.id
+      task_hash = {
+        task: {
+          name: "updated task",
+          description: "updated task description",
+        },
+      }
+
+      expect {
+        patch task_path(test_id), params: task_hash
+      }.wont_change "Task.count"
+
+      updated_task = Task.find_by(name: task_hash[:task][:name])
+
+      expect(updated_task.description).must_equal task_hash[:task][:description]
+
+      must_respond_with :redirect
+      must_redirect_to task_path(test_id)
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+
+      # Act
+      patch task_path(-1)
+
+      # Assert
+      must_respond_with :redirect
+      expect(flash[:error]).must_equal "Could not find task with id: -1"
+
+      must_redirect_to root_path
     end
   end
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "removes a task from the database" do
+      task_hash = {
+        task: {
+          name: "A Task",
+          description: "A Description of the Task",
+          deadline: Date.parse("20190410"),
+          priority_level: "Priority Level",
+        },
+      }
 
+      # Act-Assert
+      expect {
+        delete tasks_path, params: task_hash
+      }.must_change "Task.count", -1
+
+      must_respond_with :redirect
+      must_redirect_to task_path(new_task.id)
+
+      after_task = Task.find_by(id: book.id)
+      expect(after_task).must_be_nil
+    end
   end
 
-  # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "can mark an incomplete task complete without changing anything else" do
+      # Arrange
+      test_task = Task.last
+      test_task.update date_completed: nil
+      initial_attributes = test_task.attributes.clone
+      task_hash = {
+        task: {
+          date_completed: Time.now.to_date,
+        },
+      }
+
+      #Act-Assert
+      expect {
+        patch toggle_complete_task_path(test_task.id), params: task_hash
+      }.wont_change "Task.count"
+
+      test_task.reload
+
+      expect(test_task.name).must_equal initial_attributes["name"]
+      expect(test_task.description).must_equal initial_attributes["description"]
+      expect(test_task.date_completed).must_equal task_hash[:task][:date_completed]
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
   end
 end
