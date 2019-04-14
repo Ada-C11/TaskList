@@ -2,9 +2,8 @@
 <ol class="task-list">
   <% @tasks.each do |task| %>
     <li>
-      <%= link_to task.name, task_path(task) %>, 
-      <%= task.description %>, 
-      complete by<%= task.completion_date %>
+      <%= link_to task.name, task_path(task) %>
+      <%= link_to (task.completion_date ? "Unmark Complete" : "Mark Complete"), toggle_complete_path(task), method: :patch %>
       <%= link_to "Edit", edit_task_path(task) %>
       <%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>
 

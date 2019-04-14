@@ -32,25 +32,49 @@ class TasksController < ApplicationController
   def update
     task_id = params[:id]
     task = Task.find_by(id: task_id)
+
+    unless task
+      redirect_to tasks_path
+      return
+    end
     task.update(task_params)
     redirect_to task_path(task)
   end
 
   def destroy
     task_id = params[:id]
-    @task = Task.find_by(id: task_id)
+    task = Task.find_by(id: task_id)
 
-    if @task
-      @task.destroy
-      redirect_to tasks_path
-    else
-      render :notfound, status: :not_found
+    unless task
+      head :not_found
+      return
     end
+
+    task.destroy
+    redirect_to tasks_path
+  end
+
+  def toggle_complete
+    task_id = params[:id]
+    task = Task.find_by(id: task_id)
+
+    unless task
+      head :not_found
+      return
+    end
+
+    if task.completion_date.nil?
+      task.update!(completion_date: Date.current)
+    else
+      task.update!(completion_date: nil)
+    end
+
+    redirect_to tasks_path
   end
 
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :completion_date)
+    params.require(:task).permit(:name, :description)
   end
 end
