@@ -7,25 +7,25 @@ class TasksController < ApplicationController
 
   def show
     id = params[:id].to_i
-    @task = Task.find_by(id: id)
 
-    render :notfound, status: :not_found if @task.nil?
+    @task = Task.find_by(id: id)
+    unless @task
+      redirect_to tasks_path
+    end
   end
 
   def new
-    @task = Task.new(name: "-No Task Name-",
-                     description: "-No Description-",
-                     completion: "-No Completion Date-")
+    @task = Task.new
   end
 
   def create
-    @Task.new(
+    @task = Task.new(
       name: params[:task][:name],
       description: params[:task][:description],
-      completion_date: params[:task][:completion],
+      completion: params[:task][:completion],
     )
     if @task.save
-      redirect_to root_path
+      redirect_to task_path(@task.id)
     else
       render :new
     end
@@ -40,7 +40,7 @@ class TasksController < ApplicationController
     if @task.update(
       name: params[:task][:name],
       description: params[:task][:description],
-      completion_date: params[:task][:completion],
+      completion: params[:task][:completion],
     )
       redirect_to task_path
     else
