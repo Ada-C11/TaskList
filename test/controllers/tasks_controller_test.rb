@@ -4,8 +4,7 @@ describe TasksController do
   # Note to students:  Your Task model **may** be different and
   #   you may need to modify this.
   let (:task) {
-    Task.create name: "sample task", description: "this is an example for a test",
-                status: "incomplete"
+    Task.create name: "sample task", description: "this is an example for a test"
   }
 
   # Tests for Wave 1
@@ -67,7 +66,6 @@ describe TasksController do
         task: {
           name: "new task",
           description: "new task description",
-          status: "incomplete",
         },
       }
 
@@ -78,7 +76,6 @@ describe TasksController do
 
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
-      expect(new_task.status).must_equal task_hash[:task][:status]
 
       must_respond_with :redirect
       must_redirect_to task_path(new_task.id)
@@ -104,7 +101,6 @@ describe TasksController do
       task: {
         name: "new task",
         description: "new task description",
-        status: "incomplete",
       },
     }
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
@@ -112,18 +108,13 @@ describe TasksController do
     it "can update an existing task" do
       # Your code here
 
-      # get edit_task_path(task.id)
-
-      # expect {
       patch task_path(task.id), params: task_hash
-      # }.must_change "Task.count", 0
       must_respond_with :redirect
       must_redirect_to task_path(task.id)
 
       edited_task = Task.find_by(name: task_hash[:task][:name])
       expect(edited_task.name).must_equal "new task"
       expect(edited_task.description).must_equal "new task description"
-      expect(edited_task.status).must_equal "incomplete"
     end
 
     it "will redirect to the root page if given an invalid id" do

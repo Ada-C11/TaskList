@@ -9,7 +9,7 @@ class TasksController < ApplicationController
 
     if @task.nil?
       # to pass the test. I'm wondering why it redirects instead of giving a 404 page.
-      redirect_to tasks_path
+      redirect_to tasks_path, :flash => { :error => "Task id: #{params[:id]} not found!" }
     end
   end
 
@@ -22,13 +22,11 @@ class TasksController < ApplicationController
       name: params["task"]["name"],
       description: params["task"]["description"],
       completion_date: params["task"]["completion_date"],
-      status: params["task"]["status"],
     )
 
     is_successful = task.save
     if is_successful
-      redirect_to task_path(task.id)
-      # flash[:success] = "Task successfully created!"
+      redirect_to task_path(task.id), :flash => { :success => "Task successfully created!" }
     else
       redirect_to task_path(task_id)
       # flash[:error] = "Cannot create task: #{params[:name]}"
@@ -54,7 +52,6 @@ class TasksController < ApplicationController
       redirect_to task_path(task.id)
     else
       redirect_to tasks_path
-      # flash[:error] = "Cannot create task: #{params[:name]}"
     end
   end
 
@@ -65,17 +62,27 @@ class TasksController < ApplicationController
       head :not_found
     else
       task.destroy
-      redirect_to tasks_path
+      redirect_to tasks_path, :flash => { :success => "Task #{task.name} has been deleted!" }
     end
   end
 
-  def completed #might change
-    @tasks = Task.where(complete: false)
+  def toggle_complete
+    task = Task.find_by(id: params[:id])
+
+    if task
+      if task.update task_params
+        redirect_to root_path, :flash => { :success => "Task #{task.name} has been marked Complete" }
+      else
+        redirect_to root_path, :flash => { :error => "Failed to update task #{params[:name]}" }
+      end
+    else
+      redirect_to root_path, :flash => { :error => "Could not find task #{params[:name]}" }
+    end
   end
 
   private
 
   def task_params
-    return params.require(:task).permit(:name, :description, :completion_date, :status)
+    return params.require(:task).permit(:name, :description, :completion_date)
   end
 end
