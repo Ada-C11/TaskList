@@ -38,7 +38,7 @@ class TasksController < ApplicationController
     if is_successful
       redirect_to task_path(task.id)
     else
-      head :not_found # refactor this
+      head :not_found # refactor this?
     end
   end
 
@@ -88,7 +88,7 @@ class TasksController < ApplicationController
     end
 
     if task.nil?
-      head :not_found # refactor
+      head :not_found # refactor ?
     else
       task.update(completed: !(task[:completed]), completion_date: cd)
       redirect_to tasks_path
