@@ -1,10 +1,10 @@
-<h1>Tasks index</h1>
-<p>This is your task list!</p>
-<ul>
-  <% @tasks.each do |task|%>
-  <li>
-    <%= task[:id]%>
-    <%= link_to task.name, tasks_index_path(task[:name], class:'title-link') %>
-  </li>
+<h1>Your Tasks</h1>
+<ol>
+  <% @tasks.each do |task| %>
+  <li><%=link_to task.name, task_path(task.id) %></li>
+    <ul>
+      <li><%= "Description: #{task.description}" %></li>
+      <li><%= "Completion Date: #{task.completion}" %></li>
+    </ul>
   <% end %>
-</ul>
+</ol>
