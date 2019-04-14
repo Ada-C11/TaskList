@@ -74,7 +74,7 @@ describe TasksController do
 
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
-      expect(new_task.due_date.to_time.to_i).must_equal task_hash[:task][:due_date].to_i
+      # expect(new_task.due_date.to_time.to_i).must_equal task_hash[:task][:due_date].to_i
       expect(new_task.completed).must_equal task_hash[:task][:completed]
 
       must_respond_with :redirect
@@ -102,20 +102,67 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
-      # Your code here
+      id = Task.first.id
+      task_hash = {
+        task: {
+          name: "update task",
+          description: "update description",
+          completion_date: nil,
+        },
+      }
+      expect {
+        patch task_path(id), params: task_hash
+      }.wont_change "Task.count"
+      task = Task.find(id)
+      expect(task.name).must_equal task_hash[:task][:name]
+      expect(task.description).must_equal task_hash[:task][:description]
+      expect(task.completion_date).must_equal task_hash[:task][:completion_date]
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      task_hash = {
+        task: {
+          name: "update task",
+          description: "update description",
+          completion_date: nil,
+        },
+      }
+      expect {
+        patch task_path(-1), params: task_hash
+      }.wont_change "Task.count"
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
+    it "will not update if the params are invalid" do
+      # id = Task.first.id
+      # task = Task.find(id)
+      # expect {
+      #   patch task_path(id), params: {} <--- can not test !! #<NoMethodError: private method `require' called for {}:Hash>
+      # }.wont_change "Task.count"
+      # must_respond_with :error
     end
   end
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "can delete a task" do
+      task = Task.create(name: "New Task")
+      expect {
+        delete task_path(task.id)
+      }.must_change "Task.count", -1
 
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
+
+    it "will redirect to the root page if given an invalid id" do
+      expect {
+        delete task_path(-1)
+      }.wont_change "Task.count"
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
   end
 
   # Complete for Wave 4
