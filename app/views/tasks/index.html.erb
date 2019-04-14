@@ -3,10 +3,14 @@
   <% @tasks.each do |task|  %>
     <li>
       <strong>
-        <%= link_to task.name, task_path(task) %>
-        <%= link_to " Delete", task_path(task.id), method: :delete %>
-        <%# <%= link_to " Mark as complete", task_path(task.id), method: :delete %> %>
-
+        <%if task.completed == false %>
+          <%= link_to task.name, task_path(task) %>
+          <%= link_to " Mark Complete", complete_task_path(task.id), method: :patch %>
+        <%else%>
+          <strike><%= link_to task.name, task_path(task) %></strike>
+          <%= link_to "Unmark Complete", complete_task_path(task.id), method: :patch %>
+        <%end%>
+         <%= link_to " Delete", task_path(task.id), method: :delete, data: {confirm: "Are you sure?"} %>
       </strong>
     </li>
   <% end %>

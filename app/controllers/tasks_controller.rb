@@ -13,7 +13,8 @@ class TasksController < ApplicationController
     task = Task.new( 
       name: params["task"]["name"], 
       description: params["task"]["description"],
-      completion_date: params["task"]["completion_date"]
+      completion_date: params["task"]["completion_date"],
+      completed: false
       )
 
     task.save
@@ -45,10 +46,24 @@ class TasksController < ApplicationController
       redirect_to tasks_path
     else
       @task.update(name: params[:task][:name], description: params[:task][:description], completion_date: params[:task][:completion_date])
-      puts tasks_path(@task)
       redirect_to task_path(@task)
     end
 
+  end
+
+  def complete
+    task_id = params[:id]
+  
+    @task = Task.find_by(id:task_id)
+    if @task == nil
+      redirect_to tasks_path
+    elsif @task.completed == false
+      @task.update(completion_date: Time.now.to_s, completed: true)
+      redirect_to tasks_path
+    else
+      @task.update(completion_date: "not completed", completed: false)
+      redirect_to tasks_path
+    end
   end
 
   def destroy

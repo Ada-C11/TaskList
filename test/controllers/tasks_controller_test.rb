@@ -5,7 +5,7 @@ describe TasksController do
   #   you may need to modify this.
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
-                completion_date: "20190410"
+                completion_date: "20190410", completed: false
   }
 
   # Tests for Wave 1
@@ -166,10 +166,45 @@ describe TasksController do
      must_respond_with :redirect
      must_redirect_to tasks_path
     end
+
+
   end
 
   # Complete for Wave 4
   describe "toggle_complete" do
     # Your tests go here
+    it "can mark a incomplete task as complete" do
+
+      read = Task.create!(name: "read", description: "book", completion_date: "today", completed: false)
+      id = read.id
+      patch complete_task_path(id)
+      read = Task.find_by(id: id)
+      expect(read.completed).must_equal(true)
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+
+    end
+
+    it "can mark a complete task as incomplete" do
+
+      shower = Task.create!(name: "shower", description: "book", completion_date: "today", completed: true)
+      id = shower.id
+      patch complete_task_path(id)
+      shower = Task.find_by(id: id)
+      expect(shower.completed).must_equal(false)
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+
+    end
+
+    it "will redirect for an invalid task" do
+
+      id = "invalid"
+      patch complete_task_path(id)
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+
+    end
+
   end
 end

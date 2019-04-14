@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "/tasks", to: "tasks#index", as: "tasks"
   get "/tasks/new", to: "tasks#new", as: "new_task"
   post "/tasks", to: "tasks#create"
-
+  patch '/tasks/:id/edit', to: "tasks#complete", as: "complete_task"
 
 
   get "/tasks/:id", to: "tasks#show", as: "task"  #needs to be below new
