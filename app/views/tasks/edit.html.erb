@@ -1,15 +1,8 @@
 <h2>Edit '<%=@task.name%>' Task</h2>
 
-<%= form_with model: @task, class: "edit_task" do |f| %>
-<p>Please edit the task information below:</p>
+<%= render partial: "form", locals: { 
+  action_name: "Edit Task",
+  intro_text: "Please edit the task information below:"
+  } %>
 
-<%# , :input_html => { :value => @task.name }  %>
-  <%= f.label :name %>
-  <%= f.text_field :name%>
-  
-  <%= f.label :description %>
-  <%= f.text_field :description %>
- 
-  <%= f.submit "Edit Task", class: "task_button" %>
-<% end %>
 

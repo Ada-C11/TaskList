@@ -1,14 +1,8 @@
 <h2>Add A New Task</h2>
 
-<%= form_with model: @task, class: "create_task" do |f| %>
-<p>Please add a new task to your list by filling out the following form:</p>
+<%= render partial: "form", locals: { 
+  action_name: "Save Task",
+  intro_text: "Please add a new task to your list by filling out the following form:" 
+  } %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :description %>
-  <%= f.text_field :description %>
- 
-  <%= f.submit "Add Task", class: "task_button" %>
-<% end %>
 
-<%= link_to "Back to All Tasks", tasks_path %>
