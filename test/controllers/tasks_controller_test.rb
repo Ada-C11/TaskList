@@ -77,17 +77,14 @@ describe TasksController do
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
       expect(new_task.date).must_equal task_hash[:task][:date]
-      # expect(new_task.completed).must_equal task_hash[:task][:completed]
 
       must_respond_with :redirect
       must_redirect_to task_path(new_task.id)
     end
   end
 
-  # Unskip and complete these tests for Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
-      # task = Task.first
       get edit_task_path(task)
 
       # Assert
@@ -102,13 +99,8 @@ describe TasksController do
     end
   end
 
-  # Uncomment and complete these tests for Wave 3
   describe "update" do
-    # Note:  If there was a way to fail to save the changes to a task, that would be a great
-    #        thing to test.
     it "can update an existing task" do
-      # new_task = Task.first
-
       task_hash = {
         task: {
           name: "new task",
@@ -124,7 +116,6 @@ describe TasksController do
       expect(new_task.name).must_equal task_hash[:task][:name]
       expect(new_task.description).must_equal task_hash[:task][:description]
       expect(new_task.date).must_equal task_hash[:task][:date]
-      # expect(new_task.completed).must_equal task_hash[:task][:completed]
 
       must_respond_with :redirect
       must_redirect_to task_path(task)
@@ -147,12 +138,69 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "removes the book from the database" do
+      task = Task.first
 
+      expect {
+        delete task_path(task)
+      }.must_change "Task.count", -1
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+
+      destroyed_task = Task.find_by(id: task.id)
+      expect(destroyed_task).must_be_nil
+    end
+
+    it "returns a 404 if the book does not exist" do
+      task_id = 1337432
+
+      expect(Task.find_by(id: task_id)).must_be_nil
+
+      expect {
+        delete task_path(task_id)
+      }.wont_change "Task.count"
+
+      must_respond_with :not_found
+    end
   end
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "Will change complete to true if false" do
+      new_task = Task.new(complete: false)
+      new_task.save
+
+      new_task = Task.find(new_task.id)
+      expect(new_task.complete).must_equal false
+
+      put task_path(new_task.id)
+
+      new_task = Task.find(new_task.id)
+      expect(new_task.complete).must_equal true
+    end
+
+    it "Will change complete to false if true" do
+      completed_task = Task.new(complete: true)
+      completed_task.save
+
+      expect(completed_task.complete).must_equal true
+
+      put task_path(completed_task.id)
+      completed_task.save
+
+      completed_task = Task.find(completed_task.id)
+      expect(completed_task.complete).must_equal false
+    end
+
+    it "returns a 404 if the book does not exist" do
+      task_id = 1337532
+
+      expect(Task.find_by(id: task_id)).must_be_nil
+
+      put task_path(task_id)
+
+      must_respond_with :not_found
+    end
   end
 end

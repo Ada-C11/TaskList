@@ -1,21 +1,14 @@
 class TasksController < ApplicationController
-  # TASKS = [
-  #   { task: "Laundry", date: "04-5-18" },
-  #   { task: "Meal Prep", date: "04-5-19" },
-  # ]
-
   def index
-    @tasks = Task.all
+    @tasks = Task.where(complete: !true)
+    @completed_tasks = Task.where(complete: true)
   end
 
   def new
     @task = Task.new
-    # @task.name = "default title"
-    # @task.save
   end
 
   def create
-    # task = Task.new
     @task = Task.new
     unless params["task"]
       render :new, status: :bad_request
@@ -27,11 +20,7 @@ class TasksController < ApplicationController
     if params[:task][:date]
       @task.date = Date.parse(params[:task][:date])
     end
-    # task = Task.new(
-    #   name: params[:task][:name],
-    #   description: params[:task][:description],
-    #   date: Date.parse(params[:task][:date]),
-    # )
+    @task.complete = false
 
     @task.save
 
@@ -91,13 +80,16 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
-  def complete
+  def toggle_complete
     task_id = params[:id]
-
     task = Task.find_by(id: task_id)
 
-    task.complete = true
+    unless task
+      head :not_found
+      return
+    end
 
+    task.complete == true ? task.complete = false : task.complete = true
     task.save
 
     redirect_to tasks_path

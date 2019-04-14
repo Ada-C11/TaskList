@@ -1,26 +1,37 @@
+<h2>Tasks</h2>
 
-
-<p>You have <%= @tasks.length %> tasks at the moment</p>
-
-
+<p>You have <%= @tasks.length %> incompleted tasks</p>
 
 
 <ul>
   <% @tasks.each do |task| %>
     <li>
-      <% if !task.complete %>
-        <strong>
-        <%= link_to task.name, task_path(task.id) %>: 
-        </strong>
-      <% else %>
-        <strong class="completed" >
-        <%= link_to task.name, task_path(task.id) %>: 
-        </strong>
-      <% end %>
+
+      <strong>
+      <%= link_to task.name, task_path(task.id) %>: 
+      </strong>
+
       <%= task.description %> by  <%= task.date %>
       <%= link_to "edit", edit_task_path(task.id) %>
       <%= link_to "delete", task_path(task), method: :delete, data: { confirm: "Delete #{task.name}?" } %>
-      <%= link_to "complete", task_path(task), method: :put, data: { confirm: "Complete #{task.name}?" } %>
+      <%= link_to "complete", task_path(task), method: :put %>
+    </li>
+  <% end %>
+
+<h2>Completed tasks</h2>
+<p>You have <%= @completed_tasks.length %> completed tasks</p>
+
+  <% @completed_tasks.each do |task| %>
+    <li>
+
+        <strong class="completed" >
+        <%= link_to task.name, task_path(task.id) %>: 
+        </strong>
+
+      <%= task.description %> by  <%= task.date %>
+
+      <%= link_to "delete", task_path(task), method: :delete, data: { confirm: "Delete #{task.name}?" } %>
+      <%= link_to "add task", task_path(task), method: :put %>
     </li>
   <% end %>
 </ul>
