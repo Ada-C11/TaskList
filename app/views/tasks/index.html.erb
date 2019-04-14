@@ -1,20 +1,23 @@
-<h1>Welcome to TaskList</h1>
 
-<ul>
+<h1>Task List</h1>
+
+<ul class="task-list">
 <% @tasks.each do|task|%>
     <li>
-    <%= link_to task.name, task_path(task.id)%>
+    <%= link_to task.name, task_path(task.id), :class => "task-link"%>
 
-    <% if task.completed == false %>
-        <%= button_to "Mark Complete", {action: "mark_complete", id: task.id}, method: :patch %>
-    <% else %>
-        <%= button_to "Unmark Complete", {action: "mark_complete", id: task.id}, method: :patch %>   
-    <% end %>
+        <section class="index-button">
+            <% if task.completed == false %>
+                <%= link_to "Mark Complete", {action: "mark_complete", id: task.id}, method: :patch %> |
+            <% else %>
+                <%= link_to "Unmark Complete", {action: "mark_complete", id: task.id}, method: :patch %> | 
+            <% end %>
 
-    <%= button_to "Delete Task", task_path(task.id), method: :delete, data: {confirm: "Are you sure?"} %>
-    
+            <%= link_to "Delete Task", task_path(task.id), method: :delete, data: {confirm: "Are you sure?"} %>
+        </section>
     </li>
 <% end %>
 </ul>
 
-<%= button_to "Create New Task ", new_task_path, method: :get %>
+<%= button_to "Create New Task ", new_task_path, method: :get, :class => "create-button" %>
+

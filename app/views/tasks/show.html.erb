@@ -1,15 +1,25 @@
+<h1>Task Details</h1>
 <h2>
-  <%= @task.name %>
+  Task: <%= @task.name %>
 </h2>
 
-<p>
-  <%= @task.description %>
-</p>
+<article class="task-info">
+  <section>
+    Description: <%= @task.description %>
+  </section>
+  <section>
+    Due Date: <%= @task.completion_date %>
+  </section>
 
-<p>
-<%= @task.completion_date %>
-</p>
+  <section>
+    Status:
+      <% if @task.completed?%> completed
+      <% else %> In Progress
+      <% end %>
+  </section>
 
-<%= button_to "Edit #{@task.name}", edit_task_path, method: :get %>
+</article>
 
-<%= link_to "Back to All Tasks", tasks_path %>
+<%= button_to "Edit Task", edit_task_path, method: :get, :class => "edit-button" %>
+
+<%= link_to "Back to All Tasks", tasks_path, :class => "back2main-button" %>
