@@ -1,6 +1,6 @@
 require "test_helper"
 
-describe TasksController do
+describe "TasksController" do
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
                 completion_date: Time.now + 5.days
@@ -28,7 +28,7 @@ describe TasksController do
   # Unskip these tests for Wave 2
   describe "show" do
     it "can get a valid task" do
-      skip
+
       # Act
       get task_path(task.id)
 
@@ -37,7 +37,7 @@ describe TasksController do
     end
 
     it "will redirect for an invalid task" do
-      skip
+
       # Act
       get task_path(-1)
 
@@ -49,7 +49,6 @@ describe TasksController do
 
   describe "new" do
     it "can get the new task page" do
-      skip
 
       # Act
       get new_task_path
@@ -61,7 +60,6 @@ describe TasksController do
 
   describe "create" do
     it "can create a new task" do
-      skip
 
       # Arrange
       task_hash = {
@@ -79,24 +77,35 @@ describe TasksController do
 
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
-      expect(new_task.due_date.to_time.to_i).must_equal task_hash[:task][:due_date].to_i
+      expect(new_task.completion_date).must_equal task_hash[:task][:completion_date]
       expect(new_task.completed).must_equal task_hash[:task][:completed]
 
       must_respond_with :redirect
-      must_redirect_to task_path(new_task.id)
+      must_redirect_to tasks_path
+    end
+
+    it "won't create a task (refreshes page) if name is not entered" do
+      tasks_noname_hash = { task: {
+        name: "", description: "blah",
+      } }
+
+      post tasks_path, params: tasks_noname_hash
+      must_redirect_to new_task_path
     end
   end
 
   # Unskip and complete these tests for Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
-      skip
-      # Your code here
+      get edit_task_path(Task.first)
+
+      must_respond_with :success
     end
 
-    it "will respond with redirect when attempting to edit a nonexistant task" do
-      skip
-      # Your code here
+    it "will respond with redirect when attempting to edit a nonexistent task" do
+      get edit_task_path(12345)
+
+      must_redirect_to tasks_path
     end
   end
 
@@ -105,24 +114,64 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
-      # Your code here
+      # Arrange
+      new_params = { "task" => { "name" => "new name", "description" => "new description" } }
+      # Act
+
+      patch task_path(Task.first), params: new_params
+
+      # Assert
+
+      expect(Task.first[:name]).must_equal new_params["task"]["name"]
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      patch task_path(12345)
+      must_redirect_to tasks_path
     end
   end
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "deletes the task and redirects" do
+      task_hash = {
+        task: {
+          name: "new task",
+          description: "new task description",
+          completion_date: nil,
+        },
+      }
 
+      post tasks_path, params: task_hash
+
+      expect {
+        delete task_path(Task.first)
+      }.must_change "Task.count", -1
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end
+
+    it "redirects for a task that doesn't exist" do
+      delete task_path(12345)
+
+      must_redirect_to tasks_path
+    end
   end
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "toggles the completed boolean" do
+      completed = Task.first.completed
+      post task_path(Task.first)
+
+      expect(Task.first.completed).must_equal !completed
+    end
+
+    it "redirects for non-existent task" do
+      post task_path(12345)
+
+      must_redirect_to tasks_path
+    end
   end
 end

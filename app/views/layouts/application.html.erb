@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TaskList</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Nunito" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+    <h1>Task List</h1>
+      <nav>
+        <ul>
+          <li>
+            <%= link_to "View All Tasks", tasks_path %>
+          </li>
+          <li>
+            <%= link_to "Add Task", new_task_path %>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <% flash.each do |key, value| %>
+      <%= content_tag :div, value, class: "flash #{key}" %>
+      <% end %>
+
+      <%= yield %>
+    </main>
+    <footer>
+      &copy 2019 Kirsten Anderson
+    </footer>
+  </body>
+</html>
