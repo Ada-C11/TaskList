@@ -62,8 +62,6 @@ describe TasksController do
 
   describe "create" do
     it "can create a new task" do
-      
-
       # Arrange
       # Note to students:  Your Task model **may** be different and
       #   you may need to modify this.
@@ -100,31 +98,46 @@ describe TasksController do
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      skip
-      # Your code here
+
+      get edit_task_path(-1)
+
+      must_respond_with :redirect
+      expect(flash[:error]).must_equal "That task does not exist."
     end
   end
 
   # Uncomment and complete these tests for Wave 3
   describe "update" do
-    # Note:  If there was a way to fail to save the changes to a task, that would be a great
-    #        thing to test.
-    it "can update an existing task" do
-      skip
-      # Your code here
 
+    it "can update an existing task" do
+      task_hash = {
+        task: { description: "Go to the store"}
+      }
+      
+      patch task_path(task.id), params: task_hash
     end
 
+
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      patch task_path(-1)
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
     end
   end
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "can delete a task" do
+      new_task = Task.create(name: "Household", description: "Wash the dishes", completion_date: "April 15th")
 
+      expect {
+        delete task_path(new_task.id)
+      }.must_change "Task.count", -1
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end
   end
 
   # Complete for Wave 4

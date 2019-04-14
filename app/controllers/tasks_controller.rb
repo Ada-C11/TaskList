@@ -1,8 +1,5 @@
 class TasksController < ApplicationController
-  TASKS = [
-    "get groceries", "go clothing shopping", "walk the dog"    
-  ]
-  
+
   def index
     @tasks = Task.all
   end
@@ -12,12 +9,12 @@ class TasksController < ApplicationController
     @task = Task.find_by(id: task_id)
 
     if @task.nil?
-      head :not_found
+      redirect_to action: 'index', status: 302
     end
   end
 
   def new
-    @task = Task.new(name: "Location")
+    @task = Task.new
   end
 
   def create
@@ -28,35 +25,51 @@ class TasksController < ApplicationController
       description: params["task"]["description"]
       )
 
-    # If the book saves correctly, then we want to redirect to the show page of that book
-    # Otherwise, we should give back something about the error (for now, 404)
-
     is_successful = task.save
 
     if is_successful
       redirect_to task_path(task.id)
     else
-      # For Rails Week 1, not a requirement (not possible right now?) to test this case in controller tests
-      head :not_found
+      render :show
     end
   end
 
   def edit
-    @task = Task.find(params[:id])
+    @task = Task.find_by(id: params[:id])
+
+    if @task.nil?
+      flash[:error] = "There is no task with the id #{params[:id]}"
+      redirect_to action: 'index', status: 302
+    end
   end
 
   def update
-    @task = Task.find(params[:id])
+    @task = Task.find_by(id: params[:id])
     # Change to strong params
-    if @task.update(
-      name: params["task"]["name"],
-      completion_date: params["task"]["completion_date"],
-      description: params["task"]["description"]
-    )
+
+    if @task.nil?
       redirect_to tasks_path
-    else
-      head :not_acceptable
+    else  @task.update(
+          name: params["task"]["name"],
+          completion_date: params["task"]["completion_date"],
+          description: params["task"]["description"]
+        )
+        flash[:success] = "Successful Update!"
+        redirect_to task_path(@task.id)
     end
+  end
+
+
+  def complete
+    task = Task.find_by(id: params[:id])
+    if task[:completed] == false
+      task[:completed] = true
+      @task.completion_date = Time.now
+    else
+      task[:completed] = false
+    end
+    @task.save
+    redirect_to tasks_path
   end
 
   def destroy
@@ -70,15 +83,10 @@ class TasksController < ApplicationController
     end
   end
 
-  def complete
-    task = Task.find_by(id: params[:id])
-    if task[:completed] == false
-      task[:completed] = true
-    else
-      task[:completed] = false
-    end
-    task.save
-    redirect_to tasks_path
+  private
+  
+  def task_params
+    return params.require(:task).permit(:name, :description, :completion_date)
   end
 
 end
