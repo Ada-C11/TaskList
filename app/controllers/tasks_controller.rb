@@ -18,12 +18,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    # Change to strong params
-    task = Task.new(
-      name: params["task"]["name"],
-      completion_date: params["task"]["completion_date"],
-      description: params["task"]["description"]
-      )
+    task = Task.new(task_params)
 
     is_successful = task.save
 
@@ -45,15 +40,10 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find_by(id: params[:id])
-    # Change to strong params
 
     if @task.nil?
       redirect_to tasks_path
-    else  @task.update(
-          name: params["task"]["name"],
-          completion_date: params["task"]["completion_date"],
-          description: params["task"]["description"]
-        )
+    else  @task.update(task_params)
         flash[:success] = "Successful Update!"
         redirect_to task_path(@task.id)
     end
@@ -62,6 +52,7 @@ class TasksController < ApplicationController
 
   def complete
     task = Task.find_by(id: params[:id])
+    
     if task.completed
       task.update(
         completed: !task.completed
@@ -72,6 +63,7 @@ class TasksController < ApplicationController
         completion_date: DateTime.now
       )
     end
+
     task.save
     redirect_to tasks_path
   end
