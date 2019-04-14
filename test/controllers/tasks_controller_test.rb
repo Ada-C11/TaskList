@@ -176,8 +176,11 @@ describe TasksController do
     end
   end
 
-  # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "changes task's completion status from true to false" do
+      #Arrange
+      #Act
+      #Assert
   end
+end
 end
