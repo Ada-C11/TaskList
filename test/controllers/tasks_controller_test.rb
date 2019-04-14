@@ -144,7 +144,7 @@ describe TasksController do
       expect(complete.completion_date).must_equal (DateTime.now).to_s
     end
 
-    # Hi Chris. I tried to get this test to Pass but I couldn't manage!! Help please! :)
+    # Hi Chris! I tried to get this test to Pass but I couldn't manage!! Help please! :)
 
     # it "won't update completed task date during complete incomplete toggle" do
     #   task = Task.create(

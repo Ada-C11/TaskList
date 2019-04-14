@@ -39,20 +39,20 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find_by(id: params[:id])
+    task = Task.find_by(id: params[:id])
 
-    if @task.nil?
+    if task.nil?
       redirect_to tasks_path
-    else  @task.update(task_params)
+    else  task.update(task_params)
         flash[:success] = "Successful Update!"
-        redirect_to task_path(@task.id)
+        redirect_to task_path(task.id)
     end
   end
 
 
   def complete
     task = Task.find_by(id: params[:id])
-    
+
     if task.completed
       task.update(
         completed: !task.completed
