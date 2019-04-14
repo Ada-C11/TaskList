@@ -2,6 +2,11 @@
   <% @tasks.each do |task| %>
     <li>
       <%= link_to "#{task.name}", task_path(task.id) %>
+      <% if task.completion_date %>
+        <%= button_to "Unmark Complete", toggle_complete_task_path(task), method: :patch %>
+      <% else %>
+        <%= button_to "Mark Complete", toggle_complete_task_path(task), method: :patch %>
+      <% end %>
       <%= link_to "Edit", edit_task_path(task) %>
       <%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Really delete?" } %>
     </li>

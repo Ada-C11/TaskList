@@ -179,6 +179,48 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "updates the completed date when Mark Complete is pressed" do
+      # Arrange
+      task = Task.create!(name: "test task")
+
+      # Act
+      patch toggle_complete_task_path(task)
+      task.reload
+
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+
+      expect(task.completion_date).must_equal Date.current
+    end
+
+    it "updates the completed date to nil when Unmark Complete is pressed" do
+      # Arrange
+      task = Task.create!(name: "test task", completion_date: Date.current)
+
+      # Assumptions
+      expect(task).wont_be_nil
+
+      # Act
+      patch toggle_complete_task_path(task)
+      task.reload
+
+      # Assert
+      expect(task.completion_date).must_be_nil
+    end
+
+    it "returns a 404 if the task does not exist" do
+      # Arrange
+      task_id = 1234567
+
+      # Assumptions
+      expect(Task.find_by(id: task_id)).must_be_nil
+
+      # Act
+      patch toggle_complete_task_path(task_id)
+
+      # Assert
+      must_respond_with :not_found
+    end
   end
 end
