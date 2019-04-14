@@ -17,8 +17,8 @@ class TasksController < ApplicationController
 
     @task.name = params[:task][:name]
     @task.description = params[:task][:description]
-    if params[:task][:date]
-      @task.date = Date.parse(params[:task][:date])
+    if params[:task][:complete_by]
+      @task.complete_by = Date.parse(params[:task][:complete_by])
     end
     @task.complete = false
 
@@ -57,8 +57,8 @@ class TasksController < ApplicationController
 
     @task.name = params[:task][:name]
     @task.description = params[:task][:description]
-    if params[:task][:date]
-      @task.date = Date.parse(params[:task][:date])
+    if params[:task][:complete_by]
+      @task.complete_by = Date.parse(params[:task][:complete_by])
     end
 
     @task.save
@@ -89,7 +89,13 @@ class TasksController < ApplicationController
       return
     end
 
-    task.complete == true ? task.complete = false : task.complete = true
+    if task.complete == true
+      task.complete = false
+    else
+      task.complete = true
+      task.completed_on = Date.today
+    end
+
     task.save
 
     redirect_to tasks_path

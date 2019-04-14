@@ -11,7 +11,7 @@
       <%= link_to task.name, task_path(task.id) %>: 
       </strong>
 
-      <%= task.description %> by  <%= task.date %>
+      <%= task.description %>. Complete by: <%= task.complete_by %>
       <%= link_to "edit", edit_task_path(task.id) %>
       <%= link_to "delete", task_path(task), method: :delete, data: { confirm: "Delete #{task.name}?" } %>
       <%= link_to "complete", task_path(task), method: :put %>
@@ -28,7 +28,7 @@
         <%= link_to task.name, task_path(task.id) %>: 
         </strong>
 
-      <%= task.description %> by  <%= task.date %>
+      <%= task.description %>. Completed: <%= task.completed_on %>
 
       <%= link_to "delete", task_path(task), method: :delete, data: { confirm: "Delete #{task.name}?" } %>
       <%= link_to "add task", task_path(task), method: :put %>

@@ -3,7 +3,7 @@ require "test_helper"
 describe TasksController do
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
-                date: Time.now + 5.days
+                complete_by: Time.now + 5.days
   }
 
   # Tests for Wave 1
@@ -65,7 +65,7 @@ describe TasksController do
         task: {
           name: "new task",
           description: "new task description",
-          date: Date.new(2019, 4, 20),
+          complete_by: Date.new(2019, 4, 20),
         },
       }
 
@@ -76,7 +76,7 @@ describe TasksController do
 
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
-      expect(new_task.date).must_equal task_hash[:task][:date]
+      expect(new_task.complete_by).must_equal task_hash[:task][:complete_by]
 
       must_respond_with :redirect
       must_redirect_to task_path(new_task.id)
@@ -105,7 +105,7 @@ describe TasksController do
         task: {
           name: "new task",
           description: "new task description",
-          date: Date.new(2019, 4, 20),
+          complete_by: Date.new(2019, 4, 20),
         },
       }
 
@@ -115,7 +115,7 @@ describe TasksController do
 
       expect(new_task.name).must_equal task_hash[:task][:name]
       expect(new_task.description).must_equal task_hash[:task][:description]
-      expect(new_task.date).must_equal task_hash[:task][:date]
+      expect(new_task.complete_by).must_equal task_hash[:task][:complete_by]
 
       must_respond_with :redirect
       must_redirect_to task_path(task)
@@ -126,7 +126,7 @@ describe TasksController do
         task: {
           name: "new task",
           description: "new task description",
-          date: Date.new(2019, 4, 20),
+          complete_by: Date.new(2019, 4, 20),
         },
       }
       patch task_path(123456), params: task_hash
@@ -201,6 +201,20 @@ describe TasksController do
       put task_path(task_id)
 
       must_respond_with :not_found
+    end
+
+    it "changes completed_on to current date" do
+      ### TODO
+      current_date = Date.today
+      task_id = task.id
+
+      expect(task.completed_on).wont_equal current_date
+
+      put task_path(task_id)
+
+      updated_tast = Task.find(task_id)
+
+      expect(updated_tast.completed_on).must_equal current_date
     end
   end
 end
