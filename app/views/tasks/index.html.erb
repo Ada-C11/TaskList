@@ -4,19 +4,23 @@
 <ul  class="index-tasks">
   <% @tasks.each do |task| %>
     <li>
-      <% if task.completed == false %>
+        <div>
+      <% if !task.completed %>
         <%= link_to task.name, task_path(task), class: "task-name" %>
       <% else %>
         <%= link_to task.name, task_path(task), class: "task-complete" %>
       <% end %>
+      </div>
+      <div>
       <%= link_to "Edit", edit_task_path(task) %>
       <%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>
 
-      <% if task.completed == false %>
+      <% if !task.completed %>
         <%= link_to "Mark as Complete", task_path(task), method: :post %>
       <% else %>
         <%= link_to "Mark as Not Complete", task_path(task), method: :post %>
       <% end %>
+      </div>
     </li>
   <% end %>
 </ul>

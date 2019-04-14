@@ -83,6 +83,15 @@ describe "TasksController" do
       must_respond_with :redirect
       must_redirect_to tasks_path
     end
+
+    it "won't create a task (refreshes page) if name is not entered" do
+      tasks_noname_hash = { task: {
+        name: "", description: "blah",
+      } }
+
+      post tasks_path, params: tasks_noname_hash
+      must_redirect_to new_task_path
+    end
   end
 
   # Unskip and complete these tests for Wave 3
@@ -152,6 +161,17 @@ describe "TasksController" do
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "toggles the completed boolean" do
+      completed = Task.first.completed
+      post task_path(Task.first)
+
+      expect(Task.first.completed).must_equal !completed
+    end
+
+    it "redirects for non-existent task" do
+      post task_path(12345)
+
+      must_redirect_to tasks_path
+    end
   end
 end
