@@ -42,7 +42,7 @@ describe TasksController do
       get task_path(-1)
 
       # Assert
-      must_respond_with :not_found
+      must_redirect_to tasks_path
     end
   end
 
@@ -98,7 +98,7 @@ describe TasksController do
     it "will respond with redirect when attempting to edit a nonexistant task" do
       get edit_task_path(-1)
 
-      must_respond_with :not_found
+      must_redirect_to tasks_path
     end
   end
 
@@ -131,7 +131,7 @@ describe TasksController do
       must_redirect_to task_path(task.id)
     end
 
-    it "will render a 404 if given an invalid id" do
+    it "will redirect if given an invalid id" do
       task_hash = {
         task: {
           name: "new task",
@@ -146,7 +146,7 @@ describe TasksController do
         patch task_path(invalid_id), params: task_hash
       }.wont_change "Task.count"
 
-      must_respond_with :not_found
+      must_redirect_to tasks_path
     end
   end
 
@@ -163,14 +163,14 @@ describe TasksController do
       must_redirect_to tasks_path
     end
 
-    it "will render a 404 if task can't be found" do
+    it "will redirect if task can't be found" do
       invalid_id = -1
 
       expect {
         delete task_path(invalid_id)
       }.wont_change "Task.count"
 
-      must_respond_with :not_found
+      must_redirect_to tasks_path
     end
   end
 

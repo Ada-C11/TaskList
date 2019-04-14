@@ -7,7 +7,7 @@ class TasksController < ApplicationController
     task_id = params[:id]
     @task = Task.find_by(id: task_id)
 
-    head :not_found if @task.nil?
+    redirect_to tasks_path if @task.nil?
   end
 
   def new
@@ -15,10 +15,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new(
-      name: params[:task][:name],
-      description: params[:task][:description],
-    )
+    task = Task.new(task_params)
 
     if task.save
       redirect_to task_path(task.id)
@@ -29,17 +26,16 @@ class TasksController < ApplicationController
 
   def edit
     task_id = params[:id]
-    # @book = Book.new(title: "Default Title")
     @task = Task.find_by(id: task_id)
 
-    head :not_found if @task.nil?
+    redirect_to tasks_path if @task.nil?
   end
 
   def update
     task = Task.find_by(id: params[:id])
 
     if task.nil?
-      head :not_found
+      redirect_to tasks_path
     else
       task.update(task_params)
       redirect_to task_path
@@ -50,7 +46,7 @@ class TasksController < ApplicationController
     task = Task.find_by(id: params[:id])
 
     if task.nil?
-      head :not_found
+      redirect_to tasks_path
     else
       task.destroy
       redirect_to tasks_path
