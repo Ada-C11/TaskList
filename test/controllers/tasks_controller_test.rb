@@ -158,7 +158,7 @@ describe TasksController do
 
       # Act-Assert
       expect {
-        delete tasks_path, params: task_hash
+        delete task_path(task)
       }.must_change "Task.count", -1
 
       must_respond_with :redirect

@@ -3,10 +3,10 @@
 <%= flash[:error] if flash[:error] %>
 </p>
 
-<h1>Task Tracker</h1>
 <h1>Current Tasks:</h1>
+<div id="add_task">
 <%= link_to 'Add another task!', new_task_path, class:"add-task"%>
-
+</div>
 <div id="task-board">
 <div id="to-do">
 <h1>To Do</h1>
@@ -16,7 +16,8 @@
 <% incomplete_tasks.each do |task| %>
     <li>
         <h2><%= link_to task.name, task_path(task.id) %></h2> 
-        <h3><%= task.description %></h3> 
+        <h3>Description: <%=task.description %></h3> 
+        <h3>Priority Level: <%= task.priority_level %></h3> 
         <h3><strong>Completed? </strong><%= "#{task.date_completed.nil? ? "No" : "Yes!" }"%></h3> 
         <p>
         <%= link_to "Edit Task", edit_task_path(task.id) %>
@@ -36,7 +37,8 @@
 <% completed_tasks.each do |task| %>
     <li>
         <h2><%= link_to task.name, task_path(task.id) %></h2> 
-        <h3><%= task.description %></h3> 
+        <h3>Description: <%= task.description %></h3>
+        <h3>Priority Level: <%= task.priority_level %></h3> 
         <h3><strong>Completed? </strong><%= "#{task.date_completed.nil? ? "No" : "Yes!" }"%></h3> 
         <p>
         <%= link_to "Edit Task", edit_task_path(task.id) %>

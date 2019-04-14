@@ -35,7 +35,7 @@ class TasksController < ApplicationController
 
     if @task
       if @task.update task_params
-        redirect_to task_path(@task.id), { :flash => { :success => "Task has been update" } }
+        redirect_to task_path(@task.id), { :flash => { :success => "Task has been updated" } }
       else
         redirect_to :edit, :flash => { :error => "Failed to update task" }
       end
