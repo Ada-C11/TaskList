@@ -27,11 +27,7 @@ class TasksController < ApplicationController
   def show
     task_id = params[:id]
     @task = Task.find_by(id: task_id) 
-
-    unless @task
-      redirect_to tasks_path
-
-    end
+    redirect_to tasks_path unless @task
   end
 
   def destroy
@@ -47,7 +43,8 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
+    @task = Task.find_by(id: params[:id])
+    redirect_to tasks_path unless @task
   end
 
   def update
