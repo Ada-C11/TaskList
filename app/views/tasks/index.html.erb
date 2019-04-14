@@ -1,3 +1,4 @@
+<% Time.zone = "Pacific Time (US & Canada)" %>
 <h1>Tasks#index</h1>
 <p>Find me in app/views/tasks/index.html.erb</p>
 
@@ -5,16 +6,20 @@
 <h2>Tasks to do</h2>
 <% @tasks.each do |task| %>
     <% if task.completion == false %>
-        <li><%= task.title %>: <%= task.description %> created at: <%= task.created_at%>
+        <li><%= task.title %>: <%= task.description %> created at: <%= task.created_at %>
         </li>
+        <%= link_to "edit task", edit_task_path(task.id) %>
+        <%= link_to "delete task", delete_task_path(task.id) %>
+        <%= link_to "change completion status", mark_complete_path(task.id) %>
     <% end %>
 <% end %> 
 
 <h2>Tasks Completed</h2>
 <% @tasks.each do |task| %>
     <% if task.completion == true %>
-        <li><%= task.title %>: <%= task.description %> finished at: <%= task.updated_at%>
+        <li><%= task.title %>: <%= task.description %> finished at: <%= task.updated_at %>
         </li>
+        <%= link_to "edit task", edit_task_path(task.id) %>
 <% end %>
 <% end %> 
 
