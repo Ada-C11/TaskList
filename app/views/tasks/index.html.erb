@@ -2,15 +2,15 @@
 <p>
 <% @tasks %>
 </p>
-<ul>
+<ul class="list">
 <% @tasks.each do |task| %>
   <li>
   <!-- fix anchor -->
  <%= link_to task.name, task_path(task.id)%>
-    Details: <%= task.description%>, due <%= task.completion_date%>
-    
-   
+    Details: <%= task.description%>, due <%= task.completion_date%> <%= link_to "Mark Complete", toggle_path(task.id), method: :patch, data: { confirm: "Mark Complete?" } %>
   </li>
+  <li><%= link_to "Delete", task_path(task.id), method: :delete, data: { confirm: "Are you sure you want to delete?" } %></li>
+      <li>
 <% end %>
 
 </ul>

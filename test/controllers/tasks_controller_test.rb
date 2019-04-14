@@ -139,7 +139,7 @@ describe TasksController do
           completion_date: "today",
         },
       }
-      invalid_task_id = "Invalid" 
+      invalid_task_id = "Invalid"
       #Act
       patch task_path(invalid_task_id), params: update_task_hash
       # Assert
@@ -178,6 +178,14 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "can mark a task as complete" do
+      # Arrange
+      complete_task = Task.create(name: "Study", description: "At Ada", completion_date: "Sunday", status: false)
+      # Act
+      patch toggle_path(complete_task.id)
+      toggle = Task.find_by(id: complete_task.id)
+      # Assert
+      expect(toggle.status).must_equal true
+    end
   end
 end

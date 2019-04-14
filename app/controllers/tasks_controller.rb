@@ -17,7 +17,6 @@ class TasksController < ApplicationController
 
   def create
     task = Task.new(task_params)
-
     if task.name == "" || task.description == "" || task.completion_date == ""
       task.save = false
     end
@@ -63,8 +62,15 @@ class TasksController < ApplicationController
     end
   end
 
-  def complete
-    task = Task.find_by(id: params)
+  def toggle
+    @complete_task = Task.find_by(id: params[:id])
+    # is_complete = complete_task.update(status )
+    if @complete_task.update(:status => false)
+      redirect_to tasks_path
+    else
+      @complete_task.update(:status => true)
+      redirect_to tasks_path
+    end
   end
 
   private
