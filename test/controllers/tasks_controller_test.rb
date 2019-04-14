@@ -4,7 +4,7 @@ describe TasksController do
   # Note to students:  Your Task model **may** be different and
   #   you may need to modify this.
   let (:task) {
-    Task.create name: "sample task", description: "this is an example for a test", deadline: 20190410, priority_level: "low"
+    Task.create name: "sample task", description: "this is an example for a test", priority_level: "low"
   }
 
   # Tests for Wave 1
@@ -69,7 +69,6 @@ describe TasksController do
         task: {
           name: "A Task",
           description: "A Description of the Task",
-          deadline: Date.parse("20190410"),
           priority_level: "Priority Level",
         },
       }
@@ -100,8 +99,11 @@ describe TasksController do
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
+      get edit_task_path(-1)
 
-      # Your code here
+      # Assert
+      must_respond_with :redirect
+      expect(flash[:error]).must_equal "Could not find task with id: -1"
     end
   end
 
@@ -116,6 +118,7 @@ describe TasksController do
         task: {
           name: "updated task",
           description: "updated task description",
+          priority_level: "update priority level",
         },
       }
 
@@ -151,7 +154,6 @@ describe TasksController do
         task: {
           name: "A Task",
           description: "A Description of the Task",
-          deadline: Date.parse("20190410"),
           priority_level: "Priority Level",
         },
       }

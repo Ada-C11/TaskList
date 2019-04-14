@@ -21,7 +21,7 @@
         <p>
         <%= link_to "Edit Task", edit_task_path(task.id) %>
          | <%= link_to "Mark as Complete", toggle_complete_task_path(task.id, task: {date_completed: DateTime.now }), method: :patch %> | 
-        <%= link_to "Delete Task", task_path(task.id), method: :delete, data: { confirm: "Are you sure?" } %>
+        <%= link_to "Delete Task", task_path(task.id), method: :delete, data: { confirm: "Sure?" } %>
         </p>
     </li>  
 <% end %> 
@@ -29,10 +29,10 @@
 </div>
 
 <div id="done"">
-<h1>Done! :) </h1> 
+<h1>Done</h1> 
 <ul>
 <% completed_tasks = @tasks.select{|task| task.date_completed}%>
-<p><%= "You haven't completed any tasks yet. Are you ready to get to work?" if (completed_tasks.length == 0)%></p>
+<p><%= "You haven't completed any tasks yet." if (completed_tasks.length == 0)%></p>
 <% completed_tasks.each do |task| %>
     <li>
         <h2><%= link_to task.name, task_path(task.id) %></h2> 
