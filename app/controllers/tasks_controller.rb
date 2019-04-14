@@ -18,18 +18,13 @@ class TasksController < ApplicationController
 
   def create
     task = Task.new(
-      name: params["task"]["name"],
-      description: params["task"]["description"],
+      # name: params["task"]["name"],
+      # description: params["task"]["description"],
+      task_params
     )
-    # book = Book.new(book_params)
     task.save
     redirect_to task_path(task.id) # instead of sending back default response, tell browser where to go to find out more about this
     #before redirect_to tasks_path
-
-    # unless params["book"]
-    #   render :new, status:, :bad_request
-    # return
-    # end
   end
 
   def edit
@@ -48,11 +43,7 @@ class TasksController < ApplicationController
       return
     end
     # book.update(book_params)
-    @task.update(
-      name: params["task"]["name"],
-      description: params["task"]["description"],
-      completed_date: params["task"]["completed_date"],
-    )
+    @task.update(task_params)
     redirect_to task_path(@task)
   end
 
@@ -87,7 +78,9 @@ class TasksController < ApplicationController
     end
   end
 
-  def book_params
-    return params.require(:book).permit(:title, :author)
+  private
+
+  def task_params
+    return params.require(:task).permit(:name, :description, :completed_date, :completed)
   end
 end
