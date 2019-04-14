@@ -1,0 +1,58 @@
+<h1>TASKLIST</h1>
+
+<nav>
+    <ul>
+    <li><%= button_to "All Tasks", tasks_path, method: :get%>
+    </li>
+    <div>
+    </div>
+    <li><%= button_to "Add Task", new_task_path, method: :get%>
+    </li>
+    </ul>
+</nav>
+<div class="right-column">
+<h2>YOUR TASKS</h2>
+<%num=0%>
+
+<% @tasks.each do |task| %>
+
+<%# <%= button_to "#{task.name}: mark as complete", complete_task_path(task)%>
+<div class="itemized-tasks">
+ <% if task.completed %>
+  <div class="complete">
+    <div class="todo_item">
+   <p style="opacity: 0.4;"><strike><%=num +=1%>. <%= task.name %></strike>
+  </div>
+  <%= link_to "Delete", task_path(task), method: :delete, confirm: "Are you sure?" %>
+  <a> | </a>
+   <%= link_to "Mark as Incomplete", incomplete_task_path(task), method: :post %>
+   <a> | </a>
+   <%= link_to "Edit", edit_task_path(task.id), method: :get %>
+    <a> | </a>
+    <%= link_to "View", task_path(task.id), method: :get%>
+  </div>
+ 
+ 
+ <% else %>
+  <div class="complete">
+    <div class="todo_item">
+        <p> <%=num +=1%>. <%= task.name %></p>
+  </div>
+  <%= link_to "Delete", task_path(task), method: :delete, confirm: "Are you sure?" %>
+  <a> | </a>
+  <%= link_to "Mark as Complete", complete_task_path(task), method: :post %>
+  <a> | </a>
+  <%= link_to "Edit", edit_task_path(task.id), method: :get %>
+  <a> | </a>
+  <%= link_to "View", task_path(task.id), method: :get%>
+
+  </div>
+
+
+ <% end %>
+
+</div>
+
+<% end %>
+
+<%# incomplete task method, incomplete_task_path(task), completed = false %>
