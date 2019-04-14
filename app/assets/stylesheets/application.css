@@ -19,6 +19,7 @@ body {
   grid-template-columns: 200px 5fr;
   grid-template-rows: minmax(100px, 15vh) minmax(75vh, auto) minmax(75px, 10vh);
   font-family: 'Roboto Mono', monospace;
+  background-color: grey;
 }
 
 body > * {
@@ -62,6 +63,7 @@ nav {
 a {
   color: white;
   font-weight: bold;
+  text-decoration: none;
 }
 
 ul {
@@ -73,10 +75,48 @@ li {
   padding-bottom: 20px;
 }
 
-.status {
+.small {
   font-size: 12px;
 }
 
 p {
   margin: 1px;
+}
+
+.completed a {
+  text-decoration: line-through;
+}
+
+.completed::after {
+  content: "completed!";
+  font-style: italic;
+  background-color: lightgreen;
+  display: block;
+  width: 85px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.in-progress::after {
+  content: "in progress!";
+  font-style: italic;
+  background-color: lightblue;
+  display: block;
+  width: 100px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.overdue::after {
+  content: "overdue!";
+  font-style: italic;
+  background-color: lightcoral;
+  display: block;
+  width: 70px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.button_to {
+  display: inline;
 }

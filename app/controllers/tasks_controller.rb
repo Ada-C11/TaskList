@@ -4,8 +4,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    task_id = params[:id]
-    @task = Task.find_by(id: task_id)
+    @task = Task.find_by(id: params[:id])
 
     if @task.nil?
       redirect_to tasks_path
@@ -19,6 +18,12 @@ class TasksController < ApplicationController
     else
       @status = "in-progress"
     end
+
+    if @task[:completed]
+      @change = "Incomplete"
+    else
+      @change = "Complete"
+    end
   end
 
   def new
@@ -26,11 +31,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new(
-      name: params[:task][:name],
-      description: params[:task][:description],
-      due_date: params[:task][:due_date],
-    )
+    task = Task.new(task_params)
 
     is_successful = task.save
 
@@ -39,5 +40,64 @@ class TasksController < ApplicationController
     else
       head :not_found # refactor this
     end
+  end
+
+  def edit
+    @task = Task.find_by(id: params[:id])
+    if @task.nil?
+      redirect_to tasks_path
+      return
+    end
+  end
+
+  def update
+    task = Task.find_by(id: params[:id])
+
+    if task.nil?
+      redirect_to tasks_path
+      return
+    end
+
+    is_successful = task.update(task_params)
+
+    if is_successful
+      redirect_to tasks_path
+    else
+      head :not_found
+    end
+  end
+
+  def destroy
+    task = Task.find_by(id: params[:id])
+
+    if task.nil?
+      head :not_found # refactor
+    else
+      task.destroy
+      redirect_to tasks_path
+    end
+  end
+
+  def mark_complete
+    task = Task.find_by(id: params[:id])
+
+    if task.completed
+      cd = nil
+    else
+      cd = DateTime.now
+    end
+
+    if task.nil?
+      head :not_found # refactor
+    else
+      task.update(completed: !(task[:completed]), completion_date: cd)
+      redirect_to tasks_path
+    end
+  end
+
+  private
+
+  def task_params
+    return params.require(:task).permit(:name, :description, :due_date)
   end
 end

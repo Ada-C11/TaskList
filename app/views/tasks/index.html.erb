@@ -1,8 +1,18 @@
 <h1>Tasks</h1>
+
+<% tasks_sorted = @tasks.sort_by { |task| task.created_at } %>
+
 <ol>
-  <% @tasks.each do |task| %>
+  <% tasks_sorted.each do |task| %>
+    <% if task.completed %>
+      <% status = "completed" %>
+    <% elsif task.due_date && task.due_date < DateTime.now %>
+      <% status = "overdue" %>
+    <% else %>
+      <% status = "in-progress" %>
+    <% end %>
     <li>
-      <h2><%= link_to task.name, task_path(task.id) %></h2><br>
+      <h2 class="<%= status %>"><%= link_to task.name, task_path(task.id) %></h2>
     </li>
   <% end %>
 </ol>
