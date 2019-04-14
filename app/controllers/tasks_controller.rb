@@ -13,9 +13,22 @@ class TasksController < ApplicationController
   def show
     task_id = params[:id].to_i
     @task = Task.find_by(id: task_id)
+    if @task.nil?
+      flash[:error] = "Could not find task with id: #{task_id}"
+      redirect_to action: "index", status: 302
+    end
   end
 
   def new
     @task = Task.new
+  end
+
+  def create
+    @task = Task.new(name: params[:task][:name], description: params[:task][:description], completion_date: params[:task][:completion_date])
+    if @task.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 end

@@ -422,3 +422,350 @@ Processing by TasksController#index as HTML
 Completed 200 OK in 35ms (Views: 31.4ms | ActiveRecord: 0.3ms)
 
 
+Started GET "/tasks" for ::1 at 2019-04-12 15:27:29 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (11.8ms)
+Completed 200 OK in 31ms (Views: 22.3ms | ActiveRecord: 5.5ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-12 15:27:30 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 25ms (Views: 20.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-04-12 15:27:32 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 38ms (Views: 34.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/tasks" for ::1 at 2019-04-12 15:27:46 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"hczZP1h8SVoCOV+PgvXZqVMBCMDfzeze0jEfX7HqXz4a6bIZ0upudnfomDFc/3rKaeYpZhRm44u41kvdmERSOQ==", "task"=>{"name"=>"Running", "completion_date"=>"", "description"=>"Go for a run"}, "commit"=>"Save task"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `save' for nil:NilClass:
+  app/controllers/tasks_controller.rb:24:in `create'
+
+Started POST "/__better_errors/bf5ea5251625b56e/variables" for ::1 at 2019-04-12 15:27:46 -0700
+Started GET "/tasks" for ::1 at 2019-04-12 15:28:07 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 28ms (Views: 21.8ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-04-12 15:28:09 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 22ms (Views: 19.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/tasks" for ::1 at 2019-04-12 15:28:17 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YS2x+DjlBQOs1azre/CeTK2I2st5Nl9YGH408lk8xS/+CNresnMiL9kEa1Wl+j0vl2/7bbKdUA1ymWBwcJLIKA==", "task"=>{"name"=>"Run", "completion_date"=>"", "description"=>"Go for a run"}, "commit"=>"Save task"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:24
+  [1m[36mTask Create (3.2ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Run"], ["description", "Go for a run"], ["created_at", "2019-04-12 22:28:17.744044"], ["updated_at", "2019-04-12 22:28:17.744044"]]
+  ↳ app/controllers/tasks_controller.rb:24
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:24
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 3.9ms)
+
+
+Started GET "/" for ::1 at 2019-04-12 15:28:17 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 17ms (Views: 14.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tasks/3" for ::1 at 2019-04-12 15:28:19 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 21ms (Views: 17.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-12 15:28:20 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 25ms (Views: 21.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tasks/3" for ::1 at 2019-04-14 13:48:26 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 111ms (Views: 82.0ms | ActiveRecord: 6.2ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-14 13:48:28 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 38ms (Views: 32.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-14 13:56:46 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 26ms (Views: 23.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-14 13:56:48 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 30ms (Views: 25.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-14 13:56:49 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 30ms (Views: 25.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-14 13:56:50 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 26ms (Views: 22.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-14 13:56:50 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 25ms (Views: 20.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tasks/1" for ::1 at 2019-04-14 13:56:55 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 23ms (Views: 19.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-14 13:56:56 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 28ms (Views: 24.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-14 14:23:05 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (11.7ms)
+Completed 200 OK in 35ms (Views: 26.0ms | ActiveRecord: 5.8ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-04-14 14:23:08 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 24ms (Views: 20.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/tasks" for ::1 at 2019-04-14 14:23:19 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LT3WwSBThJja2l5eFXI8S3/nIGRezkJ4W2K7Tbbug9WyGL3nqsWjtK8LmeDLeJ8oRQABwpVlTS0xhe/Pn0CO0g==", "task"=>{"name"=>"study", "completion_date"=>"tomorrow", "description"=>"study for class"}, "commit"=>"Save task"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+
+RuntimeError - :
+  app/controllers/tasks_controller.rb:28:in `create'
+
+Started POST "/__better_errors/ec06b885f7007ecc/variables" for ::1 at 2019-04-14 14:23:19 -0700
+Started POST "/__better_errors/ec06b885f7007ecc/eval" for ::1 at 2019-04-14 14:23:25 -0700
+Started POST "/__better_errors/ec06b885f7007ecc/eval" for ::1 at 2019-04-14 14:24:00 -0700
+Started POST "/__better_errors/ec06b885f7007ecc/eval" for ::1 at 2019-04-14 14:24:01 -0700
+Started GET "/tasks" for ::1 at 2019-04-14 14:24:30 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (9.8ms)
+Completed 200 OK in 28ms (Views: 22.0ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-04-14 14:24:32 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 25ms (Views: 22.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/tasks" for ::1 at 2019-04-14 14:24:38 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VWqn1T4lkj98M/SxNR0r9a8/ARXVAGg1zaaZ/uqIiorKT8zztLO1EwniMw/rF4iWldggsx6rZ2CnQc18wyaHjQ==", "task"=>{"name"=>"study", "completion_date"=>"tomorrow", "description"=>"studying"}, "commit"=>"Save task"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+
+RuntimeError - :
+  app/controllers/tasks_controller.rb:28:in `create'
+
+Started POST "/__better_errors/a46a40cf5e53d89f/variables" for ::1 at 2019-04-14 14:24:38 -0700
+Started POST "/__better_errors/a46a40cf5e53d89f/eval" for ::1 at 2019-04-14 14:24:42 -0700
+Started POST "/__better_errors/a46a40cf5e53d89f/eval" for ::1 at 2019-04-14 14:24:46 -0700
+Started POST "/__better_errors/a46a40cf5e53d89f/eval" for ::1 at 2019-04-14 14:24:51 -0700
+Started POST "/tasks" for ::1 at 2019-04-14 14:25:21 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VWqn1T4lkj98M/SxNR0r9a8/ARXVAGg1zaaZ/uqIiorKT8zztLO1EwniMw/rF4iWldggsx6rZ2CnQc18wyaHjQ==", "task"=>{"name"=>"study", "completion_date"=>"tomorrow", "description"=>"studying"}, "commit"=>"Save task"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:28
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "study"], ["description", "studying"], ["created_at", "2019-04-14 21:25:22.011373"], ["updated_at", "2019-04-14 21:25:22.011373"]]
+  ↳ app/controllers/tasks_controller.rb:28
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:28
+Redirected to http://localhost:3000/
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 3.3ms)
+
+
+
+RuntimeError - :
+  app/controllers/tasks_controller.rb:33:in `create'
+
+Started POST "/__better_errors/3a743c21c22caaf1/variables" for ::1 at 2019-04-14 14:25:22 -0700
+Started POST "/__better_errors/3a743c21c22caaf1/eval" for ::1 at 2019-04-14 14:25:25 -0700
+Started POST "/__better_errors/3a743c21c22caaf1/eval" for ::1 at 2019-04-14 14:25:30 -0700
+Started POST "/__better_errors/3a743c21c22caaf1/eval" for ::1 at 2019-04-14 14:26:18 -0700
+Started POST "/__better_errors/3a743c21c22caaf1/eval" for ::1 at 2019-04-14 14:26:28 -0700
+Started GET "/tasks" for ::1 at 2019-04-14 14:27:07 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (12.8ms)
+Completed 200 OK in 43ms (Views: 36.4ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/tasks/4" for ::1 at 2019-04-14 14:27:09 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:15
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 26ms (Views: 21.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/tasks" for ::1 at 2019-04-14 14:27:11 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 26ms (Views: 22.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-04-14 14:27:26 -0700
+Processing by TasksController#new as HTML
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/new.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 30ms (Views: 18.4ms | ActiveRecord: 2.6ms)
+
+
+Started POST "/tasks" for ::1 at 2019-04-14 14:27:36 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"E8gTcSn9oxkFgQYB7psfOaQvLUim5tgTk/3dsB763LuM7XhXo2uENXBQwb8wkbxansgM7m1N10b5GokyN1TRvA==", "task"=>{"name"=>"study cs", "completion_date"=>"today", "description"=>"study for cs"}, "commit"=>"Save task"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:28
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "study cs"], ["description", "study for cs"], ["created_at", "2019-04-14 21:27:36.761612"], ["updated_at", "2019-04-14 21:27:36.761612"]]
+  ↳ app/controllers/tasks_controller.rb:28
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:28
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 2.7ms)
+
+
+
+RuntimeError - :
+  app/controllers/tasks_controller.rb:29:in `create'
+
+Started POST "/__better_errors/b322482c13128f57/variables" for ::1 at 2019-04-14 14:27:36 -0700
+Started POST "/__better_errors/b322482c13128f57/eval" for ::1 at 2019-04-14 14:27:41 -0700
+Started POST "/__better_errors/b322482c13128f57/eval" for ::1 at 2019-04-14 14:27:49 -0700
+Started POST "/__better_errors/b322482c13128f57/eval" for ::1 at 2019-04-14 14:28:17 -0700
+Started POST "/tasks" for ::1 at 2019-04-14 14:29:26 -0700
+Processing by TasksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"E8gTcSn9oxkFgQYB7psfOaQvLUim5tgTk/3dsB763LuM7XhXo2uENXBQwb8wkbxansgM7m1N10b5GokyN1TRvA==", "task"=>{"name"=>"study cs", "completion_date"=>"today", "description"=>"study for cs"}, "commit"=>"Save task"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:28
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "completion_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "study cs"], ["description", "study for cs"], ["completion_date", "today"], ["created_at", "2019-04-14 21:29:26.385672"], ["updated_at", "2019-04-14 21:29:26.385672"]]
+  ↳ app/controllers/tasks_controller.rb:28
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:28
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 3.2ms)
+
+
+
+RuntimeError - :
+  app/controllers/tasks_controller.rb:29:in `create'
+
+Started POST "/__better_errors/3c626c223878e53e/variables" for ::1 at 2019-04-14 14:29:26 -0700
+Started POST "/__better_errors/3c626c223878e53e/eval" for ::1 at 2019-04-14 14:29:30 -0700
+Started POST "/__better_errors/3c626c223878e53e/eval" for ::1 at 2019-04-14 14:29:33 -0700
+Started POST "/__better_errors/3c626c223878e53e/eval" for ::1 at 2019-04-14 14:29:38 -0700
+Started GET "/tasks" for ::1 at 2019-04-14 14:33:03 -0700
+Processing by TasksController#index as HTML
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:4
+  Rendered tasks/index.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 25ms (Views: 18.7ms | ActiveRecord: 2.3ms)
+
+
