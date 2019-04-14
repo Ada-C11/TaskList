@@ -109,6 +109,7 @@ describe TasksController do
 
       patch task_path(new_task.id), params: new_name
       new_task.reload
+      expect(new_task.name).must_equal "Changed name"
     end
 
 
