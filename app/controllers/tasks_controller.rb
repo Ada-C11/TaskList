@@ -8,19 +8,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new
-
-    unless params["task"]
-      render :new, status: :bad_request
-      return
-    end
-
-    @task.name = params["task"]["name"]
-    @task.description = params["task"]["description"]
-    @task.completion = params["task"]["completion"]
-
+    @task = Task.new(task_params)
     @task.save
-
     redirect_to tasks_path
   end
 
@@ -48,19 +37,14 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id])
+    task = Task.find(params[:id])
     
     unless params["task"]
       render :new, status: :bad_request
       return
     end
 
-    @task.name = params["task"]["name"]
-    @task.description = params["task"]["description"]
-    @task.completion = params["task"]["completion"]
-
-    @task.save
-
+    task.update(task_params)
     redirect_to tasks_path
   end
 
@@ -71,4 +55,9 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
+  private
+
+  def task_params
+    return params.require(:task).permit(:name, :description, :completion, :completed_at)
+  end
 end
