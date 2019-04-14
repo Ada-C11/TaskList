@@ -2,7 +2,11 @@
 <ul>
   <% @tasks.each do |task|%>
     <li>
-      <%= "#{task.name}: #{task.description}" %>
+      <%= link_to task.name.capitalize, task_path(task)%>
+      <br>
+      <%= "Description: #{task.description.capitalize}"%>
+      <%= link_to "Edit", edit_task_path(task)%> 
+      <%= link_to "Delete", task_path(task), method: :delete, data: {confirm: "Are you sure?"} %>
       <%= form_with url: toggle_complete_task_path(task.id), method: :patch do |f| %>
         <%= f.submit (task.completion_date ? "Unmark Complete" : "Mark Complete") %>
       <% end %>
