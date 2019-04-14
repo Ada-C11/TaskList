@@ -8,11 +8,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    puts "Made it"
-    task = Task.new(
-      name: params["task"]["name"],
-      description: params["task"]["description"],
-    )
+    task = Task.new(task_params)
 
     task.save
 
@@ -47,10 +43,7 @@ class TasksController < ApplicationController
       return
     end
 
-    task.update(
-      name: params["task"]["name"],
-      description: params["task"]["description"],
-    )
+    task.update(task_params)
 
     redirect_to task_path(task)
   end
@@ -86,5 +79,11 @@ class TasksController < ApplicationController
     task.destroy
 
     redirect_to tasks_path
+  end
+
+  private
+
+  def task_params
+    return params.require(:task).permit(:name, :description)
   end
 end
