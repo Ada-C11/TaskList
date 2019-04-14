@@ -1,9 +1,4 @@
 class TasksController < ApplicationController
-  TASKS = [
-    {todo: "Task List Project", when: "today"},
-    {todo: "Groceries", when: "Friday"},
-  ]
-
   def index
     @tasks = Task.all
   end
@@ -21,11 +16,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new(
-      name: params["task"]["name"],
-      description: params["task"]["description"],
-      completion_date: params["task"]["completion_date"],
-    )
+    task = Task.new(task_params)
 
     if task.name == "" || task.description == "" || task.completion_date == ""
       task.save = false
@@ -50,15 +41,14 @@ class TasksController < ApplicationController
   end
 
   def update
-    task_id = params[:id].to_i
-    task = Task.find_by(id: task_id)
+    edit_task_id = params[:id].to_i
+    edited_task = Task.find_by(id: edit_task_id)
 
-    # save??
-
-    if task.nil?
-      redirect_to task_path(@task.id)
+    if edited_task != nil
+      edited_task.update(task_params)
+      redirect_to root_path
     else
-      task.update
+      redirect_to root_path
     end
   end
 
@@ -71,5 +61,15 @@ class TasksController < ApplicationController
       task.destroy
       redirect_to tasks_path
     end
+  end
+
+  def complete
+    task = Task.find_by(id: params)
+  end
+
+  private
+
+  def task_params
+    return params.require(:task).permit(:name, :description, :completion_date, :status => false)
   end
 end

@@ -93,9 +93,10 @@ describe TasksController do
   describe "edit" do
     it "can get the edit page for an existing task" do
       #Arrange
-      new_task = Task.create(name: "Study")
+      existing_task = Task.create(name: "Study")
+
       # Act
-      get edit_task_path(new_task)
+      get edit_task_path(existing_task)
       # Assert
       must_respond_with :success
     end
@@ -114,13 +115,35 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
-      # Your code here
+      update_task_hash = {
+        task: {
+          name: "update task",
+          description: "new task description",
+          completion_date: "today",
+        },
+      }
+      existing_task = Task.create(name: "Hiking", description: "fun", completion_date: "Friday")
+
+      patch task_path(existing_task), params: update_task_hash
+
+      existing_task.reload
+      expect(existing_task.completion_date).must_equal "today"
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      # Arrange
+      update_task_hash = {
+        task: {
+          name: "update task",
+          description: "new task description",
+          completion_date: "today",
+        },
+      }
+      invalid_task_id = "Invalid" 
+      #Act
+      patch task_path(invalid_task_id), params: update_task_hash
+      # Assert
+      must_redirect_to root_path
     end
   end
 
