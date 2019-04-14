@@ -1,5 +1,3 @@
-TASKS = ["walk the dog", "make a bank deposit", "get groceries and stuff"]
-
 class TasksController < ApplicationController
   def index
     @tasks = Task.all
