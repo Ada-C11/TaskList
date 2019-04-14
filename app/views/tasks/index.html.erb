@@ -1,0 +1,31 @@
+<section id="all_tasks">
+<h2>Do these things:</h2>
+<ol>
+  <% @tasks.each do |task| %>
+    <section id="list-tasks">
+    <% if task.completed == false %>
+      <li><strong><%= link_to "Task: #{task.name}", task_path(task.id) %></strong></li>
+    <% elsif task.completed == true %>
+      <li id="crossed-off"><%= link_to "Task: #{task.name}", task_path(task.id) %></li>
+    <% end %>
+      <ul id="mini-buttons">
+      <li id="edit-button">
+        <%= link_to "Edit", edit_task_path(task.id) %> |
+      </li>
+      <li id="delete-button">
+        <%= link_to "Delete", task_path(task.id), method: :delete, data: {confirm: "Are you sure you'd like to delete this path?"}%> | 
+      </li>
+      <li>
+        <% if task.completed == false %>
+          <%= link_to "Mark", marked_task_path(task.id), method: :patch %>
+        <% else %>
+          <%= link_to "Unmark", marked_task_path(task.id), method: :patch %>
+        <% end %>
+      </li>
+      </ul>
+    </section>
+  <% end %>
+
+</section>
+
+
