@@ -38,7 +38,7 @@ class TasksController < ApplicationController
     @task = Task.find_by(id: params[:id])
 
     if @task.nil?
-      flash[:error] = "There is no task with the id #{params[:id]}"
+      flash[:error] = "That task does not exist."
       redirect_to action: 'index', status: 302
     end
   end
@@ -64,17 +64,19 @@ class TasksController < ApplicationController
     task = Task.find_by(id: params[:id])
     if task[:completed] == false
       task[:completed] = true
-      @task.completion_date = Time.now
+      task.completion_date = DateTime.now
     else
       task[:completed] = false
+      task[:completion_date] =  (DateTime.now).to_s
     end
-    @task.save
+
+    task.save
     redirect_to tasks_path
   end
 
-  def destroy
-    task = Task.find_by(id:  params[:id] )
 
+  def destroy
+    task = Task.find_by(id: params[:id] )
     if task.nil?
       head :not_found
     else

@@ -8,7 +8,6 @@ describe TasksController do
                 completion_date: "completion date"
   }
 
-  # Tests for Wave 1
   describe "index" do
     it "can get the index path" do
       # Act
@@ -27,10 +26,8 @@ describe TasksController do
     end
   end
 
-  # Unskip these tests for Wave 2
   describe "show" do
-    it "can get a valid task" do
-      
+    it "can get a valid task" do 
       # Act
       get task_path(task.id)
 
@@ -50,8 +47,6 @@ describe TasksController do
 
   describe "new" do
     it "can get the new task page" do
-      
-
       # Act
       get new_task_path
 
@@ -62,9 +57,6 @@ describe TasksController do
 
   describe "create" do
     it "can create a new task" do
-      # Arrange
-      # Note to students:  Your Task model **may** be different and
-      #   you may need to modify this.
       task_hash = {
         task: {
           name: "new task",
@@ -87,7 +79,6 @@ describe TasksController do
     end
   end
 
-  # Unskip and complete these tests for Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
       # Act
@@ -106,7 +97,6 @@ describe TasksController do
     end
   end
 
-  # Uncomment and complete these tests for Wave 3
   describe "update" do
 
     it "can update an existing task" do
@@ -142,6 +132,35 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+
+    it "returns success" do
+      patch complete_task_path(task.id)
+
+      must_respond_with :found
+    end
+
+    it "updates completion date to current date" do
+      patch complete_task_path(task.id)
+
+      complete = Task.find_by(id: task.id)
+
+      expect(complete.completion_date).must_equal (DateTime.now).to_s
+    end
+
+    it "won't update completed task date during complete incomplete toggle" do
+      task = Task.create(
+        name: "Home",
+        description: "Walk the dog",
+        completion_date: "April, 11th 2019",
+      )
+
+      patch complete_task_path(task.id)
+
+      toggle = Task.find_by(id: task.id)
+    
+      expect(toggle.completion_date).must_equal "April, 11th 2019"
+
+    end
+
   end
 end
