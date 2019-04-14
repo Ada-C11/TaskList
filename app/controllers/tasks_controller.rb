@@ -37,7 +37,11 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find_by(id: params[:id])
-    # redirect_to task_path
+
+    unless @task
+      head :not_found
+      return
+    end
 
     @task.update(task_params)
 
@@ -70,7 +74,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    return params.permit(:name, :completion_date, :description, :completed_at)
+    return params.require(:task).permit(:name, :completion_date, :description, :completed_at)
   end
 
   def set_task

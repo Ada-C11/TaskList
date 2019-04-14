@@ -109,8 +109,6 @@ describe TasksController do
       task_data = {
         task: {
           name: "updated test task",
-          description: "description",
-          completion_date: "April 24, 2019",
         },
       }
 
@@ -136,12 +134,36 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "removes the book from the database" do
+      # Arrange
+      task = Task.create!(name: "DESTROY_task")
 
+      # Act
+      expect {
+        delete task_path(task)
+      }.must_change "Task.count", -1
+
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+
+      after_task = Task.find_by(id: task.id)
+      expect(after_task).must_be_nil
+    end
   end
 
   # Complete for Wave 4
-  describe "toggle_complete" do
-    # Your tests go here
+  describe "mark complete" do
+    it "updates the database" do
+      task = Task.create!(name: "test_for_complete")
+
+      # Act
+      patch complete_path(task.id)
+
+      # Assert
+      after_task = Task.find_by(id: task.id)
+      expect(after_task.completed_at).wont_be_nil
+      expect(after_task.completed_at).must_be_kind_of Time
+    end
   end
 end
