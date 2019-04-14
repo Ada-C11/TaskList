@@ -1,9 +1,9 @@
 <section id="all_tasks">
-<h2>All the tasks needed to be done!</h2>
+<h2>Do these things:</h2>
 <ol>
   <% @tasks.each do |task| %>
     <section id="list-tasks">
-    <% if task.completed == false || task.completed == nil %>
+    <% if task.completed == false %>
       <li><strong><%= link_to "Task: #{task.name}", task_path(task.id) %></strong></li>
     <% elsif task.completed == true %>
       <li id="crossed-off"><%= link_to "Task: #{task.name}", task_path(task.id) %></li>
