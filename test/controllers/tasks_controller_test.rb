@@ -140,6 +140,15 @@ describe TasksController do
       must_respond_with :redirect
       # Your code here
     end
+
+    it "will not update if the params are invalid" do
+      id = task.id
+  
+      expect {
+        patch task_path(id), params: {}
+      }.must_raise ActionController::ParameterMissing
+
+    end
   end
 
   # Complete these tests for Wave 4

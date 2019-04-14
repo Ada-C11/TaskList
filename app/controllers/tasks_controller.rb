@@ -10,12 +10,7 @@ class TasksController < ApplicationController
 
   def create
 
-    task = Task.new( 
-      name: params["task"]["name"], 
-      description: params["task"]["description"],
-      completion_date: params["task"]["completion_date"],
-      completed: false
-      )
+    task = Task.new(task_params)
 
     task.save
     redirect_to tasks_path
@@ -45,7 +40,7 @@ class TasksController < ApplicationController
     if @task == nil
       redirect_to tasks_path
     else
-      @task.update(name: params[:task][:name], description: params[:task][:description], completion_date: params[:task][:completion_date])
+      @task.update(task_params)
       redirect_to task_path(@task)
     end
 
@@ -77,5 +72,13 @@ class TasksController < ApplicationController
       render :notfound, status: :not_found
     end
   end
+
+  private
+
+  def task_params
+    return params.require(:task).permit(:name, :completion_date, :completed, :description)
+  end
+
+
 
 end
