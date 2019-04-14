@@ -4,8 +4,7 @@ describe TasksController do
   # Note to students:  Your Task model **may** be different and
   #   you may need to modify this.
   let (:task) {
-    Task.create name: "sample task", description: "this is an example for a test",
-                completed_at: DateTime.new
+    Task.create name: "sample task", description: "this is an example for a test"
   }
 
   # Tests for Wave 1
@@ -69,7 +68,6 @@ describe TasksController do
         task: {
           name: "new task",
           description: "new task description",
-          completed_at: DateTime.now,
         },
       }
 
@@ -174,6 +172,16 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "changes the complete field to true, marking the task as complete" do
+      task
+
+      # expect(task.completed).must_equal true
+
+      patch mark_complete_path(task.id)
+
+      task.reload
+
+      expect(task.completed).must_equal true
+    end
   end
 end

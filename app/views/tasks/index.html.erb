@@ -6,7 +6,19 @@
 <li>
 
 
-<%= link_to task.name, task_path(task.id) %> : <%= task[:description] %>
+
+
+
+<%= link_to task.name, task_path(task.id) %>
+
+
+<% if task.completed == false %>
+<%= button_to "Mark Complete", mark_complete_path(task.id), method: :patch, class: "complete-button"  %>
+
+<%else%>
+<%= button_to "Mark Incomplete", mark_complete_path(task.id), method: :patch, class: "incomplete-button"   %>
+
+<%end %>
 
 </li>
 <% end%>

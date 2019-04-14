@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   ]
 
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order(:name)
   end
 
   def show
@@ -74,13 +74,17 @@ class TasksController < ApplicationController
     end
   end
 
-  def toggle
+  def mark_complete
+    task = Task.find_by(id: params[:id])
+    task.toggle(:completed)
+    task.save
+    task.touch
   end
 
   private
 
   def task_params
-    return params.require(:task).permit(:name, :description, :completed_at)
+    return params.require(:task).permit(:name, :description, :completed)
     #need to update def create if you want to use this.
     #only permitted params can be allowed, so make sure to include what you want
   end
