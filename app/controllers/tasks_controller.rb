@@ -17,7 +17,9 @@ class TasksController < ApplicationController
   def create
     task = Task.new(task_params)
 
-    if task.save
+    if task.name == ""
+      redirect_to tasks_path
+    elsif task.save
       redirect_to task_path(task.id)
     else
       head :bad_request
