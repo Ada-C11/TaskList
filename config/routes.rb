@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # post "/tasks", to: "tasks#create"
 
   # get "/tasks/:id", to: "tasks#show", as: "task"
+  get "/tasks/completed", to: "tasks#completed", as: "completed_tasks"
 
   resources :tasks
   # resources :tasks, only: [:index, :new, :create, :show]

@@ -8,8 +8,8 @@ class TasksController < ApplicationController
     @task = Task.find_by(id: task_id)
 
     if @task.nil?
-      redirect_to task_path
-      flash[:error] = "Could not find task with id: #{params[:id]}"
+      # to pass the test. I'm wondering why it redirects instead of giving a 404 page.
+      redirect_to tasks_path
     end
   end
 
@@ -28,26 +28,49 @@ class TasksController < ApplicationController
     is_successful = task.save
     if is_successful
       redirect_to task_path(task.id)
-      flash[:success] = "Task successfully created!"
+      # flash[:success] = "Task successfully created!"
     else
       redirect_to task_path(task_id)
-      flash[:error] = "Cannot create task: #{params[:name]}"
+      # flash[:error] = "Cannot create task: #{params[:name]}"
     end
   end
 
   def edit
     @task = Task.find_by(id: params[:id])
+    if @task.nil?
+      # need to check again
+      redirect_to tasks_path
+    end
   end
 
   def update
     task = Task.find_by(id: params[:id])
+    if task.nil?
+      redirect_to root_path
+    end
 
     is_successful = task.update(task_params)
     if is_successful
       redirect_to task_path(task.id)
     else
-      flash[:error] = "Cannot create task: #{params[:name]}"
+      redirect_to tasks_path
+      # flash[:error] = "Cannot create task: #{params[:name]}"
     end
+  end
+
+  def destroy
+    task = Task.find_by(id: params[:id])
+
+    if task.nil?
+      head :not_found
+    else
+      task.destroy
+      redirect_to tasks_path
+    end
+  end
+
+  def completed #might change
+    @tasks = Task.where(complete: false)
   end
 
   private

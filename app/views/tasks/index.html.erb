@@ -4,9 +4,8 @@
 <ul>
     <% @tasks.each do |task| %>
         <li>
-            <a href="tasks/<%= task.id %>" >
-                <%= task.name %>
-            </a>
+            <%= link_to task.name, task_path(task.id) %>
+            <%= link_to "Delete", task_path(task.id), :data => {:confirm => 'Are you sure?'}, method: :delete %>
         </li>
     <% end%>
 </ul>
