@@ -1,5 +1,3 @@
-require 'pry'
-
 class TasksController < ApplicationController
   def index
     @tasks = Task.all
@@ -64,9 +62,9 @@ class TasksController < ApplicationController
     task_id = params[:id]
     task = Task.find_by(id: task_id)
 
-    task.complete = !task.complete
+    task.completed = !task.completed
 
-    if task.complete
+    if task.completed
       task.completion_date = Date.today
     else
       task.completion_date = nil
