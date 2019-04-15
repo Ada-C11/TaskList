@@ -5,7 +5,7 @@ require "test_helper"
 describe TasksController do
   let (:task) do
     Task.create name: "sample task", description: "this is an example for a test",
-                completion: Time.now + 5.days
+                completion: "2019-05-13", completion_status: false
   end
 
   # Tests for Wave 1
@@ -77,6 +77,7 @@ describe TasksController do
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
       expect(new_task.completion.strftime("%Y-%m-%d")).must_equal task_hash[:task][:completion]
+      expect(new_task.completion_status).must_equal false
 
       must_respond_with :redirect
       must_redirect_to task_path(new_task.id)
@@ -131,7 +132,7 @@ describe TasksController do
   # Complete these tests for Wave 4
   describe "destroy" do
     it "removes task from the database" do
-      task = Task.create!(name: "Feed Chewy")
+      task = Task.create!(name: "Let Chewy Out")
 
       expect do
         delete task_path(task)
@@ -140,17 +141,17 @@ describe TasksController do
       must_respond_with :redirect
       must_redirect_to tasks_path
 
-      task_2 = Task.find_by(id: task_2)
-      expect(task_2).must_be_nil
+      after_task = Task.find_by(id: task.id)
+      expect(after_task).must_be_nil
     end
 
     it "returns a 404 if the task does not exist" do
-      task_3 = 500
+      task_500 = 500
 
-      expect(Task.find_by(id: task_3)).must_be_nil
+      expect(Task.find_by(id: task_500)).must_be_nil
 
       expect do
-        delete task_path(task_3)
+        delete task_path(task_500)
       end.wont_change "Task.count"
 
       must_respond_with :not_found
@@ -160,5 +161,48 @@ describe TasksController do
   # Complete for Wave 4
   describe "toggle_complete" do
     # Your tests go here
+    it "marks a task as complete or incomplete" do
+      patch toggle_path(task.id)
+
+      toggle_1 = Task.find_by(id: task.id)
+
+      expect(toggle_1.completion_status).must_equal true
+    end
+
+    it "is able to mark a task as complete or incomplete" do
+      patch toggle_path(task.id)
+
+      toggle_1 = Task.find_by(id: task.id)
+
+      expect(toggle_1.completion_status).must_equal true
+
+      patch toggle_path(task.id)
+
+      toggle_2 = Task.find_by(id: task.id)
+
+      expect(toggle_2.completion_status).must_equal false
+    end
+
+    it "updates date of a completed task to the current date" do
+      patch toggle_path(task.id)
+
+      toggle = Task.find_by(id: task.id)
+
+      expect(toggle.completion.strftime("%Y-%m-%d")).must_equal Time.now.strftime("%Y-%m-%d")
+    end
+
+    it "doesnt update completed task date when going from complete to incomplete" do
+      task = Task.create!(
+        name: "Let Chewy out",
+        completion: "2019-05-13",
+        completion_status: true,
+      )
+
+      patch toggle_path(task.id)
+
+      toggle = Task.find_by(id: task.id)
+
+      expect(toggle.completion.strftime("%Y-%m-%d")).must_equal "2019-05-13"
+    end
   end
 end

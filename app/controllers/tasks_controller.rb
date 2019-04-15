@@ -49,7 +49,7 @@ class TasksController < ApplicationController
     id = params[:id]
     task = Task.find_by(id: id)
 
-    unless @task
+    unless task
       head :not_found
       return
     end

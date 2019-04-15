@@ -1,4 +1,4 @@
-<h2>Your Tasks</h2>
+<h1>YOUR TASKS ʕ•́ᴥ•̀ʔっ</h1>
 <ol>
   <% @tasks.each do | task | %>
     <% if task[:completion_status] == false %>
@@ -12,13 +12,13 @@
       <li><%= "Completion Date: #{task.completion}" %></li>
       <p class = "task_actions">
         <% if task.completion_status %>
-          <sub><%= link_to "Mark as incomplete", toggle_path(task.id), method: :patch %></sub>
+          <sub><%= link_to "Incomplete", toggle_path(task.id), method: :patch %></sub>
         <% else %>
-          <sub><%= link_to "Mark as Complete", toggle_path(task.id), method: :patch %></sub>
+          <sub><%= link_to "Completed", toggle_path(task.id), method: :patch %></sub>
         <% end %>
 
         <sub><%= link_to "Edit", edit_task_path(task.id) %></sub>
-        <sub><%= link_to "Delete", task_path(task.id), method: :delete, data: { confirm: "Do you really want to delete?" } %></sub>
+        <sub><%= link_to "Delete", task_path(task.id), method: :delete, data: { confirm: "Please confirm action" } %></sub>
       </p>
     </ul>
 
