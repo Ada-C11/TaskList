@@ -1,6 +1,6 @@
-require_relative 'boot'
+require_relative "boot"
 
-require 'rails/all'
+require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module TaskList
   class Application < Rails::Application
+    config.time_zone = "Pacific Time (US & Canada)"
     config.generators do |g|
       # Force new test files to be generated in the minitest-spec style
       g.test_framework :minitest, spec: true

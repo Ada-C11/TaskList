@@ -10,10 +10,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    task_id = params[:id]
-    @task = Task.find_by(id: task_id)
-
-    # puts params
+    @task = Task.find_by(id: params[:id])
 
     if @task.nil?
       redirect_to root_path
@@ -79,6 +76,8 @@ class TasksController < ApplicationController
     task.toggle(:completed)
     task.save
     task.touch
+
+    redirect_to tasks_path
   end
 
   private
