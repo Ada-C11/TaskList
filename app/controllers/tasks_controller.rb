@@ -19,11 +19,13 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new(
-      name: params['task']['name'],
-      description: params['task']['description'],
-      completion_date: Date.parse(params['task']['completion_date'])
-    )
+    @task = Task.new
+    
+    @task.name = params[:task][:name]
+    @task.description = params[:task][:description]
+    if params[:task][:date]
+      @task.date = Date.parse(params[:task][:date])
+    end
 
     task.save
 
@@ -41,11 +43,37 @@ class TasksController < ApplicationController
   end
 
   def update
-    task = Task.find_by(id: params[:id])
+    task_id = params[:id]
+    @task = Task.find_by(id: task_id)
 
-    task.update(task_params)
+    @task.update(task_params)
 
-    redirect_to task_path(task)
+    redirect_to task_path(@task)
+  end
+
+  def destroy
+    task_id = params[:id]
+    task = Task.find_by(id: task_id)
+
+    task.destroy 
+
+    redirect_to tasks_path
+  end
+
+  def complete
+    task_id = params[:id]
+    task = Task.find_by(id: task_id)
+
+    task.complete = !task.complete
+
+    if task.complete
+      task.completion_date = Date.today
+    else
+      task.completion_date = nil
+    end
+
+    task.save
+    redirect_to tasks_path
   end
 
   private

@@ -118,9 +118,14 @@ describe TasksController do
     #        thing to test.
     it "can update an existing task" do
       # Arrange
-      
-      
+      task.description = "this is an example update"
+      task.save
+      task_id = task.id
+
       # Act
+      # expect {
+      #   patch task_path(task_id)
+      # }
 
       # Assert
     end
