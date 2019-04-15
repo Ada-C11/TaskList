@@ -58,6 +58,15 @@ class TasksController < ApplicationController
     end
   end
 
+  def toggle
+    task = Task.find_by(id: params[:id])
+    task.current_status?
+    task.toggle(:current_status)
+    task.save
+
+    redirect_to tasks_path
+  end
+
   def destroy
     task = Task.find_by(id: params[:id])
     if task.nil?

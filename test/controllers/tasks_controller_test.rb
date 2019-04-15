@@ -14,7 +14,7 @@ describe TasksController do
       # Act
       get tasks_path
 
-      # Assert
+      # Assert  
       must_respond_with :success
     end
 
