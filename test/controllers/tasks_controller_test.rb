@@ -126,13 +126,7 @@ describe TasksController do
     end
 
     it "will redirect to the root page if given an invalid id" do
-      edit_hash = {
-        task: {
-          title: "edited task",
-        },
-      }
-
-      patch task_path(999), params: edit_hash
+      patch task_path(-1)
 
       must_respond_with :redirect
     end
@@ -165,8 +159,8 @@ describe TasksController do
     it "marks as complete" do
       test_task = Task.create(title: "poop", description: "more poop", completion: false)
 
-      get mark_complete_path(test_task.id)
-      # patch mark_complete_path(test_task.id)
+      patch mark_complete_path(test_task.id)
+      test_task.reload
 
       expect(test_task.completion).must_equal true
     end

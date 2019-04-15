@@ -37,9 +37,10 @@ class TasksController < ApplicationController
     task = Task.find_by(id: params[:id])
     if task.nil?
       redirect_to tasks_path
+    else
+      task.update(task_params)
+      redirect_to task_path(task.id)
     end
-    task.update(task_params)
-    redirect_to task_path(task.id)
   end
 
   def delete
