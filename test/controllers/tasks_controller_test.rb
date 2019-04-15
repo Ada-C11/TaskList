@@ -142,15 +142,23 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
+    it "will redirect if ID is invalid" do
+      invalid_id = "NOT A VALID ID"
+
+      delete task_path(invalid_id)
+
+      must_respond_with :redirect
+    end
+
     it "can delete a task" do
       new_task = Task.create(name: "start code hw")
 
       expect {
-        delete task_path(new_task.id), params: new_task
+        delete task_path(new_task)
       }.must_change "Task.count", -1
 
       must_respond_with :redirect
-      must_redirect_to task_path
+      must_redirect_to root_path
     end
   end
 
