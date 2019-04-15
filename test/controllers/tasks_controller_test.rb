@@ -75,7 +75,7 @@ describe TasksController do
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
       # expect(new_task.due_date.to_time.to_i).must_equal task_hash[:task][:due_date].to_i
-      expect(new_task.completed).must_equal task_hash[:task][:completed]
+      # expect(new_task.completed).must_equal task_hash[:task][:completed]
 
       must_respond_with :redirect
       must_redirect_to task_path(new_task.id)
@@ -167,6 +167,48 @@ describe TasksController do
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    before do
+      task = Task.create(name: "New Task for completion")
+      @id = Task.last.id
+      @task_todo = Task.find(@id)
+    end
+    it "sets completion_date == updated time when marked completed" do
+      expect {
+        patch mark_task_path(@task_todo)
+      }.wont_change "Task.count"
+
+      task_completed = Task.find(@id)
+
+      expect(task_completed.completion_date.to_s).must_equal task_completed.updated_at.to_s
+      must_respond_with :redirect
+      must_redirect_to task_path(@id)
+      expect(task_completed.name).must_equal @task_todo.name
+      expect(task_completed.description).must_equal @task_todo.description
+    end
+
+    it "sets completion_date to nil when unmarked completed" do
+      task_completed = @task_todo
+      task_completed.update(completion_date: DateTime.current - 1)
+
+      expect {
+        patch mark_task_path(task_completed)
+      }.wont_change "Task.count"
+
+      task_todo = Task.find(@id)
+      expect(task_todo.completion_date).must_be_nil
+      expect(task_completed.name).must_equal @task_todo.name
+      expect(task_completed.description).must_equal @task_todo.description
+      must_respond_with :redirect
+      must_redirect_to task_path(@id)
+    end
+
+    it "will redirect to the root page if given an invalid id" do
+      expect {
+        patch mark_task_path(-1)
+      }.wont_change "Task.count"
+
+      must_respond_with :redirect
+      must_redirect_to task_path(-1) # this is bad becuase redirects to non-existant page, I should change design.
+    end
   end
 end
