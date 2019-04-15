@@ -1,5 +1,5 @@
 <h1>Tasks</h1>
-<p id="flash">
+<p class="flash">
     <%= flash[:success] if flash[:success] %>
     <%= flash[:error] if flash[:error] %>
 </p>
@@ -8,7 +8,7 @@
     <% @tasks.each do |task| %>
         <li>
             <%= link_to task.name, task_path(task.id) %>
-            <%= link_to "Mark as Complete", toggle_complete_task_path(task.id, task: {completion_date: DateTime.now.to_date }), method: :patch %>
+            <%= link_to "Mark as Complete", toggle_complete_path(task.id, task: {completion_date: DateTime.now.to_date }), method: :patch %>
             <%= link_to "Delete", task_path(task.id), :data => {:confirm => 'Are you sure?'}, method: :delete %>
         </li>
     <% end%>
