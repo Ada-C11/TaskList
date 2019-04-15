@@ -188,7 +188,6 @@ describe TasksController do
       post complete_task_path(id: task.id)
       completed_task = Task.find_by(completed: true)
       expect(completed_task.completed).must_equal true
-
     end
 
     # Your tests go here
