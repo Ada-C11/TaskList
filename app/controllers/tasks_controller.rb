@@ -78,4 +78,39 @@ class TasksController < ApplicationController
     end
   end
 
+  def complete
+    begin
+      @task = Task.find(params[:id])
+    rescue
+      flash[:error] = "Could not find task with id: #{params['id']}"
+      redirect_to tasks_path
+      return
+    end
+
+    if @task.completion_date.nil?
+      @task.update(
+        completion_date: Date.today
+      )
+    else
+      @task.update(
+        completion_date: nil
+      )
+    end
+
+    redirect_to tasks_path
+  end
+
+  def delete
+    begin
+      @task = Task.find(params[:id])
+    rescue
+      # make this into a method if i have time. to dry it up
+      flash[:error] = "Could not find task with id: #{params['id']}"
+      redirect_to tasks_path
+      return
+    end
+
+    @task.destroy
+    redirect_to tasks_path
+  end
 end
