@@ -12,5 +12,5 @@ Rails.application.routes.draw do
 
   resources :tasks
 
-  patch "/task/:id/mark", to: "tasks#mark"
+  patch "/task/:id/mark", to: "tasks#mark", as: "mark_task"
 end

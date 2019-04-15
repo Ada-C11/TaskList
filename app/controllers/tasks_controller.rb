@@ -6,8 +6,10 @@ class TasksController < ApplicationController
   def show
     task_id = params[:id]
     @task = Task.find_by(id: task_id)
-    flash[:error] = "Could not find task with id: #{task_id}"
-    redirect_to tasks_path unless @task
+    unless @task
+      flash[:error] = "Could not find task with id: #{task_id}"
+      redirect_to tasks_path
+    end
   end
 
   def new
@@ -27,8 +29,10 @@ class TasksController < ApplicationController
   def edit
     task_id = params[:id]
     @task = Task.find_by(id: task_id)
-    flash[:error] = "Could not find task with id: #{task_id}"
-    redirect_to tasks_path unless @task
+    unless @task
+      flash[:error] = "Could not find task with id: #{task_id}"
+      redirect_to tasks_path
+    end
   end
 
   def update
@@ -49,7 +53,19 @@ class TasksController < ApplicationController
     redirect_to root_path
   end
 
-  # private
+  def mark
+    task_id = params[:id]
+    @task = Task.find_by(id: task_id)
+    if @task
+      @task.completion_date = (@task.completion_date ? nil : DateTime.current)
+      @task.save
+    else
+      flash[:error] = "Could not find task with id: #{task_id}"
+    end
+    redirect_to task_path
+  end
+
+  private
 
   def task_params
     return params.require(:task).permit(:name, :priority_level, :completion_date, :description)

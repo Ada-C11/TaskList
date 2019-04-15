@@ -6,4 +6,12 @@ class Task < ApplicationRecord
       return "TO-DO"
     end
   end
+
+  def toggle
+    if completion_date
+      return "Unmark Done"
+    else
+      return "Mark Done"
+    end
+  end
 end

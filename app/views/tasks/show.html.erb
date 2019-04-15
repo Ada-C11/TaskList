@@ -10,7 +10,10 @@
             <%= link_to "UPDATE", edit_task_path(@task)  %>
         </li>
         <li>
-            <%= link_to "DELETE", "#delete"%>
+            <%= link_to "DELETE", task_path(@task), method: :delete, data: {confirm: "are you sure?"}%>
+        </li>
+        <li>
+            <%= link_to "#{@task.toggle}", mark_task_path(@task), method: :patch%>
         </li>
     </ul>
 </article>
