@@ -56,6 +56,7 @@ class TasksController < ApplicationController
   def destroy
     id = params[:id]
     @task = Task.find_by(id: id)
+
     unless @task
       head :not_found
       return
@@ -68,7 +69,7 @@ class TasksController < ApplicationController
 
   def complete
     @task = Task.find(params[:id])
-    @task.completion_date = Date.today
+    @task.completion = Date.today
     @task.save
 
     redirect_to tasks_path
