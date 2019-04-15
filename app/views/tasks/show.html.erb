@@ -10,9 +10,9 @@
       Description: <%= @task.description %>
     </p>
     <% if !@task.completed %>
-        <%= button_to "Mark complete", { action: "toggle_complete", id: @task.id }, method: :patch %>
+        <%= button_to "Mark complete", toggle_complete_path(@task.id), method: :patch %>
     <% else %>
-        <%= button_to "Unmark complete", { action: "toggle_complete", id: @task.id }, method: :patch %>
+        <%= button_to "Unmark complete", toggle_complete_path(@task.id), method: :patch %>
     <% end %>
   </div>
   <%= link_to "Edit this task", edit_task_path, class: "link bottom-link" %>
