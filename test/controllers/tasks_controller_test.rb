@@ -143,5 +143,12 @@ describe TasksController do
       task.reload
       assert_equal true, task.complete
     end
+    it "changes default status back to false" do
+      patch toggle_complete_path(task.id)
+      patch toggle_complete_path(task.id)
+      assert_redirected_to tasks_path
+      task.reload
+      assert_equal false, task.complete
+    end
   end
 end
