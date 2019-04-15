@@ -5,12 +5,18 @@
   <li>
     <%= link_to task.name, task_path(task.id) %> 
   </li>
+  <% if task.current_status == true %>
     <li>
-      <%= link_to "Change Status", { action: "toggle", id: task.id }, method: :patch %> 
+      <%= link_to "Pending", { action: "toggle", id: task.id }, method: :patch %> 
     </li>
+  <% else %>
+   <li>
+      <%= link_to "Complete", { action: "toggle", id: task.id }, method: :patch %> 
+    </li>
+    <% end %>
   <li>
   <%= link_to "Delete #{task.name}", 
-    task_path(task.id), method: :delete %>
+    task_path(task.id), method: :delete, data: {confirm: "You are about to delete a task. Are you sure you want to proceed?"}%>
   </li>
 
 <% end %>
