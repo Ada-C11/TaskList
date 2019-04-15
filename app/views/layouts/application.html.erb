@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TaskList</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+  
+  <body class="container">
+    <header>
+      <h1>TASKLIST</h1>
+        <nav>
+          <ul>
+            <li class="nav-icon">
+              <%= link_to(
+                image_tag("task_icon.png", alt: "home", class: "icon"),
+                root_path
+              ) %>
+            </li>
+            <li>
+              <%= link_to "Task List", tasks_path %>
+            </li>
+            <li>
+              <%= link_to "Add a Task", new_task_path %>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <%= yield %>
+      </main>
+      <footer>
+      &copy; Nara 2019
+      </footer>
+  </body>
+</html>
