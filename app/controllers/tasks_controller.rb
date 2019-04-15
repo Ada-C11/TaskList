@@ -17,7 +17,7 @@ class TasksController < ApplicationController
     task_id = params[:id]
     @task = Task.find_by(id: task_id)
     if @task.nil?
-      head :not_found
+      redirect_to tasks_path :flash => {:error => "Task does not exist!"}
     end
   end
 
