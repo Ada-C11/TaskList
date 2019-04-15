@@ -1,12 +1,13 @@
 <h1>Tasks</h1>
+<%= link_to 'Create task', create_task_path %>
 <ul>
   <% @tasks.each do |task| %>
     <li>
-          <%= link_to task.name, task_path(task.id) %>
       <% if task.completion_date %>
-        <s><%= task.name %></s>
+        <s><%= link_to task.name, task_path(task.id) %></s>
       <% else %>
-        <%= task.name %>
+        <%= link_to task.name, task_path(task.id) %>
       <% end %>
     </li>
   <% end %>
+</ul>
