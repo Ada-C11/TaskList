@@ -1,0 +1,16 @@
+<div id="index">
+  <ol>
+    <% @tasks.each do |task| %>
+      <li>
+        <%= link_to "#{task.name}", task_path(task.id) %>
+        <%= link_to "| Edit |", edit_task_path(task) %>
+        <%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Really delete?" } %>
+        <% if task.completion_date %>
+          <%= button_to "Unmark Complete", toggle_complete_task_path(task), method: :patch, :class => "btn" %>
+        <% else %>
+          <%= button_to "Mark Complete", toggle_complete_task_path(task), method: :patch, :class => "btn"  %>
+        <% end %>
+      </li>
+    <% end %>
+  </ol>
+</div>
