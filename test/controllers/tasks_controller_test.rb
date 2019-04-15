@@ -108,13 +108,30 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
-      # Your code here
+      task_update = {
+        task: {
+          name: "walk the dog",
+        },
+      }
+
+      patch task_path(task.id), params: task_update
+      task.reload
+
+      expect(task.name).must_equal "walk the dog"
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      task_update = {
+        task: {
+          name: "write tests, yay!!",
+        },
+      }
+
+      invalid_id = "Not a valid id"
+
+      patch task_path(invalid_id), params: task_update
+
+      must_respond_with :redirect
     end
   end
 
