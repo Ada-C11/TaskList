@@ -5,7 +5,7 @@ describe TasksController do
   #   you may need to modify this.
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
-                completion_date: "date"
+                completion_date: Date.current
   }
 
   # Tests for Wave 1
@@ -38,10 +38,12 @@ describe TasksController do
       must_respond_with :success
     end
 
-    it "will redirect for an invalid task" do
+    it "will respond with 302 for an invalid task" do
       # skip
       # Act
-      get task_path(-1)
+      expect {
+        get task_path(-1)
+      }.wont_change "Task.count"
 
       # Assert
       must_respond_with 302
@@ -71,7 +73,7 @@ describe TasksController do
         task: {
           name: "new task",
           description: "new task description",
-          completion_date: "completion date",
+          completion_date: Date.current,
         },
       }
 
@@ -98,9 +100,11 @@ describe TasksController do
       must_respond_with :success
     end
 
-    it "will respond with redirect when attempting to edit a nonexistant task" do
+    it "will respond with 302 when attempting to edit a nonexistant task" do
       # skip
-      get edit_task_path(-1)
+      expect {
+        get edit_task_path(-1)
+      }.wont_change "Task.count"
 
       must_respond_with 302
     end
@@ -115,7 +119,7 @@ describe TasksController do
       original_task = Task.create!(
         name: "new task",
         description: "new task description",
-        completion_date: "completion date",
+        completion_date: Date.current,
       )
 
       new_hash = {
@@ -132,9 +136,11 @@ describe TasksController do
       expect(original_task.name).must_equal "new task name"
     end
 
-    it "will redirect to the root page if given an invalid id" do
+    it "will respond with 302 if invalid id" do
       # skip
-      patch task_path(-1)
+      expect {
+        patch task_path(-1)
+      }.wont_change "Task.count"
 
       must_respond_with 302
     end
@@ -142,10 +148,12 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    it "will redirect if ID is invalid" do
+    it "will will respond with 302 if ID is invalid" do
       invalid_id = "NOT A VALID ID"
 
-      delete task_path(invalid_id)
+      expect {
+        delete task_path(invalid_id)
+      }.wont_change "Task.count"
       must_respond_with 302
     end
 
@@ -159,19 +167,40 @@ describe TasksController do
       must_respond_with :redirect
       must_redirect_to root_path
     end
-
-    # it "will provide a confirmation message before deleting" do
-    #   Task.create(name: "sing", description: "la la la")
-    #   visit tasks_path
-
-    #   click_link "Delete"
-
-    #   expect(page).to have_text("Delete success")
-    # end
   end
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "will update the completion date when complete" do
+      new_task = Task.create(name: "dance")
+
+      patch mark_complete_path(new_task.id)
+      new_task.reload
+
+      expect(new_task.completion_date).must_equal Date.current
+    end
+
+    it "will respond with 302 if ID is invalid for completed task" do
+      invalid_id = "NOT A VALID ID"
+
+      patch mark_complete_path(invalid_id)
+      must_respond_with 302
+    end
+
+    it "will respond with 302 if ID is invalid for incompleted task" do
+      invalid_id = "NOT A VALID ID"
+
+      patch mark_incomplete_path(invalid_id)
+      must_respond_with 302
+    end
+
+    it "will change the completion date to nil when marked incomplete" do
+      new_task = Task.create(name: "Cook")
+
+      patch mark_incomplete_path(new_task.id)
+      new_task.reload
+
+      expect(new_task.completion_date).must_be_nil
+    end
   end
 end

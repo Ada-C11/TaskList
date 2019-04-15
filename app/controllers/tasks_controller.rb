@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all.order(:completion_date)
+    @tasks = Task.all.order(completion_date: :desc)
   end
 
   def show
@@ -61,7 +61,7 @@ class TasksController < ApplicationController
       flash[:error] = "Could not find task with id: #{params[:id]}"
       redirect_to action: "index", status: 302
     else
-      @task.completion_date = Date.today
+      @task.completion_date = Date.current
       @task.save
       redirect_to root_path
     end
