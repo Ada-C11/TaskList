@@ -93,12 +93,21 @@ describe TasksController do
   describe "edit" do
     it "can get the edit page for an existing task" do
       skip
+
+      # it should update a task
+      # it should redirect to the show page of the task
+      # it should render 404 if the task was not found
+
       # Your code here
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
       skip
       # Your code here
+      invalid_id = "NOT A VALID ID"
+      # update task_path(invalid_id)
+      expect { edit task_path(invalid_id) }.wont_change "Task.count"
+      must_respond_with :redirect
     end
   end
 
@@ -119,12 +128,26 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "successfully deletes a task" do
+      id = Task.last
+      expect {
+        delete task_path(id)
+      }.must_change "Task.count", -1
+      must_respond_with :redirect
+    end
 
+    it "returns 404 if not found" do
+      invalid_id = "Not a valid id"
+      expect {
+        delete task_path(invalid_id)
+      }.wont_change "Task.count"
+      must_respond_with :not_found
+    end
   end
 
   # Complete for Wave 4
   describe "toggle_complete" do
     # Your tests go here
+
   end
 end
