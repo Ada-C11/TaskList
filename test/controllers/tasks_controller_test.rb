@@ -4,7 +4,8 @@ describe TasksController do
   # Note to students:  Your Task model **may** be different and
   #   you may need to modify this.
   let (:task) {
-    Task.create name: "sample task", description: "this is an example for a test"
+    Task.create name: "sample task", description: "this is an example for a test",
+                completion_date: Time.now + 5.days
   }
 
   # Tests for Wave 1
@@ -114,7 +115,6 @@ describe TasksController do
         patch task_path(to_be_updated_task.id), params: task_hash
       }.wont_change "Task.count"
 
-      to_be_updated_task.reload
       must_respond_with :redirect
       must_redirect_to task_path(to_be_updated_task.id)
 
@@ -134,8 +134,9 @@ describe TasksController do
   # Complete these tests for Wave 4
   describe "destroy" do
     # Your tests go here
-    task = Task.first
+
     it "can delete the task" do
+      task = Task.first
       expect {
         delete task_path(task.id)
       }.must_change "Task.count", -1
@@ -158,6 +159,7 @@ describe TasksController do
       task = Task.first
       task_hash = {
         task: {
+          name: "new name",
           completion_date: DateTime.now.to_date,
         },
       }
@@ -165,7 +167,7 @@ describe TasksController do
         patch toggle_complete_path(task.id), params: task_hash
       }.wont_change "Task.count"
 
-      toggled_task = Task.find_by(id: task_hash[:task][:id])
+      toggled_task = Task.find_by(name: task_hash[:task][:name])
       expect(toggled_task.completion_date).must_equal DateTime.now.to_date
     end
 
