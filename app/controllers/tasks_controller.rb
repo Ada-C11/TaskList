@@ -21,14 +21,9 @@ class TasksController < ApplicationController
   def show
     task_id = params[:id]
 
-    puts "Task ID was #{task_id}"
-
     @task = Task.find_by(id: task_id)
 
-    unless @task
-      # head :not_found
-      redirect_to tasks_path
-    end
+    redirect_to tasks_path unless @task
   end
 
   def edit

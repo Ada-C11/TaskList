@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-require 'pry'
+
 describe TasksController do
   let (:task) do
     Task.create name: 'sample task', description: 'this is an example for a test',
@@ -90,9 +90,9 @@ describe TasksController do
       }
 
       # Act-Assert
-      expect do
+      expect {
         post tasks_path, params: task_hash
-      end.must_change 'Task.count', 1
+      }.must_change 'Task.count', 1
 
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
@@ -141,15 +141,6 @@ describe TasksController do
         patch task_path(test_task), params: task_hash
       }.wont_change 'Task.count'
 
-      # task.update(
-      #   name: "updated name",
-      #   description: "updated description",
-      #   completion_date: nil
-      # )
-
-      # expect(task.name).wont_equal before_name
-      # expect(task.description).wont_equal before_description
-
       must_respond_with :redirect
       must_redirect_to task_path
     end
@@ -172,9 +163,9 @@ describe TasksController do
       test_task = task
 
       # Act
-      expect do
+      expect {
         delete task_path(test_task)
-      end.must_change 'Task.count', -1
+      }.must_change 'Task.count', -1
 
       # Assert
       must_respond_with :redirect
