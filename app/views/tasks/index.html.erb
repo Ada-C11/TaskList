@@ -1,17 +1,29 @@
-<h1>Tasks</h1>
-<p class="flash">
-    <%= flash[:success] if flash[:success] %>
-    <%= flash[:error] if flash[:error] %>
-</p>
+<section id="root_page">
+    <h1>TASKLIST</h1>
+    <p class="flash">
+        <%= flash[:success] if flash[:success] %>
+        <%= flash[:error] if flash[:error] %>
+    </p>
 
-<ul>
-    <% @tasks.each do |task| %>
-        <li>
-            <%= link_to task.name, task_path(task.id) %>
-            <%= link_to "Mark as Complete", toggle_complete_path(task.id, task: {completion_date: DateTime.now.to_date }), method: :patch %>
-            <%= link_to "Delete", task_path(task.id), :data => {:confirm => 'Are you sure?'}, method: :delete %>
-        </li>
-    <% end%>
-</ul>
+    <ul class="all-tasks">
+        <% @tasks.each do |task| %>
+            <li>
+                <div class="task_name"> <%= link_to task.name, task_path(task.id) %></div>
+                <div class="actions">
+                    <%= link_to "Mark as Complete", toggle_complete_path(task.id, task: {completion_date: DateTime.now.to_date }), method: :patch %>
+                    <%= link_to "Delete", task_path(task.id), :data => {:confirm => 'Are you sure?'}, method: :delete %>
+                </div>
+            </li>
+        <% end%>
+    </ul>
 
-<%= link_to "Add a new task", new_task_path %>
+    <div class="task-button">
+        <div><%= link_to "Add Task", new_task_path %></div>
+    
+        <div>"All Tasks" </div>
+    </div>
+
+</section>
+<footer>
+    &copy; 2019
+</footer>
