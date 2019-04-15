@@ -9,17 +9,12 @@ class TasksController < ApplicationController
     end
 
     def create
-        task = Task.new
+        task = Task.new(task_params)
 
         unless params["task"]
             render :new, status: :bad_request
             return
         end
-
-        
-        task.title = params["task"]["title"]
-        task.content = params["task"]["content"]
-        task.completiondate = params["task"]["completiondate"]
         
         task.save
         
@@ -33,6 +28,7 @@ class TasksController < ApplicationController
         if @task.nil?
             redirect_to tasks_path
         end
+
     end
 
     def edit
@@ -53,8 +49,47 @@ class TasksController < ApplicationController
             return
         end
 
-        task.update_attributes(params[:task].permit(:title, :content, :completiondate))
+        task.update(task_params)
 
         redirect_to task_path(task.id)
+    end
+
+    def destroy
+        task_id = params[:id]
+
+        task = Task.find_by(id: task_id)
+
+       unless task
+        head :not_found
+        return
+       end
+
+        task.destroy
+        
+        redirect_to tasks_path
+    end
+
+    def completed
+        task_id = params[:id]
+
+        task = Task.find_by(id: task_id)
+
+       unless task
+        head :not_found
+        return
+       end
+
+        task.toggle(:completed)
+        task.update_attribute(:completiondate, Time.now)
+        task.save
+        task.reload
+
+       redirect_to tasks_path
+    end
+
+    private
+
+    def task_params
+        return params.require(:task).permit(:title, :content, :completiondate, :completed)
     end
 end

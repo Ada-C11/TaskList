@@ -126,7 +126,7 @@ describe TasksController do
 
       # Act-Assert
       expect {
-        patch update_task_path(task.id), params: task_hash
+        patch task_path(task.id), params: task_hash
       }.must_change "Task.count", 0
 
       expect(task.title).must_equal "Get water"
@@ -141,7 +141,7 @@ describe TasksController do
     end
 
     it "will redirect to the root page if given an invalid id" do
-        patch update_task_path(999)
+        patch task_path(999)
         must_respond_with :redirect
         must_redirect_to tasks_path
     end
@@ -150,11 +150,56 @@ describe TasksController do
   # Complete these tests for Wave 4
   describe "destroy" do
     # Your tests go here
+    it "removes the task from the database" do
+      task = Task.create(title: "Task Test")
+      
+      expect {
+        delete task_path(task)
+      }.must_change "Task.count", -1
 
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+
+      after_task = Task.find_by(id: task.id)
+      expect(after_task).must_be_nil
+    end
+
+    it "returns a 404 if the book does not exist" do
+      task_id = 999
+
+      expect(Task.find_by(id: task_id)).must_be_nil
+
+      expect {
+        delete task_path(task_id)
+      }.wont_change "Task.count"
+
+      must_respond_with :not_found
+    end
   end
 
   # Complete for Wave 4
-  describe "toggle_complete" do
-    # Your tests go here
+  describe "completed" do
+    it "Can change from Mark complete to unmark complete" do
+      task = Task.create(title: "test task", completiondate: nil)
+
+      completed = {
+        task: {
+          completed: true,
+        },
+      }
+
+      expect(task.completed).must_equal false
+
+      expect {
+        patch completed_task_path(task.id), params: completed
+      }.must_change "Task.count", 0
+
+      task.reload
+
+      expect(task.completed).must_equal true
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end
   end
 end
