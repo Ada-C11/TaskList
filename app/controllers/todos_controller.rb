@@ -56,7 +56,9 @@ class TodosController < ApplicationController
     end
   end
 
-  # def mark_completed_task; end
+  # def mark_completed_task
+  #   scope :completed, -> { where(completed: true) }
+  # end
 
   private
 

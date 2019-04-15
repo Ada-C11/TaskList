@@ -124,7 +124,24 @@ describe TodosController do
 
   # Complete these tests for Wave 4
   describe 'destroy' do
-    # Your tests go here
+    it 'will redirect if ID is invalid' do
+      invalid_id = 'NOT A VALID ID'
+
+      delete todo_path(invalid_id)
+
+      must_respond_with :redirect
+    end
+
+    it 'can delete a task' do
+      new_todo = Todo.create(name: 'start code hw')
+
+      expect do
+        delete todo_path(new_todo)
+      end.must_change 'Todo.count', -1
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
   end
 
   # Complete for Wave 4
