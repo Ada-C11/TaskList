@@ -11,5 +11,10 @@ Rails.application.routes.draw do
   get '/todos/:id', to: 'todos#show', as: 'todo'
   # patch '/todo/:id/read', to: 'todo#mark_complete', as: 'mark_complete'
 
+  get '/todos/:id/edit', to: 'todos#edit', as: 'edit_task'
+  patch '/todos/:id', to: 'todos#update'
+
+  delete '/todos/:id', to: 'todos#destroy'
+
   root to: 'todos#index'
 end
