@@ -26,11 +26,6 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-    # to prevent a completion date upon task creation
-
-    @task.completion_date = nil
-    @task.completed = false
-
     @task.save
 
     redirect_to task_path(@task)
@@ -78,6 +73,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    return params.require(:task).permit(:name, :description, :completion_date)
+    return params.require(:task).permit(:name, :description)
   end
 end
