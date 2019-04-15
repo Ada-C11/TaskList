@@ -1,11 +1,28 @@
-<div class = 'tasklist'>
-<% @tasks.each do |task| %>
-    <ul>
-    <li>
-        Task <%= task.id %>: <%= task.name %>, notes: <%= task.description%>,
-        Completion date: <%= task.completion_date %>
-    </li>
-    </ul>
-    <% end %>
+<h1 class='title'>All Tasks</h1>
 
+<div class = 'container'>
+    <div class = 'page'>
+        <div class = 'new_task'>
+            <%= link_to "+ Add New Task", new_task_path%>
+        </div>
+
+        <div class = 'tasklist'>
+            <ul>
+                <% @tasks.each do |task| %>
+                    <li>
+                    <%= link_to ("♥ #{task.name}") , task_path(task), class: "task-name"%>
+                    <%= form_with model: @task, url: complete_task_path(task), method: :patch do |f|%>
+                    <%= f.submit (task.completion_date ? "Unmark Complete" : "Mark Complete"), class: "button"%>
+                    <%= link_to "Edit Task", edit_task_path(task), class: "button"%>
+                    <%= link_to "Delete Task", task_path(task), method: :delete, data: { confirm: "Are you sure you want to delete #{task.name}?"}, class: "button"%>
+                    
+                    <% end %>
+                    </li>
+                <% end %>
+            </ul>
+        </div>  
+    </div>
 </div>
+
+
+
