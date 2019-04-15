@@ -1,4 +1,4 @@
-<h2>Form for creating a new task...</h2>
+<h2>Form for editing a task...</h2>
 
 <%= form_with model: @task, class: "edit-task" do |f| %>
     <p>Please fill out this form to edit a task </p>
@@ -8,7 +8,12 @@
     <%= f.label :description %>
     <%= f.text_field :description %>
     <%= f.label :current_status %>
-    <%= f.text_field :current_status %>
+    <% if :current_status == true %>
+    <%= f.text_field "completed" %>
+    <% else%>
+    <%= f.text_field :pending %>
+    <%end%>
+
 
     <%= f.submit "Save Task", class: "task-form__submit-btn" %>
 
