@@ -150,13 +150,28 @@ describe TasksController do
   end
 
   # Complete these tests for Wave 4
-  describe "destroy" do
-    # Your tests go here
+  describe "delete" do
+    it 'deletes the task from the database' do
+      #expect {
+        delete delete_task_path(task.id)
+      #}.must_change Task.count, -1
 
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end
+
+    it "will redirect to the root page if given an invalid id" do
+      # Act
+      delete delete_task_path(-1)
+
+      # Assert
+      must_respond_with :redirect
+      expect(flash[:error]).must_equal "Could not find task with id: -1"
+    end
   end
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    
   end
 end

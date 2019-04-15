@@ -78,7 +78,7 @@ class TasksController < ApplicationController
     end
   end
 
-  def complete
+  def toggle_complete
     begin
       @task = Task.find(params[:id])
     rescue
