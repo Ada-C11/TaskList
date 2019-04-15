@@ -19,11 +19,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(
-      name: params[:task][:name],
-      description: params[:task][:description],
-      completion: params[:task][:completion],
-    )
+    @task = Task.new(task_params)
+    @task.completion_status = false
     if @task.save
       redirect_to task_path(@task.id)
     else
@@ -41,39 +38,44 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find_by(id: params[:id].to_i)
-    if @task.update(
-      name: params[:task][:name],
-      description: params[:task][:description],
-      completion: params[:task][:completion],
-    )
-      redirect_to task_path
-    else
-      render :edit
-    end
+    id = params[:id]
+    task = Task.find(id)
+
+    task.update(task_params)
+    redirect_to task_path(task.id)
   end
 
   def destroy
     id = params[:id]
-    @task = Task.find_by(id: id)
+    task = Task.find_by(id: id)
 
     unless @task
       head :not_found
       return
     end
 
-    @task.destroy
+    task.destroy
 
     redirect_to tasks_path
   end
 
-  def complete
-    @task = Task.find(params[:id])
-    @task.completion_date = Date.today
-    @task.save
-
+  def toggle
+    id = params[:id]
+    task = Task.find(id)
+    if task.completion_status
+      task.update(
+        completion_status: !task.completion_status,
+      )
+    else
+      task.update(
+        completion_status: !task.completion_status,
+        completion: Time.now,
+      )
+    end
     redirect_to tasks_path
   end
+
+  private
 
   def task_params
     return params.require(:task).permit(

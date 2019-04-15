@@ -1,23 +1,26 @@
 <h2>Your Tasks</h2>
 <ol>
-  <% @tasks.each do |task| %>
-  <% if task[:completion] == nil %>
-    <li class="blank"><%=link_to task.name, task_path(task.id) %></li>
+  <% @tasks.each do | task | %>
+    <% if task[:completion_status] == false %>
+      <li class="blank"><%=link_to task.name, task_path(task.id)%></li>
     <% else %>
-    <li ><%=link_to task.name, task_path(task.id) %></li>
-  <% end %>
+      <li class="strike"><%=link_to task.name, task_path(task.id)%></li>
+    <% end %>
+
     <ul>
-      <p >
-        <% if task[:completion].class == String %>
-          <sub><%= link_to 'Not completed |', complete_task_path(task.id), method: :patch %></sub>
+      <li><%= "Description: #{task.description}" %></li>
+      <li><%= "Completion Date: #{task.completion}" %></li>
+      <p class = "task_actions">
+        <% if task.completion_status %>
+          <sub><%= link_to "Mark as incomplete", toggle_path(task.id), method: :patch %></sub>
         <% else %>
-          <sub><%= link_to 'Mark Completed |', complete_task_path(task.id), method: :patch %></sub>
+          <sub><%= link_to "Mark as Complete", toggle_path(task.id), method: :patch %></sub>
         <% end %>
 
-
-        <sub><%= link_to 'Edit |', edit_task_path(task.id) %></sub>
-        <sub><%= link_to "Delete", task_path(task.id), method: :delete, data: {confirm: "Please confirm action?"} %></sub>
+        <sub><%= link_to "Edit", edit_task_path(task.id) %></sub>
+        <sub><%= link_to "Delete", task_path(task.id), method: :delete, data: { confirm: "Do you really want to delete?" } %></sub>
       </p>
     </ul>
+
   <% end %>
 </ol>
