@@ -44,7 +44,7 @@ describe TasksController do
       get task_path(-1)
 
       # Assert
-      must_respond_with :redirect
+      must_respond_with 302
     end
   end
 
@@ -102,7 +102,7 @@ describe TasksController do
       # skip
       get edit_task_path(-1)
 
-      must_respond_with :redirect
+      must_respond_with 302
     end
   end
 
@@ -136,7 +136,7 @@ describe TasksController do
       # skip
       patch task_path(-1)
 
-      must_respond_with :redirect
+      must_respond_with 302
     end
   end
 
@@ -146,8 +146,7 @@ describe TasksController do
       invalid_id = "NOT A VALID ID"
 
       delete task_path(invalid_id)
-
-      must_respond_with :redirect
+      must_respond_with 302
     end
 
     it "can delete a task" do
@@ -160,6 +159,15 @@ describe TasksController do
       must_respond_with :redirect
       must_redirect_to root_path
     end
+
+    # it "will provide a confirmation message before deleting" do
+    #   Task.create(name: "sing", description: "la la la")
+    #   visit tasks_path
+
+    #   click_link "Delete"
+
+    #   expect(page).to have_text("Delete success")
+    # end
   end
 
   # Complete for Wave 4

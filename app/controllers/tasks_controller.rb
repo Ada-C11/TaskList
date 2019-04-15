@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order(:completion_date)
   end
 
   def show
@@ -51,6 +51,30 @@ class TasksController < ApplicationController
       redirect_to action: "index", status: 302
     else
       task.destroy
+      redirect_to root_path
+    end
+  end
+
+  def mark_complete
+    @task = Task.find_by(id: params[:id])
+    if @task.nil?
+      flash[:error] = "Could not find task with id: #{params[:id]}"
+      redirect_to action: "index", status: 302
+    else
+      @task.completion_date = Date.today
+      @task.save
+      redirect_to root_path
+    end
+  end
+
+  def mark_incomplete
+    @task = Task.find_by(id: params[:id])
+    if @task.nil?
+      flash[:error] = "Could not find task with id: #{params[:id]}"
+      redirect_to action: "index", status: 302
+    else
+      @task.completion_date = nil
+      @task.save
       redirect_to root_path
     end
   end
