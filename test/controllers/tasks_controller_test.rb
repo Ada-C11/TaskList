@@ -45,6 +45,7 @@ describe TasksController do
     end
   end
 
+
   describe "new" do
     it "can get the new task page" do
       # Act
@@ -54,6 +55,7 @@ describe TasksController do
       must_respond_with :success
     end
   end
+
 
   describe "create" do
     it "can create a new task" do
@@ -79,6 +81,7 @@ describe TasksController do
     end
   end
 
+
   describe "edit" do
     it "can get the edit page for an existing task" do
       # Act
@@ -96,6 +99,7 @@ describe TasksController do
       expect(flash[:error]).must_equal "That task does not exist."
     end
   end
+
 
   describe "update" do
     it "can update an existing task" do
@@ -122,7 +126,7 @@ describe TasksController do
   end
 
   describe "destroy" do
-    it 'deletes a task from database' do 
+    it 'deletes a task completely from the database' do 
       task = Task.create!(name: "Home", description: "Do the dishes")
 
       expect {
@@ -131,12 +135,13 @@ describe TasksController do
 
       must_respond_with :redirect
       must_redirect_to tasks_path
-      
+
       deleted_task = Task.find_by(id: task.id)
       expect(deleted_task).must_be_nil
     end
   end
 
+  # This test could be far more thorough
   describe "toggle_complete" do
     it "returns success" do
       patch complete_task_path(task.id)
