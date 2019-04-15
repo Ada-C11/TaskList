@@ -54,7 +54,7 @@ class TasksController < ApplicationController
         redirect_to task_path(task.id)
       end
     else
-      redirect_to root_path :flash => {:error => "The task was deleted!"}
+      redirect_to tasks_path :flash => {:error => "The task was deleted!"}
     end
   end
 

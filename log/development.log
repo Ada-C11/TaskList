@@ -8555,3 +8555,18 @@ Processing by TasksController#index as HTML
 Completed 200 OK in 22ms (Views: 18.8ms | ActiveRecord: 0.4ms)
 
 
+Started GET "/tasks/49" for ::1 at 2019-04-15 02:37:30 -0700
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"49"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 49], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:18
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (12.7ms)
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.6ms)
+
+
+
+NoMethodError - undefined method `completion_date' for #<Task:0x00007fd3e23fe8d8>:
+  app/views/tasks/show.html.erb:7:in `_app_views_tasks_show_html_erb__420305760740961222_70274004483220'
+
+Started POST "/__better_errors/3c4c7c7a7e7af7b3/variables" for ::1 at 2019-04-15 02:37:30 -0700
