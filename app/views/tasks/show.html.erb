@@ -1,0 +1,19 @@
+<h2><%= @task.name %></h2>
+
+<ul>
+  <p><%= @task.description %></p>
+  <br>
+  <p class="small">Created: <%= @task.created_at.strftime("%a %D %r") %></p>
+  <p class="small">Due: <%= @task.due_date.strftime("%a %D %r") %></p>
+  <p class="small">Completed: 
+    <% if @task.completion_date %>
+      <%= @task.completion_date.strftime("%a %D %r") %>
+    <% else %>
+      N/A
+    <% end %>
+  </p>
+  <p class="small ${@task.completed eq true ? 'complete' : 'incomplete'}">Status: <%= @status %></p>
+  <%= button_to "Edit", edit_task_path(params[:id]), method: :get %>
+  <%= button_to "Delete", task_path(@task.id), method: :delete, data: {confirm: "...Really? You want to delete this?"} %>
+  <%= button_to "Mark #{@change}", mark_complete_path(@task.id), method: :patch %>
+</ul>
