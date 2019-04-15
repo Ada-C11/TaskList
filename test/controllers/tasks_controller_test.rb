@@ -146,7 +146,7 @@ describe TasksController do
       new_task = Task.create(name: "start code hw")
 
       expect {
-        delete task_path(new_task), params: new_task
+        delete task_path(new_task.id), params: new_task
       }.must_change "Task.count", -1
 
       must_respond_with :redirect
