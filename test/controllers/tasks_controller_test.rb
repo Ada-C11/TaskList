@@ -122,20 +122,22 @@ describe TasksController do
   end
 
   describe "destroy" do
-    it "can delete a task" do
-      new_task = Task.create(name: "Household", description: "Wash the dishes", completion_date: "April 15th")
+    it 'deletes a task from database' do 
+      task = Task.create!(name: "Home", description: "Do the dishes")
 
       expect {
-        delete task_path(new_task.id)
+        delete task_path(task)
       }.must_change "Task.count", -1
 
       must_respond_with :redirect
       must_redirect_to tasks_path
+      
+      deleted_task = Task.find_by(id: task.id)
+      expect(deleted_task).must_be_nil
     end
   end
 
   describe "toggle_complete" do
-
     it "returns success" do
       patch complete_task_path(task.id)
 

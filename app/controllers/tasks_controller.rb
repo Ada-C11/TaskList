@@ -43,9 +43,10 @@ class TasksController < ApplicationController
 
     if task.nil?
       redirect_to tasks_path
-    else  task.update(task_params)
-        flash[:success] = "Successful Update!"
-        redirect_to task_path(task.id)
+    else  
+      task.update(task_params)
+      flash[:success] = "Successful Update!"
+      redirect_to task_path(task.id)
     end
   end
 
@@ -70,13 +71,15 @@ class TasksController < ApplicationController
 
 
   def destroy
-    task = Task.find_by(id: params[:id] )
-    if task.nil?
+
+    task = Task.find_by(id: params[:id])
+    unless task
       head :not_found
-    else
-      task.destroy 
-      redirect_to tasks_path
+      return
     end
+
+    task.destroy
+    redirect_to tasks_path
   end
 
   private
