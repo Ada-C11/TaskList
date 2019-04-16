@@ -75,7 +75,7 @@ class TasksController < ApplicationController
 
     is_successful = task.update(task_params)
     if is_successful
-      redirect_to root_path, :flash => { :success => "Task #{task.name} has been updated!" }
+      redirect_to root_path, :flash => { :success => "Task #{task.name}'s status has been updated!" }
     else
       redirect_to root_path, :flash => { :error => "Failed to update the task" }
     end
