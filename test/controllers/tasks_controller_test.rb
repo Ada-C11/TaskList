@@ -93,6 +93,7 @@ describe TasksController do
     it "will respond with redirect when attempting to edit a nonexistant task" do
       get edit_task_path(-1)
       must_respond_with :redirect
+      must_redirect_to tasks_path
     end
   end
 
@@ -185,6 +186,7 @@ describe TasksController do
         },
       }
       patch task_path(-1)
+      must_respond_with :redirect
       must_redirect_to root_path
     end
   end
