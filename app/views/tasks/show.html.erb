@@ -4,7 +4,11 @@
 
 <p>
  <%= @task.description%> 
- <li><%= @task.current_status%></li>
+ <% if @task.current_status == false %>
+ <li>Task Pending</li>
+ <% else%>
+ <li>Task Completed</li>
+ <% end %>
 </p>
 
 <%= link_to "Back to Tasks List", tasks_path%>
