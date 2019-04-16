@@ -1,18 +1,20 @@
-<div class="task_name">
-    <h2>
-        Task: <%= @task.name %>
-    </h2>
-</div>
+<section id="show">
+    <div class="task_name">
+        <h2>
+            Task: <%= @task.name %>
+        </h2>
+    </div>
 
-<p class="flash">
-    <%= flash[:success] if flash[:success] %>
-    <%= flash[:error] if flash[:error] %>
-</p>
+    <p class="flash">
+        <%= flash[:success] if flash[:success] %>
+        <%= flash[:error] if flash[:error] %>
+    </p>
 
-<ul class="actions">
-    <li>Description: <%= @task.description%></li>
-    <li>Completion Date: <%= @task.completion_date %></li> 
-</ul>
+    <ul>
+        <li>Description: <%= @task.description%></li>
+        <li>Completion Date: <%= @task.completion_date %></li> 
+    </ul>
 
-<%= link_to "Back to all tasks", tasks_path %>
-<%= link_to "Edit this task", edit_task_path(@task.id) %>
+    <div class="button"><%= link_to "All Tasks", tasks_path %></div>
+    <div class="button"><%= link_to "Edit Task", edit_task_path(@task.id) %> </div>
+</section>
