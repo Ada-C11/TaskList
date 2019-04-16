@@ -7,10 +7,11 @@
 <ul class="front-page-list">
   <% @tasks.each do |task| %>
     <li>
-      <div><%= link_to task.name, task_path(task.id) %></div>
       <% if !task.completed %>
+        <div><%= link_to task.name, task_path(task.id) %></div>
         <%= button_to "Mark complete", { action: "mark_complete", id: task.id }, method: :patch %>
       <% else %>
+        <div id="line-through"><%= link_to task.name, task_path(task.id) %></div>
         <%= button_to "Unmark complete", { action: "mark_complete", id: task.id }, method: :patch %>
       <% end %>
       <%= button_to "Edit", { action: "edit", id: task.id }, method: :get %>

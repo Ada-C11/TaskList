@@ -14,6 +14,7 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    @task.due_date = DateTime.now
   end
 
   def create
