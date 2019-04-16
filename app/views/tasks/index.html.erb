@@ -5,23 +5,32 @@
         <%= flash[:error] if flash[:error] %>
     </p>
 
-    <ul class="all-tasks">
-        <% @tasks.each do |task| %>
-            <li>
-                <div class="task_name"> <%= link_to task.name, task_path(task.id) %></div>
-                <div class="actions">
-                    <%= link_to "Mark as Complete", toggle_complete_path(task.id, task: {completion_date: DateTime.now.to_date }), method: :patch %>
-                    <%= link_to "Delete", task_path(task.id), :data => {:confirm => 'Are you sure?'}, method: :delete %>
-                </div>
-            </li>
-        <% end%>
-    </ul>
+    <ol class="all-tasks">
+        <h2>All Tasks</h2>
+        <div>
+            <% @tasks.each do |task| %>
+                <% if task.completion_date == nil %>
+                    <li>
+                        <div class="task_name"> <%= link_to task.name, task_path(task.id) %></div>
+                        <div class="actions">
+                            <%= link_to "Mark as Complete", toggle_complete_path(task.id, task: {completion_date: DateTime.now.to_date }), method: :patch %>
+                            <%= link_to "Delete", task_path(task.id), :data => {:confirm => 'Are you sure?'}, method: :delete %>
+                        </div>
+                    </li>
+                <% else %>
+                    <li>
+                        <div class="task_name_strike"> <%= link_to task.name, task_path(task.id) %></div>
+                        <div class="actions">
+                            <%= link_to "Unmark Complete", toggle_complete_path(task.id, task: {completion_date: nil }), method: :patch %>
+                            <%= link_to "Delete", task_path(task.id), :data => {:confirm => 'Are you sure?'}, method: :delete %>
+                        </div>
+                    </li>
+                <% end %>
+            <% end%>
+        </div>
+    </ol>
 
-    <div class="task-button">
-        <div><%= link_to "Add Task", new_task_path %></div>
-    
-        <div>"All Tasks" </div>
-    </div>
+    <div class="task-button"><%= link_to "Add Task", new_task_path %></div>
 
 </section>
 <footer>
