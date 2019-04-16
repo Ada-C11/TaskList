@@ -1,0 +1,22 @@
+<body>
+    <main>
+    <h1>Task List</h1>
+    <div class="info-section">
+        <h2>Add a new task!</h2>
+
+        <%= form_with model: @task, class: 'create-task' do |f| %>
+
+        <p>Please fill out this form to add a new task</p>
+
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        <%= f.label :description %>
+        <%= f.text_field :description %>
+
+        <%= f.submit "Add Task", class: "task-button" %>
+
+        <% end %>
+    </div>
+    <%= link_to "Back to All Tasks", tasks_path, class: "link bottom-link" %>
+    </main>
+</body>

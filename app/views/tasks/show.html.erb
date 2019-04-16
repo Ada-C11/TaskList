@@ -1,0 +1,24 @@
+<body>
+  <main>
+  <h1>Task List</h1>
+
+  <div class="info-section">
+    <h2>
+      <%= @task.name %>
+    </h2>
+    <p>
+      Description: <%= @task.description %>
+    </p>
+    <% if !@task.completed %>
+        <%= button_to "Mark complete", toggle_complete_path(@task.id), method: :patch %>
+    <% else %>
+        <%= button_to "Unmark complete", toggle_complete_path(@task.id), method: :patch %>
+    <% end %>
+  </div>
+  <%= link_to "Edit this task", edit_task_path, class: "link bottom-link" %>
+
+  <%= link_to 'Delete this task', task_path(@task.id), method: :delete, data: {confirm: "Are you sure you want to delete this task?"}, class: "link bottom-link" %>
+
+  <%= link_to "Back to All Tasks", tasks_path, class: "link bottom-link" %>
+  </main>
+</body>
