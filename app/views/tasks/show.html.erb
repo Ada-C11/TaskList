@@ -1,0 +1,15 @@
+<h1> Individual Tasks!</h1>
+
+<p>
+<% @task %>
+</p>
+<h3>
+<%= @task.name %>
+</h3> 
+<p>
+Details: <%= @task.description%>, due <%= @task.completion_date %>
+</p>
+<%= link_to "Back to All Tasks.", tasks_path%>
+<%= link_to "Edit this task.", edit_task_path(@task.id), method: :get %>
+<%= link_to "Delete #{@task.name}", 
+    task_path(@task.id), method: :delete %>

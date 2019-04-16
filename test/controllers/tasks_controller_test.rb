@@ -1,9 +1,13 @@
 require "test_helper"
 
+require "test_helper"
+
 describe TasksController do
+  # Note to students:  Your Task model **may** be different and
+  #   you may need to modify this.
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
-                completion_date: Time.now + 5.days
+                completion_date: "date"
   }
 
   # Tests for Wave 1
@@ -28,7 +32,7 @@ describe TasksController do
   # Unskip these tests for Wave 2
   describe "show" do
     it "can get a valid task" do
-      skip
+
       # Act
       get task_path(task.id)
 
@@ -37,19 +41,17 @@ describe TasksController do
     end
 
     it "will redirect for an invalid task" do
-      skip
+
       # Act
       get task_path(-1)
 
       # Assert
-      must_respond_with :redirect
-      expect(flash[:error]).must_equal "Could not find task with id: -1"
+      must_respond_with :temporary_redirect
     end
   end
 
   describe "new" do
     it "can get the new task page" do
-      skip
 
       # Act
       get new_task_path
@@ -61,14 +63,15 @@ describe TasksController do
 
   describe "create" do
     it "can create a new task" do
-      skip
 
       # Arrange
+      # Note to students:  Your Task model **may** be different and
+      #   you may need to modify this.
       task_hash = {
         task: {
           name: "new task",
           description: "new task description",
-          completion_date: nil,
+          completion_date: "today",
         },
       }
 
@@ -79,8 +82,7 @@ describe TasksController do
 
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
-      expect(new_task.due_date.to_time.to_i).must_equal task_hash[:task][:due_date].to_i
-      expect(new_task.completed).must_equal task_hash[:task][:completed]
+      expect(new_task.completion_date).must_equal task_hash[:task][:completion_date]
 
       must_respond_with :redirect
       must_redirect_to task_path(new_task.id)
@@ -90,13 +92,21 @@ describe TasksController do
   # Unskip and complete these tests for Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
-      skip
-      # Your code here
+      #Arrange
+      existing_task = Task.create(name: "Study")
+
+      # Act
+      get edit_task_path(existing_task)
+      # Assert
+      must_respond_with :success
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      skip
-      # Your code here
+      bad_task_id = "THIS IS INVALID"
+      # Act
+      get edit_task_path(bad_task_id)
+      # Assert
+      must_redirect_to tasks_path
     end
   end
 
@@ -105,24 +115,77 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      skip
-      # Your code here
+      update_task_hash = {
+        task: {
+          name: "update task",
+          description: "new task description",
+          completion_date: "today",
+        },
+      }
+      existing_task = Task.create(name: "Hiking", description: "fun", completion_date: "Friday")
+
+      patch task_path(existing_task), params: update_task_hash
+
+      existing_task.reload
+      expect(existing_task.completion_date).must_equal "today"
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      # Arrange
+      update_task_hash = {
+        task: {
+          name: "update task",
+          description: "new task description",
+          completion_date: "today",
+        },
+      }
+      invalid_task_id = "Invalid"
+      #Act
+      patch task_path(invalid_task_id), params: update_task_hash
+      # Assert
+      must_redirect_to root_path
     end
   end
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "returns a 404 if the book is not found" do
+      # Arrange
+      invalid_task_id = "NOT A VALID ID"
 
+      # Try to do the Books# destroy action
+      expect {
+        # Act
+        delete task_path(invalid_task_id)
+      }.must_change "Task.count", 0
+      must_respond_with :not_found
+    end
+
+    it "can delete a book" do
+      # Arrange - Create a book
+      new_task = Task.create(name: "Study")
+
+      expect {
+        # Act
+        delete task_path(new_task.id)
+        # Assert
+      }.must_change "Task.count", -1
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end
   end
 
   # Complete for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "can mark a task as complete" do
+      # Arrange
+      complete_task = Task.create(name: "Study", description: "At Ada", completion_date: "Sunday", status: false)
+      # Act
+      patch toggle_path(complete_task.id)
+      toggle = Task.find_by(id: complete_task.id)
+      # Assert
+      expect(toggle.status).must_equal true
+    end
   end
 end
