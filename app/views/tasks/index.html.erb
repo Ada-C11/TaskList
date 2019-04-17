@@ -1,0 +1,15 @@
+<section class="tasks">
+<h2 class="sub_header">Overview of Task List</h2>
+<%= flash[:error] if flash[:error]%>
+<ol class="inner_scroll">
+  <%@tasks.each do |task|%>
+  <li class="task">
+   <a href="/tasks/<%=task.id%>"><h3>Task: <span><%= task.name%></span></h3></a>
+   <article>
+    <h4>Status:</h4>
+    <p class="status"> <%= task.status%></p>
+  </article>
+  </li>
+  <%end%>
+</ol>
+</section>

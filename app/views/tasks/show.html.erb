@@ -1,0 +1,21 @@
+<section class="review">
+<h2 class="sub_header">Task: <span><%= @task.name%></span></h2>
+<article class="inner_scroll task">
+    <h4>Description:</h4>
+    <p><%= @task.description%></p>
+    <h4>Status:</h4>
+    <p class="status"> <%= @task.status%></p>
+    <ul>
+        <li>
+            <%= link_to "UPDATE", edit_task_path(@task)  %>
+        </li>
+        <li>
+            <%= link_to "DELETE", task_path(@task), method: :delete, data: {confirm: "are you sure?"}%>
+        </li>
+        <li>
+            <%= link_to "#{@task.toggle}", mark_task_path(@task), method: :patch%>
+        </li>
+    </ul>
+</article>
+</section>
+        
