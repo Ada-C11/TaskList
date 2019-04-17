@@ -11,6 +11,7 @@
     <button type="button" class="left btn-outline-success"><%= link_to "EDIT", edit_task_path(task[:id]) %></button>
     <button type="button" class="right btn-outline-danger"><%= link_to "DELETE", task, method: :delete, data: { confirm: "Really, though? This can't be undone." }%></button></div>
     </p>Completed <%= time_ago_in_words(task.completed_at)%> ago.</p>
+        <button type="button" class="btn btn-secondary"><%= link_to "Uncomplete", complete_task_path(task), method: :patch %></button>
     </li>
     <% else %>
     <li class="list-group-item flex-column align-items-start">
