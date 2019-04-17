@@ -130,6 +130,24 @@ describe TasksController do
       must_respond_with :redirect
       must_redirect_to root_path
     end
+
+    it "won't change the data if given an invalid id" do
+      starter_input = {
+        name: "new task",
+        description: "new description",
+      }
+
+      task = Task.create(starter_input)
+
+      expect {
+        patch task_path(-1), params: starter_input
+      }.wont_change "Task.count"
+
+      task.reload
+
+      expect(task.name).must_equal starter_input[:name]
+      expect(task.description).must_equal starter_input[:description]
+    end
   end
 
   # Complete these tests for Wave 4
