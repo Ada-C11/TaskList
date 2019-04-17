@@ -118,16 +118,18 @@ describe TasksController do
     #        thing to test.
     it "can update an existing task" do
       # Arrange
-      task.description = "this is an example update"
-      task.save
-      task_id = task.id
+      task_params = {
+        task: {
+          description: "this is an example update"
+        }
+      }
 
       # Act
-      # expect {
-      #   patch task_path(task_id)
-      # }
+      patch task_path(task), params: task_params
 
       # Assert
+      must_respond_with :redirect
+      must_redirect_to task_path(task)
     end
 
     it "will redirect to the root page if given an invalid id" do
