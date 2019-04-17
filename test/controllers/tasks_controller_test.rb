@@ -103,7 +103,7 @@ describe TasksController do
     # Note:  If there was a way to fail to save the changes to a task, that would be a great
     #        thing to test.
     it "can update an existing task" do
-      to_be_updated_task = Task.first
+      task = Task.first
       task_hash = {
         task: {
           name: "new task",
@@ -113,25 +113,25 @@ describe TasksController do
       # Your code here
 
       expect {
-        patch task_path(to_be_updated_task.id), params: task_hash
+        patch task_path(task.id), params: task_hash
       }.wont_change "Task.count"
 
       must_respond_with :redirect
-      must_redirect_to task_path(to_be_updated_task.id)
+      must_redirect_to task_path(task.id)
 
-      edited_task = Task.find_by(name: task_hash[:task][:name])
-      expect(edited_task.name).must_equal "new task"
-      expect(edited_task.description).must_equal "new task description"
+      task.reload
+      expect(task.name).must_equal "new task"
+      expect(task.description).must_equal "new task description"
     end
 
     it "will redirect to the root page if given an invalid id" do
       # Your code here
-      task_hash = {
-        task: {
-          name: "new task",
-          description: "new task description",
-        },
-      }
+      # task_hash = {
+      #   task: {
+      #     name: "new task",
+      #     description: "new task description",
+      #   },
+      # }
       patch task_path(800)
       must_respond_with :redirect
       must_redirect_to root_path
