@@ -17,13 +17,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new
-    
-    @task.name = params[:task][:name]
-    @task.description = params[:task][:description]
-    if params[:task][:date]
-      @task.date = Date.parse(params[:task][:date])
-    end
+    @task = Task.new(task_params)
 
     @task.save
 
@@ -34,7 +28,7 @@ class TasksController < ApplicationController
     task_id = params[:id]
     @task = Task.find_by(id: task_id)
 
-    if @task.nil?
+    unless @task
       redirect_to tasks_path
       return
     end
@@ -44,8 +38,12 @@ class TasksController < ApplicationController
     task_id = params[:id]
     @task = Task.find_by(id: task_id)
 
-    @task.update(task_params)
+    unless @task 
+      redirect_to tasks_path
+      return
+    end
 
+    @task.update(task_params)
     redirect_to task_path(@task)
   end
 
