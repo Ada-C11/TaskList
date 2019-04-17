@@ -1,10 +1,11 @@
 <p id="notice"><%= flash[:error] if flash[:error] %></p>
 <div class="container">
 <ul class="list-group d-flex justify-content-between">
-<header><h1>Task Page</h1></header>
-<li class="list-group-item flex-column align-items-start"><p>Title: <%= @task['title']%></p>
-<p>Description: <%= @task['description']%></p>
-<button class="btn btn-outline-secondary"><%= link_to "BACK", tasks_path%>
+<header><h1><%= @task['title']%></h1></header>
+<li class="list-group-item flex-column align-items-start">
+<h4>Description: <%= @task['description']%></h4>
+<li class="list-item">Created <%= time_ago_in_words(@task.created_at)%> ago.</li>
+<button class="full btn-outline-secondary float-right"><%= link_to "Back to List", tasks_path%>
 </li>
 </ul>
 </div>

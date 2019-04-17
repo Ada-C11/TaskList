@@ -10,7 +10,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.create task_params
+    @task = Task.create(task_params)
     redirect_to task_path(@task)
   end
 
@@ -42,15 +42,15 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     if @task.completed_at.nil?
       @task.update_attribute(:completed_at, Time.now)
-      redirect_to root_path
     else
-      @task.update_attribute(:completed_at, nil)
+      @task.update_attribute(:completed_at, 'nil')
+    end
+    redirect_to root_path
   end
-end
 
   private
 
   def task_params
-    params.require(:task).permit(:title, :completed_at, :description)
+    params.require(:task).permit(:title, :description)
   end
 end
