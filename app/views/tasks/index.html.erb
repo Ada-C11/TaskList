@@ -1,0 +1,26 @@
+
+<h1>Task List</h1>
+
+<ul class="task-list">
+    <% @tasks.each do|task|%>
+        <li>
+        <%= link_to task.name, task_path(task.id), :class => "task-link"%>
+
+            <section class="index-button">
+
+                <% if task.completed == false %>
+                    <%= link_to "Mark Complete", {action: "mark_complete", id: task.id}, method: :patch %> |
+                <% else %>
+                    <%= link_to "Unmark Complete", {action: "mark_complete", id: task.id}, method: :patch %> | 
+                <% end %>
+
+                <%= link_to "Delete Task", task_path(task.id), method: :delete, data: {confirm: "Are you sure?"} %>
+                
+            </section>
+
+        </li>
+    <% end %>
+</ul>
+
+<%= button_to "Create New Task ", new_task_path, method: :get, :class => "create-button" %>
+

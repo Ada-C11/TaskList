@@ -1,0 +1,28 @@
+<h1>Task Details</h1>
+
+<h2>
+  Task: <%= @task.name %>
+</h2>
+
+<article class="task-info">
+
+  <section>
+    Description: <%= @task.description %>
+  </section>
+
+  <section>
+    Due Date: <%= @task.completion_date %>
+  </section>
+
+  <section>
+    Status:
+      <% if @task.completed?%> completed
+      <% else %> In Progress
+      <% end %>
+  </section>
+
+</article>
+
+<%= button_to "Edit Task", edit_task_path, method: :get, :class => "edit-button" %>
+
+<%= link_to "Back to All Tasks", tasks_path, :class => "back2main-button" %>
