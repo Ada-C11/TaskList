@@ -34,7 +34,7 @@ class TasksController < ApplicationController
     #done in class on Friday
     def.update(
         title: params["task"]["title"]
-        description: params["task"]["title"]
+        description: params["task"]["description"]
     )
 
     redirect_to task_path(task)
@@ -50,6 +50,11 @@ class TasksController < ApplicationController
         end
         task.destroy
         redirect_to tasks_path
+    end
+
+    private
+    def task_params
+        return params.require(:task).permit(:task, :description)
     end
 end
 
