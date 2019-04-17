@@ -1,0 +1,40 @@
+<section id="root_page">
+    <h1>TASKLIST</h1>
+    <p class="flash">
+        <%= flash[:success] if flash[:success] %>
+        <%= flash[:error] if flash[:error] %>
+    </p>
+
+    <ol class="all-tasks">
+        <h2>All Tasks</h2>
+        <div>
+            <% @tasks.each do |task| %>
+                <% if task.completion_date == nil %>
+                    <li>
+                        <div class="task_name"> <%= link_to task.name, task_path(task.id) %></div>
+                        <div class="actions">
+                            <%= link_to "Mark as Complete", toggle_complete_path(task.id, task: {completion_date: DateTime.now.to_date }), method: :patch %>
+                            <%= link_to "Edit", edit_task_path(task.id) %>
+                            <%= link_to "Delete", task_path(task.id), :data => {:confirm => 'Are you sure?'}, method: :delete %>
+                        </div>
+                    </li>
+                <% else %>
+                    <li>
+                        <div class="task_name_strike"> <%= link_to task.name, task_path(task.id) %></div>
+                        <div class="actions">
+                            <%= link_to "Unmark Complete", toggle_complete_path(task.id, task: {completion_date: nil }), method: :patch %>
+                            <%= link_to "Edit", edit_task_path(task.id) %>
+                            <%= link_to "Delete", task_path(task.id), :data => {:confirm => 'Are you sure?'}, method: :delete %>
+                        </div>
+                    </li>
+                <% end %>
+            <% end%>
+        </div>
+    </ol>
+    <div class="button"><%= link_to "Add Task", new_task_path %></div>
+
+
+</section>
+<footer>
+    &copy; 2019
+</footer>
