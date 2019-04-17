@@ -6,7 +6,7 @@
 <h2>Tasks to do</h2>
 <% @tasks.each do |task| %>
     <% if task.completion == false %>
-        <li><%= task.title %>: <%= task.description %> created at: <%= task.created_at %>
+        <li><%= task.title %>: <%= task.description %> 
         </li>
         <%= link_to "edit task", edit_task_path(task.id) %>
         <%= link_to "delete task", delete_task_path(task.id) %>
@@ -17,11 +17,13 @@
 <h2>Tasks Completed</h2>
 <% @tasks.each do |task| %>
     <% if task.completion == true %>
-        <li><%= task.title %>: <%= task.description %> finished at: <%= task.updated_at %>
+        <li><%= task.title %>: <%= task.description %> finished at: <%= task.updated_at.strftime("%F") %>
         </li>
         <%= link_to "edit task", edit_task_path(task.id) %>
 <% end %>
 <% end %> 
 
+<br>
+<br>
 
 <%= link_to "add a new task", new_task_path %>
