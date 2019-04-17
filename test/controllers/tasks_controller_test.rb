@@ -126,12 +126,6 @@ describe TasksController do
 
     it "will redirect to the root page if given an invalid id" do
       # Your code here
-      # task_hash = {
-      #   task: {
-      #     name: "new task",
-      #     description: "new task description",
-      #   },
-      # }
       patch task_path(800)
       must_respond_with :redirect
       must_redirect_to root_path
