@@ -3,7 +3,7 @@
   <ul>
     <% @tasks.each do |task| %>
       <li>
-      <% if task.completed != nil %>
+      <% if task.completed != false %>
         <strong>
           <%= link_to task.name, task_path(task.id) %> - 
         </strong>
@@ -15,10 +15,10 @@
         <strong class="completed">
           <%= link_to task.name, task_path(task.id) %> - 
         </strong>
-      </li>
-      <li>
-        <%= link_to "Mark Incomplete", completed_path(task), method: :put, data: { confirm: "Mark #{task.name} incomplete?" } %>
-      </li>
+        </li>
+        <li>
+          <%= link_to "Mark Incomplete", completed_path(task), method: :put, data: { confirm: "Mark #{task.name} incomplete?" } %>
+        </li>
       <% end %>
       <li>
         <%= link_to "Edit", edit_task_path(task) %>

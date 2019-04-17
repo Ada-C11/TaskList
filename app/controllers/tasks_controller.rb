@@ -25,7 +25,7 @@ class TasksController < ApplicationController
       @task.date = Date.parse(params[:task][:date])
     end
 
-    task.save
+    @task.save
 
     redirect_to tasks_path
   end
