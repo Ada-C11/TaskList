@@ -1,0 +1,22 @@
+<h1>Tasks</h1>
+<ul>
+<h2>To Do List:</h2>
+
+<ol class="task_list">
+  <% @tasks.order(:id).each do |task| %>
+    <li class="<%= task.completed ? 'complete' : 'incomplete' %>">
+      <h4><%= link_to("#{task.name}", task_path(task))%></h4>
+        <% if !task.completion_date %>
+          <%= link_to 'complete', mark_complete_path(task.id), method: :patch %>
+        <% else %>
+          <%= link_to 'undo complete', mark_incomplete_path(task.id), method: :patch %>
+        <% end %>
+      <%= link_to "edit", edit_task_path(task) %>
+      <%= link_to "delete", task_path(task), method: :delete, 
+      data: { confirm: 'Are you sure you want to delete this task?' } %>
+    </li>
+  <% end %>
+
+  <%= link_to "add new task", new_task_path %>
+</ol>
+</ul>
