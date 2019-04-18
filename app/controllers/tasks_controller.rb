@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry'
 class TasksController < ApplicationController
   def index
     @tasks = Task.all
