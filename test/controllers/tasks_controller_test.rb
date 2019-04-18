@@ -148,23 +148,17 @@ describe TasksController do
   # Complete these tests for Wave 4
   describe "destroy" do
     it "removes a task from the database" do
-      task_hash = {
-        task: {
-          name: "A Task",
-          description: "A Description of the Task",
-          priority_level: "Priority Level",
-        },
-      }
-
       # Act-Assert
+      task = Task.create!(name: "Sort socks", description: "Find all the lonely socks a pair.", priority_level: "Low")
+
       expect {
         delete task_path(task)
       }.must_change "Task.count", -1
 
       must_respond_with :redirect
-      must_redirect_to task_path(new_task.id)
+      must_redirect_to root_path
 
-      after_task = Task.find_by(id: book.id)
+      after_task = Task.find_by(id: task.id)
       expect(after_task).must_be_nil
     end
   end
