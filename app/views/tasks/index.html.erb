@@ -1,0 +1,26 @@
+
+<ul class="list-group d-flex justify-content-between">
+<header><h1> KATE'S TASK LIST </h1>
+<button class="full btn-outline-primary"><%= link_to "New Task", new_task_path %></button>
+</header>
+    <% @tasks.each do |task| %>
+    <% if task.completed %>
+    <li class="list-group-item flex-column align-items-start">
+        <button type="button" class="full btn-outline-info"><%= link_to "Uncomplete", complete_task_path(task), method: :patch %></button>
+    <strike><%= link_to task.title, task_path(task.id) %></strike>
+    <div class="btn-group float-right" role="group">
+    <button type="button" class="left btn-outline-success"><%= link_to "EDIT", edit_task_path(task[:id]) %></button>
+    <button type="button" class="right btn-outline-danger"><%= link_to "DELETE", task, method: :delete, data: { confirm: "Really, though? This can't be undone." }%></button></div>
+    <div class="float-right completed">Completed <%= time_ago_in_words(task.completed_at)%> ago.</div>
+    </li>
+    <% else %>
+    <li class="list-group-item flex-column align-items-start">
+    <button type="button" class="full btn-outline-info"><%= link_to "Complete", complete_task_path(task), method: :patch %></button>
+    <%= link_to task.title, task_path(task.id) %>
+    <div class="btn-group float-right" role="group">
+    <button type="button" class="left btn-outline-success"><%= link_to "EDIT", edit_task_path(task[:id]) %></button>
+    <button type="button" class="right btn-outline-danger"><%= link_to "DELETE", task, method: :delete, data: { confirm: "Really, though? This can't be undone." }%></button></div>
+    </li>
+    <% end %>
+    <% end %>
+</ul>
