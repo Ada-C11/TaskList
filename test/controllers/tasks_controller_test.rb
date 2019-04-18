@@ -58,10 +58,6 @@ describe TasksController do
 
   describe "create" do
     it "can create a new task" do
-
-      # Arrange
-      # Note to students:  Your Task model **may** be different and
-      #   you may need to modify this.
       task_hash = {
         task: {
           name: "new task",
@@ -102,8 +98,6 @@ describe TasksController do
 
   # Uncomment and complete these tests for Wave 3
   describe "update" do
-    # Note:  If there was a way to fail to save the changes to a task, that would be a great
-    #        thing to test.
     it "can update an existing task" do
       task = Task.create!(name: "original test task")
       task_data = {
