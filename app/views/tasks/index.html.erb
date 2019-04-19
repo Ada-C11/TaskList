@@ -1,0 +1,29 @@
+<h2>Task list!...</h2>
+
+<ul>
+<% @tasks.each do |task| %>
+  <li>
+    <%= link_to task.name, task_path(task.id) %> 
+  </li>
+  <% if task.current_status == true %>
+    <li>
+      <%= link_to "Mark Pending", { action: "toggle", id: task.id }, method: :patch %> 
+    </li>
+  <% else %>
+   <li>
+      <%= link_to "Mark Completed", { action: "toggle", id: task.id }, method: :patch %> 
+    </li>
+    <% end %>
+  <li>
+
+  <%= link_to "Edit", edit_task_path(task.id)%>
+  <%= link_to "Delete #{task.name}", 
+    task_path(task.id), method: :delete, data: {confirm: "You are about to delete a task. Are you sure you want to proceed?"}%>
+  </li>
+
+<% end %>
+</ul>
+
+
+<%# "I am shouting!".upcase %>
+<%# @name %>
