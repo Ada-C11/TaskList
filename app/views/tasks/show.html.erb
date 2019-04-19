@@ -1,0 +1,24 @@
+<h2>
+  <%= @task.task_name %>
+</h2>
+
+<%= image_tag "yellow-pinned-sticky.jpeg", alt: "Image of yellow sticky note with a push pin at the top" %>
+
+<p>
+  <%= @task.description %>
+</p>
+
+<p> Due:
+  <%= @task.date_due %>
+</p>
+
+<p> Complete: 
+    <%= @task.completed %>
+</p>
+
+<%= link_to "Back to task list", tasks_path %>
+
+<%= link_to "Edit #{@task.task_name}", edit_task_path(@task.id) %>
+
+<%= link_to "Delete #{@task.task_name}", 
+    task_path(@task.id), method: :delete %>

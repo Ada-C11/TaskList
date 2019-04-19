@@ -1,0 +1,23 @@
+<h1>Function-Over-Form</h1>
+<h2> to-do list</h2>
+<p>It's not pretty, but it helps you get the job done!</p>
+<ul>
+<% @tasks.each do |task| %>
+  <li>
+    <%= link_to task.task_name, task_path(task.id) %> 
+    is due: 
+    <%= task.date_due %>
+    <br>
+    <%= link_to "Edit", edit_task_path(task.id) %>
+    <%= link_to 'Delete', task_path(task), 
+      method: :delete, data: { confirm: 'Are you sure?' } %>
+    Done?
+    <%= task.completed %>
+    <%= link_to "toggle", toggle_completed_action_path(task), method: :put %>
+    completed at: 
+    <%= task.date_completed %>
+  </li>
+<% end %>
+</ul>
+
+<%= link_to "new task", new_task_path %>
