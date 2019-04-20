@@ -1,5 +1,0 @@
-class AddCompletedByToTask < ActiveRecord::Migration[5.2]
-  def change
-    add_column :tasks, :completed_by, :date
-  end
-end

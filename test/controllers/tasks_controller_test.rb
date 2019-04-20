@@ -138,7 +138,7 @@ describe TasksController do
 
   # Complete these tests for Wave 4
   describe "destroy" do
-    it "removes the book from the database" do
+    it "removes the task from the database" do
       task = Task.first
 
       expect {
@@ -152,7 +152,7 @@ describe TasksController do
       expect(destroyed_task).must_be_nil
     end
 
-    it "returns a 404 if the book does not exist" do
+    it "returns a 404 if the task does not exist" do
       task_id = 1337432
 
       expect(Task.find_by(id: task_id)).must_be_nil
@@ -193,7 +193,7 @@ describe TasksController do
       expect(completed_task.complete).must_equal false
     end
 
-    it "returns a 404 if the book does not exist" do
+    it "returns a 404 if the task does not exist" do
       task_id = 1337532
 
       expect(Task.find_by(id: task_id)).must_be_nil
