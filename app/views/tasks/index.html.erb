@@ -5,34 +5,20 @@
 <ul>
  <% @tasks.each do |task| %>
    <li>
-        <%= link_to task.title, task_path(task.id) %>
-     <% if task.completion_date %>
-       <s><%= task.title %></s>
-     <% else %>
-       <%= task.title %>
-     <% end %>
-   </li>
+      <%= link_to task.title, task_path(task.id) %>
+      <% if task.completion_date %>
+        <s><%= task.title %></s>
+      <% else %>
+        <%= task.title %>
+      <% end %>
+      <div>
+        <%= link_to "Edit", edit_task_path(task) %> |
+        <%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Sure?" } %>
+      </div>
+    </li>
  <% end %>
 
-<% 
-=begin %>     <% if @task.completion_date %>
-//         <%# Checked %>
-//         &#9745;
-//     <% else %>
-//         <%# Unchecked %>
-//         &#9744;
-//     <% end %>
-//     <% @task.name %>
-// </h1>
-// <ul>
-//     <% if @task.description %>
-//         <li>description: <%= @task.description %></li>
-//     <% end %>
-//     <% if @task.completion_date %>
-//         <li>completed on <%= @task.completion_date %></li>
-//     <% end %> 
-<% 
-=end %>
+
 
 
 

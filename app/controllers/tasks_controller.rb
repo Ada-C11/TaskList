@@ -22,23 +22,38 @@ class TasksController < ApplicationController
             render :new, status: :bad_request
             return
         end
-        binding.pry
+
         @task.title = params["task"]["title"],
         @task.description = params["task"]["description"]
 
         @task.save
-
         redirect_to tasks_path
     end
 
-    #done in class on Friday
-    def.update(
-        title: params["task"]["title"]
-        description: params["task"]["description"]
-    )
-
-    redirect_to task_path(task)
+    def show
+        task_id = params[:id]
+        @task = Task.find_by(id: task_id)
+   
+        redirect_to tasks_path if @task.nil?
     end
+
+    def edit
+        task_id = params[:id]
+        @task = Task.find_by(id: task_id)
+    
+        redirect_to tasks_path if @task.nil?
+    end
+    
+    # def.update(
+    #     @task = Task.find(params[:id])
+    
+    #     unless task
+    #       redirect_to tasks_path
+    #       return
+    #     end
+    #     task.update(task_params)
+    #     redirect_to task_path(task)
+    # end
 
         #from wave 4 test #1- done in class 
     def destroy
@@ -52,6 +67,24 @@ class TasksController < ApplicationController
         redirect_to tasks_path
     end
 
+    def toggle_complete
+        task_id = params[:id]
+        task = Task.find_by(id: task_id)
+    
+        unless task
+          head :not_found
+          return
+        end
+    
+        if task.completion_date.nil?
+          task.update!(completion_date: Date.current)
+        else
+          task.update!(completion_date: nil)
+        end
+    
+        redirect_to tasks_path
+    end
+
     private
     def task_params
         return params.require(:task).permit(:task, :description)
@@ -59,27 +92,5 @@ class TasksController < ApplicationController
 end
 
 
+
         
-
-
-# #WAVE 2, Question 1
-# def show
-#     title_id = params[:id]
-#     @title = TASKS[title_id]
-#     if @title.nil?
-#         head: not_found
-#     end
-# end
-
-# #binding.pry - notes w/ Dan 
-# unless params["title"]
-#     render :new, status: bad_request
-# end 
-
-# @task = Task.find_by(id: title_id)
-
-# class TasksController < ApplicationController
-#     def index
-#         @tasks = TASKS
-#     end 
-# end
