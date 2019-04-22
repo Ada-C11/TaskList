@@ -1,0 +1,37 @@
+<link href="stylesheets/index.css" rel="stylesheet" type="text/css">
+        
+<head>
+  <title>Jillianne's TaskList</title>
+</head>
+<body>
+  <header>
+    <h1>Jillianne's TaskList</h1>
+  </header>
+  <section>
+      <% if @tasks.length == 0 %>
+      <h3>No Tasks</h3>
+      <% else %>
+          <% @tasks.each do |task| %>
+              <br>
+              <td><%= task.name %></td>
+              <% if task.completed_at.nil? %>
+              <br>
+              <td> <i>Incomplete</i> </td>
+              <% else %>
+              <td><i><%= task.completed_at %></i></td>
+              <% end %>
+              <br>
+              <td><%= button_to "Change Status", toggle_complete_path(task.id), method: :patch %></td>
+              <td><%= link_to "Show", task_path(task.id) %>
+                  <%= link_to "Delete", verify_path(task.id) %></td>
+                  <br>
+          <% end %>
+      <% end %><br><br>
+    <%= link_to "Add New Task", new_task_path %>
+    </section>
+    <footer>
+      &copy; 2019 Jillianne Ramirez
+    </footer>
+</body>
+
+<%#= image_tag "tasklist.jpg", alt: "Stock image of to-do list with pen and coffee" %>

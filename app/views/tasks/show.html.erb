@@ -1,0 +1,27 @@
+<% Time.zone = "Pacific Time (US & Canada)" %>
+
+<h2>
+  Task: <%= @task.name %>
+</h2>
+
+<h3>
+  Description: <%= @task.description %>
+</h3>
+
+<h3>
+  Status: <% if @task.completed_at.nil? %>
+  <% @task.completed_at = "Incomplete" %>
+  <%= @task.completed_at %>
+  <% else %>
+  <%= @task.completed_at %>
+  <% end %>
+</h3>
+
+<% if @task.completed_at == "Complete" %>
+<h3>Completion Time: <%=@task.completion_date %></h3>
+<% end %>
+
+
+<%= link_to "Edit #{@task.name}", edit_task_path(@task.id) %>
+<%= link_to "Back to All Tasks", tasks_path %>
+<%= link_to "Delete #{@task.name}", verify_path(@task.id) %>
