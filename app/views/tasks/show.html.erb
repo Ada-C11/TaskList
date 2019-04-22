@@ -1,0 +1,19 @@
+
+<%# <p>Find me in app/views/tasks/show.html.erb</p> %>
+
+<h2>Task: <%=@task.name%></h2>
+
+<h3>Description: </h3>
+<p>
+<%= @task.description %>
+
+<h3>Status:</h3>
+<% if @task.completed == true%>
+<p>Completed on: <%= @task.updated_at %></p>
+<% else%>
+<p>Incomplete</p>
+<%end%>
+</p>
+
+<%= link_to "Edit task", edit_task_path, class: "buttons_show_page" %>
+<%= link_to "Delete task", task_path(@task.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "buttons_show_page" %>
