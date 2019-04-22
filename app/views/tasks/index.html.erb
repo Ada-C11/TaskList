@@ -1,0 +1,37 @@
+<h1><%= link_to "TaskList", tasks_path %></h1>
+<h2>just get it done!</h2>
+
+<body>
+    <section class="task_list">
+        <div>
+            <p class="button"><%= link_to "Add Task", new_task_path %></p>
+        </div>
+        <div class="task_list">
+            <p>ToDo:</p>
+            <ol>
+                <% @tasks.each do |task| %>
+                    <li>
+                        <%if task.complete == false%>
+                            <div>
+                                <a href="/tasks/<%=task.id%>"> <%= task.name %>: <%= task.description %> Due:<%= task.completion_date %> </a>
+                            </div>
+                            <div>
+                                <%= link_to "Mark Complete", { action: "toggle_complete", id: task.id }, method: :patch %> | 
+                                <%= link_to "Edit", edit_task_path(task.id) %> | 
+                                <%= link_to "Delete", task_path(task.id), data: { confirm: 'Are you sure you want to delete this message?'}, method: :delete %>
+                            </div>
+                        <%else%>
+                            <div class="strike">
+                                <a href="/tasks/<%=task.id%>"> <%= task.name %>: <%= task.description %> Due:<%= task.completion_date %> </a>                            </div>
+                            <div>
+                                <%= link_to "Unmark Complete", { action: "toggle_complete", id: task.id }, method: :patch%> | 
+                                <%= link_to "Edit", edit_task_path(task.id) %> | 
+                                <%= link_to "Delete", task_path(task.id), data: { confirm: 'Are you sure you want to delete this message?'}, method: :delete %>
+                            </div>
+                        <%end%>
+                    </li>
+                <%end%>
+            </ol>
+        </div>
+    </section>
+</body>
