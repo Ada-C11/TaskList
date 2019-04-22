@@ -1,0 +1,42 @@
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|IBM+Plex+Mono|Inconsolata" rel="stylesheet">
+
+<main class=index>
+  <h1>Task List</h1>
+     <nav>
+      <ul class="side_buttons">
+        <li><%= link_to "Add Task", new_task_path %></li>
+      </ul>
+    </nav>
+  <div class="all_tasks">
+  <h2>My Tasks</h2>
+  <ol>
+  <% @tasks.each do |task| %>
+    <% if task.completed == false%>
+      <li>
+        <a href="/tasks/<%=task.id%>">
+        <%= task.task_name%></a>
+        <div class="links">
+        <%= link_to "Mark complete", { action: "toggle_complete", id: task.id }, method: :patch %> |
+        <%= link_to "Edit", edit_task_path(task.id) %> |
+        <%= link_to "Delete", task_path(task.id), method: :delete, data: {confirm: "Are you sure you want to delete this task?"}%> 
+        </div>
+      </li>
+      <% else %>
+      <li>
+        <div class="strike-through">
+        <a href="/tasks/<%=task.id%>">
+        <%= task.task_name%></a>
+        </div>
+        <div class="links">
+        <%= link_to "Unmark complete", { action: "toggle_complete", id: task.id }, method: :patch %> |
+        <%= link_to "Edit", edit_task_path(task.id) %> |
+        <%= link_to "Delete", task_path(task.id), method: :delete, data: {confirm: "Are you sure you want to delete this task?"}%> 
+        </div>
+
+      <% end %>
+    </li>
+  <% end %>
+  </ol>
+  </div>
+  </main>
+
