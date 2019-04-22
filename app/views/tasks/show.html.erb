@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="../assets/stylesheets/normalize.css">
+
+<h2>
+  <span><%= link_to "⟵", tasks_path %></span>
+  <span><%= @task.name %></span>
+</h2>
+
+<div>
+  <p class="description">
+    <%= @task.description %>
+  </p>
+
+  <p class="due-date">
+    <% if !@task.due_date.nil? %>
+      <%= "Due on: #{@task.due_date}" %>
+    <% end %>
+  </p>
+
+  <p class="completed-date">
+    <% if !@task.completed_date.nil? %>
+      <%= "Completed on: #{@task.completed_date}" %>
+    <% else %>
+      <%= "Completed on: N/A" %>
+    <% end %>
+  </p>
+
+  <p class="status">
+    <% if @task.completed %>
+      <%= "Status: Complete" %>
+    <% else %>
+      <%= "Status: Incomplete" %>
+    <% end %>
+  </p>
+</div>
+
+<ul class="bottom-menu">
+  <li class="bottom-menu-item">
+    <%= button_to "Edit", { action: "edit", id: @task.id }, method: :get %>
+  </li>
+  <li class="bottom-menu-item">
+    <%= button_to "Delete", task_path(@task.id), method: :delete, data: { confirm: "Are you sure?" } %>
+  </li>
+</ul>
