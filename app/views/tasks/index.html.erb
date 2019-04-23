@@ -1,0 +1,32 @@
+  <ul class="tasks-list">
+    <% @tasks.each do |task| %>
+      <li>
+        <ul class="task-elements">
+          <li class="task-name">
+            <% if task.completed_at %>
+              <strong><strike><%= task.name %></strike></strong> 
+              <li class="due-date">
+                Due by: <%= task.completion_date %>
+              </li>
+              <li class="task-actions">
+                <%= link_to "View details", task_path(task.id) %> |
+                <%= link_to "Edit", edit_task_path(task.id) %> |
+                <%= link_to "Delete", task_path(task.id), method: :delete, data: { confirm: "Are you very sure you want to delete?" } %>
+              </li>
+            <% else %>  
+              <strong><%= task.name %></strong> 
+              <li class="due-date">
+                Due by: <%= task.completion_date %>
+              </li>
+              <li class="task-actions">
+                <%= link_to "Mark Complete", complete_path(task.id), method: :patch %> |
+                <%= link_to "View details", task_path(task.id) %> |
+                <%= link_to "Edit", edit_task_path(task.id) %> |
+                <%= link_to "Delete", task_path(task.id), method: :delete, data: { confirm: "Are you very sure you want to delete?" } %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+    <% end %>
+  </ul>
+

@@ -1,0 +1,35 @@
+<h1>Task Details</h1>
+
+<h2><%= @task.name %></h2>
+
+<p>
+  <strong>Description:</strong> <%= @task.description %>
+</p>
+
+<p>
+  <strong>Due Date:</strong> <%= @task.completion_date %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <% if @task.completed_at %>
+    Completed on: <%= @task.completed_at %>
+  <% else %>
+    Not completed yet!
+   <% end %>
+</p>
+
+<ul>
+  <% if @task.completed_at %>
+    <li class="task-actions">
+      <%= link_to "Edit", edit_task_path(@task.id) %> |
+      <%= link_to "Delete", task_path(@task.id), method: :delete, data: { confirm: "Are you very sure you want to delete?" } %>
+    </li>
+  <% else %>  
+    <li class="task-actions">
+      <%= link_to "Mark Complete", complete_path(@task.id), method: :patch %> |
+      <%= link_to "Edit", edit_task_path(@task.id) %> |
+      <%= link_to "Delete", task_path(@task.id), method: :delete, data: { confirm: "Are you very sure you want to delete?" } %>
+    </li>
+  <% end %>
+</ul>
