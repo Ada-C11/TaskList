@@ -1,0 +1,25 @@
+<h2>Your Tasks</h2>
+<ul>
+<% @tasks.each do |task| %>  
+  <li>
+    <% if task.completed == true %>
+      <span class="strike-through">
+    <% end %>
+    <a class="link" id="task_link" href="/tasks/<%= task.id %>" >
+    <%= task.name %>
+    </a><br>
+    </span>
+    <% if task.completed == false %>
+      <%= link_to "Mark Complete", mark_complete_path(task.id), method: :patch, class: "link" %>
+    <% else %>
+      <%= link_to "Unmark Complete", mark_complete_path(task.id), method: :patch, class: "link" %>
+    <% end %>
+    |
+    <%= link_to "Edit", edit_task_path(task.id), class: "link" %>
+    |  
+    <%= link_to "Delete", task_path(task.id), method: :delete, class: "link" %>
+  </li><br>
+<% end %>
+</ul>
+
+
