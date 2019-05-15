@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root :to => 'tasks#root' #re-read ada lesson this looks weird
+  root :to => 'tasks#show' #re-read ada lesson this looks weird
   get '/tasks', to: 'tasks#index', as: 'tasks'
   get '/tasks/create', to: 'tasks#create', as: 'create_task'
   get '/tasks/:id', to: 'tasks#show', as: 'task'

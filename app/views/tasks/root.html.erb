@@ -1,1 +1,17 @@
-<%= @message %>
+<h1>Tasks</h1>
+<%= link_to 'Create task', create_task_path %>
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <% if task.completion_date %>
+        <%= link_to "☑", toggle_complete_task_path(task.id), method: :patch %>
+        <s><%= link_to task.name, task_path(task.id) %></s>
+      <% else %>
+        <%= link_to "☐", toggle_complete_task_path(task.id), method: :patch %>
+        <%= link_to task.name, task_path(task.id) %>
+      <% end %>
+      <%= link_to 'X', delete_task_path(task.id), method: :delete, data: { comfirm: 'Are you sure you want to delete?' } %>
+      <%# jqueryneeded!!? stack overflow %>
+    </li>
+  <% end %>
+</ul>
