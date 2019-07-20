@@ -1,0 +1,21 @@
+<h1>Task <%= @task.id %>:
+  <% if @task.completion_date %>
+    <%# Checked %>
+    &#9745;
+  <% else %>
+    <%# Unchecked %>
+    &#9744;
+  <% end %>
+  <%= @task.name %>
+</h1>
+<ul>
+  <% if @task.description %>
+    <li>description: <%= @task.description %></li>
+  <% end %>
+  <% if @task.completion_date %>
+    <li>completed on <%= @task.completion_date %></li>
+  <% end %>
+</ul>
+<%= link_to "Edit", edit_task_path %>
+<br />
+<%= link_to "Back to all Tasks", tasks_path %>
