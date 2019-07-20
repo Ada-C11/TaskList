@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Up to the Task</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+          <h1><%= link_to "Up To The Task", tasks_path %></h1>
+      </header>
+       <main>
+      <% flash.each do |key, value| %>
+        <div class="alert alert -<%=key %>"><%=value%></div>
+     <% end %>
+      <%= yield %>
+      </main>
+    </div>
+  </body>
+</html>
