@@ -1,0 +1,17 @@
+<h3> Task: <%= @task.task %>,</h3>  
+<p> Description: <%= @task.descriptions %> </p>
+
+  <% if @task.completed == false %>
+    <%= button_to "Mark Complete", mark_complete_path(@task.id), method: :patch, class: "complete-button"%>
+  <% else %>
+    <p>Completed on: <%= @task.updated_at %></p>
+    <%= button_to "Mark Incomplete", mark_complete_path(@task.id), method: :patch, class: "incomplete-button"   %><br/>
+  <% end %>
+
+<div class="buttons">
+  <%= link_to "Back to Tasks", tasks_path, class: "home-button" %><br/>
+
+  <%= link_to "Edit Task", edit_task_path, class: "edit-button" %><br/>
+
+  <%= button_to "Delete #{@task.task}", task_path(@task.id), method: :delete, data: {confirm: "Are you sure?"}, class: "delete-button" %>
+</div>

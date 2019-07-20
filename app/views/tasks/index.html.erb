@@ -1,0 +1,20 @@
+<section class="index">
+  <ul>
+    <% @tasks.each do |todo_item| %>
+        <li>
+          <%= link_to todo_item.task, task_path(todo_item.id) %>,
+          
+          Completion status: <%= todo_item.completed %><br/>
+          <% if todo_item.completed == false %>
+            <%= button_to "Mark Complete", mark_complete_path(todo_item.id), method: :patch, class: "complete-button"%>
+          <% else %>
+            <%= button_to "Mark Incomplete", mark_complete_path(todo_item.id), method: :patch, class: "incomplete-button"   %><br/>
+          <% end %>
+          </div>
+        </li>
+    <% end %>
+  </ul>
+
+  <%= link_to "Add Task", new_task_path, class: "add-task-button" %>
+
+</section>
