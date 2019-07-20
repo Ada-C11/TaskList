@@ -1,9 +1,11 @@
 require "test_helper"
 
 describe TasksController do
+  # Note to students:  Your Task model **may** be different and
+  #   you may need to modify this.
   let (:task) {
     Task.create name: "sample task", description: "this is an example for a test",
-                completion_date: Time.now + 5.days
+                complete: false, complete_date: nil
   }
 
   # Tests for Wave 1
@@ -25,10 +27,9 @@ describe TasksController do
     end
   end
 
-  # Unskip these tests for Wave 2
+  # Tests for Wave 2
   describe "show" do
     it "can get a valid task" do
-      skip
       # Act
       get task_path(task.id)
 
@@ -37,20 +38,16 @@ describe TasksController do
     end
 
     it "will redirect for an invalid task" do
-      skip
       # Act
       get task_path(-1)
 
       # Assert
       must_respond_with :redirect
-      expect(flash[:error]).must_equal "Could not find task with id: -1"
     end
   end
 
   describe "new" do
     it "can get the new task page" do
-      skip
-
       # Act
       get new_task_path
 
@@ -61,14 +58,15 @@ describe TasksController do
 
   describe "create" do
     it "can create a new task" do
-      skip
 
       # Arrange
+      # Note to students:  Your Task model **may** be different and
+      #   you may need to modify this.
       task_hash = {
         task: {
           name: "new task",
           description: "new task description",
-          completion_date: nil,
+          completed: false,
         },
       }
 
@@ -79,50 +77,105 @@ describe TasksController do
 
       new_task = Task.find_by(name: task_hash[:task][:name])
       expect(new_task.description).must_equal task_hash[:task][:description]
-      expect(new_task.due_date.to_time.to_i).must_equal task_hash[:task][:due_date].to_i
-      expect(new_task.completed).must_equal task_hash[:task][:completed]
+      expect(new_task.complete).must_equal task_hash[:task][:complete]
 
       must_respond_with :redirect
-      must_redirect_to task_path(new_task.id)
+      must_redirect_to tasks_path
     end
   end
 
-  # Unskip and complete these tests for Wave 3
+  # Tests for Wave 3
   describe "edit" do
     it "can get the edit page for an existing task" do
-      skip
-      # Your code here
+      new_task = Task.create(name: "Watch The Martian", description: "On Netflix", complete: false)
+
+      get edit_task_path(new_task.id)
+
+      must_respond_with :success
     end
 
     it "will respond with redirect when attempting to edit a nonexistant task" do
-      skip
-      # Your code here
+      get edit_task_path(-1)
+
+      must_respond_with :redirect
     end
   end
 
-  # Uncomment and complete these tests for Wave 3
+  # Tests for Wave 3
   describe "update" do
-    # Note:  If there was a way to fail to save the changes to a task, that would be a great
-    #        thing to test.
     it "can update an existing task" do
-      skip
-      # Your code here
+      # Arrange
+      task = Task.create(name: "Watch The Martian", description: "On Netflix", complete: false)
+
+      # Act
+      patch task_path(task.id), params: { task: { description: "On Hulu" } }
+      task.reload
+
+      # Assert
+      expect(task).wont_be_nil
+      expect(task.name).must_equal "Watch The Martian"
+      expect(task.description).must_equal "On Hulu"
+      expect(task.complete).must_equal false
+
+      must_respond_with :redirect
+      must_redirect_to task_path(task.id)
     end
 
     it "will redirect to the root page if given an invalid id" do
-      skip
-      # Your code here
+      get edit_task_path(-1)
+
+      must_respond_with :redirect
     end
   end
 
-  # Complete these tests for Wave 4
+  # Tests for Wave 4
   describe "destroy" do
-    # Your tests go here
+    it "will delete the task" do
+      task = Task.create(name: "Watch The Martian", description: "On Netflix", complete: false)
 
+      expect {
+        delete task_path(task.id)
+      }.must_change "Task.count", -1
+
+      must_respond_with :redirect
+      must_redirect_to tasks_path
+    end
   end
 
-  # Complete for Wave 4
+  # Tests for Wave 4
   describe "toggle_complete" do
-    # Your tests go here
+    it "can mark a task complete" do
+      task = Task.create(name: "Vacuum", description: "Carpeted floors", complete: false, complete_date: nil)
+
+      travel_to Time.zone.local(2019, 4, 16, 01, 04, 44)
+      patch mark_complete_path(task.id)
+      task.reload
+
+      expect(task).wont_be_nil
+      expect(task.name).must_equal "Vacuum"
+      expect(task.description).must_equal "Carpeted floors"
+      expect(task.complete).must_equal true
+      expect(task.complete_date).must_equal Date.current
+
+      must_respond_with :redirect
+      must_redirect_to task_path(task.id)
+    end
+
+    it "can mark a task incomplete" do
+      task = Task.create(name: "Vacuum", description: "Carpeted floors", complete: true, complete_date: nil)
+
+      travel_to Time.zone.local(2019, 4, 16, 01, 04, 44)
+      patch mark_complete_path(task.id)
+      task.reload
+
+      expect(task).wont_be_nil
+      expect(task.name).must_equal "Vacuum"
+      expect(task.description).must_equal "Carpeted floors"
+      expect(task.complete).must_equal false
+      expect(task.complete_date).must_equal nil
+
+      must_respond_with :redirect
+      must_redirect_to task_path(task.id)
+    end
   end
 end

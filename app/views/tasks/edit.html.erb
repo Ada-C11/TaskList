@@ -1,0 +1,26 @@
+<h2>Please use this form to update a Task</h2>
+
+
+<%= form_with model: @task, class: 'update-task' do |f| %>
+
+  <p>Please fill out this form to update a task</p>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <%= f.label :complete_date %>
+  <%= f.text_field :complete_date, readonly: true %>
+  
+  <% if @task.complete == false %>
+    <%= link_to "Mark Complete", mark_complete_path(@task.id), method: :patch %>
+  <% else %>
+    <%= link_to "Unmark Complete", mark_complete_path(@task.id), method: :patch %>
+  <% end %>
+
+  <br><br>
+
+  <%= f.submit "Update Task", class: "task-form__submit-btn" %>
+
+  <%= link_to "Cancel Changes", task_path %>
+<% end %>
